@@ -44,6 +44,8 @@ make_again.bat
 *.suo
 *.user
 *.ncb
+
+build_vs2017/
 Debug/
 Release/
 CodeAnalyst/
