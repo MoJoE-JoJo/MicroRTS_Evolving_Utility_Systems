@@ -3150,6 +3150,7 @@ void MarineMicroBot::OnGameStart() {
 
 void MarineMicroBot::OnStep() {
     const ObservationInterface* observation = Observation();
+    std::cout << Observation()->GetUnits(sc2::Unit::Alliance::Self).size() << std::endl;
     ActionInterface* action = Actions();
 
     Point2D mp, zp;
