@@ -3149,6 +3149,7 @@ void MarineMicroBot::OnGameStart() {
 }
 
 void MarineMicroBot::OnStep() {
+    std::cout << Observation()->GetUnits(sc2::Unit::Alliance::Self).size() << std::endl;
     const ObservationInterface* observation = Observation();
     ActionInterface* action = Actions();
 

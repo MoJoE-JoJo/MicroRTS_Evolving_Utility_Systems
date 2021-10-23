@@ -1,7 +1,7 @@
 #include "sc2api/sc2_api.h"
 #include "sc2lib/sc2_lib.h"
+#include <iostream>
 
-#include "sc2utils/sc2_manage_process.h"
 
 // A helper bot that actually just moves a random unit every 5 seconds
 // timing is controlled in Main, with the SleepFor function
@@ -23,11 +23,15 @@ public:
         sc2::ActionInterface* action = Actions();
 
         sc2::Units my_units = observation->GetUnits(sc2::Unit::Alliance::Self);
+        std::cout << observation->GetUnits().size() << std::endl;
+        std::cout << observation->GetGameLoop() << std::endl;
+        std::cout << my_units.size() << std::endl;
         if (my_units.empty()) {
             return;
         }
 
         const sc2::Unit* unit = sc2::GetRandomEntry(my_units);
+        std::cout << unit->unit_type << std::endl;
 
         sc2::Point2D move_target = sc2::FindRandomLocation(observation->GetGameInfo());
         if (!CanPathToLocation(unit, move_target)) {
@@ -38,6 +42,8 @@ public:
     }
 
     virtual void OnStep() final {
+        std::cout << "yolo" << std::endl;
+
         TryMoveRandomUnit();
     }
 };
@@ -49,7 +55,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    coordinator.SetRealtime(true);
+    coordinator.SetRealtime(false);
 
     // Add the helper, it will annoy the players.
     AnnoyingHelper bot;
@@ -65,7 +71,7 @@ int main(int argc, char* argv[]) {
 
     // Step forward the game simulation.
     while (coordinator.Update()) {
-        sc2::SleepFor(5 * 1000);
+        //sc2::SleepFor(5 * 1000);
     }
 
     return 0;
