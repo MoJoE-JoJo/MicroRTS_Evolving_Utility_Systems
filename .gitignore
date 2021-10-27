@@ -1,3 +1,7 @@
-project/.vs/*
-project/obj/*
-project/x64/*
+*.*~
+*.class
+/bin/
+/.classpath
+/.project
+/.idea
+/.vscode
