@@ -2,26 +2,18 @@ package util;
 import rts.*;
 
 public class USAction extends USNode {
-    private String operation;
-    private USNode param1;
-    private USNode param2;
+    private USFeature feature;
     private PlayerAction action;
 
-    public USAction (String name, String operation, USNode param1, USNode param2, PlayerAction action) {
+    public USAction (String name, USFeature feature, PlayerAction action) {
         this.name = name;
-        this.operation = operation;
-        this.param1 = param1;
-        this.param2 = param2;
+        this.feature = feature;
         this.action = action;
     }
 
     @Override
     public void calculateValue(GameState gs) {
-        if (this.operation == "/") {
-            this.value = this.param1.getValue(gs) / this.param2.getValue(gs);
-        } else {
-            // add other operations as needed
-        }
+        this.value = this.feature.getValue(gs);
     }
 
     public PlayerAction getAction() {
