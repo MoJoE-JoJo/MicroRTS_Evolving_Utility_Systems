@@ -3,7 +3,7 @@ import java.util.List;
 import rts.*;
 
 public class UtilitySystem {
-    private List<USNode> variables;
+    private List<USVariable> variables;
     private List<USNode> features;
     private List<USAction> actions;
 
@@ -19,7 +19,7 @@ public class UtilitySystem {
         });
     }
 
-    // need to find the best way to pass gamestate, just using String as a placeholder
+    // currently just returns highest value, should select a random based on the values.
     public PlayerAction getAction(GameState gs) {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
@@ -30,5 +30,10 @@ public class UtilitySystem {
             }
         }
         return bestNode.getAction();
+    }
+
+    // outputs the utility system as a string that can be parsed by PlantUML
+    public String ToPlantUML() {
+        return "";
     }
 }
