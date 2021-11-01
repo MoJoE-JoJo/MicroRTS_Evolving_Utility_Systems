@@ -41,7 +41,7 @@ public class UtilitySystemAI extends AI {
     @Override
     public PlayerAction getAction(int player, GameState gs) {
         try {
-            return us.getActionWeightedRandom(gs);
+            return us.getActionWeightedRandom(gs, player);
         }catch(Exception e) {
             return new PlayerAction();
         }

@@ -9,7 +9,7 @@ public class UtilitySystem {
     private List<USFeature> features;
     private List<USAction> actions;
     private Random random;
-    // Should util system have a name? a generation number atleast?
+    private int generation;
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions) {
         this.variables = variables;
@@ -31,12 +31,12 @@ public class UtilitySystem {
     }
 
     // gets the highest scoring action
-    public PlayerAction getActionBest(GameState gs) {
+    public PlayerAction getActionBest(GameState gs, int player) {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            if (node.getValue(gs) > bestNode.getValue(gs)) {
+            if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
                 bestNode = node;
             }
         }
@@ -44,12 +44,12 @@ public class UtilitySystem {
     }
 
     // gets a random node, using the scores as weights
-    public PlayerAction getActionWeightedRandom(GameState gs) throws Exception {
+    public PlayerAction getActionWeightedRandom(GameState gs, int player) throws Exception {
         float sum = 0;
         float[] indices = new float[actions.size()];
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            sum += node.getValue(gs);
+            sum += node.getValue(gs, player);
             indices[i] = sum;
         }
         float r = this.random.nextFloat() * sum;

@@ -7,11 +7,11 @@ public abstract class USNode {
     protected float value;
     protected boolean visited;
 
-    public abstract void calculateValue(GameState gs);
+    public abstract void calculateValue(GameState gs, int player);
 
-    public float getValue(GameState gs) {
+    public float getValue(GameState gs, int player) {
         if (!this.visited) {
-            this.calculateValue(gs);
+            this.calculateValue(gs, player);
             this.visited = true;
         }
         return this.value;

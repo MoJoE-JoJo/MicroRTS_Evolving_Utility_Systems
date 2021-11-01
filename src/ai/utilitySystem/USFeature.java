@@ -14,9 +14,9 @@ public class USFeature extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs) {
+    public void calculateValue(GameState gs, int player) {
         if (this.operation == "Divide") {
-            this.value = this.param1.getValue(gs) / this.param2.getValue(gs);
+            this.value = this.param1.getValue(gs, player) / this.param2.getValue(gs, player);
         } else {
             // add other operations as needed
         }

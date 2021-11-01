@@ -12,8 +12,8 @@ public class USAction extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs) {
-        this.value = this.feature.getValue(gs);
+    public void calculateValue(GameState gs, int player) {
+        this.value = this.feature.getValue(gs, player);
     }
 
     public PlayerAction getAction() {
