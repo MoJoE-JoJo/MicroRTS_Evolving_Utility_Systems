@@ -1,4 +1,4 @@
-package utilitySystem;
+package ai.utilitySystem;
 import rts.*;
 
 public class USAction extends USNode {
@@ -18,5 +18,16 @@ public class USAction extends USNode {
 
     public PlayerAction getAction() {
         return this.action;
+    }
+
+    @Override
+    public String toPlantUML() {
+        return "object " + this.name + " {\n" +
+            "Score: " + this.value + "\n" +
+            "}\n";
+    }
+
+    public String relationsToPlantUML() {
+        return this.feature.getName() + " --> " + this.name + "\n";
     }
 }

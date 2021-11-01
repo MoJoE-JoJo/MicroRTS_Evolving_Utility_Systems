@@ -6,11 +6,12 @@ package ai;
 
 import ai.core.AI;
 import ai.core.ParameterSpecification;
+import ai.utilitySystem.UtilitySystem;
+
 import java.util.ArrayList;
 import java.util.List;
 import rts.*;
 import rts.units.UnitTypeTable;
-import utilitySystem.UtilitySystem;
 
 /**
  *

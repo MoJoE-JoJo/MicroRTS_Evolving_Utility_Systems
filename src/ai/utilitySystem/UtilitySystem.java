@@ -1,4 +1,4 @@
-package utilitySystem;
+package ai.utilitySystem;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +9,7 @@ public class UtilitySystem {
     private List<USFeature> features;
     private List<USAction> actions;
     private Random random;
+    // Should util system have a name? a generation number atleast?
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions) {
         this.variables = variables;
@@ -63,7 +64,35 @@ public class UtilitySystem {
     }
 
     // outputs the utility system as a string that can be parsed by PlantUML
-    public String ToPlantUML() {
-        return "";
+    public String toPlantUML() {
+        String concatString = "";
+        String variables = "";
+        String features = "";
+        String actions = "";
+        String relations = "";
+        for(int i = 0; i < this.variables.size(); i++) {
+            variables += this.variables.get(i).toPlantUML();
+        }
+        for(int i = 0; i < this.features.size(); i++) {
+            USFeature feature = this.features.get(i);
+            features += feature.toPlantUML();
+            relations += feature.relationsToPlantUML();
+        }
+        for(int i = 0; i < this.actions.size(); i++) {
+            USAction action = this.actions.get(i);
+            actions += action.toPlantUML();
+            relations += action.relationsToPlantUML();
+        }
+        concatString += USConstants.PlantUMLStart;
+        concatString += USConstants.PlantUMLVariablesStart;
+        concatString += variables;
+        concatString += "}\n";
+        concatString += USConstants.PlantUMLActionsStart;
+        concatString += actions;
+        concatString += "}\n";
+        concatString += features;
+        concatString += relations;
+        concatString += USConstants.PlantUMLEnd;
+        return concatString;
     }
 }

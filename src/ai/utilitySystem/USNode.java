@@ -1,15 +1,13 @@
-package utilitySystem;
+package ai.utilitySystem;
 
 import rts.GameState;
 
-public class USNode {
+public abstract class USNode {
     protected String name;
     protected float value;
     protected boolean visited;
 
-    public void calculateValue(GameState gs) {
-
-    }
+    public abstract void calculateValue(GameState gs);
 
     public float getValue(GameState gs) {
         if (!this.visited) {
@@ -30,5 +28,7 @@ public class USNode {
     public String getName() {
         return this.name;
     }
+
+    public abstract String toPlantUML();
 
 }
