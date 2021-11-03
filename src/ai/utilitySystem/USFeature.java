@@ -44,7 +44,7 @@ public class USFeature extends USNode {
             case MAX:
                 this.value = Math.min(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
-            case default:
+            default:
                 throw new Exception("Not yet implemented operation: " + this.operation);
         }
     }

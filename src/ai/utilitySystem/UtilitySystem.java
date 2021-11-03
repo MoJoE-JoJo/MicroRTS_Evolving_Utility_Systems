@@ -1,6 +1,7 @@
 package ai.utilitySystem;
 import java.util.List;
 import java.util.Random;
+import ai.utilitySystem.USAction.UtilAction;
 
 import rts.*;
 
@@ -31,20 +32,25 @@ public class UtilitySystem {
     }
 
     // gets the highest scoring action
-    public PlayerAction getActionBest(GameState gs, int player) {
+    public UtilAction getActionBest(GameState gs, int player) {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
-                bestNode = node;
+            try{
+                if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
+                    bestNode = node;
+                }
+            }catch (Exception e){
+                System.out.println(e);
             }
+
         }
         return bestNode.getAction();
     }
 
     // gets a random node, using the scores as weights
-    public PlayerAction getActionWeightedRandom(GameState gs, int player) throws Exception {
+    public UtilAction getActionWeightedRandom(GameState gs, int player) throws Exception {
         float sum = 0;
         float[] indices = new float[actions.size()];
         for(int i = 0; i < actions.size(); i++) {

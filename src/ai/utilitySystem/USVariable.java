@@ -7,7 +7,7 @@ import rts.units.Unit;
 public class USVariable extends USNode {
     GameStateVariables gsv;
 
-    enum GameStateVariables {
+    enum GameStateVariables { //TODO: Rename to GameStateVariable
         PLAYER_RESOURCE,
         ENEMY_RESOURCE,
         PLAYER_WORKERS,
