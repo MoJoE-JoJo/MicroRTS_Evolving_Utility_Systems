@@ -8,21 +8,23 @@ public class USVariable extends USNode {
     GameStateVariables gsv;
 
     enum GameStateVariables {
-        PLAYER_RESOURCE,
-        ENEMY_RESOURCE,
-        PLAYER_WORKERS,
-        ENEMY_WORKERS,
-        PLAYER_LIGHT,
-        ENEMY_LIGHT,
-        PLAYER_HEAVY,
-        ENEMY_HEAVY,
-        PLAYER_RANGED,
-        ENEMY_RANGED,
-        PLAYER_BARRACKS,
-        ENEMY_BARRACKS,
-        PLAYER_BASE_HEALTH,
-        ENEMY_BASE_HEALTH,
-        UNHARVESTED_RESOURCES
+        PLAYER_RESOURCE,        // The player's total resource count.
+        ENEMY_RESOURCE,         // The enemy's total resource count.
+        PLAYER_WORKERS,         // The player's total worker unit count.
+        ENEMY_WORKERS,          // The enemy's total worker unit count.
+        PLAYER_WARRIORS,        // The player's total warrior unit count (Light, Heavy and ranged).
+        ENEMY_WARRIORS,         // The enemy's total warrior unit count (Light, Heavy and ranged).
+        PLAYER_LIGHT,           // The player's total light unit count.
+        ENEMY_LIGHT,            // The enemy's total light unit count.
+        PLAYER_HEAVY,           // The player's total heavy unit count.
+        ENEMY_HEAVY,            // The enemy's total heavy unit count.
+        PLAYER_RANGED,          // The player's total ranged unit count.
+        ENEMY_RANGED,           // The enemy's total ranged unit count.
+        PLAYER_BARRACKS,        // The player's total barrack unit count.
+        ENEMY_BARRACKS,         // The enemy's total barrack unit count.
+        PLAYER_BASE_HEALTH,     // The sum of all of the player's base units health.
+        ENEMY_BASE_HEALTH,      // The sum of all of the enemy's base units health.
+        UNHARVESTED_RESOURCES   // The sum of unharvested resources in all resource units.
     }
 
     public USVariable(String name, GameStateVariables gsv) {
@@ -33,6 +35,7 @@ public class USVariable extends USNode {
     @Override
     public void calculateValue(GameState gs, int player) throws Exception {
         final int enemy = player == 0 ? 1 : 0;
+        int sum = 0;
         switch (this.gsv) {
             case PLAYER_RESOURCE:
                 this.value = getPlayerResource(gs, player);
@@ -46,6 +49,18 @@ public class USVariable extends USNode {
                 break;
             case ENEMY_WORKERS:
                 this.value = getPlayerUnitCount(gs, enemy, "Worker");
+                break;
+            case PLAYER_WARRIORS:
+                sum += getPlayerUnitCount(gs, player, "Light");
+                sum += getPlayerUnitCount(gs, player, "Heavy");
+                sum += getPlayerUnitCount(gs, player, "Ranged");
+                this.value = sum;
+                break;
+            case ENEMY_WARRIORS:
+                sum += getPlayerUnitCount(gs, enemy, "Light");
+                sum += getPlayerUnitCount(gs, enemy, "Heavy");
+                sum += getPlayerUnitCount(gs, enemy, "Ranged");
+                this.value = sum;
                 break;
             case PLAYER_LIGHT:
                 this.value = getPlayerUnitCount(gs, player, "Light");

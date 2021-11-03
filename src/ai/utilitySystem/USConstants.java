@@ -7,6 +7,6 @@ public final class USConstants {
                                             "' Vertical lines: ->, <-, <->\n" +
                                             "title Simple Utility System\n\n";
     public static final String PlantUMLEnd = "@enduml";
-    public static final String PlantUMLVariablesStart = "package Values {\n";
+    public static final String PlantUMLVariablesStart = "package Variables {\n";
     public static final String PlantUMLActionsStart = "package Actions {\n";
 }
