@@ -13,7 +13,7 @@ public class USConstant extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player) throws Exception {
         this.value = this.constant;
         this.visited = true;
     }

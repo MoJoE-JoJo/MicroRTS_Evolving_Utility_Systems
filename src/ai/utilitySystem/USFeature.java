@@ -23,7 +23,7 @@ public class USFeature extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player) throws Exception {
         switch (this.operation) {
             case DIVIDE:
                 if (this.param2.getValue(gs, player) == 0) {
