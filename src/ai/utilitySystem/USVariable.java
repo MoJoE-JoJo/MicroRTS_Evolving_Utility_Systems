@@ -31,7 +31,7 @@ public class USVariable extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs, int player) {
+    public void calculateValue(GameState gs, int player) throws Exception {
         final int enemy = player == 0 ? 1 : 0;
         switch (this.gsv) {
             case PLAYER_RESOURCE:
@@ -81,8 +81,7 @@ public class USVariable extends USNode {
                 this.value = getUnharvestedResources(gs);
                 break;
             default:
-                // throw an error?
-                break;
+                throw new Exception("Not yet implemented game state variable: " + this.gsv);
         }
     }
 

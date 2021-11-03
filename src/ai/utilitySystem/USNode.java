@@ -7,9 +7,9 @@ public abstract class USNode {
     protected float value;
     protected boolean visited;
 
-    public abstract void calculateValue(GameState gs, int player);
+    public abstract void calculateValue(GameState gs, int player) throws Exception;
 
-    public float getValue(GameState gs, int player) {
+    public float getValue(GameState gs, int player) throws Exception {
         if (!this.visited) {
             this.calculateValue(gs, player);
             this.visited = true;
