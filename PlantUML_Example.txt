@@ -1,0 +1,189 @@
+@startuml
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package VALUES {
+    object All_Resources {
+        Value: 10
+    }
+
+    object Workers {
+        Value: 10
+    }
+    object Lights {
+        Value: 10
+    }
+    object Heavys {
+        Value: 10
+    }
+    object Ranged {
+        Value: 10
+    }
+    object Resources {
+        Value: 10
+    }
+    object Barracks {
+        Value: 10
+    }
+    object Base_Health {
+        Value: 10
+    }
+
+    object Enemy_Workers {
+        Value: 10
+    }
+    object Enemy_Lights {
+        Value: 10
+    }
+    object Enemy_Heavys {
+        Value: 10
+    }
+    object Enemy_Ranged {
+        Value: 10
+    }
+    object Enemy_Resources {
+        Value: 10
+    }
+    object Enemy_Barracks {
+        Value: 10
+    }
+    object Enemy_Base_Health {
+        Value: 10
+    }
+}
+
+package Actions{
+    object Attack{
+        Score: 0.2
+    }
+    object Defend{
+        Score: 0.2
+    }
+    object Build_Barrack{
+        Score: 0.2
+    }
+    object Build_Worker{
+        Score: 0.2
+    }
+    object Build_Light{
+        Score: 0.2
+    }
+    object Build_Heavy{
+        Score: 0.2
+    }
+    object Build_Ranged{
+        Score: 0.2
+    }
+}
+
+map F1{
+    Func => Divide(V1,10)
+    Value => 10
+}
+object F2{
+    Func: Average(V1,V2)
+    Value: 10
+}
+map F3{
+    Func => Multiply(V1,V2)
+    Value => 10
+}
+object F4{
+    Func: Add(1.2,V2)
+    Value: 10
+}
+object F5{
+    Func: Max(V1,V2)
+    Value: 10
+}
+object F6{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F7{
+    Func: Log(V1)
+    Value: 10
+}
+object F8{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F9{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F10{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F11{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F12{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F13{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F14{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F15{
+    Func: Min(V1,V2)
+    Value: 10
+}
+object F16{
+    Func:   Min(V1,V2)
+    Value:  10
+}
+object F17{
+    Func: Min(V1,V2)
+    Value: 10
+}
+Resources --> F3 : V1
+Workers --> F3 : V2
+Workers --> F1 : V1
+Enemy_Lights --> F4 : V1
+Lights --> F5 : V2
+Enemy_Heavys --> F5 : V1
+Enemy_Barracks --> F7 : V1
+Enemy_Base_Health --> F6 : V1
+Base_Health --> F6 : V2
+Enemy_Ranged --> F8 : V1
+Enemy_Workers --> F8 : V2
+Enemy_Resources --> F9 : V1
+Barracks --> F9 : V2
+Ranged --> F10 : V1
+All_Resources --> F10: V2
+F1 --> F2 : V1
+F3 --> F2 : V2
+
+F2 --> F11 : V1
+F3 --> F11 : V2
+F8 --> F12 : V1
+F2 --> F12 : V2
+F2 --> F13 : V1
+F9 --> F13 : V2
+F1 --> F14 : V1
+F6 --> F14 : V2
+F5 --> F15 : V1
+F2 --> F15 : V2
+F7 --> F16 : V1
+F2 --> F16 : V2
+F2 --> F17: V1
+F9 --> F17 : V2
+
+F11 --> Defend
+F12 --> Attack
+F13 --> Build_Barrack
+F14 --> Build_Worker
+F15 --> Build_Light
+F16 --> Build_Heavy
+F17 --> Build_Ranged
+@enduml

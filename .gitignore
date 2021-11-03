@@ -5,3 +5,5 @@
 /.project
 /.idea
 /.vscode
+/results/*
+/tournament_*/
