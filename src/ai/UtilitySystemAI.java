@@ -14,10 +14,7 @@ import ai.utilitySystem.*;
 import ai.abstraction.*;
 import ai.utilitySystem.USAction.UtilAction;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import rts.*;
 import rts.units.Unit;
@@ -202,13 +199,166 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
     PlayerAction BuildBase(GameState gs, Player p){
         System.out.println("Build Base");
-        return new PlayerAction();
+        //Setup of variables
+        PhysicalGameState pgs = gs.getPhysicalGameState();
+        List<Unit> otherResources = new ArrayList<>(otherResourcePoint(p, pgs));
+        List<Integer> reservedPositions = new ArrayList<>();
+        int nbases = 0;
+        for (Unit u2 : pgs.getUnits()) {
+            if (u2.getType() == baseType
+                    && u2.getPlayer() == p.getID()) {
+                nbases++;
+            }
+        }
+        //Build base if there are none left
+        if (nbases == 0 && p.getResources() >= baseType.cost){
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u) == null
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
+                        buildIfNotAlreadyBuilding(u, baseType, u.getX(), u.getY(), reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+            //Use attacking worker to build base if none are left
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
+                        buildIfNotAlreadyBuilding(u, baseType, u.getX(), u.getY(), reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+        }
+        //Expand behaviour
+        if (!otherResources.isEmpty() && p.getResources() >= baseType.cost) {
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u) == null
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
+                        buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX()-1, otherResources.get(0).getY()-1, reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+            //Use Attacking worker if none other are available
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
+                        buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX() - 1, otherResources.get(0).getY() - 1, reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+        }
+        return translateActions(p.getID(),gs);
+    }
+
+    protected List<Unit> otherResourcePoint(Player p, PhysicalGameState pgs) {
+
+        List<Unit> bases = getMyBases(p, pgs);
+        Set<Unit> myResources = new HashSet<>();
+        Set<Unit> otherResources = new HashSet<>();
+
+        for (Unit base : bases) {
+            List<Unit> closestUnits = new ArrayList<>(pgs.getUnitsAround(base.getX(), base.getY(), 10));
+            for (Unit closestUnit : closestUnits) {
+                if (closestUnit.getType().isResource) {
+                    myResources.add(closestUnit);
+                }
+            }
+        }
+
+        for (Unit u2 : pgs.getUnits()) {
+            if (u2.getType().isResource) {
+                if (!myResources.contains(u2)) {
+                    otherResources.add(u2);
+                }
+            }
+        }
+        if(!bases.isEmpty()){
+            return getOrderedResources(new ArrayList<>(otherResources), bases.get(0));
+        }else{
+            return new ArrayList<>(otherResources);
+        }
+    }
+    protected List<Unit> getOrderedResources(List<Unit> resources, Unit base){
+        List<Unit> resReturn = new ArrayList<>();
+
+        HashMap<Integer, ArrayList<Unit>> map = new HashMap<>();
+        for (Unit res : resources) {
+            int d = Math.abs(res.getX() - base.getX()) + Math.abs(res.getY() - base.getY());
+            if(map.containsKey(d)){
+                ArrayList<Unit> nResourc = map.get(d);
+                nResourc.add(res);
+            }else{
+                ArrayList<Unit> nResourc = new ArrayList<>();
+                nResourc.add(res);
+                map.put(d, nResourc);
+            }
+        }
+        ArrayList<Integer> keysOrdered = new ArrayList<>(map.keySet());
+        Collections.sort(keysOrdered);
+
+        for (Integer key : keysOrdered) {
+            resReturn.addAll(map.get(key));
+
+        }
+
+        return resReturn;
+
+    }
+    protected List<Unit> getMyBases(Player p, PhysicalGameState pgs) {
+
+        List<Unit> bases = new ArrayList<>();
+        for (Unit u2 : pgs.getUnits()) {
+            if (u2.getType() == baseType
+                    && u2.getPlayer() == p.getID()) {
+                bases.add(u2);
+            }
+        }
+        return bases;
     }
 
     PlayerAction BuildBarracks(GameState gs, Player p){
         System.out.println("Build Barracks");
-        return new PlayerAction();
+        //Setup of variables
+        PhysicalGameState pgs = gs.getPhysicalGameState();
+        List<Integer> reservedPositions = new ArrayList<>();
+        //Build barracks with resource worker
+        if (p.getResources() >= barracksType.cost) {
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u) == null
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
+                            || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
+                        buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+            //Use Attacking worker if none other are available
+            for (Unit u : pgs.getUnits()) {
+                if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                    if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
+                        buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
+                        break;
+                    }
+                }
+            }
+        }
+        return translateActions(p.getID(),gs);
     }
+
     PlayerAction BuildWorker(GameState gs, Player p){
         System.out.println("Build Worker");
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -236,12 +386,38 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     PlayerAction Harvest_Resources(GameState gs, Player p){
         System.out.println("Harvest Resource");
         PhysicalGameState pgs = gs.getPhysicalGameState();
-        // behavior of bases:
+        //Only takes workers who are idling and makes them harvest
         for(Unit u:pgs.getUnits()) {
             if (u.getType()==workerType && u.getPlayer()==p.getID()) {
                 if(gs.getActionAssignment(u) == null){
-                    //Do something
-                    //break;
+                    Unit closestBase = null;
+                    Unit closestResource = null;
+                    //Find closest resources
+                    int closestDistance = 0;
+                    for (Unit u2 : pgs.getUnits()) {
+                        if (u2.getType().isResource) {
+                            int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
+                            if (closestResource == null || d < closestDistance) {
+                                closestResource = u2;
+                                closestDistance = d;
+                            }
+                        }
+                    }
+                    //Find closest base
+                    closestDistance = 0;
+                    for (Unit u2 : pgs.getUnits()) {
+                        if (u2.getType().isStockpile && u2.getPlayer() == p.getID()) {
+                            int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
+                            if (closestBase == null || d < closestDistance) {
+                                closestBase = u2;
+                                closestDistance = d;
+                            }
+                        }
+                    }
+                    if (closestResource != null && closestBase != null) {
+                        harvest(u, closestResource, closestBase);
+                    }
+                    break;
                 }
             }
         }

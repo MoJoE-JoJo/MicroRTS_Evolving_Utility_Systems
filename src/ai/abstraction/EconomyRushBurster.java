@@ -264,7 +264,7 @@ public class EconomyRushBurster extends AbstractionLayerAI {
                     //envio para construção
                     if (p.getResources() >= baseType.cost + resourcesUsed) {
                         Unit u = freeWorkers.remove(0);
-                        buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX()-2, otherResources.get(0).getY()-2, reservedPositions, p, pgs);
+                        buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX()-1, otherResources.get(0).getY()-1, reservedPositions, p, pgs);
                         resourcesUsed += baseType.cost;
                     }
                 }
