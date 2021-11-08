@@ -25,14 +25,14 @@ import rts.units.UnitTypeTable;
  *
  */
 public class UtilitySystemAI extends AbstractionLayerAI {
-    private UtilitySystem us; // can we just pass it as param in constructor?
+    protected UtilitySystem us; // can we just pass it as param in constructor?
     protected UnitTypeTable utt;
-    UnitType workerType;
-    UnitType baseType;
-    UnitType barracksType;
-    UnitType lightType;
-    UnitType heavyType;
-    UnitType rangedType;
+    protected UnitType workerType;
+    protected UnitType baseType;
+    protected UnitType barracksType;
+    protected UnitType lightType;
+    protected UnitType heavyType;
+    protected UnitType rangedType;
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
         super(pathfinding, computationLimit, iterationsLimit);
@@ -46,6 +46,11 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
+    }
+
+    public UtilitySystemAI(UnitTypeTable a_utt) {
+        this(a_utt, new AStarPathFinding());
+        //reset(a_utt);
     }
     
     @Override
@@ -104,7 +109,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return new ArrayList<>();
     }
 
-    PlayerAction AttackWithSingleUnit(GameState gs, Player p){
+    protected PlayerAction AttackWithSingleUnit(GameState gs, Player p){
         System.out.println("Attack With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         boolean warUnitAttacking = false;
@@ -121,7 +126,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             for(Unit u:pgs.getUnits()) {
                 if (u.getType().canAttack && u.getType().canHarvest &&
                         u.getPlayer() == p.getID() &&
-                        (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST ||
+                        (gs.getActionAssignment(u)==null ||
+                                gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST ||
                                 gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE)) {
                     attackClosestEnemy(u,p,gs);
                     break;
@@ -148,14 +154,25 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    PlayerAction DefendWithSingleUnit(GameState gs, Player p){
+    protected PlayerAction DefendWithSingleUnit(GameState gs, Player p){
         System.out.println("Defend With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
+        //Use military units
         for (Unit u : pgs.getUnits()) {
             if (u.getType().canAttack && !u.getType().canHarvest
                     && u.getPlayer() == p.getID()
                     && gs.getActionAssignment(u) == null) {
                 DefendLogic(u, p, gs);
+                return translateActions(p.getID(),gs);
+            }
+        }
+        //Use workers if no military units are available
+        for (Unit u : pgs.getUnits()) {
+            if (u.getType().canAttack && u.getType().canHarvest
+                    && u.getPlayer() == p.getID()
+                    && gs.getActionAssignment(u) == null) {
+                DefendLogic(u, p, gs);
+                return translateActions(p.getID(),gs);
             }
         }
         return translateActions(p.getID(),gs);
@@ -197,7 +214,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    PlayerAction BuildBase(GameState gs, Player p){
+    protected PlayerAction BuildBase(GameState gs, Player p){
         System.out.println("Build Base");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -220,7 +237,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
                         buildIfNotAlreadyBuilding(u, baseType, u.getX(), u.getY(), reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -229,7 +246,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
                     if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
                         buildIfNotAlreadyBuilding(u, baseType, u.getX(), u.getY(), reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -244,7 +261,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
                         buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX()-1, otherResources.get(0).getY()-1, reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -253,7 +270,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
                     if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
                         buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX() - 1, otherResources.get(0).getY() - 1, reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -327,7 +344,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return bases;
     }
 
-    PlayerAction BuildBarracks(GameState gs, Player p){
+    protected PlayerAction BuildBarracks(GameState gs, Player p){
         System.out.println("Build Barracks");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -342,7 +359,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
                             || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
                         buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -351,7 +368,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
                     if (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_ATTACK_LOCATION) {
                         buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
-                        break;
+                        return translateActions(p.getID(),gs);
                     }
                 }
             }
@@ -359,20 +376,23 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return translateActions(p.getID(),gs);
     }
 
-    PlayerAction BuildWorker(GameState gs, Player p){
+    protected PlayerAction BuildWorker(GameState gs, Player p){
         System.out.println("Build Worker");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         // behavior of bases:
         for(Unit u:pgs.getUnits()) {
             if (u.getType()==baseType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=workerType.cost) train(u, workerType);
+                if (p.getResources()>=workerType.cost){
+                    train(u, workerType);
+                    break;
+                }
                 else if(p.getResources()<workerType.cost) break;
             }
         }
         return translateActions(p.getID(),gs);
     }
 
-    PlayerAction BuildWarUnit(GameState gs, Player p){
+    protected PlayerAction BuildWarUnit(GameState gs, Player p){
         System.out.println("Build War Unit");
         Random ran = new Random();
         int val = ran.nextInt(3);
@@ -383,7 +403,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return translateActions(p.getID(),gs);
     }
 
-    PlayerAction Harvest_Resources(GameState gs, Player p){
+    protected PlayerAction Harvest_Resources(GameState gs, Player p){
         System.out.println("Harvest Resource");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         //Only takes workers who are idling and makes them harvest
@@ -424,32 +444,41 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return translateActions(p.getID(),gs);
     }
 
-    void BuildLight(GameState gs, Player p){
+    protected void BuildLight(GameState gs, Player p){
         PhysicalGameState pgs = gs.getPhysicalGameState();
         // behavior of bases:
         for(Unit u:pgs.getUnits()) {
             if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=lightType.cost) train(u, lightType);
+                if (p.getResources()>=lightType.cost){
+                    train(u, lightType);
+                    break;
+                }
                 else if(p.getResources()<lightType.cost) break;
             }
         }
     }
-    void BuildHeavy(GameState gs, Player p){
+    protected void BuildHeavy(GameState gs, Player p){
         PhysicalGameState pgs = gs.getPhysicalGameState();
         // behavior of bases:
         for(Unit u:pgs.getUnits()) {
             if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=heavyType.cost) train(u, heavyType);
+                if (p.getResources()>=heavyType.cost){
+                    train(u, heavyType);
+                    break;
+                }
                 else if(p.getResources()<heavyType.cost) break;
             }
         }
     }
-    void BuildRanged(GameState gs, Player p){
+    protected void BuildRanged(GameState gs, Player p){
         PhysicalGameState pgs = gs.getPhysicalGameState();
         // behavior of bases:
         for(Unit u:pgs.getUnits()) {
             if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=heavyType.cost) train(u, heavyType);
+                if (p.getResources()>=heavyType.cost){
+                    train(u, heavyType);
+                    break;
+                }
                 else if(p.getResources()<heavyType.cost) break;
             }
         }

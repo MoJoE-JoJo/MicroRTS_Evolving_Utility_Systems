@@ -6,7 +6,7 @@ public class USFeature extends USNode {
     private USNode param1; // What if we want a constant here instead?
     private USNode param2;
 
-    enum Operation {
+    public enum Operation {
         DIVIDE,
         MULTIPLY,
         SUM,

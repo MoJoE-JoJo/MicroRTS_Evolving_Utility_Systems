@@ -6,11 +6,11 @@ import ai.utilitySystem.USAction.UtilAction;
 import rts.*;
 
 public class UtilitySystem {
-    private List<USVariable> variables;
-    private List<USFeature> features;
-    private List<USAction> actions;
-    private Random random;
-    private int generation;
+    protected List<USVariable> variables;
+    protected List<USFeature> features;
+    protected List<USAction> actions;
+    protected Random random;
+    protected int generation;
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions) {
         this.variables = variables;

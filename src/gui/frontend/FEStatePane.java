@@ -6,6 +6,8 @@
 
 package gui.frontend;
 
+import ai.TestUtilitySystemAI;
+
 import ai.BranchingFactorCalculatorBigInteger;
 import ai.core.AI;
 import ai.core.AIWithComputationBudget;
@@ -125,7 +127,9 @@ public class FEStatePane extends JPanel {
                                 new EvaluationFunctionForwarding(new SimpleEvaluationFunction()),
                                 new SimpleOptEvaluationFunction()};
 
-    public static Class AIs[] = {PassiveAI.class,
+    public static Class AIs[] = {
+                TestUtilitySystemAI.class,
+            PassiveAI.class,
                    MouseController.class,
                    RandomAI.class,
                    RandomBiasedAI.class,
@@ -758,7 +762,7 @@ public class FEStatePane extends JPanel {
         
 //        p1.add(Box.createVerticalGlue());
         MapGenerator mg = new MapGenerator(currentUtt);
-        GameState initialGs = new GameState(mg.bases8x8(), currentUtt);
+        GameState initialGs = new GameState(mg.basesWorkers16x16(), currentUtt);
 
         JPanel p2 = new JPanel();
         p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
