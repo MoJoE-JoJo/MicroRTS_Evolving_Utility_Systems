@@ -47,6 +47,11 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
     }
+
+    public UtilitySystemAI(UnitTypeTable a_utt) {
+        this(a_utt, new AStarPathFinding());
+        reset(a_utt);
+    }
     
     @Override
     public void reset() {
