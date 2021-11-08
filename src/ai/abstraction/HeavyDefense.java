@@ -150,7 +150,7 @@ public class HeavyDefense extends AbstractionLayerAI {
                     closestDistance = d;
                 }
             }
-        else if(u2.getPlayer()==p.getID() && u2.getType() == baseType)
+            else if(u2.getPlayer()==p.getID() && u2.getType() == baseType)
             {
                 mybase = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
             }
