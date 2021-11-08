@@ -95,10 +95,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 case BUILD_WORKER -> { return BuildWorker(gs, p); }
                 case BUILD_WAR_UNIT -> { return BuildWarUnit(gs, p); }
                 case HARVEST_RESOURCE -> { return Harvest_Resources(gs, p); }
-                default -> { return new PlayerAction(); }
+                default -> { return translateActions(p.getID(),gs); }
             }
         }catch(Exception e) {
-            return new PlayerAction();
+            return translateActions(player,gs);
         }
     }
     
