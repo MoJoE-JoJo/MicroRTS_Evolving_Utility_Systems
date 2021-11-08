@@ -1,0 +1,47 @@
+<project name="anji" default="jar-lib" basedir=".">
+  <property name="src" value="."/>
+  <property name="dest" value="../out"/>
+
+  <target name="compile">
+    <javac srcdir="${src}" destdir="${dest}">
+      <classpath>
+        <pathelement path="../../lib/clibwrapper_jiio.jar"/>
+        <pathelement path="../../lib/hb16.jar"/>
+        <pathelement path="../../lib/jai_imageio.jar"/>
+        <pathelement path="../../lib/jakarta-regexp-1.3.jar"/>
+        <pathelement path="../../lib/jcommon.jar"/>
+        <pathelement path="../../lib/jfreechart.jar"/>
+        <pathelement path="../../lib/jgap.jar"/>
+        <pathelement path="../../lib/jmagick.jar"/>
+        <pathelement path="../../lib/junit.jar"/>
+        <pathelement path="../../lib/log4j.jar"/>
+        <pathelement path="../../lib/mlibwrapper_jai.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar-lib" depends="compile" description="builds a new ANJI jar file and place it in the lib folder">
+    <jar destfile="../../lib/anji.jar" basedir="${dest}" update="yes">
+       <include name="**/**.class"/>
+    </jar>
+  </target>
+
+  <target name="jar-here" depends="compile" description="builds a jar file beside the build xml file">
+    <jar jarfile="anji.jar" basedir="${dest}">
+      <include name="**/**.class"/>
+    </jar>
+  </target>
+
+  <target name="clean" description="Clean out the out folder of all class files">
+    <delete>
+      <fileset dir="${dest}">
+        <include name="**/**.class"/>
+      </fileset>
+      <dirset dir="${dest}">
+        <include name="."/>
+      </dirset>
+    </delete>
+  </target>
+
+</project>
+

@@ -1,0 +1,39 @@
+<project name="anji" default="jar" basedir=".">
+  <property name="src" value="."/>
+  <property name="dest" value="../out"/>
+
+  <target name="compile">
+    <javac srcdir="${src}" destdir="${dest}">
+      <classpath>
+        <pathelement path="../../lib/clibwrapper_jiio.jar"/>
+        <pathelement path="../../lib/hb16.jar"/>
+        <pathelement path="../../lib/jai_imageio.jar"/>
+        <pathelement path="../../lib/jakarta-regexp-1.3.jar"/>
+        <pathelement path="../../lib/jcommon.jar"/>
+        <pathelement path="../../lib/jfreechart.jar"/>
+        <pathelement path="../../lib/jgap.jar"/>
+        <pathelement path="../../lib/jmagick.jar"/>
+        <pathelement path="../../lib/junit.jar"/>
+        <pathelement path="../../lib/log4j.jar"/>
+        <pathelement path="../../lib/mlibwrapper_jai.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar jarfile="anji.jar" basedir="${dest}">
+       <include name="**/**.class"/>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete>
+      <fileset dir="${dest}">
+        <include name="anji.jar"/>
+        <include name="*.class"/>
+      </fileset>
+    </delete>
+  </target>
+
+</project>
+
