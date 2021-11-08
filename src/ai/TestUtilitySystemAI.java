@@ -1,5 +1,6 @@
 package ai;
 
+import ai.abstraction.Build;
 import ai.utilitySystem.*;
 import rts.*;
 import rts.units.Unit;
@@ -73,7 +74,9 @@ public class TestUtilitySystemAI extends UtilitySystemAI {
             return Harvest_Resources(gs, p);
         }
         else{
-            return new PlayerAction();
+            oneAction = true;
+            return BuildWorker(gs, p);
+            //return translateActions(p.getID(),gs);
         }
         //return new PlayerAction();
     }
