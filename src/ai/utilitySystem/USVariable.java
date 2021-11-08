@@ -5,9 +5,9 @@ import rts.*;
 import rts.units.Unit;
 
 public class USVariable extends USNode {
-    GameStateVariables gsv;
+    GameStateVariable gsv;
 
-    enum GameStateVariables { //TODO: Rename to GameStateVariable
+    enum GameStateVariable {
         PLAYER_RESOURCE,            // The player's total resource count.
         ENEMY_RESOURCE,             // The enemy's total resource count.
         PLAYER_WORKERS,             // The player's total worker unit count.
@@ -28,7 +28,7 @@ public class USVariable extends USNode {
         PLAYER_HARVESTING_WORKERS   // The count of the player's worker units that are actively harvesting resources.
     }
 
-    public USVariable(String name, GameStateVariables gsv) {
+    public USVariable(String name, GameStateVariable gsv) {
         this.name = name;
         this.gsv = gsv;
     }
