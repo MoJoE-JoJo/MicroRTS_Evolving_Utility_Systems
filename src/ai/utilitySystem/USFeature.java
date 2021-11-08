@@ -12,7 +12,8 @@ public class USFeature extends USNode {
         SUM,
         SUBTRACT,
         MIN,
-        MAX
+        MAX,
+        POWER
     }
 
     public USFeature (String name, Operation operation, USNode param1, USNode param2) {
@@ -46,6 +47,9 @@ public class USFeature extends USNode {
                 break;
             case MAX:
                 this.value = Math.max(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                break;
+            case POWER:
+                this.value = (float)Math.pow(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
             default:
                 throw new Exception("Not yet implemented operation: " + this.operation);

@@ -88,7 +88,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             //Do the translation stuff
             //return us.getActionWeightedRandom(gs, player);
             UtilAction utilAction = us.getActionWeightedRandom(gs, player);
-            System.out.println(us.toPlantUML());
+            //System.out.println(us.toPlantUML());
             //PhysicalGameState pgs = gs.getPhysicalGameState();
             Player p = gs.getPlayer(player);
             switch (utilAction) {
