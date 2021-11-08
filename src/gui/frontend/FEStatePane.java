@@ -129,7 +129,7 @@ public class FEStatePane extends JPanel {
                                 new SimpleOptEvaluationFunction()};
 
     public static Class AIs[] = {
-                   TestUtilitySystemAI.class,
+                   UtilitySystemAI.class,
                    PassiveAI.class,
                    MouseController.class,
                    RandomAI.class,

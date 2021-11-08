@@ -89,7 +89,7 @@ public final class USConstants {
         features.add(f9);
         USFeature f10 = new USFeature("warMAX1", Operation.MAX, f1, c1);
         features.add(f10);
-        USFeature f11 = new USFeature("resourceGT2DIVwarMin1", Operation.DIVIDE, f10, f1);
+        USFeature f11 = new USFeature("resourceGT2DIVwarMin1", Operation.DIVIDE, f9, f1);
         features.add(f11);
         USFeature f12 = new USFeature("resouceSUB1", Operation.SUBTRACT, v1, c1);
         features.add(f12);
@@ -101,7 +101,7 @@ public final class USConstants {
         features.add(f15);
         USFeature f16 = new USFeature("harvestingMAX02", Operation.MAX, v4, c6);
         features.add(f16);
-        USFeature f17 = new USFeature("1DIVabove", Operation.DIVIDE, c1, f16);
+        USFeature f17 = new USFeature("5DIVabove", Operation.DIVIDE, c2, f16);
         features.add(f17);
 
         // actions
