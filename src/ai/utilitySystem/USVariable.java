@@ -193,9 +193,11 @@ public class USVariable extends USNode {
         List<Unit> units = gs.getUnits();
         int count = 0;
         for(Unit unit : units) {
-            if (unit.getPlayer() == player && unit.getType().name == unitName &&
-                gs.getActionAssignment(unit).action.getType() == actionId) {
-                count++;
+            if (unit.getPlayer() == player && unit.getType().name == unitName) {
+                UnitActionAssignment uaa = gs.getActionAssignment(unit);
+                if (uaa != null && uaa.action.getType() == actionId) {
+                    count++;
+                }
             }
         }
         return count;

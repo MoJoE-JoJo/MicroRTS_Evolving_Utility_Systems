@@ -51,6 +51,7 @@ public class UtilitySystem {
 
     // gets a random node, using the scores as weights
     public UtilAction getActionWeightedRandom(GameState gs, int player) throws Exception {
+        this.markAllNodesUnvisited();
         float sum = 0;
         float[] indices = new float[actions.size()];
         for(int i = 0; i < actions.size(); i++) {
@@ -60,7 +61,7 @@ public class UtilitySystem {
         }
         float r = this.random.nextFloat() * sum;
         for(int i = 0; i < actions.size(); i++) {
-            if (r <= sum) {
+            if (r <= indices[i]) {
                 return actions.get(i).getAction();
             }
         }

@@ -6,7 +6,7 @@ public class USFeature extends USNode {
     private USNode param1; // What if we want a constant here instead?
     private USNode param2;
 
-    enum Operation {
+    public enum Operation {
         DIVIDE,
         MULTIPLY,
         SUM,
@@ -42,10 +42,10 @@ public class USFeature extends USNode {
                 this.value = this.param1.getValue(gs, player) - this.param2.getValue(gs, player);
                 break;
             case MIN:
-                this.value = Math.max(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = Math.min(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
             case MAX:
-                this.value = Math.min(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = Math.max(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
             default:
                 throw new Exception("Not yet implemented operation: " + this.operation);

@@ -11,8 +11,9 @@ import ai.core.ParameterSpecification;
 import ai.utilitySystem.USVariable;
 import ai.utilitySystem.UtilitySystem;
 import ai.utilitySystem.*;
-import ai.abstraction.*;
+import ai.utilitySystem.USFeature.Operation;
 import ai.utilitySystem.USAction.UtilAction;
+import ai.abstraction.*;
 
 import java.util.*;
 
@@ -46,11 +47,13 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
+        us = USConstants.getSimpleUtilitySystem();
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
+        us = USConstants.getSimpleUtilitySystem();
     }
     
     @Override
@@ -85,6 +88,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             //Do the translation stuff
             //return us.getActionWeightedRandom(gs, player);
             UtilAction utilAction = us.getActionWeightedRandom(gs, player);
+            System.out.println(us.toPlantUML());
             //PhysicalGameState pgs = gs.getPhysicalGameState();
             Player p = gs.getPlayer(player);
             switch (utilAction) {
@@ -98,6 +102,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 default -> { return new PlayerAction(); }
             }
         }catch(Exception e) {
+            System.out.println(e);
             return new PlayerAction();
         }
     }

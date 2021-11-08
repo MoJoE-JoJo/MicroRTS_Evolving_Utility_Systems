@@ -57,6 +57,7 @@ import ai.portfolio.PortfolioAI;
 import ai.portfolio.portfoliogreedysearch.PGSAI;
 import ai.puppet.PuppetSearchMCTS;
 import ai.stochastic.UnitActionProbabilityDistribution;
+import ai.UtilitySystemAI;
 import gui.MouseController;
 import gui.PhysicalGameStateMouseJFrame;
 import gui.PhysicalGameStatePanel;
@@ -125,7 +126,8 @@ public class FEStatePane extends JPanel {
                                 new EvaluationFunctionForwarding(new SimpleEvaluationFunction()),
                                 new SimpleOptEvaluationFunction()};
 
-    public static Class AIs[] = {PassiveAI.class,
+    public static Class AIs[] = {UtilitySystemAI.class,
+                   PassiveAI.class,
                    MouseController.class,
                    RandomAI.class,
                    RandomBiasedAI.class,
