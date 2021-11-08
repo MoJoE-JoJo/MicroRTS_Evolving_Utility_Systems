@@ -55,11 +55,6 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         reset(a_utt);
         us = USConstants.getSimpleUtilitySystem();
     }
-
-    public UtilitySystemAI(UnitTypeTable a_utt) {
-        this(a_utt, new AStarPathFinding());
-        //reset(a_utt);
-    }
     
     @Override
     public void reset() {
