@@ -38,7 +38,7 @@
         <include name="**/**.class"/>
       </fileset>
       <dirset dir="${dest}">
-        <include name="."/>
+        <include name="*"/>
       </dirset>
     </delete>
   </target>
