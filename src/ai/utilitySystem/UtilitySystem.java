@@ -31,7 +31,7 @@ public class UtilitySystem {
     }
 
     // gets the highest scoring action
-    public PlayerAction getActionBest(GameState gs, int player) {
+    public PlayerAction getActionBest(GameState gs, int player) throws Exception {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {

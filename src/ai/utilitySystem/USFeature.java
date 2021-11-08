@@ -23,10 +23,13 @@ public class USFeature extends USNode {
     }
 
     @Override
-    public void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player) throws Exception {
         switch (this.operation) {
             case DIVIDE:
-                // How do we avoid division by 0?
+                if (this.param2.getValue(gs, player) == 0) {
+                    this.value = 0;
+                    break;
+                }
                 this.value = this.param1.getValue(gs, player) / this.param2.getValue(gs, player);
                 break;
             case MULTIPLY:
@@ -51,14 +54,24 @@ public class USFeature extends USNode {
 
     @Override
     public String toPlantUML() {
+        String v1 = "V1";
+        String v2 = "V2";
+        if (this.param1.getClass() == USConstant.class) {
+            USConstant constant = (USConstant) this.param1;
+            v1 = "" + constant.getConstant();
+        }
+        if (this.param2.getClass() == USConstant.class) {
+            USConstant constant = (USConstant) this.param2;
+            v2 = "" + constant.getConstant();
+        }
         return "map " + this.name + " {\n" +
-            "Func => " + this.operation + "(V1, V2)\n" +
+            "Func => " + this.operation + "(" + v1 + "," + v2 + ")\n" +
             "Value => " + this.value + "\n" +
             "}\n";
     }
 
     public String relationsToPlantUML() {
-        return this.param1.getName() + " --> " + this.name + " : V1\n" + 
-            this.param2.getName() + " --> " + this.name + " : V2\n";
+        return (this.param1.getClass() == USConstant.class ? "" : (this.param1.getName() + " --> " + this.name + " : V1\n")) + 
+            (this.param2.getClass() == USConstant.class ? "" : (this.param2.getName() + " --> " + this.name + " : V2\n"));
     }
 }
