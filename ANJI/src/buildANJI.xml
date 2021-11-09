@@ -37,10 +37,10 @@
       <fileset dir="${dest}">
         <include name="**/**.class"/>
       </fileset>
-      <dirset dir="${dest}">
-        <include name="*"/>
-      </dirset>
     </delete>
+    <delete dir="${dest}/com"/>
+    <delete dir="${dest}/org"/>
+    <delete dir="${dest}/examples"/>
   </target>
 
 </project>
