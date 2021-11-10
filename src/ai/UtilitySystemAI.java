@@ -143,8 +143,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         //Check defending military units
         if(canAttack.size() == 0){
             for(Unit u:pgs.getUnits()) {
-                if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                        defendingUnits.contains(u) && canAttack.size() == 0) {
+                if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() && defendingUnits.contains(u)) {
                     canAttack.add(u);
                 }
             }
@@ -163,8 +162,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         //Check defending workers
         if(canAttack.size() == 0){
             for(Unit u:pgs.getUnits()) {
-                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                        (gs.getActionAssignment(u)==null || defendingUnits.contains(u))) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() && defendingUnits.contains(u)) {
                     canAttack.add(u);
                 }
             }
