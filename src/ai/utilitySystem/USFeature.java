@@ -1,4 +1,5 @@
 package ai.utilitySystem;
+
 import rts.*;
 
 public class USFeature extends USNode {
@@ -16,7 +17,7 @@ public class USFeature extends USNode {
         POWER
     }
 
-    public USFeature (String name, Operation operation, USNode param1, USNode param2) {
+    public USFeature(String name, Operation operation, USNode param1, USNode param2) {
         this.name = name;
         this.operation = operation;
         this.param1 = param1;
@@ -49,11 +50,16 @@ public class USFeature extends USNode {
                 this.value = Math.max(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
             case POWER:
-                this.value = (float)Math.pow(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = (float) Math.pow(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
                 break;
             default:
                 throw new Exception("Not yet implemented operation: " + this.operation);
         }
+    }
+
+    @Override
+    public NodeType getType() {
+        return NodeType.US_FEATURE;
     }
 
     @Override
@@ -69,13 +75,24 @@ public class USFeature extends USNode {
             v2 = "" + constant.getConstant();
         }
         return "map " + this.name + " {\n" +
-            "Func => " + this.operation + "(" + v1 + "," + v2 + ")\n" +
-            "Value => " + this.value + "\n" +
-            "}\n";
+                "Func => " + this.operation + "(" + v1 + "," + v2 + ")\n" +
+                "Value => " + this.value + "\n" +
+                "}\n";
+    }
+
+    public void addParam(USNode node) {
+        if (param1 == null) {
+            param1 = node;
+        } else if (param2 == null) {
+            param2 = node;
+        } else {
+            //TODO Handle this, unsure how
+            System.out.println("YO! trying to set more than 2 param to a feature Node");
+        }
     }
 
     public String relationsToPlantUML() {
-        return (this.param1.getClass() == USConstant.class ? "" : (this.param1.getName() + " --> " + this.name + " : V1\n")) + 
-            (this.param2.getClass() == USConstant.class ? "" : (this.param2.getName() + " --> " + this.name + " : V2\n"));
+        return (this.param1.getClass() == USConstant.class ? "" : (this.param1.getName() + " --> " + this.name + " : V1\n")) +
+                (this.param2.getClass() == USConstant.class ? "" : (this.param2.getName() + " --> " + this.name + " : V2\n"));
     }
 }

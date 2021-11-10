@@ -163,6 +163,11 @@ public final static String INITIAL_TOPOLOGY_ACTIVATION_INPUT_KEY = "initial.topo
  */
 public final static String INITIAL_TOPOLOGY_ACTIVATION_OUTPUT_KEY = "initial.topology.activation.output";
 
+// ===== HERE!!! ===== adding own config values
+
+public final static String BUILD_UTILITY_SYSTEM = "utility.system.build";
+
+
 private Properties props;
 
 private CloneReproductionOperator cloneOper = null;
@@ -392,17 +397,33 @@ public NeuronAllele newNeuronAllele( Long connectionId ) {
 		neatIdMap.putNeuronId( connectionId, id );
 	}
 
-	//TODO HERE SELECT A RANDOM ACTIVATION FUNCTION
 
-	ActivationFunctionType[] ownFunctions = {ActivationFunctionType.ADDITION, ActivationFunctionType.MULTIPLICATION, ActivationFunctionType.DIVISION};
-
-	int rng = getRandomGenerator().nextInt(2);
-
-	ActivationFunctionType chosenFunction = ownFunctions[rng];
+	//FIXME here we select a random function of the utility system kind if the
+	NeuronGene gene;
+	if (props.getBooleanProperty(BUILD_UTILITY_SYSTEM, false ))
+	{
 
 
-	//NeuronGene gene = new NeuronGene( NeuronType.HIDDEN, id, hiddenActivationType );
-	NeuronGene gene = new NeuronGene( NeuronType.HIDDEN, id, chosenFunction);
+		ActivationFunctionType[] ownFunctions = {
+				ActivationFunctionType.SUM,
+				ActivationFunctionType.MULTIPLY,
+				ActivationFunctionType.DIVIDE,
+				ActivationFunctionType.MIN,
+				ActivationFunctionType.MAX,
+				ActivationFunctionType.POWER,
+				ActivationFunctionType.SUBTRACT,
+		};
+
+		int rng = getRandomGenerator().nextInt(ownFunctions.length-1);
+
+		ActivationFunctionType chosenFunction = ownFunctions[rng];
+		gene = new NeuronGene( NeuronType.HIDDEN, id, chosenFunction);
+	}
+	else
+	{
+		gene = new NeuronGene( NeuronType.HIDDEN, id, hiddenActivationType );
+	}
+
 	return new NeuronAllele(gene);
 }
 

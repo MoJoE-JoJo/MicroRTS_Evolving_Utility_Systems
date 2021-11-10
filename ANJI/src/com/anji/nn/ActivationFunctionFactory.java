@@ -19,6 +19,10 @@
  */
 package com.anji.nn;
 
+import com.anji.nn.addons.SumActivationFunction;
+import com.anji.nn.addons.DivideActivationFunction;
+import com.anji.nn.addons.MultiplicationActivationFunction;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,9 +55,9 @@ public class ActivationFunctionFactory {
 		activationFunctions.put( SignedClampedLinearActivationFunction.NAME, new SignedClampedLinearActivationFunction() );
 
 		// === own functions ===
-		activationFunctions.put( AdditionActivationFunction.NAME, new AdditionActivationFunction() );
-		activationFunctions.put( MultiplicationActivationFunction.NAME, new MultiplicationActivationFunction() );
-		activationFunctions.put( DivisionActivationFunction.NAME, new DivisionActivationFunction() );
+		activationFunctions.put( SumActivationFunction.NAME, new SumActivationFunction() );
+		activationFunctions.put( com.anji.nn.addons.MultiplicationActivationFunction.NAME, new MultiplicationActivationFunction() );
+		activationFunctions.put( DivideActivationFunction.NAME, new DivideActivationFunction() );
 
 	}
 

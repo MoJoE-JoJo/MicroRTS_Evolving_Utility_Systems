@@ -1,9 +1,11 @@
-package com.anji.nn;
+package com.anji.nn.addons;
 
-public class DivisionActivationFunction implements ActivationFunction{
+import com.anji.nn.ActivationFunction;
+import com.anji.nn.ActivationFunctionType;
 
+public class SubtractActivationFunction implements ActivationFunction {
 
-    public final static String NAME = ActivationFunctionType.DIVISION.toString();
+    public final static String NAME = ActivationFunctionType.SUBTRACT.toString();
 
     @Override
     public double apply(double input) {

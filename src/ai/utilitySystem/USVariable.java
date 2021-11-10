@@ -107,6 +107,11 @@ public class USVariable extends USNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.US_VARIABLE;
+    }
+
+    @Override
     public String toPlantUML() {
         return "object " + this.name + " {\n" +
             "Value: " + this.value + "\n" +

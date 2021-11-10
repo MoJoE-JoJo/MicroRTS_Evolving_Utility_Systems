@@ -1,9 +1,11 @@
-package com.anji.nn;
+package com.anji.nn.addons;
 
-public class AdditionActivationFunction implements ActivationFunction {
+import com.anji.nn.ActivationFunction;
+import com.anji.nn.ActivationFunctionType;
 
+public class MaxActivationFunction implements ActivationFunction {
 
-    public final static String NAME = ActivationFunctionType.ADDITION.toString();
+    public final static String NAME = ActivationFunctionType.MAX.toString();
 
     @Override
     public double apply(double input) {
@@ -22,6 +24,6 @@ public class AdditionActivationFunction implements ActivationFunction {
 
     @Override
     public long cost() {
-        return 42;
+        return 69;
     }
 }

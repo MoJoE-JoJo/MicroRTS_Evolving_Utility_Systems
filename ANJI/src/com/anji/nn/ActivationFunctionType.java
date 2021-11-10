@@ -74,16 +74,15 @@ public final static ActivationFunctionType SIGNED_CLAMPED_LINEAR = new Activatio
 		"signed-clamped-linear" );
 
 
-// === OWN FUNCTIONS! ===
+// TODO === OWN FUNCTIONS! ===
 
-public final static ActivationFunctionType MULTIPLICATION = new ActivationFunctionType(
-		"multiplication");
-
-public final static ActivationFunctionType ADDITION = new ActivationFunctionType(
-			"addition");
-
-public final static ActivationFunctionType DIVISION = new ActivationFunctionType(
-		"division");
+public final static ActivationFunctionType DIVIDE = new ActivationFunctionType("DIVIDE");
+public final static ActivationFunctionType MULTIPLY = new ActivationFunctionType("MULTIPLY");
+public final static ActivationFunctionType SUM = new ActivationFunctionType("SUM");
+public final static ActivationFunctionType SUBTRACT = new ActivationFunctionType("SUBTRACT");
+public final static ActivationFunctionType MIN = new ActivationFunctionType("MIN");
+public final static ActivationFunctionType MAX = new ActivationFunctionType("MAX");
+public final static ActivationFunctionType POWER = new ActivationFunctionType("MAX");
 
 
 /**
@@ -110,9 +109,13 @@ public static ActivationFunctionType valueOf( String name ) {
 		types.put( ActivationFunctionType.SIGNED_CLAMPED_LINEAR.toString(),
 				ActivationFunctionType.SIGNED_CLAMPED_LINEAR );
 		// === OWN FUNCTIONS ===
-		types.put( ActivationFunctionType.MULTIPLICATION.toString(), ActivationFunctionType.MULTIPLICATION );
-		types.put( ActivationFunctionType.ADDITION.toString(), ActivationFunctionType.ADDITION );
-		types.put( ActivationFunctionType.DIVISION.toString(), ActivationFunctionType.DIVISION );
+		types.put( ActivationFunctionType.DIVIDE.toString(), ActivationFunctionType.DIVIDE );
+		types.put( ActivationFunctionType.MULTIPLY.toString(), ActivationFunctionType.MULTIPLY );
+		types.put( ActivationFunctionType.SUM.toString(), ActivationFunctionType.SUM );
+		types.put( ActivationFunctionType.SUBTRACT.toString(), ActivationFunctionType.SUBTRACT );
+		types.put( ActivationFunctionType.MIN.toString(), ActivationFunctionType.MIN );
+		types.put( ActivationFunctionType.MAX.toString(), ActivationFunctionType.MAX );
+		types.put( ActivationFunctionType.POWER.toString(), ActivationFunctionType.POWER );
 	}
 	return (ActivationFunctionType) types.get( name );
 }
