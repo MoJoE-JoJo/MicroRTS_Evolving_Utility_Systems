@@ -111,7 +111,11 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     @Override
     public List<ParameterSpecification> getParameters()
     {
-        return new ArrayList<>();
+        List<ParameterSpecification> parameters = new ArrayList<>();
+        
+        parameters.add(new ParameterSpecification("PathFinding", PathFinding.class, new AStarPathFinding()));
+
+        return parameters;
     }
 
     protected PlayerAction AttackWithSingleUnit(GameState gs, Player p){
