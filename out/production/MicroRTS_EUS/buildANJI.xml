@@ -1,4 +1,4 @@
-<project name="anji" default="jar" basedir=".">
+<project name="anji" default="jar-lib" basedir=".">
   <property name="src" value="."/>
   <property name="dest" value="../out"/>
 
@@ -20,19 +20,27 @@
     </javac>
   </target>
 
-  <target name="jar" depends="compile">
-    <jar jarfile="anji.jar" basedir="${dest}">
+  <target name="jar-lib" depends="compile" description="builds a new ANJI jar file and place it in the lib folder">
+    <jar destfile="../../lib/anji.jar" basedir="${dest}" update="yes">
        <include name="**/**.class"/>
     </jar>
   </target>
 
-  <target name="clean">
+  <target name="jar-here" depends="compile" description="builds a jar file beside the build xml file">
+    <jar jarfile="anji.jar" basedir="${dest}">
+      <include name="**/**.class"/>
+    </jar>
+  </target>
+
+  <target name="clean" description="Clean out the out folder of all class files">
     <delete>
       <fileset dir="${dest}">
-        <include name="anji.jar"/>
-        <include name="*.class"/>
+        <include name="**/**.class"/>
       </fileset>
     </delete>
+    <delete dir="${dest}/com"/>
+    <delete dir="${dest}/org"/>
+    <delete dir="${dest}/examples"/>
   </target>
 
 </project>

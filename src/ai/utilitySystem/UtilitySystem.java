@@ -1,15 +1,16 @@
 package ai.utilitySystem;
 import java.util.List;
 import java.util.Random;
+import ai.utilitySystem.USAction.UtilAction;
 
 import rts.*;
 
 public class UtilitySystem {
-    private List<USVariable> variables;
-    private List<USFeature> features;
-    private List<USAction> actions;
-    private Random random;
-    private int generation;
+    protected List<USVariable> variables;
+    protected List<USFeature> features;
+    protected List<USAction> actions;
+    protected Random random;
+    protected int generation;
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions) {
         this.variables = variables;
@@ -31,20 +32,26 @@ public class UtilitySystem {
     }
 
     // gets the highest scoring action
-    public PlayerAction getActionBest(GameState gs, int player) throws Exception {
+    public UtilAction getActionBest(GameState gs, int player) throws Exception {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
-                bestNode = node;
+            try{
+                if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
+                    bestNode = node;
+                }
+            }catch (Exception e){
+                System.out.println(e);
             }
+
         }
         return bestNode.getAction();
     }
 
     // gets a random node, using the scores as weights
-    public PlayerAction getActionWeightedRandom(GameState gs, int player) throws Exception {
+    public UtilAction getActionWeightedRandom(GameState gs, int player) throws Exception {
+        this.markAllNodesUnvisited();
         float sum = 0;
         float[] indices = new float[actions.size()];
         for(int i = 0; i < actions.size(); i++) {
@@ -54,7 +61,7 @@ public class UtilitySystem {
         }
         float r = this.random.nextFloat() * sum;
         for(int i = 0; i < actions.size(); i++) {
-            if (r <= sum) {
+            if (r <= indices[i]) {
                 return actions.get(i).getAction();
             }
         }

@@ -4,8 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ai.utilitySystem.USFeature.Operation;
-import ai.utilitySystem.USVariable.GameStateVariables;
-import rts.PlayerAction;
+import ai.utilitySystem.USVariable.GameStateVariable;
 
 public class USTestToPlantUML {
     public static void main(String args[]) throws InterruptedException {
@@ -15,11 +14,11 @@ public class USTestToPlantUML {
         List<USAction> actions = new LinkedList<USAction>();
 
         // variables
-        USVariable v1 = new USVariable("v1", GameStateVariables.PLAYER_RESOURCE);
+        USVariable v1 = new USVariable("v1", GameStateVariable.PLAYER_RESOURCE);
         variables.add(v1);
-        USVariable v2 = new USVariable("v2", GameStateVariables.PLAYER_WORKERS);
+        USVariable v2 = new USVariable("v2", GameStateVariable.PLAYER_WORKERS);
         variables.add(v2);
-        USVariable v3 = new USVariable("v3", GameStateVariables.PLAYER_WARRIORS);
+        USVariable v3 = new USVariable("v3", GameStateVariable.PLAYER_WARRIORS);
         variables.add(v3);
 
         // constants
@@ -36,11 +35,11 @@ public class USTestToPlantUML {
         features.add(f4);
 
         // actions
-        USAction a1 = new USAction("a1", f1, new PlayerAction());
+        USAction a1 = new USAction("a1", f1, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT);
         actions.add(a1);
-        USAction a2 = new USAction("a2", f2, new PlayerAction());
+        USAction a2 = new USAction("a2", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT);
         actions.add(a2);
-        USAction a3 = new USAction("a3", f4, new PlayerAction());
+        USAction a3 = new USAction("a3", f4, USAction.UtilAction.BUILD_WORKER);
         actions.add(a3);
 
         UtilitySystem us = new UtilitySystem(variables, features, actions);

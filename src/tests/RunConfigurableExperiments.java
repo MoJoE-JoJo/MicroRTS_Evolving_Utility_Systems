@@ -352,6 +352,7 @@ public class RunConfigurableExperiments {
 
     public static void main(String args[]) throws Exception {
         boolean asymetric = !args[1].equals("-");
+        /*
         loadBots1(args[0]);
         if (asymetric) {
             loadBots2(args[1]);
@@ -360,6 +361,10 @@ public class RunConfigurableExperiments {
         if (asymetric) {
             processBots(bots2);
         }
+        */
+        bots1.add(new RandomAI(utt));
+        bots2.add(new RandomAI(utt));
+        bots2.add(new RandomBiasedAI());
         loadMaps(args[2]);
         PrintStream out = new PrintStream(new File(args[3]));
         int iterations = Integer.parseInt(args[4]);

@@ -7,3 +7,5 @@
 /.vscode
 /ANJI/db/
 /db/
+/results/*
+/tournament_*/
