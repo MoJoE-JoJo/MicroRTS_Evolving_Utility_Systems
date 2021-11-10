@@ -34,15 +34,18 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     protected UnitType heavyType;
     protected UnitType rangedType;
 
-    protected List<Unit> passiveUnits = new LinkedList<Unit>();
-    protected List<Unit> attackingUnits = new LinkedList<Unit>();
-    protected List<Unit> defendingUnits = new LinkedList<Unit>();
+    protected List<Unit> passiveUnits;
+    protected List<Unit> attackingUnits;
+    protected List<Unit> defendingUnits;
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
         super(pathfinding, computationLimit, iterationsLimit);
         List<USVariable> variables = new ArrayList<USVariable>();
         List<USFeature> features = new ArrayList<USFeature>();
         List<USAction> actions = new ArrayList<USAction>();
+        passiveUnits = new LinkedList<>();
+        attackingUnits = new LinkedList<>();
+        defendingUnits = new LinkedList<>();
         utt = a_utt;
         us = new UtilitySystem(variables, features, actions);
     }
@@ -58,9 +61,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
     
     @Override
-    public void reset() {
-        super.reset();
-    }
+    public void reset() { super.reset(); }
 
     public void reset(UnitTypeTable a_utt)
     {
@@ -74,6 +75,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             rangedType = utt.getUnitType("Ranged");
 
         }
+        passiveUnits = new LinkedList<>();
+        attackingUnits = new LinkedList<>();
+        defendingUnits = new LinkedList<>();
     }
 
 
@@ -129,33 +133,43 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         System.out.println("Attack With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canAttack = new LinkedList<>();
-        boolean warUnitAttacking = false;
+        //Check passive military units
         for(Unit u:pgs.getUnits()) {
             if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                    (gs.getActionAssignment(u)==null || passiveUnits.contains(u) || defendingUnits.contains(u))) {
+                    (gs.getActionAssignment(u)==null || passiveUnits.contains(u))) {
                 canAttack.add(u);
-                //attackClosestEnemy(u,p,gs);
-                warUnitAttacking = true;
             }
         }
-        if(warUnitAttacking){
-            Random rand = new Random();
-            Unit u = canAttack.get(rand.nextInt(canAttack.size()));
-            attackClosestEnemy(u,p,gs);
-            attackingUnits.add(u);
-            defendingUnits.remove(u);
-            passiveUnits.remove(u);
-        }
-        //Use workers if there are no military units
-        else if(!warUnitAttacking){
+        //Check defending military units
+        if(canAttack.size() == 0){
             for(Unit u:pgs.getUnits()) {
-                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                        (gs.getActionAssignment(u)==null || passiveUnits.contains(u) || defendingUnits.contains(u) || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE )) {
+                if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() &&
+                        defendingUnits.contains(u) && canAttack.size() == 0) {
                     canAttack.add(u);
-                    //attackClosestEnemy(u,p,gs);
-                    //break;
                 }
             }
+        }
+        //Check passive workers
+        if(canAttack.size() == 0){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
+                        (gs.getActionAssignment(u)==null ||
+                                (passiveUnits.contains(u) && (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE )))
+                        ) {
+                    canAttack.add(u);
+                }
+            }
+        }
+        //Check defending workers
+        if(canAttack.size() == 0){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
+                        (gs.getActionAssignment(u)==null || defendingUnits.contains(u))) {
+                    canAttack.add(u);
+                }
+            }
+        }
+        if(canAttack.size() > 0){
             Random rand = new Random();
             Unit u = canAttack.get(rand.nextInt(canAttack.size()));
             attackClosestEnemy(u,p,gs);
@@ -188,11 +202,13 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     protected PlayerAction DefendWithSingleUnit(GameState gs, Player p){
         System.out.println("Defend With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
+        boolean warUnitAttacking = false;
+        List<Unit> canAttack = new LinkedList<>();
         //Use military units
         for (Unit u : pgs.getUnits()) {
             if (u.getType().canAttack && !u.getType().canHarvest
                     && u.getPlayer() == p.getID()
-                    && gs.getActionAssignment(u) == null) {
+                    && (gs.getActionAssignment(u)==null || passiveUnits.contains(u) || attackingUnits.contains(u))) {
                 DefendLogic(u, p, gs);
                 return translateActions(p.getID(),gs);
             }
@@ -425,7 +441,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return translateActions(p.getID(),gs);
     }
 
-    //TODO: Make random to choose
+    //TODO: Make random to choose, done
     protected PlayerAction BuildWarUnit(GameState gs, Player p){
         System.out.println("Build War Unit");
         Random ran = new Random();
