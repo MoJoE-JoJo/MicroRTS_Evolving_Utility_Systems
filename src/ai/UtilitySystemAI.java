@@ -34,18 +34,22 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     protected UnitType heavyType;
     protected UnitType rangedType;
 
-    protected List<Unit> passiveUnits;
-    protected List<Unit> attackingUnits;
-    protected List<Unit> defendingUnits;
+    protected HashSet<Unit> passiveUnits;
+    protected HashSet<Unit> harvestingWorkers;
+    protected HashSet<Unit> buildingWorkers;
+    protected HashSet<Unit> attackingUnits;
+    protected HashSet<Unit> defendingUnits;
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
         super(pathfinding, computationLimit, iterationsLimit);
         List<USVariable> variables = new ArrayList<USVariable>();
         List<USFeature> features = new ArrayList<USFeature>();
         List<USAction> actions = new ArrayList<USAction>();
-        passiveUnits = new LinkedList<>();
-        attackingUnits = new LinkedList<>();
-        defendingUnits = new LinkedList<>();
+        passiveUnits = new HashSet<>();
+        harvestingWorkers = new HashSet<>();
+        buildingWorkers = new HashSet<>();
+        attackingUnits = new HashSet<>();
+        defendingUnits = new HashSet<>();
         utt = a_utt;
         us = new UtilitySystem(variables, features, actions);
     }
@@ -75,9 +79,11 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             rangedType = utt.getUnitType("Ranged");
 
         }
-        passiveUnits = new LinkedList<>();
-        attackingUnits = new LinkedList<>();
-        defendingUnits = new LinkedList<>();
+        passiveUnits = new HashSet<>();
+        harvestingWorkers = new HashSet<>();
+        buildingWorkers = new HashSet<>();
+        attackingUnits = new HashSet<>();
+        defendingUnits = new HashSet<>();
     }
 
 
@@ -90,10 +96,26 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     @Override
     public PlayerAction getAction(int player, GameState gs) {
         try {
+            //Remove dead units
+            HashSet<Unit> liveUnits = new HashSet<>(gs.getUnits());
+            passiveUnits.removeIf(u -> !liveUnits.contains(u));
+            attackingUnits.removeIf(u -> !liveUnits.contains(u));
+            defendingUnits.removeIf(u -> !liveUnits.contains(u));
+            harvestingWorkers.removeIf(u -> !liveUnits.contains(u));
+            buildingWorkers.removeIf(u -> !liveUnits.contains(u));
+
+            //Make all units that are doing nothing part of the passive set
+            for (Unit u: gs.getUnits()) {
+                if((gs.getActionAssignment(u) == null || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE) &&
+                        !attackingUnits.contains(u) &&
+                        !defendingUnits.contains(u)){
+                    passiveUnits.add(u);
+                    harvestingWorkers.remove(u);
+                    buildingWorkers.remove(u);
+                }
+            }
             //Do the translation stuff
-            //return us.getActionWeightedRandom(gs, player);
             UtilAction utilAction = us.getActionWeightedRandom(gs, player);
-            //PhysicalGameState pgs = gs.getPhysicalGameState();
             Player p = gs.getPlayer(player);
             for (Unit u:attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
@@ -102,6 +124,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             for (Unit u:defendingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
                 DefendLogic(u, p, gs);
+            }
+            for (Unit u:harvestingWorkers) {
+                //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
+                HarvestLogic(u, p, gs);
             }
             switch (utilAction) {
                 case ATTACK_WITH_SINGLE_UNIT -> { return AttackWithSingleUnit(gs, p); }
@@ -125,18 +151,13 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return new ArrayList<>();
     }
 
-    //TODO: Make list of available units for new actions
-
-    //TODO: Choose random unit, done
-    //TODO: Make a list of attacking units, done
     protected PlayerAction AttackWithSingleUnit(GameState gs, Player p){
         System.out.println("Attack With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canAttack = new LinkedList<>();
         //Check passive military units
         for(Unit u:pgs.getUnits()) {
-            if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                    (gs.getActionAssignment(u)==null || passiveUnits.contains(u))) {
+            if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() && passiveUnits.contains(u)) {
                 canAttack.add(u);
             }
         }
@@ -151,10 +172,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         //Check passive workers
         if(canAttack.size() == 0){
             for(Unit u:pgs.getUnits()) {
-                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                        (gs.getActionAssignment(u)==null ||
-                                (passiveUnits.contains(u) && (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE )))
-                        ) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() && passiveUnits.contains(u)) {
                     canAttack.add(u);
                 }
             }
@@ -167,6 +185,14 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 }
             }
         }
+        //Check harvesting workers
+        if(canAttack.size() == 0){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() && harvestingWorkers.contains(u)) {
+                    canAttack.add(u);
+                }
+            }
+        }
         if(canAttack.size() > 0){
             Random rand = new Random();
             Unit u = canAttack.get(rand.nextInt(canAttack.size()));
@@ -174,6 +200,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             attackingUnits.add(u);
             defendingUnits.remove(u);
             passiveUnits.remove(u);
+            harvestingWorkers.remove(u);
         }
         return translateActions(p.getID(),gs);
     }
@@ -195,16 +222,13 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    //TODO: Gotta make a list of managed units that defend, done
-    //TODO: Choose random unit, done
     protected PlayerAction DefendWithSingleUnit(GameState gs, Player p){
         System.out.println("Defend With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canDefend = new LinkedList<>();
         //Check passive military units
         for (Unit u : pgs.getUnits()) {
-            if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID()
-                    && (gs.getActionAssignment(u)==null || passiveUnits.contains(u) )) {
+            if (u.getType().canAttack && !u.getType().canHarvest && u.getPlayer() == p.getID() && passiveUnits.contains(u)) {
                 canDefend.add(u);
             }
         }
@@ -219,10 +243,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         //Check passive workers
         if(canDefend.size() == 0){
             for(Unit u:pgs.getUnits()) {
-                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() &&
-                        (gs.getActionAssignment(u)==null ||
-                                (passiveUnits.contains(u) && (gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE )))
-                ) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() && passiveUnits.contains(u)) {
                     canDefend.add(u);
                 }
             }
@@ -235,6 +256,14 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 }
             }
         }
+        //Check harvesting workers
+        if(canDefend.size() == 0){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType().canAttack && u.getType().canHarvest && u.getPlayer() == p.getID() && harvestingWorkers.contains(u)) {
+                    canDefend.add(u);
+                }
+            }
+        }
         if(canDefend.size() > 0){
             Random rand = new Random();
             Unit u = canDefend.get(rand.nextInt(canDefend.size()));
@@ -242,6 +271,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             attackingUnits.remove(u);
             defendingUnits.add(u);
             passiveUnits.remove(u);
+            harvestingWorkers.remove(u);
         }
         return translateActions(p.getID(),gs);
     }
@@ -282,7 +312,6 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    //TODO: Choose random worker, done
     protected PlayerAction BuildBase(GameState gs, Player p){
         System.out.println("Build Base");
         //Setup of variables
@@ -290,26 +319,26 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         List<Unit> otherResources = new ArrayList<>(otherResourcePoint(p, pgs));
         List<Integer> reservedPositions = new ArrayList<>();
         List<Unit> canBuild = new LinkedList<Unit>();
-        int nbases = 0;
+        int nBases = 0;
         for (Unit u2 : pgs.getUnits()) {
             if (u2.getType() == baseType
                     && u2.getPlayer() == p.getID()) {
-                nbases++;
+                nBases++;
             }
         }
         //Build base if there are none left
-        if (nbases == 0 && p.getResources() >= baseType.cost){
+        if (nBases == 0 && p.getResources() >= baseType.cost){
             //Check passive worker
             for (Unit u : pgs.getUnits()) {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                    if(passiveUnits.contains(u)){
-                        if (gs.getActionAssignment(u) == null
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction. TYPE_RETURN) {
-                            canBuild.add(u);
-                        }
+                    if(passiveUnits.contains(u)) canBuild.add(u);
+                }
+            }
+            //Check harvesting workers
+            if(canBuild.size() == 0){
+                for (Unit u : pgs.getUnits()) {
+                    if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                        if(harvestingWorkers.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -317,9 +346,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
                     if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(defendingUnits.contains(u)){
-                                canBuild.add(u);
-                        }
+                        if(defendingUnits.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -327,9 +354,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
                     if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(attackingUnits.contains(u)){
-                            canBuild.add(u);
-                        }
+                        if(attackingUnits.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -339,23 +364,25 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 buildIfNotAlreadyBuilding(u, baseType, u.getX(), u.getY(), reservedPositions, p, pgs);
                 attackingUnits.remove(u);
                 defendingUnits.remove(u);
-                passiveUnits.add(u);
+                passiveUnits.remove(u);
+                harvestingWorkers.remove(u);
+                buildingWorkers.add(u);
                 return translateActions(p.getID(),gs);
             }
         }
         //Expand behaviour
-        if (!otherResources.isEmpty() && p.getResources() >= baseType.cost) {
+        if (!otherResources.isEmpty() && nBases > 0 && p.getResources() >= baseType.cost) {
             //check passive worker
             for (Unit u : pgs.getUnits()) {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                    if(passiveUnits.contains(u)) {
-                        if (gs.getActionAssignment(u) == null
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
-                            canBuild.add(u);
-                        }
+                    if(passiveUnits.contains(u)) canBuild.add(u);
+                }
+            }
+            //Check harvesting workers
+            if(canBuild.size() == 0){
+                for (Unit u : pgs.getUnits()) {
+                    if (u.getType() == workerType && u.getPlayer() == p.getID()) {
+                        if(harvestingWorkers.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -363,9 +390,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
                     if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(defendingUnits.contains(u)){
-                            canBuild.add(u);
-                        }
+                        if(defendingUnits.contains(u)) canBuild.add(u);
+
                     }
                 }
             }
@@ -373,9 +399,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
                     if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(attackingUnits.contains(u)){
-                            canBuild.add(u);
-                        }
+                        if(attackingUnits.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -385,7 +409,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 buildIfNotAlreadyBuilding(u, baseType, otherResources.get(0).getX() - 1, otherResources.get(0).getY() - 1, reservedPositions, p, pgs);
                 attackingUnits.remove(u);
                 defendingUnits.remove(u);
-                passiveUnits.add(u);
+                passiveUnits.remove(u);
+                harvestingWorkers.remove(u);
+                buildingWorkers.add(u);
                 return translateActions(p.getID(),gs);
             }
         }
@@ -458,47 +484,37 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return bases;
     }
 
-    //TODO: Choose random worker, done
+
     protected PlayerAction BuildBarracks(GameState gs, Player p){
         System.out.println("Build Barracks");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Integer> reservedPositions = new ArrayList<>();
         List<Unit> canBuild = new LinkedList<Unit>();
-        //Build barracks with resource worker
+        //Build barracks with passive worker
         if (p.getResources() >= barracksType.cost) {
             for (Unit u : pgs.getUnits()) {
                 if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                    if(passiveUnits.contains(u)) {
-                        if (gs.getActionAssignment(u) == null
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_HARVEST
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_MOVE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE
-                                || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_RETURN) {
-                            canBuild.add(u);
-                            //buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
-                            //return translateActions(p.getID(), gs);
-                        }
-                    }
+                    if(passiveUnits.contains(u)) canBuild.add(u);
+                }
+            }
+            //Check harvesting workers
+            if(canBuild.size() == 0){
+                for (Unit u : pgs.getUnits()) {
+                    if (u.getType() == workerType && u.getPlayer() == p.getID()) if(harvestingWorkers.contains(u)) canBuild.add(u);
                 }
             }
             //Check defending workers
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
-                    if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(defendingUnits.contains(u)){
-                            canBuild.add(u);
-                        }
-                    }
+                    if (u.getType() == workerType && u.getPlayer() == p.getID()) if(defendingUnits.contains(u)) canBuild.add(u);
                 }
             }
             //Check attacking workers
             if(canBuild.size() == 0){
                 for (Unit u : pgs.getUnits()) {
                     if (u.getType() == workerType && u.getPlayer() == p.getID()) {
-                        if(attackingUnits.contains(u)){
-                            canBuild.add(u);
-                        }
+                        if (attackingUnits.contains(u)) canBuild.add(u);
                     }
                 }
             }
@@ -508,14 +524,15 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
                 attackingUnits.remove(u);
                 defendingUnits.remove(u);
-                passiveUnits.add(u);
+                passiveUnits.remove(u);
+                harvestingWorkers.remove(u);
+                buildingWorkers.add(u);
                 return translateActions(p.getID(),gs);
             }
-
         }
         return translateActions(p.getID(),gs);
     }
-    //TODO: Make random
+
     protected PlayerAction BuildWorker(GameState gs, Player p){
         System.out.println("Build Worker");
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -533,12 +550,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 train(u, workerType);
                 return translateActions(p.getID(),gs);
             }
-
         }
         return translateActions(p.getID(),gs);
     }
 
-    //TODO: Make random to choose, done
     protected PlayerAction BuildWarUnit(GameState gs, Player p){
         System.out.println("Build War Unit");
         Random ran = new Random();
@@ -550,77 +565,95 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return translateActions(p.getID(),gs);
     }
 
-    //TODO: Make to choose randomly, done
-    //TODO: Make it able to harvest several resource (look at economyrush)
     protected PlayerAction Harvest_Resources(GameState gs, Player p){
         System.out.println("Harvest Resource");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canHarvest = new LinkedList<>();
-         //Only takes workers who are idling and makes them harvest
+        //Only takes workers who are idling and makes them harvest
        for(Unit u:pgs.getUnits()) {
             if (u.getType()==workerType && u.getPlayer()==p.getID()) {
-                if(gs.getActionAssignment(u) == null){
-                    //Find closest resources
-                    canHarvest.add(u);
-                    break;
+                if(passiveUnits.contains(u)) canHarvest.add(u);
+            }
+        }
+       //defending workers
+       if(canHarvest.size() == 0){
+           for(Unit u:pgs.getUnits()) {
+               if (u.getType()==workerType && u.getPlayer()==p.getID()) {
+                   if(defendingUnits.contains(u)) canHarvest.add(u);
+               }
+           }
+       }
+        //attacking workers
+        if(canHarvest.size() == 0){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType()==workerType && u.getPlayer()==p.getID()) {
+                    if(attackingUnits.contains(u)) canHarvest.add(u);
                 }
             }
         }
         if(canHarvest.size() > 0){
-            Unit closestBase = null;
-            Unit closestResource = null;
             Random rand = new Random();
             Unit u = canHarvest.get(rand.nextInt(canHarvest.size()));
-            int closestDistance = 0;
-            for (Unit u2 : pgs.getUnits()) {
-                if (u2.getType().isResource) {
-                    if(pf.pathToPositionInRangeExists(u, u2.getPosition(pgs), 1, gs, gs.getResourceUsage())){
-                        int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
-                        if (closestResource == null || d < closestDistance) {
-                            closestResource = u2;
-                            closestDistance = d;
-                        }
-                    }
-                }
-            }
-            //Find closest base
-            closestDistance = 0;
-            for (Unit u2 : pgs.getUnits()) {
-                if (u2.getType().isStockpile && u2.getPlayer() == p.getID()) {
+            HarvestLogic(u, p, gs);
+            attackingUnits.remove(u);
+            defendingUnits.remove(u);
+            passiveUnits.remove(u);
+            harvestingWorkers.add(u);
+            return translateActions(p.getID(),gs);
+        }
+        return translateActions(p.getID(),gs);
+    }
+
+    void HarvestLogic(Unit u, Player p, GameState gs){
+        PhysicalGameState pgs = gs.getPhysicalGameState();
+        Unit closestBase = null;
+        Unit closestResource = null;
+        int closestDistance = 0;
+        for (Unit u2 : pgs.getUnits()) {
+            if (u2.getType().isResource) {
+                if(pf.pathToPositionInRangeExists(u, u2.getPosition(pgs), 1, gs, gs.getResourceUsage())){
                     int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
-                    if (closestBase == null || d < closestDistance) {
-                        closestBase = u2;
+                    if (closestResource == null || d < closestDistance) {
+                        closestResource = u2;
                         closestDistance = d;
                     }
                 }
             }
-            //This block should make it so that they can get a new target to harvest and return to
-            if (closestResource != null && closestBase != null) {
-                AbstractAction aa = getAbstractAction(u);
-                if (aa instanceof Harvest) {
-                    Harvest h_aa = (Harvest) aa;
-                    if (h_aa.getTarget() != closestResource || h_aa.getBase() != closestBase) {
-                        harvest(u, closestResource, closestBase);
-                    }
-                } else {
-                    harvest(u, closestResource, closestBase);
+        }
+        //Find closest base
+        closestDistance = 0;
+        for (Unit u2 : pgs.getUnits()) {
+            if (u2.getType().isStockpile && u2.getPlayer() == p.getID()) {
+                int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
+                if (closestBase == null || d < closestDistance) {
+                    closestBase = u2;
+                    closestDistance = d;
                 }
             }
-            return translateActions(p.getID(),gs);
         }
-        return translateActions(p.getID(),gs);
+        //This block should make it so that they can get a new target to harvest and return to
+        if (closestResource != null && closestBase != null) {
+            AbstractAction aa = getAbstractAction(u);
+            if (aa instanceof Harvest) {
+                Harvest h_aa = (Harvest) aa;
+                if (h_aa.getTarget() != closestResource || h_aa.getBase() != closestBase) {
+                    harvest(u, closestResource, closestBase);
+                }
+            } else {
+                harvest(u, closestResource, closestBase);
+            }
+        }
     }
 
     protected void BuildLight(GameState gs, Player p){
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
-        for(Unit u:pgs.getUnits()) {
-            if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=lightType.cost){
+        if(p.getResources() >= lightType.cost){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
                     canTrain.add(u);
                 }
-                else if(p.getResources()<lightType.cost) break;
             }
         }
         if(canTrain.size() > 0){
@@ -633,18 +666,17 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
-        for(Unit u:pgs.getUnits()) {
-            if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=heavyType.cost){
+        if(p.getResources() >= heavyType.cost){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
                     canTrain.add(u);
                 }
-                else if(p.getResources()<heavyType.cost) break;
             }
         }
         if(canTrain.size() > 0){
             Random rand = new Random();
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
-            train(u,lightType);
+            train(u,heavyType);
         }
     }
     protected void BuildRanged(GameState gs, Player p){
@@ -652,18 +684,17 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         List<Unit> canTrain = new LinkedList<Unit>();
 
         // behavior of bases:
-        for(Unit u:pgs.getUnits()) {
-            if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
-                if (p.getResources()>=rangedType.cost){
+        if(p.getResources() >= rangedType.cost){
+            for(Unit u:pgs.getUnits()) {
+                if (u.getType()==barracksType && u.getPlayer()==p.getID() && gs.getActionAssignment(u)==null) {
                     canTrain.add(u);
                 }
-                else if(p.getResources()<heavyType.cost) break;
             }
         }
         if(canTrain.size() > 0){
             Random rand = new Random();
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
-            train(u,lightType);
+            train(u,rangedType);
         }
     }
 
