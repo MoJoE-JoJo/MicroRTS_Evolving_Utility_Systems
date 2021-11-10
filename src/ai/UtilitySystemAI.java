@@ -523,7 +523,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                     int closestDistance = 0;
                     for (Unit u2 : pgs.getUnits()) {
                         if (u2.getType().isResource) {
-                            if(pf.pathExists(u, u2.getPosition(pgs), gs, gs.getResourceUsage())){
+                            if(pf.pathToPositionInRangeExists(u, u2.getPosition(pgs), 1, gs, gs.getResourceUsage())){
                                 int d = Math.abs(u2.getX() - u.getX()) + Math.abs(u2.getY() - u.getY());
                                 if (closestResource == null || d < closestDistance) {
                                     closestResource = u2;
