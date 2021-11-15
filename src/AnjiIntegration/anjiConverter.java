@@ -1,8 +1,7 @@
-package NEATIntegration;
+package AnjiIntegration;
 
 import ai.utilitySystem.*;
 import com.anji.integration.ChromosomeToNetworkXml;
-import org.jgap.Chromosome;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -57,8 +56,8 @@ public class anjiConverter {
     private static UtilitySystem buildUtilitySystemFromNodeList(NodeList nodeList) {
         // Structures and values used
         Map<String, USNode> nodeMap = new HashMap<>();
-        // Map where the key is the src and value destination
-        Map<String, String> connectionMap = new HashMap<>();
+        // Map where the key is the src and the value the destination
+        Map<String, List<String>> connectionMap = new HashMap<>();
         // action index counter
         int nextActionIndex = 0;
 
@@ -104,8 +103,7 @@ public class anjiConverter {
                                 // need a way to assign an action to a neuron, should always be in the same order.
                                 USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
 
-                                if(nextActionIndex <= USAction.UtilAction.values().length-2)
-                                {
+                                if (nextActionIndex <= USAction.UtilAction.values().length - 2) {
                                     nextActionIndex++;
                                 }
 
@@ -130,9 +128,17 @@ public class anjiConverter {
                         // Handle connections,
                         String srcId = tempNode.getAttributes().getNamedItem("src-id").getNodeValue();
                         String destId = tempNode.getAttributes().getNamedItem("dest-id").getNodeValue();
-                        connectionMap.put(srcId, destId);
-//                        System.out.println(destId);
-//                        System.out.println(srcId);'
+
+                        //see if there already exist a list.
+                        if (connectionMap.containsKey(srcId)) {
+                            List tmpList = connectionMap.get(srcId);
+                            tmpList.add(destId);
+                        } else // if key don't exist, put a new list in the map
+                        {
+                            List newList = new LinkedList();
+                            newList.add(destId);
+                            connectionMap.put(srcId, newList);
+                        }
                         break;
                     default:
                         break;
@@ -142,40 +148,72 @@ public class anjiConverter {
 
         // use the connections map to assign nodes
 
-        for (
-                var entry : connectionMap.entrySet()) {
+        for (var entry : connectionMap.entrySet()) {
             var src = entry.getKey();
-            var dest = entry.getValue();
-            System.out.println("Connection: " + src + " --> " + dest);
+            var destList = entry.getValue();
+            USNode srcNode = nodeMap.get(src); // lookup src node
+            for (var destNodeId : destList) {
+                System.out.println("Connection: " + src + " --> " + destNodeId);
 
-            // look up src and dest in map
+                // look up destNode in map
+                USNode destNode = nodeMap.get(destNodeId);
 
-            USNode srcNode = nodeMap.get(src);
-            USNode destNode = nodeMap.get(dest);
+                if(!allowedToMakeConnection(srcNode, destNode))
+                {
+                    continue;
+                }
 
-            // switch on src node type, this is for updating all the object relations.
-            // The utility system is based on a "top down" approach, it builds relations such that the destNode has a ref to srcNode
-            switch (destNode.getType()) {
-                case US_CONSTANT:
-                case US_VARIABLE:
-                    // do nothing,
-                    System.out.println("VARIABLE or CONSTANT Node should never be the dest of a connection");
-                    break;
-                case US_FEATURE:
-                    USFeature tmpFeature = (USFeature) destNode;
-                    tmpFeature.addParam(srcNode);
-                    break;
-                case US_ACTION:
-                    USAction tmpAction = (USAction) destNode;
-                    tmpAction.addFeature(srcNode);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + srcNode.getType());
+
+                // switch on src node type, this is for updating all the object relations.
+                // The utility system is based on a "top down" approach, it builds relations such that the destNode has a ref to srcNode
+                switch (destNode.getType()) {
+                    case US_CONSTANT:
+                    case US_VARIABLE:
+
+                        // only allow a connection with variable as dest, if its to a action
+                        if (srcNode.getType() == USNode.NodeType.US_ACTION) {
+                            USAction tmpFeature = (USAction) srcNode;
+                            tmpFeature.addFeature(destNode);
+                            System.out.println("Made a connection from a Variable to a Action");
+
+                        } else {
+                            System.out.println("VARIABLE or CONSTANT Node should never be the dest of a connection");
+                        }
+
+                        break;
+                    case US_FEATURE:
+                        USFeature tmpFeature = (USFeature) destNode;
+                        tmpFeature.addParam(srcNode);
+                        break;
+                    case US_ACTION:
+                        USAction tmpAction = (USAction) destNode;
+                        tmpAction.addFeature(srcNode);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + srcNode.getType());
+                }
             }
         }
 
         UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList);
         return US;
+    }
+
+    private static boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
+        if (srcNode.getType() == USNode.NodeType.US_ACTION && destNode.getType() == USNode.NodeType.US_ACTION)
+        {
+            return false;
+        }
+
+        if (srcNode.getType() == USNode.NodeType.US_VARIABLE && destNode.getType() == USNode.NodeType.US_VARIABLE)
+        {
+            return false;
+        }
+
+        //TODO Maybe more cases
+
+
+        return true;
     }
 
     private static void printNote(NodeList nodeList) {

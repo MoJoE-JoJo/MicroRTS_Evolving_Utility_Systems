@@ -1,4 +1,4 @@
-package NEATIntegration;
+package AnjiIntegration;
 
 import ai.utilitySystem.UtilitySystem;
 import com.anji.neat.Evolver;
@@ -9,15 +9,17 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        tryAndRunAnji();
+        //tryAndRunAnji();
+        tryAndBuildFromChromosome();
 
     }
 
     private static void tryAndBuildFromChromosome() {
 
         try {
-            UtilitySystem us = anjiConverter.toUtilitySytemFromChromosome(9999);
+            UtilitySystem us = anjiConverter.toUtilitySytemFromChromosome(13198);
             System.out.println(us.toPlantUML());
+            System.out.println("Done");
         } catch (Exception e) {
             e.printStackTrace();
         }
