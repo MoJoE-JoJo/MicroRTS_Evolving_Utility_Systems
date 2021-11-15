@@ -25,7 +25,7 @@ import rts.units.UnitTypeTable;
  *
  */
 public class UtilitySystemAI extends AbstractionLayerAI {
-    protected UtilitySystem us; // can we just pass it as param in constructor?
+    protected UtilitySystem utilitySystem; // can we just pass it as param in constructor?
     protected UnitTypeTable utt;
     protected UnitType workerType;
     protected UnitType baseType;
@@ -51,20 +51,28 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         attackingUnits = new HashSet<>();
         defendingUnits = new HashSet<>();
         utt = a_utt;
-        us = new UtilitySystem(variables, features, actions);
+        utilitySystem = new UtilitySystem(variables, features, actions);
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
-        us = USConstants.getSimpleUtilitySystem();
+        utilitySystem = USConstants.getSimpleUtilitySystem();
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        us = USConstants.getSimpleUtilitySystem();
+        utilitySystem = USConstants.getSimpleUtilitySystem();
     }
+
+    public UtilitySystemAI(UnitTypeTable a_utt, UtilitySystem us) {
+        this(a_utt, new AStarPathFinding());
+        reset(a_utt);
+        utilitySystem = us;
+    }
+
+
     
     @Override
     public void reset() { super.reset(); }
@@ -117,7 +125,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 }
             }
             //Do the translation stuff
-            UtilAction utilAction = us.getActionWeightedRandom(gs, player);
+            UtilAction utilAction = utilitySystem.getActionWeightedRandom(gs, player);
             Player p = gs.getPlayer(player);
             for (Unit u:attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one

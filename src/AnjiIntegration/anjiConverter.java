@@ -27,9 +27,7 @@ public class anjiConverter {
 
             Document doc = docBuilder.parse(new InputSource(new StringReader(rawXML)));
 
-
             if (doc.hasChildNodes()) {
-                printNote(doc.getChildNodes());
                 returnSystem = buildUtilitySystemFromNodeList(doc.getChildNodes());
             }
         } catch (Exception e) {

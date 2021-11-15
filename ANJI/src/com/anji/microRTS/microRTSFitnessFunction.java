@@ -1,6 +1,7 @@
 package com.anji.microRTS;
 
 import AnjiIntegration.anjiConverter;
+import AnjiIntegration.fitnessCalculator;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.integration.XmlPersistableChromosome;
 import com.anji.util.Configurable;
@@ -8,6 +9,7 @@ import com.anji.util.Properties;
 import com.anji.util.Randomizer;
 import org.jgap.BulkFitnessFunction;
 import org.jgap.Chromosome;
+import tests.RunExperimentTest;
 
 import java.util.Iterator;
 import java.util.List;
@@ -49,13 +51,14 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
 
             // TODO play microRTS and get a fitness score
+            int fitness = 0;
+            try {
+                fitness = fitnessCalculator.fitnessOfUtilitySystem(US);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-
-
-            // copy of random fitness.
-
-            int randomFitness = rand.nextInt( MAX_FITNESS );
-            chrom.setFitnessValue( randomFitness + 1 );
+            chrom.setFitnessValue( fitness );
         }
     }
 
