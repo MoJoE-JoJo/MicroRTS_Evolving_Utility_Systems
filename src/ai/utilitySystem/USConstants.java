@@ -108,9 +108,9 @@ public final class USConstants {
         features.add(fwo1);
         USFeature fwo2 = new USFeature("resouceGT1", Operation.MAX, fwo1, c0);
         features.add(fwo2);
-        USFeature fwo3 = new USFeature("workValue", Operation.MAX, fwo2, c5);
+        USFeature fwo3 = new USFeature("workValue", Operation.MAX, fwo2, c10);
         features.add(fwo3);
-        USFeature fwo4 = new USFeature("02POWworkers", Operation.POWER, c05, vwo);
+        USFeature fwo4 = new USFeature("02POWworkers", Operation.POWER, c025, vwo);
         features.add(fwo4);
         USFeature fwo5 = new USFeature("valueWorXPow", Operation.MULTIPLY, fwo3, fwo4);
         features.add(fwo5);

@@ -1,5 +1,8 @@
 package com.anji.microRTS;
 
+import AnjiIntegration.anjiConverter;
+import ai.utilitySystem.UtilitySystem;
+import com.anji.integration.XmlPersistableChromosome;
 import com.anji.util.Configurable;
 import com.anji.util.Properties;
 import com.anji.util.Randomizer;
@@ -9,6 +12,8 @@ import org.jgap.Chromosome;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+
 
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 1000000;
@@ -21,10 +26,33 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         Iterator it = genotypes.iterator();
         while ( it.hasNext() ) {
             Chromosome chrom = (Chromosome) it.next();
-            //TODO build utility system, and play microRTS.
 
 
-            // currently, just copy of random fitness.
+            // build utility system
+            UtilitySystem US = null;
+            try {
+                var xmlString = new XmlPersistableChromosome(chrom).toXml();
+
+                US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
+
+                System.out.println(xmlString);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (US == null)
+            {
+                //set the fitness to 0 if it failed to build the utility system
+                chrom.setFitnessValue(0);
+                continue;
+            }
+
+            // TODO play microRTS and get a fitness score
+
+
+
+            // copy of random fitness.
 
             int randomFitness = rand.nextInt( MAX_FITNESS );
             chrom.setFitnessValue( randomFitness + 1 );

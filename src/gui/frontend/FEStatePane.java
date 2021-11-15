@@ -6,8 +6,6 @@
 
 package gui.frontend;
 
-import ai.TestUtilitySystemAI;
-
 import ai.BranchingFactorCalculatorBigInteger;
 import ai.core.AI;
 import ai.core.AIWithComputationBudget;
@@ -60,6 +58,7 @@ import ai.portfolio.portfoliogreedysearch.PGSAI;
 import ai.puppet.PuppetSearchMCTS;
 import ai.stochastic.UnitActionProbabilityDistribution;
 import ai.UtilitySystemAI;
+import ai.UtilitySystemAIRandom;
 import gui.MouseController;
 import gui.PhysicalGameStateMouseJFrame;
 import gui.PhysicalGameStatePanel;
@@ -130,6 +129,7 @@ public class FEStatePane extends JPanel {
 
     public static Class AIs[] = {
                    UtilitySystemAI.class,
+                   UtilitySystemAIRandom.class,
                    PassiveAI.class,
                    MouseController.class,
                    RandomAI.class,

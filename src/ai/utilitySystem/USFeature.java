@@ -91,6 +91,11 @@ public class USFeature extends USNode {
         }
     }
 
+    public USNode getParam2()
+    {
+        return param2;
+    }
+
     public String relationsToPlantUML() {
         return (this.param1.getClass() == USConstant.class ? "" : (this.param1.getName() + " --> " + this.name + " : V1\n")) +
                 (this.param2.getClass() == USConstant.class ? "" : (this.param2.getName() + " --> " + this.name + " : V2\n"));

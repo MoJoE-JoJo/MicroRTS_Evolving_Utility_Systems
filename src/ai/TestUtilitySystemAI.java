@@ -71,12 +71,12 @@ public class TestUtilitySystemAI extends UtilitySystemAI {
         //}
         if(oneAction){
             oneAction = false;
-            return Harvest_Resources(gs, p);
+            return DefendWithSingleUnit(gs, p);
         }
         else{
-            oneAction = true;
-            return BuildWorker(gs, p);
-            //return translateActions(p.getID(),gs);
+            //oneAction = true;
+            //return BuildWorker(gs, p);
+            return translateActions(p.getID(),gs);
         }
         //return new PlayerAction();
     }
