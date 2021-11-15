@@ -9,16 +9,16 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        //tryAndRunAnji();
-        tryAndBuildFromChromosome();
+        tryAndRunAnji();
+        //tryAndBuildFromChromosome();
 
     }
 
     private static void tryAndBuildFromChromosome() {
-
         try {
-            UtilitySystem us = anjiConverter.toUtilitySytemFromChromosome(13198);
-            System.out.println(us.toPlantUML());
+            UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(166);
+            String uml = us.toPlantUML();
+            System.out.println(uml);
             System.out.println("Done");
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,8 +36,6 @@ public class startANJI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }
 

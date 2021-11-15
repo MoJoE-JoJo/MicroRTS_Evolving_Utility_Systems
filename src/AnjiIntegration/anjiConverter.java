@@ -6,23 +6,40 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 
 public class anjiConverter {
 
-    // TODO need a method that can go from a chromosome to a utility system.
+    public static UtilitySystem toUtilitySystemFromXMLString(String rawXML) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-    public static UtilitySystem toUtilitySytemFromChromosome(long chromId) throws Exception {
+        UtilitySystem returnSystem = null;
+        try {
+            DocumentBuilder docBuilder = dbf.newDocumentBuilder();
+
+            Document doc = docBuilder.parse(new InputSource(new StringReader(rawXML)));
+
+
+            if (doc.hasChildNodes()) {
+                printNote(doc.getChildNodes());
+                returnSystem = buildUtilitySystemFromNodeList(doc.getChildNodes());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnSystem;
+    }
+
+
+    public static UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
         ChromosomeToNetworkXml converter = new ChromosomeToNetworkXml();
 
         // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
@@ -36,9 +53,9 @@ public class anjiConverter {
         try (InputStream is = readXmlFileIntoInputStream("./db/chromosome/chromosome" + chromId + ".xml")) {
 
             // parse XML file
-            DocumentBuilder docbuilder = dbf.newDocumentBuilder();
+            DocumentBuilder docBuilder = dbf.newDocumentBuilder();
             // read from a project's resources folder
-            Document doc = docbuilder.parse(is);
+            Document doc = docBuilder.parse(is);
 
             System.out.println("Root Element :" + doc.getDocumentElement().getNodeName());
             System.out.println("------");
@@ -58,6 +75,8 @@ public class anjiConverter {
         Map<String, USNode> nodeMap = new HashMap<>();
         // Map where the key is the src and the value the destination
         Map<String, List<String>> connectionMap = new HashMap<>();
+        // list of output nodes from the ANJI network
+        List<String> finalFeaturesNodes = new LinkedList<>();
         // action index counter
         int nextActionIndex = 0;
 
@@ -74,21 +93,21 @@ public class anjiConverter {
 
         for (int count = 0; count < nodeList.getLength(); count++) {
 
-            Node tempNode = nodeList.item(count);
+            Node tempXMLNode = nodeList.item(count);
 
             // make sure it's an element node.
-            if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+            if (tempXMLNode.getNodeType() == Node.ELEMENT_NODE) {
 
                 // get node name and value
-                String nodeName = tempNode.getNodeName();
+                String nodeName = tempXMLNode.getNodeName();
                 System.out.println("\nNode Name = " + nodeName + " [OPEN]");
 
                 // switch on the node name
                 switch (nodeName) {
                     case "neuron":
                         // handle neurons, need to handle based on input, hidden or output neuron
-                        String neuronType = tempNode.getAttributes().getNamedItem("type").getNodeValue();
-                        String neuronId = tempNode.getAttributes().getNamedItem("id").getNodeValue();
+                        String neuronType = tempXMLNode.getAttributes().getNamedItem("type").getNodeValue();
+                        String neuronId = tempXMLNode.getAttributes().getNamedItem("id").getNodeValue();
                         switch (neuronType) {
                             case "in":
                                 // inputs neurons -> utility system variable nodes
@@ -99,22 +118,30 @@ public class anjiConverter {
                                 varibleList.add(usVariable);
                                 break;
                             case "out":
-                                // outputs neurons -> utility system action nodes
-                                // need a way to assign an action to a neuron, should always be in the same order.
-                                USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
+                                // outputs neurons -> utility system "final features layer" nodes
+                                // creates a new feature node, and a action node.
+                                // The connection going to a "out" node will then go to this feature node that can handle multiple connections
 
+                                // create a "final feature layer" node.
+                                USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM, null, null);
+
+
+                                USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
                                 if (nextActionIndex <= USAction.UtilAction.values().length - 2) {
                                     nextActionIndex++;
                                 }
 
-                                USAction actionNode = new USAction(neuronId, null, actionEnum);
-                                nodeMap.put(neuronId, actionNode);
+                                USAction actionNode = new USAction(actionEnum.toString(), finalFeature, actionEnum);
+
+                                nodeMap.put(neuronId, finalFeature);
+                                featureList.add(finalFeature);
                                 actionList.add(actionNode);
                                 break;
                             case "hid":
                                 // hidden neurons -> utility system features nodes
-                                // read the operation from the
-                                String operation = tempNode.getAttributes().getNamedItem("activation").getNodeValue();
+                                // read the operation from the XMLnode
+                                String operation = tempXMLNode.getAttributes().getNamedItem("activation").getNodeValue();
+                                //create new feaure and add to node map and feature list
                                 USFeature feature = new USFeature(neuronId, USFeature.Operation.valueOf(operation), null, null);
                                 nodeMap.put(neuronId, feature);
                                 featureList.add(feature);
@@ -126,8 +153,8 @@ public class anjiConverter {
                         break;
                     case "connection":
                         // Handle connections,
-                        String srcId = tempNode.getAttributes().getNamedItem("src-id").getNodeValue();
-                        String destId = tempNode.getAttributes().getNamedItem("dest-id").getNodeValue();
+                        String srcId = tempXMLNode.getAttributes().getNamedItem("src-id").getNodeValue();
+                        String destId = tempXMLNode.getAttributes().getNamedItem("dest-id").getNodeValue();
 
                         //see if there already exist a list.
                         if (connectionMap.containsKey(srcId)) {
@@ -158,11 +185,9 @@ public class anjiConverter {
                 // look up destNode in map
                 USNode destNode = nodeMap.get(destNodeId);
 
-                if(!allowedToMakeConnection(srcNode, destNode))
-                {
+                if (!allowedToMakeConnection(srcNode, destNode)) {
                     continue;
                 }
-
 
                 // switch on src node type, this is for updating all the object relations.
                 // The utility system is based on a "top down" approach, it builds relations such that the destNode has a ref to srcNode
@@ -195,18 +220,30 @@ public class anjiConverter {
             }
         }
 
+        // == Handle empty values in feature nodes ==
+
+        for (USFeature node : featureList) {
+            if (node.getParam2() == null) {
+                //todo not sure this is good enough
+                node.addParam(new USConstant(1.0f));
+            }
+        }
+
         UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList);
         return US;
     }
 
     private static boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
-        if (srcNode.getType() == USNode.NodeType.US_ACTION && destNode.getType() == USNode.NodeType.US_ACTION)
-        {
+        if (srcNode.getType() == USNode.NodeType.US_ACTION && destNode.getType() == USNode.NodeType.US_ACTION) {
             return false;
         }
 
-        if (srcNode.getType() == USNode.NodeType.US_VARIABLE && destNode.getType() == USNode.NodeType.US_VARIABLE)
-        {
+        if (srcNode.getType() == USNode.NodeType.US_VARIABLE && destNode.getType() == USNode.NodeType.US_VARIABLE) {
+            return false;
+        }
+
+        // check for circular connection.
+        if (srcNode.getName() == destNode.getName()) {
             return false;
         }
 

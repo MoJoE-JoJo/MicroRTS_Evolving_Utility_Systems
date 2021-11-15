@@ -1,16 +1,16 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="./graphFitness.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="./graphFitnessRefresh.xsl" ?>
 <!DOCTYPE run SYSTEM "../run.dtd">
-<run name="testrun" timedatestamp="[20211110 14:59:10 - 20211110 14:59:14]" >
+<run name="testrun" timedatestamp="[20211115 11:52:02 - 20211115 12:04:27]" >
 <search-parameters>
-<population-size>50</population-size>
-<generations>10</generations>
+<population-size>75</population-size>
+<generations>20</generations>
 </search-parameters>
 <generation id="1" >
 <fitness>
-<max>980350</max>
-<min>3</min>
-<avg>421954</avg>
+<max>995944</max>
+<min>10663</min>
+<avg>525192</avg>
 </fitness>
 <complexity>
 <champ>151</champ>
@@ -18,700 +18,1896 @@
 <min>151</min>
 <avg>151.0</avg>
 </complexity>
-<specie id="151" count="50">
-<chromosome id="151" fitness="294870" />
-<chromosome id="152" fitness="33100" />
-<chromosome id="153" fitness="96188" />
-<chromosome id="154" fitness="445654" />
-<chromosome id="155" fitness="850107" />
-<chromosome id="156" fitness="653769" />
-<chromosome id="157" fitness="762800" />
-<chromosome id="158" fitness="550222" />
-<chromosome id="159" fitness="131864" />
-<chromosome id="160" fitness="321733" />
-<chromosome id="161" fitness="604217" />
-<chromosome id="162" fitness="358305" />
-<chromosome id="163" fitness="313934" />
-<chromosome id="164" fitness="767661" />
-<chromosome id="165" fitness="326868" />
-<chromosome id="166" fitness="980350" />
-<chromosome id="167" fitness="840476" />
-<chromosome id="168" fitness="517241" />
-<chromosome id="169" fitness="26686" />
-<chromosome id="170" fitness="400497" />
-<chromosome id="171" fitness="306086" />
-<chromosome id="172" fitness="340990" />
-<chromosome id="173" fitness="958852" />
-<chromosome id="174" fitness="158610" />
-<chromosome id="175" fitness="755736" />
-<chromosome id="176" fitness="275248" />
-<chromosome id="177" fitness="346550" />
-<chromosome id="178" fitness="313742" />
-<chromosome id="179" fitness="443876" />
-<chromosome id="180" fitness="803576" />
-<chromosome id="181" fitness="926458" />
-<chromosome id="182" fitness="186895" />
-<chromosome id="183" fitness="121191" />
-<chromosome id="184" fitness="351278" />
-<chromosome id="185" fitness="612028" />
-<chromosome id="186" fitness="512523" />
-<chromosome id="187" fitness="566505" />
-<chromosome id="188" fitness="406452" />
-<chromosome id="189" fitness="3" />
-<chromosome id="190" fitness="106662" />
-<chromosome id="191" fitness="231171" />
-<chromosome id="192" fitness="21230" />
-<chromosome id="193" fitness="203231" />
-<chromosome id="194" fitness="107909" />
-<chromosome id="195" fitness="813147" />
-<chromosome id="196" fitness="344033" />
-<chromosome id="197" fitness="325247" />
-<chromosome id="198" fitness="797552" />
-<chromosome id="199" fitness="295563" />
-<chromosome id="200" fitness="188839" />
+<specie id="151" count="75">
+<chromosome id="151" fitness="995944" />
+<chromosome id="152" fitness="172174" />
+<chromosome id="153" fitness="182429" />
+<chromosome id="154" fitness="732357" />
+<chromosome id="155" fitness="561277" />
+<chromosome id="156" fitness="161243" />
+<chromosome id="157" fitness="770751" />
+<chromosome id="158" fitness="831682" />
+<chromosome id="159" fitness="704880" />
+<chromosome id="160" fitness="465547" />
+<chromosome id="161" fitness="650478" />
+<chromosome id="162" fitness="541329" />
+<chromosome id="163" fitness="234138" />
+<chromosome id="164" fitness="936487" />
+<chromosome id="165" fitness="210647" />
+<chromosome id="166" fitness="485675" />
+<chromosome id="167" fitness="793989" />
+<chromosome id="168" fitness="736890" />
+<chromosome id="169" fitness="625438" />
+<chromosome id="170" fitness="875888" />
+<chromosome id="171" fitness="563908" />
+<chromosome id="172" fitness="295229" />
+<chromosome id="173" fitness="221509" />
+<chromosome id="174" fitness="203168" />
+<chromosome id="175" fitness="355100" />
+<chromosome id="176" fitness="759844" />
+<chromosome id="177" fitness="10663" />
+<chromosome id="178" fitness="734130" />
+<chromosome id="179" fitness="928416" />
+<chromosome id="180" fitness="844228" />
+<chromosome id="181" fitness="707486" />
+<chromosome id="182" fitness="505941" />
+<chromosome id="183" fitness="723482" />
+<chromosome id="184" fitness="99039" />
+<chromosome id="185" fitness="923140" />
+<chromosome id="186" fitness="586112" />
+<chromosome id="187" fitness="372965" />
+<chromosome id="188" fitness="81038" />
+<chromosome id="189" fitness="678423" />
+<chromosome id="190" fitness="580792" />
+<chromosome id="191" fitness="149592" />
+<chromosome id="192" fitness="847497" />
+<chromosome id="193" fitness="729206" />
+<chromosome id="194" fitness="457118" />
+<chromosome id="195" fitness="101213" />
+<chromosome id="196" fitness="194838" />
+<chromosome id="197" fitness="750856" />
+<chromosome id="198" fitness="953138" />
+<chromosome id="199" fitness="395295" />
+<chromosome id="200" fitness="984460" />
+<chromosome id="201" fitness="514492" />
+<chromosome id="202" fitness="863528" />
+<chromosome id="203" fitness="745441" />
+<chromosome id="204" fitness="91651" />
+<chromosome id="205" fitness="870122" />
+<chromosome id="206" fitness="911973" />
+<chromosome id="207" fitness="79532" />
+<chromosome id="208" fitness="445531" />
+<chromosome id="209" fitness="465624" />
+<chromosome id="210" fitness="637590" />
+<chromosome id="211" fitness="66145" />
+<chromosome id="212" fitness="30309" />
+<chromosome id="213" fitness="175065" />
+<chromosome id="214" fitness="188269" />
+<chromosome id="215" fitness="142508" />
+<chromosome id="216" fitness="15089" />
+<chromosome id="217" fitness="431121" />
+<chromosome id="218" fitness="892602" />
+<chromosome id="219" fitness="283737" />
+<chromosome id="220" fitness="720437" />
+<chromosome id="221" fitness="975123" />
+<chromosome id="222" fitness="832354" />
+<chromosome id="223" fitness="701761" />
+<chromosome id="224" fitness="639254" />
+<chromosome id="225" fitness="263147" />
 </specie>
 </generation>
 <generation id="2" >
 <fitness>
-<max>986696</max>
-<min>57682</min>
-<avg>543104</avg>
+<max>989130</max>
+<min>18545</min>
+<avg>454839</avg>
 </fitness>
 <complexity>
-<champ>177</champ>
-<max>192</max>
+<champ>181</champ>
+<max>187</max>
 <min>151</min>
-<avg>170.84</avg>
+<avg>170.68</avg>
 </complexity>
-<specie id="151" count="50">
-<chromosome id="155" fitness="717644" />
-<chromosome id="157" fitness="731926" />
-<chromosome id="164" fitness="632557" />
-<chromosome id="166" fitness="508959" />
-<chromosome id="167" fitness="739102" />
-<chromosome id="173" fitness="977443" />
-<chromosome id="180" fitness="849598" />
-<chromosome id="181" fitness="790048" />
-<chromosome id="195" fitness="968498" />
-<chromosome id="198" fitness="928649" />
-<chromosome id="856" fitness="585953" />
-<chromosome id="857" fitness="873242" />
-<chromosome id="858" fitness="489059" />
-<chromosome id="859" fitness="634008" />
-<chromosome id="860" fitness="320510" />
-<chromosome id="861" fitness="363070" />
-<chromosome id="862" fitness="361710" />
-<chromosome id="863" fitness="104792" />
-<chromosome id="864" fitness="986696" />
-<chromosome id="865" fitness="189707" />
-<chromosome id="866" fitness="232805" />
-<chromosome id="867" fitness="691834" />
-<chromosome id="868" fitness="78542" />
-<chromosome id="869" fitness="411371" />
-<chromosome id="870" fitness="966008" />
-<chromosome id="871" fitness="350830" />
-<chromosome id="872" fitness="167425" />
-<chromosome id="873" fitness="306359" />
-<chromosome id="874" fitness="200137" />
-<chromosome id="875" fitness="543707" />
-<chromosome id="876" fitness="212180" />
-<chromosome id="877" fitness="147502" />
-<chromosome id="878" fitness="696595" />
-<chromosome id="879" fitness="531432" />
-<chromosome id="880" fitness="986364" />
-<chromosome id="881" fitness="57682" />
-<chromosome id="882" fitness="957832" />
-<chromosome id="883" fitness="166119" />
-<chromosome id="884" fitness="367831" />
-<chromosome id="885" fitness="813343" />
-<chromosome id="886" fitness="415802" />
-<chromosome id="887" fitness="448157" />
-<chromosome id="888" fitness="727657" />
-<chromosome id="889" fitness="769705" />
-<chromosome id="890" fitness="336431" />
-<chromosome id="891" fitness="455730" />
-<chromosome id="892" fitness="859201" />
-<chromosome id="893" fitness="214097" />
-<chromosome id="894" fitness="312855" />
-<chromosome id="895" fitness="976498" />
+<specie id="151" count="75">
+<chromosome id="151" fitness="354686" />
+<chromosome id="164" fitness="593682" />
+<chromosome id="170" fitness="903821" />
+<chromosome id="179" fitness="433402" />
+<chromosome id="180" fitness="930078" />
+<chromosome id="185" fitness="638875" />
+<chromosome id="192" fitness="769352" />
+<chromosome id="198" fitness="484855" />
+<chromosome id="200" fitness="149724" />
+<chromosome id="202" fitness="732999" />
+<chromosome id="205" fitness="114840" />
+<chromosome id="206" fitness="102000" />
+<chromosome id="218" fitness="500008" />
+<chromosome id="221" fitness="64790" />
+<chromosome id="222" fitness="45978" />
+<chromosome id="1031" fitness="797290" />
+<chromosome id="1032" fitness="476311" />
+<chromosome id="1033" fitness="666272" />
+<chromosome id="1034" fitness="624113" />
+<chromosome id="1035" fitness="639461" />
+<chromosome id="1036" fitness="443658" />
+<chromosome id="1037" fitness="466722" />
+<chromosome id="1038" fitness="861049" />
+<chromosome id="1039" fitness="663205" />
+<chromosome id="1040" fitness="768837" />
+<chromosome id="1041" fitness="496669" />
+<chromosome id="1042" fitness="212164" />
+<chromosome id="1043" fitness="214169" />
+<chromosome id="1044" fitness="635924" />
+<chromosome id="1045" fitness="330477" />
+<chromosome id="1046" fitness="446309" />
+<chromosome id="1047" fitness="18545" />
+<chromosome id="1048" fitness="526404" />
+<chromosome id="1049" fitness="389277" />
+<chromosome id="1050" fitness="477980" />
+<chromosome id="1051" fitness="648072" />
+<chromosome id="1052" fitness="532959" />
+<chromosome id="1053" fitness="108059" />
+<chromosome id="1054" fitness="485273" />
+<chromosome id="1055" fitness="794334" />
+<chromosome id="1056" fitness="526339" />
+<chromosome id="1057" fitness="989130" />
+<chromosome id="1058" fitness="351023" />
+<chromosome id="1059" fitness="386046" />
+<chromosome id="1060" fitness="306270" />
+<chromosome id="1061" fitness="325303" />
+<chromosome id="1062" fitness="663830" />
+<chromosome id="1063" fitness="221055" />
+<chromosome id="1064" fitness="579272" />
+<chromosome id="1065" fitness="128099" />
+<chromosome id="1066" fitness="274204" />
+<chromosome id="1067" fitness="327845" />
+<chromosome id="1068" fitness="605309" />
+<chromosome id="1069" fitness="386430" />
+<chromosome id="1070" fitness="469930" />
+<chromosome id="1071" fitness="653927" />
+<chromosome id="1072" fitness="424502" />
+<chromosome id="1073" fitness="51701" />
+<chromosome id="1074" fitness="443247" />
+<chromosome id="1075" fitness="425675" />
+<chromosome id="1076" fitness="34274" />
+<chromosome id="1077" fitness="503010" />
+<chromosome id="1078" fitness="293291" />
+<chromosome id="1079" fitness="904814" />
+<chromosome id="1080" fitness="397702" />
+<chromosome id="1081" fitness="92962" />
+<chromosome id="1082" fitness="325722" />
+<chromosome id="1083" fitness="159136" />
+<chromosome id="1084" fitness="116078" />
+<chromosome id="1085" fitness="928453" />
+<chromosome id="1086" fitness="300859" />
+<chromosome id="1087" fitness="448363" />
+<chromosome id="1088" fitness="909326" />
+<chromosome id="1089" fitness="597406" />
+<chromosome id="1090" fitness="19771" />
 </specie>
 </generation>
 <generation id="3" >
 <fitness>
-<max>948441</max>
-<min>2525</min>
-<avg>492111</avg>
+<max>978990</max>
+<min>13418</min>
+<avg>514333</avg>
 </fitness>
 <complexity>
-<champ>194</champ>
-<max>235</max>
+<champ>199</champ>
+<max>224</max>
 <min>151</min>
-<avg>188.04</avg>
+<avg>190.74666666666667</avg>
 </complexity>
-<specie id="151" count="50">
-<chromosome id="173" fitness="435929" />
-<chromosome id="195" fitness="383837" />
-<chromosome id="198" fitness="215185" />
-<chromosome id="857" fitness="93668" />
-<chromosome id="864" fitness="815034" />
-<chromosome id="870" fitness="803279" />
-<chromosome id="880" fitness="816547" />
-<chromosome id="882" fitness="393481" />
-<chromosome id="892" fitness="287490" />
-<chromosome id="895" fitness="165949" />
-<chromosome id="1293" fitness="68471" />
-<chromosome id="1294" fitness="639538" />
-<chromosome id="1295" fitness="658585" />
-<chromosome id="1296" fitness="63713" />
-<chromosome id="1297" fitness="700385" />
-<chromosome id="1298" fitness="575028" />
-<chromosome id="1299" fitness="2525" />
-<chromosome id="1300" fitness="692898" />
-<chromosome id="1301" fitness="786952" />
-<chromosome id="1302" fitness="28069" />
-<chromosome id="1303" fitness="293189" />
-<chromosome id="1304" fitness="806214" />
-<chromosome id="1305" fitness="654687" />
-<chromosome id="1306" fitness="948441" />
-<chromosome id="1307" fitness="256351" />
-<chromosome id="1308" fitness="874039" />
-<chromosome id="1309" fitness="117984" />
-<chromosome id="1310" fitness="734866" />
-<chromosome id="1311" fitness="377106" />
-<chromosome id="1312" fitness="780794" />
-<chromosome id="1313" fitness="584634" />
-<chromosome id="1314" fitness="32396" />
-<chromosome id="1315" fitness="922659" />
-<chromosome id="1316" fitness="154128" />
-<chromosome id="1317" fitness="84069" />
-<chromosome id="1318" fitness="94883" />
-<chromosome id="1319" fitness="632980" />
-<chromosome id="1320" fitness="204143" />
-<chromosome id="1321" fitness="838549" />
-<chromosome id="1322" fitness="325794" />
-<chromosome id="1323" fitness="643047" />
-<chromosome id="1324" fitness="256792" />
-<chromosome id="1325" fitness="773260" />
-<chromosome id="1326" fitness="475561" />
-<chromosome id="1327" fitness="733888" />
-<chromosome id="1328" fitness="727445" />
-<chromosome id="1329" fitness="838410" />
-<chromosome id="1330" fitness="869178" />
-<chromosome id="1331" fitness="464488" />
-<chromosome id="1332" fitness="479057" />
+<specie id="151" count="75">
+<chromosome id="170" fitness="549631" />
+<chromosome id="180" fitness="362682" />
+<chromosome id="192" fitness="119900" />
+<chromosome id="202" fitness="694905" />
+<chromosome id="1031" fitness="587099" />
+<chromosome id="1033" fitness="530169" />
+<chromosome id="1038" fitness="275052" />
+<chromosome id="1039" fitness="315813" />
+<chromosome id="1040" fitness="552646" />
+<chromosome id="1055" fitness="945405" />
+<chromosome id="1057" fitness="214388" />
+<chromosome id="1062" fitness="892768" />
+<chromosome id="1079" fitness="656059" />
+<chromosome id="1085" fitness="467769" />
+<chromosome id="1088" fitness="505603" />
+<chromosome id="1593" fitness="229930" />
+<chromosome id="1594" fitness="732239" />
+<chromosome id="1595" fitness="556449" />
+<chromosome id="1596" fitness="749156" />
+<chromosome id="1597" fitness="820636" />
+<chromosome id="1598" fitness="409923" />
+<chromosome id="1599" fitness="396502" />
+<chromosome id="1600" fitness="841328" />
+<chromosome id="1601" fitness="313094" />
+<chromosome id="1602" fitness="110881" />
+<chromosome id="1603" fitness="650514" />
+<chromosome id="1604" fitness="822972" />
+<chromosome id="1605" fitness="473652" />
+<chromosome id="1606" fitness="851067" />
+<chromosome id="1607" fitness="943006" />
+<chromosome id="1608" fitness="906187" />
+<chromosome id="1609" fitness="914930" />
+<chromosome id="1610" fitness="921998" />
+<chromosome id="1611" fitness="137521" />
+<chromosome id="1612" fitness="13418" />
+<chromosome id="1613" fitness="530517" />
+<chromosome id="1614" fitness="68739" />
+<chromosome id="1615" fitness="429902" />
+<chromosome id="1616" fitness="741632" />
+<chromosome id="1617" fitness="526881" />
+<chromosome id="1618" fitness="346897" />
+<chromosome id="1619" fitness="903355" />
+<chromosome id="1620" fitness="264317" />
+<chromosome id="1621" fitness="598106" />
+<chromosome id="1622" fitness="342143" />
+<chromosome id="1623" fitness="418009" />
+<chromosome id="1624" fitness="315760" />
+<chromosome id="1625" fitness="289322" />
+<chromosome id="1626" fitness="286087" />
+<chromosome id="1627" fitness="845349" />
+<chromosome id="1628" fitness="223925" />
+<chromosome id="1629" fitness="530155" />
+<chromosome id="1630" fitness="640406" />
+<chromosome id="1631" fitness="140490" />
+<chromosome id="1632" fitness="204107" />
+<chromosome id="1633" fitness="532306" />
+<chromosome id="1634" fitness="279920" />
+<chromosome id="1635" fitness="748256" />
+<chromosome id="1636" fitness="231812" />
+<chromosome id="1637" fitness="749305" />
+<chromosome id="1638" fitness="370033" />
+<chromosome id="1639" fitness="132613" />
+<chromosome id="1640" fitness="487061" />
+<chromosome id="1641" fitness="766024" />
+<chromosome id="1642" fitness="978990" />
+<chromosome id="1643" fitness="956694" />
+<chromosome id="1644" fitness="897613" />
+<chromosome id="1645" fitness="404671" />
+<chromosome id="1646" fitness="324602" />
+<chromosome id="1647" fitness="88587" />
+<chromosome id="1648" fitness="123747" />
+<chromosome id="1649" fitness="823265" />
+<chromosome id="1650" fitness="836037" />
+<chromosome id="1651" fitness="493804" />
+<chromosome id="1652" fitness="238248" />
 </specie>
 </generation>
 <generation id="4" >
 <fitness>
-<max>994336</max>
-<min>11348</min>
-<avg>552082</avg>
+<max>989940</max>
+<min>353</min>
+<avg>507124</avg>
 </fitness>
 <complexity>
-<champ>194</champ>
-<max>265</max>
-<min>169</min>
-<avg>214.54</avg>
+<champ>260</champ>
+<max>266</max>
+<min>168</min>
+<avg>219.02666666666667</avg>
 </complexity>
-<specie id="151" count="50">
-<chromosome id="864" fitness="954584" />
-<chromosome id="870" fitness="417453" />
-<chromosome id="880" fitness="242728" />
-<chromosome id="1304" fitness="227131" />
-<chromosome id="1306" fitness="994336" />
-<chromosome id="1308" fitness="672878" />
-<chromosome id="1315" fitness="868000" />
-<chromosome id="1321" fitness="946083" />
-<chromosome id="1329" fitness="942652" />
-<chromosome id="1330" fitness="280595" />
-<chromosome id="1783" fitness="299799" />
-<chromosome id="1784" fitness="237837" />
-<chromosome id="1785" fitness="929755" />
-<chromosome id="1786" fitness="537243" />
-<chromosome id="1787" fitness="99176" />
-<chromosome id="1788" fitness="932006" />
-<chromosome id="1789" fitness="738699" />
-<chromosome id="1790" fitness="162913" />
-<chromosome id="1791" fitness="103959" />
-<chromosome id="1792" fitness="899550" />
-<chromosome id="1793" fitness="42080" />
-<chromosome id="1794" fitness="975125" />
-<chromosome id="1795" fitness="829102" />
-<chromosome id="1796" fitness="358155" />
-<chromosome id="1797" fitness="837902" />
-<chromosome id="1798" fitness="269492" />
-<chromosome id="1799" fitness="369452" />
-<chromosome id="1800" fitness="284381" />
-<chromosome id="1801" fitness="11348" />
-<chromosome id="1802" fitness="941807" />
-<chromosome id="1803" fitness="193728" />
-<chromosome id="1804" fitness="11763" />
-<chromosome id="1805" fitness="341781" />
-<chromosome id="1806" fitness="557708" />
-<chromosome id="1807" fitness="890804" />
-<chromosome id="1808" fitness="544153" />
-<chromosome id="1809" fitness="106951" />
-<chromosome id="1810" fitness="28091" />
-<chromosome id="1811" fitness="306663" />
-<chromosome id="1812" fitness="533922" />
-<chromosome id="1813" fitness="908356" />
-<chromosome id="1814" fitness="592630" />
-<chromosome id="1815" fitness="986611" />
-<chromosome id="1816" fitness="303967" />
-<chromosome id="1817" fitness="889470" />
-<chromosome id="1818" fitness="826643" />
-<chromosome id="1819" fitness="894317" />
-<chromosome id="1820" fitness="739129" />
-<chromosome id="1821" fitness="881936" />
-<chromosome id="1822" fitness="659305" />
+<specie id="151" count="75">
+<chromosome id="1055" fitness="725876" />
+<chromosome id="1062" fitness="485771" />
+<chromosome id="1600" fitness="366388" />
+<chromosome id="1606" fitness="167668" />
+<chromosome id="1607" fitness="14939" />
+<chromosome id="1608" fitness="449088" />
+<chromosome id="1609" fitness="629273" />
+<chromosome id="1610" fitness="396770" />
+<chromosome id="1619" fitness="330523" />
+<chromosome id="1627" fitness="343671" />
+<chromosome id="1642" fitness="932736" />
+<chromosome id="1643" fitness="968862" />
+<chromosome id="1644" fitness="559693" />
+<chromosome id="1649" fitness="852395" />
+<chromosome id="1650" fitness="396594" />
+<chromosome id="2349" fitness="695329" />
+<chromosome id="2350" fitness="298750" />
+<chromosome id="2351" fitness="483954" />
+<chromosome id="2352" fitness="60760" />
+<chromosome id="2353" fitness="253378" />
+<chromosome id="2354" fitness="754415" />
+<chromosome id="2355" fitness="715706" />
+<chromosome id="2356" fitness="297790" />
+<chromosome id="2357" fitness="354023" />
+<chromosome id="2358" fitness="502389" />
+<chromosome id="2359" fitness="969925" />
+<chromosome id="2360" fitness="21000" />
+<chromosome id="2361" fitness="732376" />
+<chromosome id="2362" fitness="450065" />
+<chromosome id="2363" fitness="194301" />
+<chromosome id="2364" fitness="834758" />
+<chromosome id="2365" fitness="647561" />
+<chromosome id="2366" fitness="137056" />
+<chromosome id="2367" fitness="258169" />
+<chromosome id="2368" fitness="564740" />
+<chromosome id="2369" fitness="301994" />
+<chromosome id="2370" fitness="372678" />
+<chromosome id="2371" fitness="538855" />
+<chromosome id="2372" fitness="550665" />
+<chromosome id="2373" fitness="890713" />
+<chromosome id="2374" fitness="219254" />
+<chromosome id="2375" fitness="871173" />
+<chromosome id="2376" fitness="599209" />
+<chromosome id="2377" fitness="772600" />
+<chromosome id="2378" fitness="785119" />
+<chromosome id="2379" fitness="720905" />
+<chromosome id="2380" fitness="101319" />
+<chromosome id="2381" fitness="876184" />
+<chromosome id="2382" fitness="626486" />
+<chromosome id="2383" fitness="353" />
+<chromosome id="2384" fitness="650603" />
+<chromosome id="2385" fitness="154132" />
+<chromosome id="2386" fitness="795228" />
+<chromosome id="2387" fitness="838101" />
+<chromosome id="2388" fitness="532796" />
+<chromosome id="2389" fitness="57467" />
+<chromosome id="2390" fitness="860077" />
+<chromosome id="2391" fitness="521672" />
+<chromosome id="2392" fitness="920602" />
+<chromosome id="2393" fitness="12517" />
+<chromosome id="2394" fitness="144805" />
+<chromosome id="2395" fitness="402973" />
+<chromosome id="2396" fitness="208282" />
+<chromosome id="2397" fitness="981222" />
+<chromosome id="2398" fitness="621678" />
+<chromosome id="2399" fitness="724917" />
+<chromosome id="2400" fitness="416927" />
+<chromosome id="2401" fitness="858145" />
+<chromosome id="2402" fitness="255050" />
+<chromosome id="2403" fitness="517143" />
+<chromosome id="2404" fitness="573969" />
+<chromosome id="2405" fitness="989940" />
+<chromosome id="2406" fitness="23513" />
+<chromosome id="2407" fitness="199913" />
+<chromosome id="2408" fitness="698429" />
 </specie>
 </generation>
 <generation id="5" >
 <fitness>
-<max>994314</max>
-<min>2468</min>
-<avg>536692</avg>
+<max>998029</max>
+<min>1795</min>
+<avg>503507</avg>
 </fitness>
 <complexity>
-<champ>194</champ>
-<max>273</max>
-<min>177</min>
-<avg>230.1</avg>
+<champ>305</champ>
+<max>325</max>
+<min>199</min>
+<avg>268.7733333333333</avg>
 </complexity>
-<specie id="151" count="50">
-<chromosome id="864" fitness="5789" />
-<chromosome id="1306" fitness="994314" />
-<chromosome id="1321" fitness="650462" />
-<chromosome id="1329" fitness="15920" />
-<chromosome id="1785" fitness="193600" />
-<chromosome id="1788" fitness="978568" />
-<chromosome id="1794" fitness="744687" />
-<chromosome id="1802" fitness="423103" />
-<chromosome id="1813" fitness="381197" />
-<chromosome id="1815" fitness="440560" />
-<chromosome id="2321" fitness="105346" />
-<chromosome id="2322" fitness="619142" />
-<chromosome id="2323" fitness="296138" />
-<chromosome id="2324" fitness="647260" />
-<chromosome id="2325" fitness="355627" />
-<chromosome id="2326" fitness="960286" />
-<chromosome id="2327" fitness="863741" />
-<chromosome id="2328" fitness="846765" />
-<chromosome id="2329" fitness="382545" />
-<chromosome id="2330" fitness="739273" />
-<chromosome id="2331" fitness="428481" />
-<chromosome id="2332" fitness="590888" />
-<chromosome id="2333" fitness="146623" />
-<chromosome id="2334" fitness="345505" />
-<chromosome id="2335" fitness="943689" />
-<chromosome id="2336" fitness="849539" />
-<chromosome id="2337" fitness="10600" />
-<chromosome id="2338" fitness="581415" />
-<chromosome id="2339" fitness="971285" />
-<chromosome id="2340" fitness="598557" />
-<chromosome id="2341" fitness="288311" />
-<chromosome id="2342" fitness="100721" />
-<chromosome id="2343" fitness="892497" />
-<chromosome id="2344" fitness="620730" />
-<chromosome id="2345" fitness="861381" />
-<chromosome id="2346" fitness="335726" />
-<chromosome id="2347" fitness="577051" />
-<chromosome id="2348" fitness="410268" />
-<chromosome id="2349" fitness="2468" />
-<chromosome id="2350" fitness="721175" />
-<chromosome id="2351" fitness="430370" />
-<chromosome id="2352" fitness="700090" />
-<chromosome id="2353" fitness="7704" />
-<chromosome id="2354" fitness="154996" />
-<chromosome id="2355" fitness="953642" />
-<chromosome id="2356" fitness="644831" />
-<chromosome id="2357" fitness="735141" />
-<chromosome id="2358" fitness="533512" />
-<chromosome id="2359" fitness="961707" />
-<chromosome id="2360" fitness="791394" />
+<specie id="151" count="61">
+<chromosome id="1642" fitness="724396" />
+<chromosome id="1643" fitness="377353" />
+<chromosome id="1649" fitness="960228" />
+<chromosome id="2359" fitness="960603" />
+<chromosome id="2364" fitness="693593" />
+<chromosome id="2373" fitness="284131" />
+<chromosome id="2375" fitness="35728" />
+<chromosome id="2381" fitness="731346" />
+<chromosome id="2386" fitness="269094" />
+<chromosome id="2387" fitness="557709" />
+<chromosome id="2390" fitness="712388" />
+<chromosome id="2392" fitness="701590" />
+<chromosome id="2397" fitness="683848" />
+<chromosome id="2401" fitness="975458" />
+<chromosome id="2405" fitness="483921" />
+<chromosome id="3551" fitness="81804" />
+<chromosome id="3552" fitness="31439" />
+<chromosome id="3553" fitness="61897" />
+<chromosome id="3554" fitness="961918" />
+<chromosome id="3556" fitness="634141" />
+<chromosome id="3557" fitness="130870" />
+<chromosome id="3558" fitness="63063" />
+<chromosome id="3559" fitness="481539" />
+<chromosome id="3560" fitness="366882" />
+<chromosome id="3561" fitness="479499" />
+<chromosome id="3562" fitness="211758" />
+<chromosome id="3563" fitness="689966" />
+<chromosome id="3564" fitness="224171" />
+<chromosome id="3565" fitness="269722" />
+<chromosome id="3567" fitness="268167" />
+<chromosome id="3568" fitness="647265" />
+<chromosome id="3569" fitness="11594" />
+<chromosome id="3570" fitness="921924" />
+<chromosome id="3573" fitness="428059" />
+<chromosome id="3574" fitness="615201" />
+<chromosome id="3575" fitness="864378" />
+<chromosome id="3576" fitness="826586" />
+<chromosome id="3577" fitness="780231" />
+<chromosome id="3578" fitness="973515" />
+<chromosome id="3579" fitness="837217" />
+<chromosome id="3580" fitness="155566" />
+<chromosome id="3582" fitness="167757" />
+<chromosome id="3586" fitness="673030" />
+<chromosome id="3587" fitness="436002" />
+<chromosome id="3588" fitness="802338" />
+<chromosome id="3589" fitness="524639" />
+<chromosome id="3590" fitness="447041" />
+<chromosome id="3591" fitness="61397" />
+<chromosome id="3593" fitness="570857" />
+<chromosome id="3596" fitness="263839" />
+<chromosome id="3597" fitness="862525" />
+<chromosome id="3598" fitness="874258" />
+<chromosome id="3600" fitness="108896" />
+<chromosome id="3601" fitness="40508" />
+<chromosome id="3602" fitness="938957" />
+<chromosome id="3603" fitness="225340" />
+<chromosome id="3605" fitness="663022" />
+<chromosome id="3606" fitness="976684" />
+<chromosome id="3607" fitness="920150" />
+<chromosome id="3608" fitness="370962" />
+<chromosome id="3609" fitness="478439" />
+</specie>
+<specie id="3550" count="11">
+<chromosome id="3550" fitness="213589" />
+<chromosome id="3571" fitness="461730" />
+<chromosome id="3572" fitness="413010" />
+<chromosome id="3581" fitness="1795" />
+<chromosome id="3583" fitness="548882" />
+<chromosome id="3584" fitness="316932" />
+<chromosome id="3585" fitness="50533" />
+<chromosome id="3592" fitness="373058" />
+<chromosome id="3595" fitness="998029" />
+<chromosome id="3599" fitness="468510" />
+<chromosome id="3604" fitness="796637" />
+</specie>
+<specie id="3555" count="1">
+<chromosome id="3555" fitness="917379" />
+</specie>
+<specie id="3566" count="1">
+<chromosome id="3566" fitness="9220" />
+</specie>
+<specie id="3594" count="1">
+<chromosome id="3594" fitness="617396" />
 </specie>
 </generation>
 <generation id="6" >
 <fitness>
-<max>985579</max>
-<min>21664</min>
-<avg>463501</avg>
+<max>972197</max>
+<min>9290</min>
+<avg>517616</avg>
 </fitness>
 <complexity>
-<champ>308</champ>
-<max>340</max>
-<min>194</min>
-<avg>255.6</avg>
+<champ>330</champ>
+<max>440</max>
+<min>244</min>
+<avg>352.16</avg>
 </complexity>
-<specie id="151" count="41">
-<chromosome id="1306" fitness="473924" />
-<chromosome id="1788" fitness="372955" />
-<chromosome id="2326" fitness="368367" />
-<chromosome id="2327" fitness="964508" />
-<chromosome id="2335" fitness="360255" />
-<chromosome id="2339" fitness="382041" />
-<chromosome id="2343" fitness="633421" />
-<chromosome id="2345" fitness="440012" />
-<chromosome id="2355" fitness="826722" />
-<chromosome id="2359" fitness="724990" />
-<chromosome id="3012" fitness="804805" />
-<chromosome id="3013" fitness="501990" />
-<chromosome id="3014" fitness="741702" />
-<chromosome id="3016" fitness="811664" />
-<chromosome id="3017" fitness="825167" />
-<chromosome id="3018" fitness="379174" />
-<chromosome id="3019" fitness="645886" />
-<chromosome id="3020" fitness="529032" />
-<chromosome id="3022" fitness="491649" />
-<chromosome id="3023" fitness="704343" />
-<chromosome id="3024" fitness="672245" />
-<chromosome id="3025" fitness="271543" />
-<chromosome id="3026" fitness="231899" />
-<chromosome id="3027" fitness="52653" />
-<chromosome id="3028" fitness="758467" />
-<chromosome id="3029" fitness="81426" />
-<chromosome id="3030" fitness="198985" />
-<chromosome id="3031" fitness="485568" />
-<chromosome id="3032" fitness="303204" />
-<chromosome id="3033" fitness="864013" />
-<chromosome id="3034" fitness="290148" />
-<chromosome id="3035" fitness="199397" />
-<chromosome id="3036" fitness="694996" />
-<chromosome id="3037" fitness="139511" />
-<chromosome id="3041" fitness="303506" />
-<chromosome id="3043" fitness="141750" />
-<chromosome id="3045" fitness="201895" />
-<chromosome id="3046" fitness="159359" />
-<chromosome id="3049" fitness="238724" />
-<chromosome id="3050" fitness="784854" />
-<chromosome id="3051" fitness="775998" />
+<specie id="151" count="4">
+<chromosome id="2401" fitness="558235" />
+<chromosome id="3578" fitness="428319" />
+<chromosome id="3606" fitness="160854" />
+<chromosome id="5453" fitness="536520" />
 </specie>
-<specie id="3015" count="3">
-<chromosome id="3015" fitness="280299" />
-<chromosome id="3038" fitness="663193" />
-<chromosome id="3040" fitness="357048" />
+<specie id="3550" count="32">
+<chromosome id="3550" fitness="165170" />
+<chromosome id="3571" fitness="335813" />
+<chromosome id="3572" fitness="879945" />
+<chromosome id="3583" fitness="574585" />
+<chromosome id="3584" fitness="32533" />
+<chromosome id="3592" fitness="418737" />
+<chromosome id="3595" fitness="765828" />
+<chromosome id="3599" fitness="303957" />
+<chromosome id="3604" fitness="255227" />
+<chromosome id="5422" fitness="886379" />
+<chromosome id="5424" fitness="918203" />
+<chromosome id="5429" fitness="112512" />
+<chromosome id="5431" fitness="612095" />
+<chromosome id="5432" fitness="710662" />
+<chromosome id="5438" fitness="830433" />
+<chromosome id="5441" fitness="9290" />
+<chromosome id="5442" fitness="454049" />
+<chromosome id="5443" fitness="896573" />
+<chromosome id="5444" fitness="403983" />
+<chromosome id="5445" fitness="869755" />
+<chromosome id="5446" fitness="239933" />
+<chromosome id="5448" fitness="968508" />
+<chromosome id="5449" fitness="699289" />
+<chromosome id="5454" fitness="783232" />
+<chromosome id="5457" fitness="943806" />
+<chromosome id="5460" fitness="575382" />
+<chromosome id="5462" fitness="826163" />
+<chromosome id="5463" fitness="202611" />
+<chromosome id="5466" fitness="142520" />
+<chromosome id="5471" fitness="690305" />
+<chromosome id="5473" fitness="47876" />
+<chromosome id="5477" fitness="585149" />
 </specie>
-<specie id="3021" count="5">
-<chromosome id="3021" fitness="56993" />
-<chromosome id="3042" fitness="629982" />
-<chromosome id="3044" fitness="21664" />
-<chromosome id="3047" fitness="34317" />
-<chromosome id="3048" fitness="985579" />
+<specie id="3555" count="20">
+<chromosome id="3555" fitness="649604" />
+<chromosome id="5420" fitness="731126" />
+<chromosome id="5421" fitness="219861" />
+<chromosome id="5427" fitness="422291" />
+<chromosome id="5434" fitness="836064" />
+<chromosome id="5435" fitness="972197" />
+<chromosome id="5437" fitness="971297" />
+<chromosome id="5439" fitness="95309" />
+<chromosome id="5440" fitness="39555" />
+<chromosome id="5447" fitness="822011" />
+<chromosome id="5451" fitness="361840" />
+<chromosome id="5458" fitness="603676" />
+<chromosome id="5459" fitness="889141" />
+<chromosome id="5461" fitness="753842" />
+<chromosome id="5464" fitness="125445" />
+<chromosome id="5468" fitness="667389" />
+<chromosome id="5469" fitness="110932" />
+<chromosome id="5472" fitness="892650" />
+<chromosome id="5475" fitness="757121" />
+<chromosome id="5476" fitness="692600" />
 </specie>
-<specie id="3039" count="1">
-<chromosome id="3039" fitness="313261" />
+<specie id="3566" count="1">
+<chromosome id="3566" fitness="545404" />
+</specie>
+<specie id="3594" count="16">
+<chromosome id="3594" fitness="917855" />
+<chromosome id="5419" fitness="48980" />
+<chromosome id="5423" fitness="36918" />
+<chromosome id="5426" fitness="451895" />
+<chromosome id="5428" fitness="248439" />
+<chromosome id="5430" fitness="37612" />
+<chromosome id="5433" fitness="966119" />
+<chromosome id="5436" fitness="310307" />
+<chromosome id="5450" fitness="282028" />
+<chromosome id="5452" fitness="737416" />
+<chromosome id="5455" fitness="316135" />
+<chromosome id="5456" fitness="492434" />
+<chromosome id="5465" fitness="970930" />
+<chromosome id="5470" fitness="954472" />
+<chromosome id="5474" fitness="207024" />
+<chromosome id="5478" fitness="92411" />
+</specie>
+<specie id="5425" count="2">
+<chromosome id="5425" fitness="242841" />
+<chromosome id="5467" fitness="523623" />
 </specie>
 </generation>
 <generation id="7" >
 <fitness>
-<max>965554</max>
-<min>28854</min>
-<avg>517792</avg>
+<max>996653</max>
+<min>15240</min>
+<avg>468325</avg>
 </fitness>
 <complexity>
-<champ>359</champ>
-<max>453</max>
-<min>204</min>
-<avg>340.44</avg>
+<champ>409</champ>
+<max>609</max>
+<min>244</min>
+<avg>423.7733333333333</avg>
 </complexity>
-<specie id="151" count="8">
-<chromosome id="2327" fitness="57610" />
-<chromosome id="2355" fitness="684729" />
-<chromosome id="3017" fitness="953288" />
-<chromosome id="3033" fitness="321189" />
-<chromosome id="4617" fitness="28854" />
-<chromosome id="4623" fitness="184741" />
-<chromosome id="4632" fitness="733489" />
-<chromosome id="4639" fitness="892527" />
+<specie id="151" count="5">
+<chromosome id="2401" fitness="242228" />
+<chromosome id="3578" fitness="160503" />
+<chromosome id="5453" fitness="514156" />
+<chromosome id="8186" fitness="357861" />
+<chromosome id="8245" fitness="685319" />
 </specie>
-<specie id="3015" count="15">
-<chromosome id="3015" fitness="442829" />
-<chromosome id="3038" fitness="338516" />
-<chromosome id="3040" fitness="758105" />
-<chromosome id="4607" fitness="187226" />
-<chromosome id="4608" fitness="100054" />
-<chromosome id="4609" fitness="636073" />
-<chromosome id="4613" fitness="755494" />
-<chromosome id="4614" fitness="78066" />
-<chromosome id="4616" fitness="602314" />
-<chromosome id="4624" fitness="698436" />
-<chromosome id="4628" fitness="633405" />
-<chromosome id="4629" fitness="32755" />
-<chromosome id="4630" fitness="238581" />
-<chromosome id="4631" fitness="71567" />
-<chromosome id="4636" fitness="948035" />
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="859548" />
 </specie>
-<specie id="3021" count="15">
-<chromosome id="3042" fitness="523421" />
-<chromosome id="3048" fitness="144187" />
-<chromosome id="4603" fitness="846265" />
-<chromosome id="4605" fitness="144512" />
-<chromosome id="4606" fitness="519797" />
-<chromosome id="4610" fitness="947969" />
-<chromosome id="4612" fitness="172440" />
-<chromosome id="4618" fitness="93799" />
-<chromosome id="4619" fitness="951883" />
-<chromosome id="4620" fitness="906823" />
-<chromosome id="4625" fitness="171977" />
-<chromosome id="4627" fitness="724919" />
-<chromosome id="4633" fitness="951700" />
-<chromosome id="4640" fitness="127874" />
-<chromosome id="4641" fitness="846118" />
+<specie id="3555" count="16">
+<chromosome id="5435" fitness="130963" />
+<chromosome id="5437" fitness="632581" />
+<chromosome id="5472" fitness="320212" />
+<chromosome id="8189" fitness="610235" />
+<chromosome id="8192" fitness="325926" />
+<chromosome id="8196" fitness="692830" />
+<chromosome id="8203" fitness="187689" />
+<chromosome id="8205" fitness="319180" />
+<chromosome id="8208" fitness="996653" />
+<chromosome id="8215" fitness="649574" />
+<chromosome id="8216" fitness="272006" />
+<chromosome id="8223" fitness="271940" />
+<chromosome id="8226" fitness="299667" />
+<chromosome id="8228" fitness="221874" />
+<chromosome id="8238" fitness="290747" />
+<chromosome id="8242" fitness="172490" />
 </specie>
-<specie id="3039" count="6">
-<chromosome id="3039" fitness="547097" />
-<chromosome id="4602" fitness="453081" />
-<chromosome id="4626" fitness="965554" />
-<chromosome id="4634" fitness="145626" />
-<chromosome id="4637" fitness="842322" />
-<chromosome id="4638" fitness="247292" />
+<specie id="3566" count="9">
+<chromosome id="3566" fitness="266997" />
+<chromosome id="8191" fitness="212880" />
+<chromosome id="8193" fitness="505881" />
+<chromosome id="8207" fitness="849546" />
+<chromosome id="8210" fitness="681436" />
+<chromosome id="8221" fitness="419654" />
+<chromosome id="8224" fitness="420464" />
+<chromosome id="8229" fitness="171081" />
+<chromosome id="8243" fitness="381118" />
 </specie>
-<specie id="4604" count="1">
-<chromosome id="4604" fitness="872779" />
+<specie id="3594" count="23">
+<chromosome id="3594" fitness="120898" />
+<chromosome id="5433" fitness="84781" />
+<chromosome id="5452" fitness="307199" />
+<chromosome id="5465" fitness="906208" />
+<chromosome id="5470" fitness="973071" />
+<chromosome id="8187" fitness="618286" />
+<chromosome id="8197" fitness="587949" />
+<chromosome id="8198" fitness="508826" />
+<chromosome id="8199" fitness="593285" />
+<chromosome id="8202" fitness="993631" />
+<chromosome id="8206" fitness="963941" />
+<chromosome id="8212" fitness="756190" />
+<chromosome id="8217" fitness="221740" />
+<chromosome id="8219" fitness="294867" />
+<chromosome id="8225" fitness="758261" />
+<chromosome id="8231" fitness="480301" />
+<chromosome id="8232" fitness="873978" />
+<chromosome id="8235" fitness="906680" />
+<chromosome id="8236" fitness="105981" />
+<chromosome id="8237" fitness="390409" />
+<chromosome id="8239" fitness="84049" />
+<chromosome id="8241" fitness="518869" />
+<chromosome id="8244" fitness="313467" />
 </specie>
-<specie id="4611" count="5">
-<chromosome id="4611" fitness="584055" />
-<chromosome id="4615" fitness="720664" />
-<chromosome id="4621" fitness="753260" />
-<chromosome id="4622" fitness="764762" />
-<chromosome id="4635" fitness="541543" />
+<specie id="5425" count="8">
+<chromosome id="5425" fitness="510677" />
+<chromosome id="5467" fitness="526014" />
+<chromosome id="8190" fitness="292047" />
+<chromosome id="8195" fitness="635653" />
+<chromosome id="8201" fitness="932945" />
+<chromosome id="8214" fitness="23005" />
+<chromosome id="8230" fitness="611987" />
+<chromosome id="8233" fitness="81661" />
+</specie>
+<specie id="8188" count="13">
+<chromosome id="8188" fitness="565563" />
+<chromosome id="8194" fitness="704551" />
+<chromosome id="8200" fitness="913558" />
+<chromosome id="8204" fitness="530862" />
+<chromosome id="8209" fitness="255812" />
+<chromosome id="8211" fitness="15240" />
+<chromosome id="8213" fitness="655441" />
+<chromosome id="8218" fitness="818231" />
+<chromosome id="8220" fitness="402302" />
+<chromosome id="8222" fitness="264407" />
+<chromosome id="8227" fitness="33340" />
+<chromosome id="8234" fitness="661084" />
+<chromosome id="8240" fitness="203945" />
 </specie>
 </generation>
 <generation id="8" >
 <fitness>
-<max>985407</max>
-<min>10011</min>
-<avg>483187</avg>
+<max>990044</max>
+<min>5411</min>
+<avg>492747</avg>
 </fitness>
 <complexity>
-<champ>582</champ>
-<max>589</max>
+<champ>520</champ>
+<max>842</max>
 <min>279</min>
-<avg>423.92</avg>
+<avg>555.4266666666666</avg>
 </complexity>
-<specie id="151" count="1">
-<chromosome id="3017" fitness="618923" />
+<specie id="151" count="3">
+<chromosome id="5453" fitness="824726" />
+<chromosome id="8186" fitness="686059" />
+<chromosome id="8245" fitness="486624" />
 </specie>
-<specie id="3015" count="6">
-<chromosome id="4636" fitness="33959" />
-<chromosome id="6895" fitness="407004" />
-<chromosome id="6912" fitness="584764" />
-<chromosome id="6916" fitness="146139" />
-<chromosome id="6921" fitness="857431" />
-<chromosome id="6926" fitness="384205" />
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="763298" />
 </specie>
-<specie id="3021" count="5">
-<chromosome id="4619" fitness="864514" />
-<chromosome id="6906" fitness="600654" />
-<chromosome id="6920" fitness="482018" />
-<chromosome id="6923" fitness="665546" />
-<chromosome id="6933" fitness="309703" />
+<specie id="3555" count="12">
+<chromosome id="8208" fitness="374086" />
+<chromosome id="12127" fitness="822686" />
+<chromosome id="12129" fitness="817156" />
+<chromosome id="12133" fitness="622478" />
+<chromosome id="12139" fitness="74942" />
+<chromosome id="12148" fitness="355382" />
+<chromosome id="12150" fitness="180879" />
+<chromosome id="12151" fitness="990044" />
+<chromosome id="12152" fitness="588029" />
+<chromosome id="12158" fitness="245571" />
+<chromosome id="12168" fitness="141845" />
+<chromosome id="12177" fitness="232091" />
 </specie>
-<specie id="3039" count="9">
-<chromosome id="4626" fitness="971741" />
-<chromosome id="4637" fitness="223554" />
-<chromosome id="6897" fitness="150693" />
-<chromosome id="6899" fitness="948691" />
-<chromosome id="6900" fitness="605966" />
-<chromosome id="6907" fitness="491148" />
-<chromosome id="6919" fitness="29767" />
-<chromosome id="6927" fitness="104743" />
-<chromosome id="6931" fitness="937736" />
+<specie id="3566" count="10">
+<chromosome id="8207" fitness="479069" />
+<chromosome id="8210" fitness="576754" />
+<chromosome id="12126" fitness="828431" />
+<chromosome id="12128" fitness="857338" />
+<chromosome id="12134" fitness="628496" />
+<chromosome id="12153" fitness="187647" />
+<chromosome id="12159" fitness="751034" />
+<chromosome id="12161" fitness="912107" />
+<chromosome id="12162" fitness="799732" />
+<chromosome id="12178" fitness="558579" />
 </specie>
-<specie id="4604" count="15">
-<chromosome id="4604" fitness="705074" />
-<chromosome id="6894" fitness="447238" />
-<chromosome id="6905" fitness="932704" />
-<chromosome id="6908" fitness="812688" />
-<chromosome id="6909" fitness="252671" />
-<chromosome id="6910" fitness="898034" />
-<chromosome id="6911" fitness="562068" />
-<chromosome id="6915" fitness="55619" />
-<chromosome id="6917" fitness="710996" />
-<chromosome id="6922" fitness="45598" />
-<chromosome id="6924" fitness="189076" />
-<chromosome id="6928" fitness="508139" />
-<chromosome id="6929" fitness="619443" />
-<chromosome id="6930" fitness="336818" />
-<chromosome id="6932" fitness="26610" />
+<specie id="3594" count="17">
+<chromosome id="8202" fitness="11581" />
+<chromosome id="12125" fitness="451164" />
+<chromosome id="12131" fitness="765129" />
+<chromosome id="12132" fitness="63415" />
+<chromosome id="12142" fitness="595715" />
+<chromosome id="12143" fitness="780912" />
+<chromosome id="12144" fitness="454906" />
+<chromosome id="12145" fitness="628876" />
+<chromosome id="12147" fitness="331948" />
+<chromosome id="12154" fitness="788865" />
+<chromosome id="12164" fitness="332079" />
+<chromosome id="12169" fitness="341742" />
+<chromosome id="12175" fitness="983072" />
+<chromosome id="12176" fitness="202193" />
+<chromosome id="12180" fitness="514388" />
+<chromosome id="12183" fitness="779337" />
+<chromosome id="12184" fitness="286055" />
 </specie>
-<specie id="4611" count="9">
-<chromosome id="4611" fitness="802199" />
-<chromosome id="4615" fitness="639461" />
-<chromosome id="4621" fitness="626857" />
-<chromosome id="4622" fitness="10011" />
-<chromosome id="6896" fitness="271221" />
-<chromosome id="6898" fitness="526875" />
-<chromosome id="6903" fitness="630169" />
-<chromosome id="6913" fitness="279767" />
-<chromosome id="6914" fitness="674620" />
+<specie id="5425" count="12">
+<chromosome id="5425" fitness="175819" />
+<chromosome id="5467" fitness="872416" />
+<chromosome id="8195" fitness="909062" />
+<chromosome id="8201" fitness="796029" />
+<chromosome id="8230" fitness="94374" />
+<chromosome id="12136" fitness="829573" />
+<chromosome id="12149" fitness="626161" />
+<chromosome id="12155" fitness="198293" />
+<chromosome id="12170" fitness="396074" />
+<chromosome id="12174" fitness="301174" />
+<chromosome id="12181" fitness="525593" />
+<chromosome id="12182" fitness="723366" />
 </specie>
-<specie id="6901" count="3">
-<chromosome id="6901" fitness="985407" />
-<chromosome id="6902" fitness="150203" />
-<chromosome id="6904" fitness="250644" />
-</specie>
-<specie id="6918" count="2">
-<chromosome id="6918" fitness="467164" />
-<chromosome id="6925" fitness="323110" />
+<specie id="8188" count="20">
+<chromosome id="8200" fitness="9086" />
+<chromosome id="8218" fitness="348091" />
+<chromosome id="12130" fitness="373159" />
+<chromosome id="12135" fitness="956569" />
+<chromosome id="12137" fitness="56289" />
+<chromosome id="12138" fitness="541842" />
+<chromosome id="12140" fitness="803286" />
+<chromosome id="12141" fitness="43959" />
+<chromosome id="12146" fitness="181002" />
+<chromosome id="12156" fitness="652558" />
+<chromosome id="12157" fitness="872873" />
+<chromosome id="12160" fitness="216553" />
+<chromosome id="12163" fitness="69693" />
+<chromosome id="12165" fitness="104991" />
+<chromosome id="12166" fitness="19481" />
+<chromosome id="12167" fitness="901766" />
+<chromosome id="12171" fitness="610988" />
+<chromosome id="12172" fitness="62404" />
+<chromosome id="12173" fitness="5411" />
+<chromosome id="12179" fitness="581673" />
 </specie>
 </generation>
 <generation id="9" >
 <fitness>
-<max>992621</max>
-<min>2686</min>
-<avg>433849</avg>
+<max>999385</max>
+<min>17393</min>
+<avg>557707</avg>
 </fitness>
 <complexity>
-<champ>809</champ>
-<max>818</max>
+<champ>649</champ>
+<max>1064</max>
 <min>279</min>
-<avg>526.3</avg>
+<avg>572.4933333333333</avg>
 </complexity>
-<specie id="151" count="1">
-<chromosome id="3017" fitness="465722" />
+<specie id="151" count="3">
+<chromosome id="5453" fitness="855531" />
+<chromosome id="8186" fitness="51676" />
+<chromosome id="8245" fitness="218421" />
 </specie>
-<specie id="3015" count="1">
-<chromosome id="6921" fitness="925875" />
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="812022" />
 </specie>
-<specie id="3021" count="6">
-<chromosome id="4619" fitness="139744" />
-<chromosome id="6923" fitness="557469" />
-<chromosome id="9795" fitness="316026" />
-<chromosome id="9801" fitness="309321" />
-<chromosome id="9828" fitness="319348" />
-<chromosome id="9832" fitness="861658" />
+<specie id="3555" count="11">
+<chromosome id="12151" fitness="727989" />
+<chromosome id="15845" fitness="668078" />
+<chromosome id="15852" fitness="707825" />
+<chromosome id="15855" fitness="586188" />
+<chromosome id="15860" fitness="66897" />
+<chromosome id="15868" fitness="579910" />
+<chromosome id="15871" fitness="242722" />
+<chromosome id="15875" fitness="999385" />
+<chromosome id="15877" fitness="354339" />
+<chromosome id="15896" fitness="401921" />
+<chromosome id="15900" fitness="363135" />
 </specie>
-<specie id="3039" count="8">
-<chromosome id="4626" fitness="147824" />
-<chromosome id="9805" fitness="732368" />
-<chromosome id="9818" fitness="791643" />
-<chromosome id="9821" fitness="694026" />
-<chromosome id="9825" fitness="79874" />
-<chromosome id="9826" fitness="2686" />
-<chromosome id="9830" fitness="460078" />
-<chromosome id="9831" fitness="456347" />
+<specie id="3566" count="13">
+<chromosome id="12126" fitness="950459" />
+<chromosome id="12128" fitness="733622" />
+<chromosome id="12159" fitness="820607" />
+<chromosome id="12161" fitness="967202" />
+<chromosome id="12162" fitness="892216" />
+<chromosome id="15851" fitness="473133" />
+<chromosome id="15853" fitness="871637" />
+<chromosome id="15873" fitness="356200" />
+<chromosome id="15874" fitness="510388" />
+<chromosome id="15876" fitness="682975" />
+<chromosome id="15879" fitness="703636" />
+<chromosome id="15894" fitness="835354" />
+<chromosome id="15904" fitness="74079" />
 </specie>
-<specie id="4604" count="9">
-<chromosome id="6905" fitness="476994" />
-<chromosome id="9798" fitness="201300" />
-<chromosome id="9802" fitness="153150" />
-<chromosome id="9803" fitness="586181" />
-<chromosome id="9811" fitness="799617" />
-<chromosome id="9816" fitness="361476" />
-<chromosome id="9819" fitness="795084" />
-<chromosome id="9827" fitness="7032" />
-<chromosome id="9834" fitness="918803" />
+<specie id="3594" count="17">
+<chromosome id="12175" fitness="473702" />
+<chromosome id="15846" fitness="969471" />
+<chromosome id="15849" fitness="105498" />
+<chromosome id="15854" fitness="469616" />
+<chromosome id="15857" fitness="540174" />
+<chromosome id="15862" fitness="456467" />
+<chromosome id="15863" fitness="991762" />
+<chromosome id="15865" fitness="28061" />
+<chromosome id="15867" fitness="392096" />
+<chromosome id="15869" fitness="746726" />
+<chromosome id="15883" fitness="679070" />
+<chromosome id="15884" fitness="684489" />
+<chromosome id="15897" fitness="921154" />
+<chromosome id="15898" fitness="306394" />
+<chromosome id="15899" fitness="17393" />
+<chromosome id="15902" fitness="302274" />
+<chromosome id="15903" fitness="722988" />
 </specie>
-<specie id="4611" count="6">
-<chromosome id="4611" fitness="807307" />
-<chromosome id="9797" fitness="613033" />
-<chromosome id="9808" fitness="276269" />
-<chromosome id="9810" fitness="33633" />
-<chromosome id="9820" fitness="29445" />
-<chromosome id="9833" fitness="690093" />
+<specie id="5425" count="11">
+<chromosome id="5467" fitness="844619" />
+<chromosome id="8195" fitness="657471" />
+<chromosome id="12136" fitness="432892" />
+<chromosome id="15859" fitness="861375" />
+<chromosome id="15866" fitness="716932" />
+<chromosome id="15880" fitness="288928" />
+<chromosome id="15886" fitness="922510" />
+<chromosome id="15889" fitness="964280" />
+<chromosome id="15890" fitness="882274" />
+<chromosome id="15891" fitness="490382" />
+<chromosome id="15895" fitness="854633" />
 </specie>
-<specie id="6901" count="13">
-<chromosome id="6901" fitness="403893" />
-<chromosome id="9796" fitness="92488" />
-<chromosome id="9799" fitness="156052" />
-<chromosome id="9804" fitness="479003" />
-<chromosome id="9806" fitness="581367" />
-<chromosome id="9807" fitness="770336" />
-<chromosome id="9813" fitness="86766" />
-<chromosome id="9814" fitness="150203" />
-<chromosome id="9815" fitness="62881" />
-<chromosome id="9817" fitness="511582" />
-<chromosome id="9823" fitness="346025" />
-<chromosome id="9824" fitness="33977" />
-<chromosome id="9829" fitness="992621" />
+<specie id="8188" count="12">
+<chromosome id="12135" fitness="825853" />
+<chromosome id="15847" fitness="450499" />
+<chromosome id="15848" fitness="576043" />
+<chromosome id="15850" fitness="645968" />
+<chromosome id="15861" fitness="224835" />
+<chromosome id="15870" fitness="191718" />
+<chromosome id="15872" fitness="616933" />
+<chromosome id="15878" fitness="536153" />
+<chromosome id="15885" fitness="311386" />
+<chromosome id="15888" fitness="698166" />
+<chromosome id="15892" fitness="420312" />
+<chromosome id="15901" fitness="943964" />
 </specie>
-<specie id="6918" count="6">
-<chromosome id="6918" fitness="392702" />
-<chromosome id="6925" fitness="742075" />
-<chromosome id="9800" fitness="630928" />
-<chromosome id="9809" fitness="329280" />
-<chromosome id="9812" fitness="726083" />
-<chromosome id="9822" fitness="194763" />
+<specie id="15856" count="7">
+<chromosome id="15856" fitness="603808" />
+<chromosome id="15858" fitness="524883" />
+<chromosome id="15864" fitness="138348" />
+<chromosome id="15881" fitness="118250" />
+<chromosome id="15882" fitness="344194" />
+<chromosome id="15887" fitness="350152" />
+<chromosome id="15893" fitness="75430" />
 </specie>
 </generation>
 <generation id="10" >
 <fitness>
-<max>963875</max>
-<min>4804</min>
-<avg>479340</avg>
+<max>992704</max>
+<min>4947</min>
+<avg>434101</avg>
 </fitness>
 <complexity>
-<champ>399</champ>
-<max>1122</max>
-<min>279</min>
-<avg>621.34</avg>
+<champ>280</champ>
+<max>1432</max>
+<min>280</min>
+<avg>666.3333333333334</avg>
 </complexity>
 <specie id="151" count="1">
-<chromosome id="3017" fitness="718923" />
+<chromosome id="5453" fitness="992704" />
 </specie>
-<specie id="3015" count="1">
-<chromosome id="6921" fitness="824033" />
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="78865" />
 </specie>
-<specie id="3021" count="1">
-<chromosome id="9832" fitness="193476" />
+<specie id="3555" count="9">
+<chromosome id="15875" fitness="681151" />
+<chromosome id="20177" fitness="102696" />
+<chromosome id="20179" fitness="57084" />
+<chromosome id="20183" fitness="540857" />
+<chromosome id="20184" fitness="913034" />
+<chromosome id="20198" fitness="258361" />
+<chromosome id="20207" fitness="855061" />
+<chromosome id="20211" fitness="265086" />
+<chromosome id="20212" fitness="515316" />
 </specie>
-<specie id="3039" count="7">
-<chromosome id="9818" fitness="122155" />
-<chromosome id="13167" fitness="282047" />
-<chromosome id="13169" fitness="57000" />
-<chromosome id="13170" fitness="765387" />
-<chromosome id="13181" fitness="660879" />
-<chromosome id="13190" fitness="310069" />
-<chromosome id="13195" fitness="606964" />
+<specie id="3566" count="10">
+<chromosome id="12126" fitness="239772" />
+<chromosome id="12161" fitness="575607" />
+<chromosome id="20159" fitness="164814" />
+<chromosome id="20168" fitness="180992" />
+<chromosome id="20178" fitness="987161" />
+<chromosome id="20186" fitness="878908" />
+<chromosome id="20201" fitness="598442" />
+<chromosome id="20203" fitness="638216" />
+<chromosome id="20210" fitness="150579" />
+<chromosome id="20216" fitness="296835" />
 </specie>
-<specie id="4604" count="9">
-<chromosome id="9834" fitness="196319" />
-<chromosome id="13168" fitness="603937" />
-<chromosome id="13178" fitness="847530" />
-<chromosome id="13184" fitness="581556" />
-<chromosome id="13187" fitness="375834" />
-<chromosome id="13189" fitness="596274" />
-<chromosome id="13196" fitness="882841" />
-<chromosome id="13198" fitness="963875" />
-<chromosome id="13203" fitness="373439" />
+<specie id="3594" count="15">
+<chromosome id="15863" fitness="19784" />
+<chromosome id="20160" fitness="303270" />
+<chromosome id="20166" fitness="576421" />
+<chromosome id="20167" fitness="815650" />
+<chromosome id="20173" fitness="328974" />
+<chromosome id="20175" fitness="203726" />
+<chromosome id="20180" fitness="749298" />
+<chromosome id="20191" fitness="205004" />
+<chromosome id="20192" fitness="740459" />
+<chromosome id="20197" fitness="924343" />
+<chromosome id="20206" fitness="302376" />
+<chromosome id="20208" fitness="532129" />
+<chromosome id="20209" fitness="797871" />
+<chromosome id="20213" fitness="88959" />
+<chromosome id="20214" fitness="139605" />
 </specie>
-<specie id="4611" count="6">
-<chromosome id="4611" fitness="630312" />
-<chromosome id="9833" fitness="382088" />
-<chromosome id="13166" fitness="322290" />
-<chromosome id="13185" fitness="597542" />
-<chromosome id="13202" fitness="807397" />
-<chromosome id="13204" fitness="121300" />
+<specie id="5425" count="8">
+<chromosome id="5467" fitness="441013" />
+<chromosome id="15859" fitness="50365" />
+<chromosome id="15886" fitness="706313" />
+<chromosome id="15889" fitness="140751" />
+<chromosome id="15890" fitness="398909" />
+<chromosome id="15895" fitness="20875" />
+<chromosome id="20190" fitness="233723" />
+<chromosome id="20194" fitness="18464" />
 </specie>
-<specie id="6901" count="14">
-<chromosome id="9829" fitness="445342" />
-<chromosome id="13172" fitness="348780" />
-<chromosome id="13173" fitness="829186" />
-<chromosome id="13174" fitness="427312" />
-<chromosome id="13176" fitness="630805" />
-<chromosome id="13177" fitness="4804" />
-<chromosome id="13179" fitness="415437" />
-<chromosome id="13180" fitness="128444" />
-<chromosome id="13183" fitness="140835" />
-<chromosome id="13191" fitness="765756" />
-<chromosome id="13192" fitness="802169" />
-<chromosome id="13194" fitness="571259" />
-<chromosome id="13197" fitness="250167" />
-<chromosome id="13199" fitness="150314" />
+<specie id="8188" count="17">
+<chromosome id="15901" fitness="355502" />
+<chromosome id="20161" fitness="942092" />
+<chromosome id="20162" fitness="826184" />
+<chromosome id="20163" fitness="548418" />
+<chromosome id="20164" fitness="669923" />
+<chromosome id="20170" fitness="24969" />
+<chromosome id="20171" fitness="481459" />
+<chromosome id="20172" fitness="377296" />
+<chromosome id="20176" fitness="957448" />
+<chromosome id="20181" fitness="576053" />
+<chromosome id="20185" fitness="605060" />
+<chromosome id="20187" fitness="479643" />
+<chromosome id="20188" fitness="136697" />
+<chromosome id="20189" fitness="377079" />
+<chromosome id="20193" fitness="4947" />
+<chromosome id="20200" fitness="714411" />
+<chromosome id="20205" fitness="441613" />
 </specie>
-<specie id="6918" count="11">
-<chromosome id="6925" fitness="504833" />
-<chromosome id="9812" fitness="246905" />
-<chromosome id="13171" fitness="631775" />
-<chromosome id="13175" fitness="422587" />
-<chromosome id="13182" fitness="734315" />
-<chromosome id="13186" fitness="651628" />
-<chromosome id="13188" fitness="616311" />
-<chromosome id="13193" fitness="286383" />
-<chromosome id="13200" fitness="408116" />
-<chromosome id="13201" fitness="498409" />
-<chromosome id="13205" fitness="231670" />
+<specie id="15856" count="7">
+<chromosome id="15856" fitness="558355" />
+<chromosome id="15858" fitness="690170" />
+<chromosome id="20165" fitness="43664" />
+<chromosome id="20182" fitness="584425" />
+<chromosome id="20195" fitness="613491" />
+<chromosome id="20196" fitness="50831" />
+<chromosome id="20199" fitness="37426" />
+</specie>
+<specie id="20169" count="1">
+<chromosome id="20169" fitness="494074" />
+</specie>
+<specie id="20174" count="2">
+<chromosome id="20174" fitness="790343" />
+<chromosome id="20218" fitness="93072" />
+</specie>
+<specie id="20202" count="1">
+<chromosome id="20202" fitness="614620" />
+</specie>
+<specie id="20204" count="2">
+<chromosome id="20204" fitness="339353" />
+<chromosome id="20215" fitness="53351" />
+</specie>
+<specie id="20217" count="1">
+<chromosome id="20217" fitness="365788" />
+</specie>
+</generation>
+<generation id="11" >
+<fitness>
+<max>990141</max>
+<min>31400</min>
+<avg>501667</avg>
+</fitness>
+<complexity>
+<champ>792</champ>
+<max>1426</max>
+<min>280</min>
+<avg>797.4533333333334</avg>
+</complexity>
+<specie id="151" count="1">
+<chromosome id="5453" fitness="293946" />
+</specie>
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="351517" />
+</specie>
+<specie id="3555" count="2">
+<chromosome id="20184" fitness="412239" />
+<chromosome id="20207" fitness="839574" />
+</specie>
+<specie id="3566" count="7">
+<chromosome id="20178" fitness="206537" />
+<chromosome id="20186" fitness="775724" />
+<chromosome id="26643" fitness="701983" />
+<chromosome id="26658" fitness="860489" />
+<chromosome id="26661" fitness="816589" />
+<chromosome id="26671" fitness="990141" />
+<chromosome id="26702" fitness="752196" />
+</specie>
+<specie id="3594" count="15">
+<chromosome id="20197" fitness="875325" />
+<chromosome id="26649" fitness="227121" />
+<chromosome id="26652" fitness="419069" />
+<chromosome id="26653" fitness="352419" />
+<chromosome id="26657" fitness="391815" />
+<chromosome id="26660" fitness="863413" />
+<chromosome id="26666" fitness="600843" />
+<chromosome id="26667" fitness="373561" />
+<chromosome id="26668" fitness="174330" />
+<chromosome id="26674" fitness="78277" />
+<chromosome id="26679" fitness="768074" />
+<chromosome id="26682" fitness="509294" />
+<chromosome id="26683" fitness="943328" />
+<chromosome id="26688" fitness="128630" />
+<chromosome id="26698" fitness="703683" />
+</specie>
+<specie id="5425" count="1">
+<chromosome id="15886" fitness="287881" />
+</specie>
+<specie id="8188" count="8">
+<chromosome id="20176" fitness="685948" />
+<chromosome id="26644" fitness="697696" />
+<chromosome id="26651" fitness="142265" />
+<chromosome id="26669" fitness="406657" />
+<chromosome id="26676" fitness="272096" />
+<chromosome id="26684" fitness="679901" />
+<chromosome id="26687" fitness="301366" />
+<chromosome id="26695" fitness="31400" />
+</specie>
+<specie id="15856" count="6">
+<chromosome id="15858" fitness="154459" />
+<chromosome id="26656" fitness="662169" />
+<chromosome id="26662" fitness="794612" />
+<chromosome id="26673" fitness="171415" />
+<chromosome id="26692" fitness="281543" />
+<chromosome id="26700" fitness="811480" />
+</specie>
+<specie id="20169" count="5">
+<chromosome id="20169" fitness="87638" />
+<chromosome id="26650" fitness="204379" />
+<chromosome id="26659" fitness="773102" />
+<chromosome id="26691" fitness="931400" />
+<chromosome id="26694" fitness="43069" />
+</specie>
+<specie id="20174" count="5">
+<chromosome id="20174" fitness="789853" />
+<chromosome id="26647" fitness="990018" />
+<chromosome id="26677" fitness="161908" />
+<chromosome id="26678" fitness="825460" />
+<chromosome id="26701" fitness="56624" />
+</specie>
+<specie id="20202" count="5">
+<chromosome id="20202" fitness="915925" />
+<chromosome id="26648" fitness="751449" />
+<chromosome id="26672" fitness="715632" />
+<chromosome id="26680" fitness="340926" />
+<chromosome id="26685" fitness="212050" />
+</specie>
+<specie id="20204" count="8">
+<chromosome id="20204" fitness="609691" />
+<chromosome id="26645" fitness="295112" />
+<chromosome id="26681" fitness="153993" />
+<chromosome id="26686" fitness="181793" />
+<chromosome id="26689" fitness="744361" />
+<chromosome id="26693" fitness="332358" />
+<chromosome id="26696" fitness="489944" />
+<chromosome id="26699" fitness="159268" />
+</specie>
+<specie id="20217" count="4">
+<chromosome id="20217" fitness="433237" />
+<chromosome id="26654" fitness="881698" />
+<chromosome id="26664" fitness="748237" />
+<chromosome id="26675" fitness="494084" />
+</specie>
+<specie id="26646" count="6">
+<chromosome id="26646" fitness="780675" />
+<chromosome id="26655" fitness="752968" />
+<chromosome id="26663" fitness="534317" />
+<chromosome id="26665" fitness="520591" />
+<chromosome id="26690" fitness="232719" />
+<chromosome id="26697" fitness="338452" />
+</specie>
+<specie id="26670" count="1">
+<chromosome id="26670" fitness="351150" />
+</specie>
+</generation>
+<generation id="12" >
+<fitness>
+<max>986688</max>
+<min>17371</min>
+<avg>511966</avg>
+</fitness>
+<complexity>
+<champ>585</champ>
+<max>1941</max>
+<min>280</min>
+<avg>1086.1333333333334</avg>
+</complexity>
+<specie id="151" count="1">
+<chromosome id="5453" fitness="283175" />
+</specie>
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="499603" />
+</specie>
+<specie id="3555" count="1">
+<chromosome id="20207" fitness="200705" />
+</specie>
+<specie id="3566" count="6">
+<chromosome id="26671" fitness="277568" />
+<chromosome id="37501" fitness="601823" />
+<chromosome id="37508" fitness="777278" />
+<chromosome id="37514" fitness="704541" />
+<chromosome id="37524" fitness="513652" />
+<chromosome id="37550" fitness="122526" />
+</specie>
+<specie id="3594" count="2">
+<chromosome id="26683" fitness="564653" />
+<chromosome id="37530" fitness="834178" />
+</specie>
+<specie id="5425" count="1">
+<chromosome id="15886" fitness="986688" />
+</specie>
+<specie id="8188" count="6">
+<chromosome id="26644" fitness="743533" />
+<chromosome id="37510" fitness="491393" />
+<chromosome id="37513" fitness="235022" />
+<chromosome id="37522" fitness="472204" />
+<chromosome id="37527" fitness="17371" />
+<chromosome id="37537" fitness="58025" />
+</specie>
+<specie id="15856" count="1">
+<chromosome id="26700" fitness="337302" />
+</specie>
+<specie id="20169" count="6">
+<chromosome id="26691" fitness="423682" />
+<chromosome id="37504" fitness="979412" />
+<chromosome id="37528" fitness="667358" />
+<chromosome id="37531" fitness="757443" />
+<chromosome id="37535" fitness="808181" />
+<chromosome id="37542" fitness="746602" />
+</specie>
+<specie id="20174" count="7">
+<chromosome id="26647" fitness="645221" />
+<chromosome id="37511" fitness="403370" />
+<chromosome id="37521" fitness="175529" />
+<chromosome id="37549" fitness="171254" />
+<chromosome id="37551" fitness="661632" />
+<chromosome id="37555" fitness="577749" />
+<chromosome id="37558" fitness="821976" />
+</specie>
+<specie id="20202" count="6">
+<chromosome id="20202" fitness="436408" />
+<chromosome id="37509" fitness="666072" />
+<chromosome id="37518" fitness="745063" />
+<chromosome id="37544" fitness="570614" />
+<chromosome id="37546" fitness="796189" />
+<chromosome id="37554" fitness="448097" />
+</specie>
+<specie id="20204" count="6">
+<chromosome id="26689" fitness="46555" />
+<chromosome id="37505" fitness="836855" />
+<chromosome id="37507" fitness="380391" />
+<chromosome id="37519" fitness="338187" />
+<chromosome id="37533" fitness="229883" />
+<chromosome id="37547" fitness="784380" />
+</specie>
+<specie id="20217" count="7">
+<chromosome id="26654" fitness="786548" />
+<chromosome id="37500" fitness="376338" />
+<chromosome id="37516" fitness="373138" />
+<chromosome id="37520" fitness="335945" />
+<chromosome id="37525" fitness="71161" />
+<chromosome id="37553" fitness="372154" />
+<chromosome id="37557" fitness="213655" />
+</specie>
+<specie id="26646" count="5">
+<chromosome id="26646" fitness="383150" />
+<chromosome id="37499" fitness="552768" />
+<chromosome id="37523" fitness="36761" />
+<chromosome id="37545" fitness="156734" />
+<chromosome id="37552" fitness="57488" />
+</specie>
+<specie id="26670" count="6">
+<chromosome id="26670" fitness="691943" />
+<chromosome id="37502" fitness="718527" />
+<chromosome id="37506" fitness="769335" />
+<chromosome id="37526" fitness="758505" />
+<chromosome id="37534" fitness="459163" />
+<chromosome id="37541" fitness="46452" />
+</specie>
+<specie id="37503" count="4">
+<chromosome id="37503" fitness="801393" />
+<chromosome id="37515" fitness="347997" />
+<chromosome id="37517" fitness="813405" />
+<chromosome id="37556" fitness="592317" />
+</specie>
+<specie id="37512" count="7">
+<chromosome id="37512" fitness="471164" />
+<chromosome id="37529" fitness="923152" />
+<chromosome id="37532" fitness="630417" />
+<chromosome id="37538" fitness="175351" />
+<chromosome id="37539" fitness="958262" />
+<chromosome id="37543" fitness="880770" />
+<chromosome id="37548" fitness="586670" />
+</specie>
+<specie id="37536" count="1">
+<chromosome id="37536" fitness="877637" />
+</specie>
+<specie id="37540" count="1">
+<chromosome id="37540" fitness="339876" />
+</specie>
+</generation>
+<generation id="13" >
+<fitness>
+<max>980381</max>
+<min>6255</min>
+<avg>508554</avg>
+</fitness>
+<complexity>
+<champ>1621</champ>
+<max>2927</max>
+<min>330</min>
+<avg>1358.3866666666668</avg>
+</complexity>
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="150910" />
+</specie>
+<specie id="3566" count="1">
+<chromosome id="37508" fitness="135919" />
+</specie>
+<specie id="3594" count="5">
+<chromosome id="37530" fitness="939536" />
+<chromosome id="54184" fitness="638053" />
+<chromosome id="54234" fitness="608350" />
+<chromosome id="54235" fitness="474146" />
+<chromosome id="54238" fitness="854259" />
+</specie>
+<specie id="5425" count="1">
+<chromosome id="15886" fitness="936398" />
+</specie>
+<specie id="8188" count="8">
+<chromosome id="26644" fitness="768811" />
+<chromosome id="54179" fitness="660772" />
+<chromosome id="54181" fitness="957383" />
+<chromosome id="54183" fitness="670211" />
+<chromosome id="54189" fitness="547018" />
+<chromosome id="54205" fitness="482087" />
+<chromosome id="54217" fitness="926220" />
+<chromosome id="54222" fitness="894951" />
+</specie>
+<specie id="20169" count="6">
+<chromosome id="37504" fitness="265357" />
+<chromosome id="54182" fitness="343693" />
+<chromosome id="54193" fitness="761092" />
+<chromosome id="54229" fitness="749471" />
+<chromosome id="54231" fitness="319744" />
+<chromosome id="54236" fitness="394795" />
+</specie>
+<specie id="20174" count="5">
+<chromosome id="37558" fitness="155485" />
+<chromosome id="54187" fitness="200826" />
+<chromosome id="54213" fitness="180002" />
+<chromosome id="54221" fitness="10092" />
+<chromosome id="54232" fitness="132432" />
+</specie>
+<specie id="20202" count="5">
+<chromosome id="37546" fitness="251948" />
+<chromosome id="54185" fitness="702619" />
+<chromosome id="54194" fitness="758821" />
+<chromosome id="54207" fitness="296429" />
+<chromosome id="54210" fitness="306506" />
+</specie>
+<specie id="20204" count="9">
+<chromosome id="37505" fitness="926785" />
+<chromosome id="54192" fitness="919323" />
+<chromosome id="54209" fitness="6255" />
+<chromosome id="54214" fitness="552607" />
+<chromosome id="54215" fitness="17316" />
+<chromosome id="54220" fitness="597731" />
+<chromosome id="54224" fitness="157937" />
+<chromosome id="54226" fitness="313288" />
+<chromosome id="54230" fitness="817049" />
+</specie>
+<specie id="20217" count="5">
+<chromosome id="26654" fitness="139623" />
+<chromosome id="54188" fitness="786652" />
+<chromosome id="54195" fitness="926944" />
+<chromosome id="54197" fitness="796556" />
+<chromosome id="54204" fitness="778734" />
+</specie>
+<specie id="26646" count="4">
+<chromosome id="37499" fitness="980381" />
+<chromosome id="54203" fitness="148537" />
+<chromosome id="54206" fitness="211875" />
+<chromosome id="54218" fitness="490596" />
+</specie>
+<specie id="26670" count="5">
+<chromosome id="37506" fitness="828330" />
+<chromosome id="54180" fitness="570256" />
+<chromosome id="54196" fitness="605656" />
+<chromosome id="54199" fitness="785571" />
+<chromosome id="54211" fitness="21889" />
+</specie>
+<specie id="37503" count="5">
+<chromosome id="37517" fitness="721939" />
+<chromosome id="54201" fitness="40328" />
+<chromosome id="54223" fitness="802498" />
+<chromosome id="54228" fitness="974574" />
+<chromosome id="54237" fitness="450367" />
+</specie>
+<specie id="37512" count="6">
+<chromosome id="37539" fitness="253550" />
+<chromosome id="54186" fitness="374743" />
+<chromosome id="54190" fitness="48643" />
+<chromosome id="54200" fitness="592903" />
+<chromosome id="54216" fitness="829085" />
+<chromosome id="54227" fitness="788567" />
+</specie>
+<specie id="37536" count="9">
+<chromosome id="37536" fitness="332823" />
+<chromosome id="54191" fitness="323138" />
+<chromosome id="54198" fitness="392952" />
+<chromosome id="54202" fitness="887510" />
+<chromosome id="54208" fitness="633748" />
+<chromosome id="54212" fitness="423576" />
+<chromosome id="54219" fitness="234640" />
+<chromosome id="54225" fitness="64892" />
+<chromosome id="54233" fitness="116903" />
+</specie>
+</generation>
+<generation id="14" >
+<fitness>
+<max>997687</max>
+<min>2640</min>
+<avg>493641</avg>
+</fitness>
+<complexity>
+<champ>1603</champ>
+<max>4745</max>
+<min>330</min>
+<avg>1748.2666666666667</avg>
+</complexity>
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="595404" />
+</specie>
+<specie id="3566" count="1">
+<chromosome id="37508" fitness="897101" />
+</specie>
+<specie id="3594" count="5">
+<chromosome id="37530" fitness="884246" />
+<chromosome id="77926" fitness="640134" />
+<chromosome id="77930" fitness="7052" />
+<chromosome id="77949" fitness="314109" />
+<chromosome id="77954" fitness="26280" />
+</specie>
+<specie id="5425" count="1">
+<chromosome id="15886" fitness="542715" />
+</specie>
+<specie id="8188" count="2">
+<chromosome id="54181" fitness="787353" />
+<chromosome id="77913" fitness="420172" />
+</specie>
+<specie id="20169" count="7">
+<chromosome id="54193" fitness="582503" />
+<chromosome id="77916" fitness="376354" />
+<chromosome id="77931" fitness="2640" />
+<chromosome id="77938" fitness="17170" />
+<chromosome id="77940" fitness="158558" />
+<chromosome id="77944" fitness="253047" />
+<chromosome id="77962" fitness="590659" />
+</specie>
+<specie id="20174" count="1">
+<chromosome id="54187" fitness="795858" />
+</specie>
+<specie id="20202" count="5">
+<chromosome id="54194" fitness="852726" />
+<chromosome id="77929" fitness="255687" />
+<chromosome id="77932" fitness="384181" />
+<chromosome id="77934" fitness="311220" />
+<chromosome id="77941" fitness="238814" />
+</specie>
+<specie id="20204" count="10">
+<chromosome id="37505" fitness="370845" />
+<chromosome id="77903" fitness="619980" />
+<chromosome id="77907" fitness="777636" />
+<chromosome id="77911" fitness="371251" />
+<chromosome id="77919" fitness="981910" />
+<chromosome id="77942" fitness="670146" />
+<chromosome id="77945" fitness="442177" />
+<chromosome id="77946" fitness="193009" />
+<chromosome id="77947" fitness="285590" />
+<chromosome id="77957" fitness="326065" />
+</specie>
+<specie id="20217" count="6">
+<chromosome id="54195" fitness="70784" />
+<chromosome id="77910" fitness="53003" />
+<chromosome id="77914" fitness="49272" />
+<chromosome id="77943" fitness="251690" />
+<chromosome id="77948" fitness="478349" />
+<chromosome id="77951" fitness="877742" />
+</specie>
+<specie id="26646" count="6">
+<chromosome id="37499" fitness="323499" />
+<chromosome id="77906" fitness="613786" />
+<chromosome id="77917" fitness="917402" />
+<chromosome id="77923" fitness="947962" />
+<chromosome id="77953" fitness="808317" />
+<chromosome id="77955" fitness="935414" />
+</specie>
+<specie id="26670" count="6">
+<chromosome id="37506" fitness="108475" />
+<chromosome id="77921" fitness="997687" />
+<chromosome id="77925" fitness="465764" />
+<chromosome id="77927" fitness="686941" />
+<chromosome id="77956" fitness="402551" />
+<chromosome id="77958" fitness="272119" />
+</specie>
+<specie id="37503" count="1">
+<chromosome id="54228" fitness="266216" />
+</specie>
+<specie id="37512" count="5">
+<chromosome id="54216" fitness="478936" />
+<chromosome id="77915" fitness="691495" />
+<chromosome id="77933" fitness="585217" />
+<chromosome id="77935" fitness="856021" />
+<chromosome id="77960" fitness="911531" />
+</specie>
+<specie id="37536" count="7">
+<chromosome id="54202" fitness="927602" />
+<chromosome id="77905" fitness="348378" />
+<chromosome id="77912" fitness="262485" />
+<chromosome id="77918" fitness="405133" />
+<chromosome id="77924" fitness="840374" />
+<chromosome id="77950" fitness="582532" />
+<chromosome id="77959" fitness="916560" />
+</specie>
+<specie id="77904" count="5">
+<chromosome id="77904" fitness="166518" />
+<chromosome id="77909" fitness="179460" />
+<chromosome id="77920" fitness="809609" />
+<chromosome id="77928" fitness="698468" />
+<chromosome id="77952" fitness="391991" />
+</specie>
+<specie id="77908" count="2">
+<chromosome id="77908" fitness="635791" />
+<chromosome id="77922" fitness="653736" />
+</specie>
+<specie id="77936" count="1">
+<chromosome id="77936" fitness="299569" />
+</specie>
+<specie id="77937" count="1">
+<chromosome id="77937" fitness="96027" />
+</specie>
+<specie id="77939" count="1">
+<chromosome id="77939" fitness="718364" />
+</specie>
+<specie id="77961" count="1">
+<chromosome id="77961" fitness="67714" />
+</specie>
+</generation>
+<generation id="15" >
+<fitness>
+<max>986179</max>
+<min>1077</min>
+<avg>512849</avg>
+</fitness>
+<complexity>
+<champ>1056</champ>
+<max>8580</max>
+<min>330</min>
+<avg>2498.0133333333333</avg>
+</complexity>
+<specie id="3550" count="1">
+<chromosome id="5448" fitness="416247" />
+</specie>
+<specie id="3566" count="1">
+<chromosome id="37508" fitness="886422" />
+</specie>
+<specie id="3594" count="5">
+<chromosome id="37530" fitness="36373" />
+<chromosome id="119999" fitness="707936" />
+<chromosome id="120012" fitness="966829" />
+<chromosome id="120013" fitness="164922" />
+<chromosome id="120035" fitness="15466" />
+</specie>
+<specie id="8188" count="5">
+<chromosome id="54181" fitness="986179" />
+<chromosome id="120029" fitness="676530" />
+<chromosome id="120037" fitness="186605" />
+<chromosome id="120039" fitness="759252" />
+<chromosome id="120050" fitness="180572" />
+</specie>
+<specie id="20174" count="1">
+<chromosome id="54187" fitness="756453" />
+</specie>
+<specie id="20202" count="5">
+<chromosome id="54194" fitness="872054" />
+<chromosome id="120025" fitness="260260" />
+<chromosome id="120027" fitness="1077" />
+<chromosome id="120044" fitness="599435" />
+<chromosome id="120047" fitness="58671" />
+</specie>
+<specie id="20204" count="5">
+<chromosome id="77919" fitness="491898" />
+<chromosome id="120014" fitness="847561" />
+<chromosome id="120036" fitness="126248" />
+<chromosome id="120040" fitness="914862" />
+<chromosome id="120042" fitness="957988" />
+</specie>
+<specie id="20217" count="5">
+<chromosome id="77951" fitness="529496" />
+<chromosome id="120016" fitness="657165" />
+<chromosome id="120028" fitness="407411" />
+<chromosome id="120038" fitness="469788" />
+<chromosome id="120052" fitness="623956" />
+</specie>
+<specie id="26646" count="5">
+<chromosome id="77923" fitness="17187" />
+<chromosome id="119995" fitness="176527" />
+<chromosome id="120008" fitness="138301" />
+<chromosome id="120010" fitness="890063" />
+<chromosome id="120043" fitness="922204" />
+</specie>
+<specie id="26670" count="1">
+<chromosome id="77921" fitness="289330" />
+</specie>
+<specie id="37512" count="1">
+<chromosome id="77960" fitness="332671" />
+</specie>
+<specie id="37536" count="9">
+<chromosome id="54202" fitness="634874" />
+<chromosome id="119998" fitness="833176" />
+<chromosome id="120000" fitness="897515" />
+<chromosome id="120006" fitness="833538" />
+<chromosome id="120020" fitness="675020" />
+<chromosome id="120021" fitness="291756" />
+<chromosome id="120022" fitness="138022" />
+<chromosome id="120034" fitness="152435" />
+<chromosome id="120041" fitness="714262" />
+</specie>
+<specie id="77904" count="9">
+<chromosome id="77920" fitness="967047" />
+<chromosome id="119997" fitness="613913" />
+<chromosome id="120015" fitness="642978" />
+<chromosome id="120024" fitness="563441" />
+<chromosome id="120030" fitness="437117" />
+<chromosome id="120032" fitness="876728" />
+<chromosome id="120045" fitness="763218" />
+<chromosome id="120046" fitness="333242" />
+<chromosome id="120053" fitness="769129" />
+</specie>
+<specie id="77908" count="1">
+<chromosome id="77922" fitness="86765" />
+</specie>
+<specie id="77939" count="5">
+<chromosome id="77939" fitness="171424" />
+<chromosome id="120011" fitness="5402" />
+<chromosome id="120017" fitness="793393" />
+<chromosome id="120023" fitness="440128" />
+<chromosome id="120026" fitness="94565" />
+</specie>
+<specie id="119994" count="4">
+<chromosome id="119994" fitness="117444" />
+<chromosome id="120003" fitness="836581" />
+<chromosome id="120018" fitness="904095" />
+<chromosome id="120031" fitness="621648" />
+</specie>
+<specie id="119996" count="4">
+<chromosome id="119996" fitness="640695" />
+<chromosome id="120001" fitness="907136" />
+<chromosome id="120048" fitness="736278" />
+<chromosome id="120049" fitness="223760" />
+</specie>
+<specie id="120002" count="1">
+<chromosome id="120002" fitness="549488" />
+</specie>
+<specie id="120004" count="5">
+<chromosome id="120004" fitness="6764" />
+<chromosome id="120005" fitness="160072" />
+<chromosome id="120007" fitness="492823" />
+<chromosome id="120033" fitness="434756" />
+<chromosome id="120051" fitness="724120" />
+</specie>
+<specie id="120009" count="1">
+<chromosome id="120009" fitness="858011" />
+</specie>
+<specie id="120019" count="1">
+<chromosome id="120019" fitness="197042" />
+</specie>
+</generation>
+<generation id="16" >
+<fitness>
+<max>980553</max>
+<min>27111</min>
+<avg>478620</avg>
+</fitness>
+<complexity>
+<champ>3747</champ>
+<max>18294</max>
+<min>405</min>
+<avg>4612.12</avg>
+</complexity>
+<specie id="3566" count="1">
+<chromosome id="37508" fitness="191575" />
+</specie>
+<specie id="3594" count="1">
+<chromosome id="120012" fitness="135270" />
+</specie>
+<specie id="8188" count="1">
+<chromosome id="54181" fitness="203713" />
+</specie>
+<specie id="20174" count="1">
+<chromosome id="54187" fitness="971568" />
+</specie>
+<specie id="20202" count="5">
+<chromosome id="54194" fitness="290604" />
+<chromosome id="226804" fitness="509841" />
+<chromosome id="226819" fitness="733562" />
+<chromosome id="226820" fitness="613515" />
+<chromosome id="226856" fitness="268643" />
+</specie>
+<specie id="20204" count="1">
+<chromosome id="120042" fitness="652685" />
+</specie>
+<specie id="20217" count="1">
+<chromosome id="120016" fitness="929722" />
+</specie>
+<specie id="26646" count="1">
+<chromosome id="120043" fitness="208498" />
+</specie>
+<specie id="37536" count="9">
+<chromosome id="120000" fitness="857611" />
+<chromosome id="226813" fitness="806741" />
+<chromosome id="226816" fitness="69826" />
+<chromosome id="226818" fitness="420458" />
+<chromosome id="226827" fitness="677691" />
+<chromosome id="226830" fitness="29949" />
+<chromosome id="226834" fitness="783753" />
+<chromosome id="226840" fitness="135469" />
+<chromosome id="226846" fitness="537926" />
+</specie>
+<specie id="77904" count="9">
+<chromosome id="77920" fitness="538090" />
+<chromosome id="226802" fitness="190840" />
+<chromosome id="226809" fitness="438702" />
+<chromosome id="226817" fitness="516026" />
+<chromosome id="226829" fitness="312928" />
+<chromosome id="226837" fitness="153091" />
+<chromosome id="226841" fitness="190416" />
+<chromosome id="226857" fitness="509521" />
+<chromosome id="226858" fitness="676315" />
+</specie>
+<specie id="77939" count="5">
+<chromosome id="120017" fitness="867930" />
+<chromosome id="226814" fitness="441922" />
+<chromosome id="226847" fitness="926477" />
+<chromosome id="226848" fitness="592426" />
+<chromosome id="226853" fitness="578594" />
+</specie>
+<specie id="119994" count="5">
+<chromosome id="120018" fitness="27111" />
+<chromosome id="226807" fitness="503458" />
+<chromosome id="226811" fitness="870576" />
+<chromosome id="226849" fitness="176675" />
+<chromosome id="226850" fitness="33259" />
+</specie>
+<specie id="119996" count="5">
+<chromosome id="120001" fitness="578403" />
+<chromosome id="226806" fitness="86965" />
+<chromosome id="226808" fitness="942746" />
+<chromosome id="226832" fitness="980553" />
+<chromosome id="226839" fitness="636111" />
+</specie>
+<specie id="120004" count="1">
+<chromosome id="120051" fitness="231335" />
+</specie>
+<specie id="120009" count="6">
+<chromosome id="120009" fitness="215113" />
+<chromosome id="226823" fitness="348314" />
+<chromosome id="226836" fitness="215098" />
+<chromosome id="226843" fitness="163657" />
+<chromosome id="226845" fitness="254534" />
+<chromosome id="226859" fitness="634493" />
+</specie>
+<specie id="226801" count="3">
+<chromosome id="226801" fitness="575587" />
+<chromosome id="226831" fitness="109448" />
+<chromosome id="226852" fitness="581015" />
+</specie>
+<specie id="226803" count="4">
+<chromosome id="226803" fitness="230572" />
+<chromosome id="226805" fitness="564215" />
+<chromosome id="226826" fitness="289675" />
+<chromosome id="226828" fitness="646446" />
+</specie>
+<specie id="226810" count="1">
+<chromosome id="226810" fitness="293259" />
+</specie>
+<specie id="226812" count="3">
+<chromosome id="226812" fitness="169015" />
+<chromosome id="226824" fitness="647925" />
+<chromosome id="226833" fitness="781999" />
+</specie>
+<specie id="226815" count="1">
+<chromosome id="226815" fitness="255211" />
+</specie>
+<specie id="226821" count="1">
+<chromosome id="226821" fitness="648344" />
+</specie>
+<specie id="226822" count="1">
+<chromosome id="226822" fitness="618980" />
+</specie>
+<specie id="226825" count="1">
+<chromosome id="226825" fitness="402922" />
+</specie>
+<specie id="226835" count="1">
+<chromosome id="226835" fitness="570884" />
+</specie>
+<specie id="226838" count="4">
+<chromosome id="226838" fitness="842999" />
+<chromosome id="226844" fitness="486531" />
+<chromosome id="226851" fitness="874526" />
+<chromosome id="226855" fitness="538336" />
+</specie>
+<specie id="226842" count="1">
+<chromosome id="226842" fitness="332782" />
+</specie>
+<specie id="226854" count="1">
+<chromosome id="226854" fitness="901866" />
+</specie>
+<specie id="226860" count="1">
+<chromosome id="226860" fitness="673727" />
+</specie>
+</generation>
+<generation id="17" >
+<fitness>
+<max>994377</max>
+<min>16594</min>
+<avg>500973</avg>
+</fitness>
+<complexity>
+<champ>2588</champ>
+<max>44817</max>
+<min>510</min>
+<avg>6907.64</avg>
+</complexity>
+<specie id="20174" count="1">
+<chromosome id="54187" fitness="454425" />
+</specie>
+<specie id="20202" count="1">
+<chromosome id="226819" fitness="265477" />
+</specie>
+<specie id="20204" count="1">
+<chromosome id="120042" fitness="570344" />
+</specie>
+<specie id="20217" count="1">
+<chromosome id="120016" fitness="431869" />
+</specie>
+<specie id="37536" count="5">
+<chromosome id="120000" fitness="769214" />
+<chromosome id="406590" fitness="385328" />
+<chromosome id="406598" fitness="605133" />
+<chromosome id="406622" fitness="622700" />
+<chromosome id="406630" fitness="509076" />
+</specie>
+<specie id="77904" count="6">
+<chromosome id="226858" fitness="465941" />
+<chromosome id="406587" fitness="704485" />
+<chromosome id="406594" fitness="956366" />
+<chromosome id="406601" fitness="198257" />
+<chromosome id="406605" fitness="740633" />
+<chromosome id="406627" fitness="642314" />
+</specie>
+<specie id="77939" count="1">
+<chromosome id="226847" fitness="453785" />
+</specie>
+<specie id="119994" count="1">
+<chromosome id="226811" fitness="50301" />
+</specie>
+<specie id="119996" count="6">
+<chromosome id="226832" fitness="249693" />
+<chromosome id="406602" fitness="739046" />
+<chromosome id="406617" fitness="121850" />
+<chromosome id="406618" fitness="87543" />
+<chromosome id="406619" fitness="661717" />
+<chromosome id="406624" fitness="563408" />
+</specie>
+<specie id="226803" count="4">
+<chromosome id="226828" fitness="334016" />
+<chromosome id="406588" fitness="514336" />
+<chromosome id="406599" fitness="207950" />
+<chromosome id="406607" fitness="706432" />
+</specie>
+<specie id="226812" count="2">
+<chromosome id="226833" fitness="989694" />
+<chromosome id="406608" fitness="688304" />
+</specie>
+<specie id="226821" count="4">
+<chromosome id="226821" fitness="781803" />
+<chromosome id="406595" fitness="408356" />
+<chromosome id="406625" fitness="509419" />
+<chromosome id="406635" fitness="755329" />
+</specie>
+<specie id="226838" count="5">
+<chromosome id="226851" fitness="989789" />
+<chromosome id="406604" fitness="350010" />
+<chromosome id="406611" fitness="487345" />
+<chromosome id="406612" fitness="293491" />
+<chromosome id="406639" fitness="479980" />
+</specie>
+<specie id="226854" count="5">
+<chromosome id="226854" fitness="536264" />
+<chromosome id="406591" fitness="186680" />
+<chromosome id="406593" fitness="173116" />
+<chromosome id="406623" fitness="955691" />
+<chromosome id="406642" fitness="40488" />
+</specie>
+<specie id="226860" count="5">
+<chromosome id="226860" fitness="226518" />
+<chromosome id="406584" fitness="901326" />
+<chromosome id="406614" fitness="29119" />
+<chromosome id="406620" fitness="479095" />
+<chromosome id="406626" fitness="54725" />
+</specie>
+<specie id="406585" count="3">
+<chromosome id="406585" fitness="666854" />
+<chromosome id="406613" fitness="60473" />
+<chromosome id="406616" fitness="55725" />
+</specie>
+<specie id="406586" count="1">
+<chromosome id="406586" fitness="483932" />
+</specie>
+<specie id="406589" count="4">
+<chromosome id="406589" fitness="187303" />
+<chromosome id="406606" fitness="454240" />
+<chromosome id="406609" fitness="976361" />
+<chromosome id="406629" fitness="994377" />
+</specie>
+<specie id="406592" count="1">
+<chromosome id="406592" fitness="416104" />
+</specie>
+<specie id="406596" count="1">
+<chromosome id="406596" fitness="715187" />
+</specie>
+<specie id="406597" count="1">
+<chromosome id="406597" fitness="926597" />
+</specie>
+<specie id="406600" count="1">
+<chromosome id="406600" fitness="702330" />
+</specie>
+<specie id="406603" count="1">
+<chromosome id="406603" fitness="917936" />
+</specie>
+<specie id="406610" count="1">
+<chromosome id="406610" fitness="38428" />
+</specie>
+<specie id="406615" count="1">
+<chromosome id="406615" fitness="16594" />
+</specie>
+<specie id="406621" count="1">
+<chromosome id="406621" fitness="390347" />
+</specie>
+<specie id="406628" count="2">
+<chromosome id="406628" fitness="275194" />
+<chromosome id="406631" fitness="874064" />
+</specie>
+<specie id="406632" count="1">
+<chromosome id="406632" fitness="97074" />
+</specie>
+<specie id="406633" count="2">
+<chromosome id="406633" fitness="557304" />
+<chromosome id="406643" fitness="606317" />
+</specie>
+<specie id="406634" count="1">
+<chromosome id="406634" fitness="930399" />
+</specie>
+<specie id="406636" count="1">
+<chromosome id="406636" fitness="957898" />
+</specie>
+<specie id="406637" count="1">
+<chromosome id="406637" fitness="973822" />
+</specie>
+<specie id="406638" count="1">
+<chromosome id="406638" fitness="761100" />
+</specie>
+<specie id="406640" count="1">
+<chromosome id="406640" fitness="17060" />
+</specie>
+<specie id="406641" count="1">
+<chromosome id="406641" fitness="191820" />
 </specie>
 </generation>
 </run>
