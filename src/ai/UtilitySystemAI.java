@@ -117,7 +117,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 }
             }
             //Do the translation stuff
-            UtilAction utilAction = us.getActionWeightedRandom(gs, player);
+            UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
+            UtilAction utilAction = us.getActionWeightedRandom(gs, player, unitGroups);
             Player p = gs.getPlayer(player);
             for (Unit u:attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
@@ -159,7 +160,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction AttackWithSingleUnit(GameState gs, Player p){
-        System.out.println("Attack With Single Unit");
+        // System.out.println("Attack With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canAttack = new LinkedList<>();
         //Check passive military units
@@ -230,7 +231,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction DefendWithSingleUnit(GameState gs, Player p){
-        System.out.println("Defend With Single Unit");
+        // System.out.println("Defend With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canDefend = new LinkedList<>();
         //Check passive military units
@@ -320,7 +321,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction BuildBase(GameState gs, Player p){
-        System.out.println("Build Base");
+        // System.out.println("Build Base");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> otherResources = new ArrayList<>(otherResourcePoint(p, pgs));
@@ -493,7 +494,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
 
     protected PlayerAction BuildBarracks(GameState gs, Player p){
-        System.out.println("Build Barracks");
+        // System.out.println("Build Barracks");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Integer> reservedPositions = new ArrayList<>();
@@ -541,7 +542,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction BuildWorker(GameState gs, Player p){
-        System.out.println("Build Worker");
+        // System.out.println("Build Worker");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
@@ -562,7 +563,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction BuildWarUnit(GameState gs, Player p){
-        System.out.println("Build War Unit");
+        // System.out.println("Build War Unit");
         Random ran = new Random();
         int val = ran.nextInt(3);
         if(val == 0) BuildLight(gs, p);
@@ -573,7 +574,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     }
 
     protected PlayerAction Harvest_Resources(GameState gs, Player p){
-        System.out.println("Harvest Resource");
+        // System.out.println("Harvest Resource");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canHarvest = new LinkedList<>();
         //Only takes workers who are idling and makes them harvest

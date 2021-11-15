@@ -15,9 +15,10 @@ public abstract class USNode {
      * 
      * @param gs
      * @param player
+     * @param unitGroups
      * @throws Exception
      */
-    protected abstract void calculateValue(GameState gs, int player) throws Exception;
+    protected abstract void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception;
 
     /**
      * Gets the value of the node.
@@ -28,9 +29,9 @@ public abstract class USNode {
      * @return
      * @throws Exception
      */
-    public float getValue(GameState gs, int player) throws Exception {
+    public float getValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         if (!this.visited) {
-            this.calculateValue(gs, player);
+            this.calculateValue(gs, player, unitGroups);
             this.visited = true;
         }
         return this.value;

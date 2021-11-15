@@ -27,6 +27,7 @@ import rts.units.UnitTypeTable;
         GameState gs = runExperiment(ai1, ai2, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
 
         GameState gs2 = runUntilAtResourceCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
+        // with the current US it often wins before reaching 10 resources.
 
         System.out.println("GAMEOVER");
         System.out.println("Winner: " + gs.winner());
