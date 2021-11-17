@@ -127,7 +127,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 }
             }
             //Do the translation stuff
-            UtilAction utilAction = utilitySystem.getActionWeightedRandom(gs, player);
+
+            UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
+            UtilAction utilAction = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
             Player p = gs.getPlayer(player);
             for (Unit u : attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
@@ -514,7 +516,6 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
         return bases;
     }
-
 
     protected PlayerAction BuildBarracks(GameState gs, Player p) {
         if (verbose) System.out.println("Build Barracks");

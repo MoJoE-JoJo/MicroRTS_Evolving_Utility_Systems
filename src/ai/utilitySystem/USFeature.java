@@ -25,32 +25,34 @@ public class USFeature extends USNode {
     }
 
     @Override
-    protected void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+        float val1 = this.param1.getValue(gs, player, unitGroups);
+        float val2 = this.param2.getValue(gs, player, unitGroups);
         switch (this.operation) {
             case DIVIDE:
-                if (this.param2.getValue(gs, player) == 0) {
+                if (val2 == 0) {
                     this.value = 0;
                     break;
                 }
-                this.value = this.param1.getValue(gs, player) / this.param2.getValue(gs, player);
+                this.value = val1 / val2;
                 break;
             case MULTIPLY:
-                this.value = this.param1.getValue(gs, player) * this.param2.getValue(gs, player);
+                this.value = val1 * val2;
                 break;
             case SUM:
-                this.value = this.param1.getValue(gs, player) + this.param2.getValue(gs, player);
+                this.value = val1 + val2;
                 break;
             case SUBTRACT:
-                this.value = this.param1.getValue(gs, player) - this.param2.getValue(gs, player);
+                this.value = val1 - val2;
                 break;
             case MIN:
-                this.value = Math.min(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = Math.min(val1, val2);
                 break;
             case MAX:
-                this.value = Math.max(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = Math.max(val1, val2);
                 break;
             case POWER:
-                this.value = (float) Math.pow(this.param1.getValue(gs, player), this.param2.getValue(gs, player));
+                this.value = (float)Math.pow(val1, val2);
                 break;
             default:
                 throw new Exception("Not yet implemented operation: " + this.operation);

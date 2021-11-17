@@ -34,7 +34,7 @@ public class USVariable extends USNode {
     }
 
     @Override
-    protected void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         // player ids are 0 and 1, so invert it to get the enemy's id.
         final int enemy = player == 0 ? 1 : 0;
         int sum;
@@ -99,7 +99,7 @@ public class USVariable extends USNode {
                 this.value = getUnharvestedResources(gs);
                 break;
             case PLAYER_HARVESTING_WORKERS:
-                this.value = getUnitsPerformingAction(gs, player, "Worker", UnitAction.TYPE_HARVEST);
+                this.value = unitGroups.harvestingWorkers.size();
                 break;
             default:
                 throw new Exception("Not yet implemented game state variable: " + this.gsv);
@@ -180,29 +180,6 @@ public class USVariable extends USNode {
         for(Unit unit : units) {
             if (unit.getType().isResource) {
                 count += unit.getResources(); // I'm not sure this is how to get the resource count
-            }
-        }
-        return count;
-    }
-
-    /**
-     * The number of units of a specific type owned by the given player executing a specific action.
-     * 
-     * @param gs
-     * @param player
-     * @param unitName
-     * @param actionId
-     * @return
-     */
-    private float getUnitsPerformingAction(GameState gs, int player, String unitName, int actionId) {
-        List<Unit> units = gs.getUnits();
-        int count = 0;
-        for(Unit unit : units) {
-            if (unit.getPlayer() == player && unit.getType().name == unitName) {
-                UnitActionAssignment uaa = gs.getActionAssignment(unit);
-                if (uaa != null && uaa.action.getType() == actionId) {
-                    count++;
-                }
             }
         }
         return count;

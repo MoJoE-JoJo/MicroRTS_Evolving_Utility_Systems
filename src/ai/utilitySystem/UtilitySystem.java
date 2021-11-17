@@ -32,13 +32,13 @@ public class UtilitySystem {
     }
 
     // gets the highest scoring action
-    public UtilAction getActionBest(GameState gs, int player) throws Exception {
+    public UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
             try{
-                if (node.getValue(gs, player) > bestNode.getValue(gs, player)) {
+                if (node.getValue(gs, player, unitGroups) > bestNode.getValue(gs, player, unitGroups)) {
                     bestNode = node;
                 }
             }catch (Exception e){
@@ -50,15 +50,17 @@ public class UtilitySystem {
     }
 
     // gets a random node, using the scores as weights
-    public UtilAction getActionWeightedRandom(GameState gs, int player) throws Exception {
+    public UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
+        // calculate values for all actions
         float sum = 0;
         float[] indices = new float[actions.size()];
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            sum += node.getValue(gs, player);
+            sum += node.getValue(gs, player, unitGroups);
             indices[i] = sum;
         }
+        // chose one randomly using the values as weights
         float r = this.random.nextFloat() * sum;
         for(int i = 0; i < actions.size(); i++) {
             if (r <= indices[i]) {
