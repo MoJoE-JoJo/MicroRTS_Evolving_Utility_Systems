@@ -12,7 +12,7 @@ public class USAction extends USNode {
         HARVEST_RESOURCE
     }
 
-    private USFeature feature;
+    private USNode feature;
     private UtilAction action;
 
     public USAction (String name, USFeature feature, UtilAction action) {
@@ -26,6 +26,11 @@ public class USAction extends USNode {
         this.value = this.feature.getValue(gs, player, unitGroups);
     }
 
+    @Override
+    public NodeType getType() {
+        return NodeType.US_ACTION;
+    }
+
     public UtilAction getAction() {
         return this.action;
     }
@@ -35,6 +40,10 @@ public class USAction extends USNode {
         return "object " + this.name + " {\n" +
             "Score: " + this.value + "\n" +
             "}\n";
+    }
+
+    public void addFeature(USNode node) {
+        feature = node;
     }
 
     public String relationsToPlantUML() {

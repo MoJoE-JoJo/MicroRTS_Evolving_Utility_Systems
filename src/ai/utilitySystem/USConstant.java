@@ -19,6 +19,11 @@ public class USConstant extends USNode {
     }
 
     @Override
+    public NodeType getType() {
+        return NodeType.US_CONSTANT;
+    }
+
+    @Override
     public String toPlantUML() {
         return "object Constant" + this.constant + " {\n" +
             "Value: " + this.constant + "\n" +

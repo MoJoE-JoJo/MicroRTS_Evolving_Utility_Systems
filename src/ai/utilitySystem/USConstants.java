@@ -1,13 +1,14 @@
 package ai.utilitySystem;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import ai.utilitySystem.USFeature.Operation;
 import ai.utilitySystem.USVariable.GameStateVariable;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public final class USConstants {
     public static final String PlantUMLStart = "@startuml\n" +
+                                            "skinparam packageStyle rectangle\n"+
                                             "left to right direction\n" +
                                             "' Horizontal lines: -->, <--, <-->\n" +
                                             "' Vertical lines: ->, <-, <->\n" +
