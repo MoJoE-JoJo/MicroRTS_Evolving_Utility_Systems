@@ -62,7 +62,7 @@ public class UtilitySystem {
         }
         // if all weights are 0, return a random action
         if (sum == 0) {
-            int randomInt = this.random.nextInt(0, indices.length - 1);
+            int randomInt = this.random.nextInt(0, indices.length);
             return actions.get(randomInt).getAction();
         }
         // chose one randomly using the values as weights
