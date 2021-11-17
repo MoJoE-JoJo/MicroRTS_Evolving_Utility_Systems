@@ -60,6 +60,11 @@ public class UtilitySystem {
             sum += node.getValue(gs, player, unitGroups);
             indices[i] = sum;
         }
+        // if all weights are 0, return a random action
+        if (sum == 0) {
+            int randomInt = this.random.nextInt(0, indices.length - 1);
+            return actions.get(randomInt).getAction();
+        }
         // chose one randomly using the values as weights
         float r = this.random.nextFloat() * sum;
         for(int i = 0; i < actions.size(); i++) {
