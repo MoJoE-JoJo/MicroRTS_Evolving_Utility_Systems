@@ -4,22 +4,21 @@
  */
 package ai;
 
+import ai.abstraction.AbstractAction;
+import ai.abstraction.AbstractionLayerAI;
+import ai.abstraction.Harvest;
 import ai.abstraction.pathfinding.AStarPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import ai.core.AI;
 import ai.core.ParameterSpecification;
-import ai.utilitySystem.USVariable;
-import ai.utilitySystem.UtilitySystem;
 import ai.utilitySystem.*;
 import ai.utilitySystem.USAction.UtilAction;
-import ai.abstraction.*;
-
-import java.util.*;
-
 import rts.*;
 import rts.units.Unit;
 import rts.units.UnitType;
 import rts.units.UnitTypeTable;
+
+import java.util.*;
 
 /**
  *
@@ -45,13 +44,14 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         List<USVariable> variables = new ArrayList<USVariable>();
         List<USFeature> features = new ArrayList<USFeature>();
         List<USAction> actions = new ArrayList<USAction>();
+        List<USConstant> constants = new ArrayList<USConstant>();
         passiveUnits = new HashSet<>();
         harvestingWorkers = new HashSet<>();
         buildingWorkers = new HashSet<>();
         attackingUnits = new HashSet<>();
         defendingUnits = new HashSet<>();
         utt = a_utt;
-        us = new UtilitySystem(variables, features, actions);
+        us = new UtilitySystem(variables, features, actions, constants);
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
@@ -64,6 +64,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
         us = USConstants.getSimpleUtilitySystem();
+        System.out.println(us.toPlantUML());
     }
     
     @Override

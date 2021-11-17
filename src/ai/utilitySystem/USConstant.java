@@ -4,7 +4,8 @@ import rts.*;
 public class USConstant extends USNode {
     private float constant;
 
-    public USConstant(float constant) {
+    public USConstant(String name, float constant) {
+        this.name = name;
         this.constant = constant;
     }
 
@@ -25,7 +26,7 @@ public class USConstant extends USNode {
 
     @Override
     public String toPlantUML() {
-        return "object Constant" + this.constant + " {\n" +
+        return "object " + this.name + " {\n" +
             "Value: " + this.constant + "\n" +
             "}\n";
     }

@@ -23,12 +23,15 @@ public final class USConstants {
         List<USVariable> variables = new LinkedList<USVariable>();
         List<USFeature> features = new LinkedList<USFeature>();
         List<USAction> actions = new LinkedList<USAction>();
+        List<USConstant> constants = new LinkedList<USConstant>();
 
         // constants
-        USConstant c1 = new USConstant(1f);
+        USConstant c1 = new USConstant("c1",1f);
+        constants.add(c1);
 
         // features
-        USFeature f1 = new USFeature("f1", Operation.DIVIDE, c1, c1);
+        USFeature f1 = new USFeature("f1", Operation.DIVIDE);
+        f1.addParam(c1);
         features.add(f1);
 
         // actions
@@ -40,7 +43,7 @@ public final class USConstants {
         actions.add(new USAction("build_war", f1, USAction.UtilAction.BUILD_WAR_UNIT));
         actions.add(new USAction("harvest", f1, USAction.UtilAction.HARVEST_RESOURCE));
 
-        UtilitySystem us = new UtilitySystem(variables, features, actions);
+        UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         return us;
     }
 
@@ -50,6 +53,7 @@ public final class USConstants {
         List<USVariable> variables = new LinkedList<USVariable>();
         List<USFeature> features = new LinkedList<USFeature>();
         List<USAction> actions = new LinkedList<USAction>();
+        List<USConstant> constants = new LinkedList<USConstant>();
 
         // variables
         USVariable vre = new USVariable("resource", GameStateVariable.PLAYER_RESOURCE);
@@ -64,59 +68,132 @@ public final class USConstants {
         variables.add(vra);
 
         // constants
-        USConstant c0 = new USConstant(0f);
-        USConstant c01 = new USConstant(0.1f);
-        USConstant c025 = new USConstant(0.25f);
-        USConstant c05 = new USConstant(0.5f);
-        USConstant c1 = new USConstant(1f);
-        USConstant c2 = new USConstant(2f);
-        USConstant c5 = new USConstant(5f);
-        USConstant c10 = new USConstant(10f);        
+        USConstant c0 = new USConstant("c0",0f);
+        constants.add(c0);
+        USConstant c01 = new USConstant("c0.1",0.1f);
+        constants.add(c01);
+        USConstant c025 = new USConstant("c0.25",0.25f);
+        constants.add(c025);
+        USConstant c05 = new USConstant("c0.5",0.5f);
+        constants.add(c05);
+        USConstant c1 = new USConstant("c1",1f);
+        constants.add(c1);
+        USConstant c2 = new USConstant("c2",2f);
+        constants.add(c2);
+        USConstant c5 = new USConstant("c5",5f);
+        constants.add(c5);
+        USConstant c10 = new USConstant("c10",10f);
+        constants.add(c10);
 
         // features
-        USFeature fa1 = new USFeature("warriorX5", Operation.MULTIPLY, vwa, c5);
+        USFeature fa1 = new USFeature("warriorX5", Operation.MULTIPLY);
+        fa1.addParam(vwa);
+        fa1.addParam(c5);
         features.add(fa1);
-        USFeature fa2 = new USFeature("workerX1", Operation.MULTIPLY, vwo, c1);
+
+        USFeature fa2 = new USFeature("workerX1", Operation.MULTIPLY);
+        fa2.addParam(vwo);
+        fa2.addParam(c1);
         features.add(fa2);
-        USFeature fa3 = new USFeature("warSUMwork", Operation.SUM, fa1, fa2);
+
+        USFeature fa3 = new USFeature("warSUMwork", Operation.SUM);
+        fa3.addParam(fa1);
+        fa3.addParam(fa2);
         features.add(fa3);
-        USFeature fba1 = new USFeature("resourceSUB10", Operation.SUBTRACT, vre, c10);
+
+        USFeature fba1 = new USFeature("resourceSUB10", Operation.SUBTRACT);
+        fba1.addParam(vre);
+        fba1.addParam(c10);
         features.add(fba1);
-        USFeature fba2 = new USFeature("resourceGT10", Operation.MAX, fba1, c0);
+
+        USFeature fba2 = new USFeature("resourceGT10", Operation.MAX);
+        fba2.addParam(fba1);
+        fba2.addParam(c0);
         features.add(fba2);
-        USFeature fra1 = new USFeature("resouceSUB2", Operation.SUBTRACT, vre, c2);
+
+        USFeature fra1 = new USFeature("resouceSUB2", Operation.SUBTRACT);
+        fra1.addParam(vre);
+        fra1.addParam(c2);
         features.add(fra1);
-        USFeature fra2 = new USFeature("resouceGT2", Operation.MAX, fra1, c0);
+
+        USFeature fra2 = new USFeature("resouceGT2", Operation.MAX);
+        fra2.addParam(fra1);
+        fra2.addParam(c0);
         features.add(fra2);
-        USFeature fra3 = new USFeature("warrValue", Operation.MAX, fra2, c10);
+
+        USFeature fra3 = new USFeature("warrValue", Operation.MAX);
+        fra3.addParam(fra2);
+        fra3.addParam(c10);
         features.add(fra3);
-        USFeature fra4 = new USFeature("02POWwarriors", Operation.POWER, c01, vra);
+
+        USFeature fra4 = new USFeature("02POWwarriors", Operation.POWER);
+        fra4.addParam(c01);
+        fra4.addParam(vra);
         features.add(fra4);
-        USFeature fra5 = new USFeature("valueWarXPow", Operation.MULTIPLY, fra3, fra4);
+
+        USFeature fra5 = new USFeature("valueWarXPow", Operation.MULTIPLY);
+        fra5.addParam(fra3);
+        fra5.addParam(fra4);
         features.add(fra5);
-        USFeature fwa1 = new USFeature("resouceSUB2", Operation.SUBTRACT, vre, c2);
+
+        USFeature fwa1 = new USFeature("resouceSUB2", Operation.SUBTRACT);
+        fwa1.addParam(vre);
+        fwa1.addParam(c2);
         features.add(fwa1);
-        USFeature fwa2 = new USFeature("resouceGT2", Operation.MAX, fwa1, c0);
+
+        USFeature fwa2 = new USFeature("resouceGT2", Operation.MAX);
+        fwa2.addParam(fwa1);
+        fwa2.addParam(c0);
         features.add(fwa2);
-        USFeature fwa3 = new USFeature("warrValue", Operation.MAX, fwa2, c10);
+
+        USFeature fwa3 = new USFeature("warrValue", Operation.MAX);
+        fwa3.addParam(fwa2);
+        fwa3.addParam(c10);
         features.add(fwa3);
-        USFeature fwa4 = new USFeature("02POWwarriors", Operation.POWER, c05, vwa);
+
+        USFeature fwa4 = new USFeature("02POWwarriors", Operation.POWER);
+        fwa4.addParam(c05);
+        fwa4.addParam(vwa);
         features.add(fwa4);
-        USFeature fwa5 = new USFeature("valueWarXPow", Operation.MULTIPLY, fwa3, fwa4);
+
+        USFeature fwa5 = new USFeature("valueWarXPow", Operation.MULTIPLY);
+        fwa5.addParam(fwa3);
+        fwa5.addParam(fwa4);
         features.add(fwa5);
-        USFeature fwo1 = new USFeature("resouceSUB1", Operation.SUBTRACT, vre, c1);
+
+        USFeature fwo1 = new USFeature("resouceSUB1", Operation.SUBTRACT);
+        fwo1.addParam(vre);
+        fwo1.addParam(c1);
         features.add(fwo1);
-        USFeature fwo2 = new USFeature("resouceGT1", Operation.MAX, fwo1, c0);
+
+        USFeature fwo2 = new USFeature("resouceGT1", Operation.MAX);
+        fwo2.addParam(fwo1);
+        fwo2.addParam(c0);
         features.add(fwo2);
-        USFeature fwo3 = new USFeature("workValue", Operation.MAX, fwo2, c10);
+
+        USFeature fwo3 = new USFeature("workValue", Operation.MAX);
+        fwo3.addParam(fwo2);
+        fwo3.addParam(c10);
         features.add(fwo3);
-        USFeature fwo4 = new USFeature("02POWworkers", Operation.POWER, c025, vwo);
+
+        USFeature fwo4 = new USFeature("02POWworkers", Operation.POWER);
+        fwo4.addParam(c025);
+        fwo4.addParam(vwo);
         features.add(fwo4);
-        USFeature fwo5 = new USFeature("valueWorXPow", Operation.MULTIPLY, fwo3, fwo4);
+
+        USFeature fwo5 = new USFeature("valueWorXPow", Operation.MULTIPLY);
+        fwo5.addParam(fwo3);
+        fwo5.addParam(fwo4);
         features.add(fwo5);
-        USFeature fh1 = new USFeature("harvestingMAX02", Operation.MAX, vha, c01);
+
+        USFeature fh1 = new USFeature("harvestingMAX02", Operation.MAX);
+        fh1.addParam(vha);
+        fh1.addParam(c01);
         features.add(fh1);
-        USFeature fh2 = new USFeature("5DIVabove", Operation.DIVIDE, c5, fh1);
+
+        USFeature fh2 = new USFeature("5DIVabove", Operation.DIVIDE);
+        fh2.addParam(c5);
+        fh2.addParam(fh1);
         features.add(fh2);
 
         // actions
@@ -128,7 +205,7 @@ public final class USConstants {
         actions.add(new USAction("build_worker", fwo5, USAction.UtilAction.BUILD_WORKER));
         actions.add(new USAction("harvest", fh2, USAction.UtilAction.HARVEST_RESOURCE));
 
-        UtilitySystem us = new UtilitySystem(variables, features, actions);
+        UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         return us;
     }
 }

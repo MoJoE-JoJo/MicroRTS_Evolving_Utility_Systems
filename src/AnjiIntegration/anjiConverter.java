@@ -123,7 +123,7 @@ public class anjiConverter {
                                 // The connection going to a "out" node will then go to this feature node that can handle multiple connections
 
                                 // create a "final feature layer" node.
-                                USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM, null, null);
+                                USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM);
 
 
                                 USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
@@ -142,7 +142,7 @@ public class anjiConverter {
                                 // read the operation from the XMLnode
                                 String operation = tempXMLNode.getAttributes().getNamedItem("activation").getNodeValue();
                                 //create new feaure and add to node map and feature list
-                                USFeature feature = new USFeature(neuronId, USFeature.Operation.valueOf(operation), null, null);
+                                USFeature feature = new USFeature(neuronId, USFeature.Operation.valueOf(operation));
                                 nodeMap.put(neuronId, feature);
                                 featureList.add(feature);
                                 break;
@@ -221,15 +221,16 @@ public class anjiConverter {
         }
 
         // == Handle empty values in feature nodes ==
-
+        /*
         for (USFeature node : featureList) {
             if (node.getParam2() == null) {
                 //todo not sure this is good enough
                 node.addParam(new USConstant(1.0f));
             }
         }
+        */
 
-        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList);
+        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, new ArrayList<>()); //TODO: ANJI cannot generate constants as it is
         return US;
     }
 
