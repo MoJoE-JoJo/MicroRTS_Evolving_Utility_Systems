@@ -37,8 +37,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
                 US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
 
-                System.out.println(xmlString);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -53,7 +51,9 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             // TODO play microRTS and get a fitness score
             int fitness = 0;
             try {
+                System.out.println("Calculating fitness for chromosome -> " + chrom.getId());
                 fitness = fitnessCalculator.fitnessOfUtilitySystem(US);
+                System.out.println("Fitness -> " + fitness);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,7 +64,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public int getMaxFitnessValue() {
-        return 20;
+        return 5000;
     }
 
     @Override

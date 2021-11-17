@@ -63,7 +63,7 @@ import rts.units.UnitTypeTable;
     }
 
     public static GameState runUntilAtResourceCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int resourceGoal) throws Exception {
-        boolean GC_EACH_FRAME = true;
+        boolean GC_EACH_FRAME = false;
         long lastTimeActionIssued = 0;
         ai1.reset();
         ai2.reset();

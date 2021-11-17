@@ -87,7 +87,7 @@ public class USFeature extends USNode {
             param2 = node;
         } else {
             //TODO Handle this, unsure how
-            System.out.println("YO! trying to set more than 2 param to a feature Node");
+
         }
     }
 

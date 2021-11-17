@@ -9,14 +9,14 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        tryAndRunAnji();
-        //tryAndBuildFromChromosome();
+        //tryAndRunAnji();
+        tryAndBuildFromChromosome(605);
 
     }
 
-    private static void tryAndBuildFromChromosome() {
+    private static void tryAndBuildFromChromosome(int id) {
         try {
-            UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(166);
+            UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(id);
             String uml = us.toPlantUML();
             System.out.println(uml);
             System.out.println("Done");

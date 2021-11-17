@@ -98,7 +98,7 @@ public class anjiConverter {
 
                 // get node name and value
                 String nodeName = tempXMLNode.getNodeName();
-                System.out.println("\nNode Name = " + nodeName + " [OPEN]");
+                //System.out.println("\nNode Name = " + nodeName + " [OPEN]");
 
                 // switch on the node name
                 switch (nodeName) {
@@ -178,7 +178,7 @@ public class anjiConverter {
             var destList = entry.getValue();
             USNode srcNode = nodeMap.get(src); // lookup src node
             for (var destNodeId : destList) {
-                System.out.println("Connection: " + src + " --> " + destNodeId);
+                //System.out.println("Connection: " + src + " --> " + destNodeId);
 
                 // look up destNode in map
                 USNode destNode = nodeMap.get(destNodeId);

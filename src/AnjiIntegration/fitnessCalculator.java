@@ -15,12 +15,12 @@ public class fitnessCalculator {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(); // original game (NOOP length = move length)
-        int MAX_GAME_CYCLES = 3000; // game time
-        int MAX_INACTIVE_CYCLES = 3000;
+        int MAX_GAME_CYCLES = 1000; // game time
+        int MAX_INACTIVE_CYCLES = 1000;
         PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
 
         // == SETUP THE AI ==
-        AI utilitySystemAI = new UtilitySystemAI(utt, utilitySystem);
+        AI utilitySystemAI = new UtilitySystemAI(utt, utilitySystem, false);
         AI ai3 = new PassiveAI();
 
         // == PLAY THE GAME ==
@@ -29,8 +29,8 @@ public class fitnessCalculator {
         // == EVAL GAMESTATE ==
         System.out.println("Time: " + gs.getTime());
         System.out.println("Winner: " + gs.winner());
-        System.out.println(gs);
+        //System.out.println(gs);
 
-        return 0;
+        return MAX_GAME_CYCLES - gs.getTime();
     }
 }
