@@ -88,7 +88,6 @@ public class UtilitySystem {
         String actions = "";
         String relations = "";
         String constants = "";
-        //TODO: Hent konstanter ligesom variable
         for(int i = 0; i < this.variables.size(); i++) {
             variables += this.variables.get(i).toPlantUML();
         }

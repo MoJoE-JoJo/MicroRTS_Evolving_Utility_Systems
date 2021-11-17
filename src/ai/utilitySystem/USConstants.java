@@ -9,6 +9,7 @@ import java.util.List;
 public final class USConstants {
     public static final String PlantUMLStart = "@startuml\n" +
                                             "skinparam packageStyle rectangle\n"+
+                                            "skinparam linetype polyline\n"+
                                             "left to right direction\n" +
                                             "' Horizontal lines: -->, <--, <-->\n" +
                                             "' Vertical lines: ->, <-, <->\n" +
@@ -136,30 +137,10 @@ public final class USConstants {
         fra5.addParam(fra4);
         features.add(fra5);
 
-        USFeature fwa1 = new USFeature("resouceSUB2", Operation.SUBTRACT);
-        fwa1.addParam(vre);
-        fwa1.addParam(c2);
-        features.add(fwa1);
-
-        USFeature fwa2 = new USFeature("resouceGT2", Operation.MAX);
-        fwa2.addParam(fwa1);
-        fwa2.addParam(c0);
-        features.add(fwa2);
-
-        USFeature fwa3 = new USFeature("warrValue", Operation.MAX);
-        fwa3.addParam(fwa2);
-        fwa3.addParam(c10);
-        features.add(fwa3);
-
-        USFeature fwa4 = new USFeature("02POWwarriors", Operation.POWER);
+        USFeature fwa4 = new USFeature("05POWwarriors", Operation.POWER);
         fwa4.addParam(c05);
         fwa4.addParam(vwa);
         features.add(fwa4);
-
-        USFeature fwa5 = new USFeature("valueWarXPow", Operation.MULTIPLY);
-        fwa5.addParam(fwa3);
-        fwa5.addParam(fwa4);
-        features.add(fwa5);
 
         USFeature fwo1 = new USFeature("resouceSUB1", Operation.SUBTRACT);
         fwo1.addParam(vre);
@@ -201,7 +182,7 @@ public final class USConstants {
         //actions.add(new USAction("defend", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
         actions.add(new USAction("build_base", fba2, USAction.UtilAction.BUILD_BASE));
         actions.add(new USAction("build_barracks", fra5, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_war", fwa5, USAction.UtilAction.BUILD_WAR_UNIT));
+        actions.add(new USAction("build_war", fra5, USAction.UtilAction.BUILD_WAR_UNIT));
         actions.add(new USAction("build_worker", fwo5, USAction.UtilAction.BUILD_WORKER));
         actions.add(new USAction("harvest", fh2, USAction.UtilAction.HARVEST_RESOURCE));
 

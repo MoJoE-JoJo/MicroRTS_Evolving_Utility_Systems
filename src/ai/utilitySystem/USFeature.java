@@ -167,7 +167,7 @@ public class USFeature extends USNode {
     public String relationsToPlantUML() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i<params.size(); i++){
-            sb.append(params.get(i).getName()).append(" --> ").append(name).append(" : V").append(i).append("\n");
+            sb.append(params.get(i).getName()).append(" ----> ").append(name).append(" : V").append(i).append("\n");
         }
         return sb.toString();
     }

@@ -65,6 +65,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
         utilitySystem = USConstants.getSimpleUtilitySystem();
+        System.out.println(utilitySystem.toPlantUML());
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt, UtilitySystem us, boolean verbose) {
