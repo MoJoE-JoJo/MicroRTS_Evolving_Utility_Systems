@@ -29,14 +29,14 @@ public class USFeature extends USNode {
     }
 
     @Override
-    protected void calculateValue(GameState gs, int player) throws Exception {
+    protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         float val = 0.0f;
         switch (this.operation) {
             case DIVIDE -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         if (nextVal == 0.0f) nextVal = 1f;
                         val /= nextVal;
                     }
@@ -45,9 +45,9 @@ public class USFeature extends USNode {
             }
             case MULTIPLY -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val *= nextVal;
                     }
                 }
@@ -55,9 +55,9 @@ public class USFeature extends USNode {
             }
             case SUM -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val += nextVal;
                     }
                 }
@@ -65,9 +65,9 @@ public class USFeature extends USNode {
             }
             case SUBTRACT -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val -= nextVal;
                     }
                 }
@@ -75,9 +75,9 @@ public class USFeature extends USNode {
             }
             case MIN -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val = Math.min(val, nextVal);
                     }
                 }
@@ -85,9 +85,9 @@ public class USFeature extends USNode {
             }
             case MAX -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val = Math.max(val, nextVal);
                     }
                 }
@@ -95,9 +95,9 @@ public class USFeature extends USNode {
             }
             case POWER -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val = (float) Math.pow(val, nextVal);
                     }
                 }
@@ -105,9 +105,9 @@ public class USFeature extends USNode {
             }
             case AVGERAGE -> {
                 for (int i = 0; i < params.size(); i++) {
-                    if (i == 0) val = params.get(i).getValue(gs, player);
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
                     else {
-                        float nextVal = params.get(i).getValue(gs, player);
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
                         val += nextVal;
                     }
                 }
@@ -152,7 +152,7 @@ public class USFeature extends USNode {
             param2 = node;
         } else {
             //TODO Handle this, unsure how
-            System.out.println("YO! trying to set more than 2 param to a feature Node");
+
         }
          */
     }

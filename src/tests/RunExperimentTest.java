@@ -25,8 +25,8 @@ import rts.units.UnitTypeTable;
 
         PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
         GameState gs = runExperiment(ai1, ai2, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
-
-        GameState gs2 = runUntilAtResourceCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
+        GameState gs2 = runUntilAtResourceCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 10);
+        // with the current US it often wins before reaching 10 resources.
 
         System.out.println("GAMEOVER");
         System.out.println("Winner: " + gs.winner());
@@ -62,8 +62,8 @@ import rts.units.UnitTypeTable;
         return gs;
     }
 
-    public static GameState runUntilAtResourceCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles) throws Exception {
-        boolean GC_EACH_FRAME = true;
+    public static GameState runUntilAtResourceCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int resourceGoal) throws Exception {
+        boolean GC_EACH_FRAME = false;
         long lastTimeActionIssued = 0;
         ai1.reset();
         ai2.reset();
@@ -83,7 +83,7 @@ import rts.units.UnitTypeTable;
         } while (!gameover && 
                     (gs.getTime() < max_cycles) && 
                     (gs.getTime() - lastTimeActionIssued < max_inactive_cycles) &&
-                    resourceCount < 10);
+                    resourceCount < resourceGoal);
         ai1.gameOver(gs.winner());
         ai2.gameOver(gs.winner());
         return gs;

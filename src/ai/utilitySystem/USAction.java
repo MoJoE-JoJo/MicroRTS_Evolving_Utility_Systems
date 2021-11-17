@@ -22,8 +22,8 @@ public class USAction extends USNode {
     }
 
     @Override
-    protected void calculateValue(GameState gs, int player) throws Exception {
-        this.value = this.feature.getValue(gs, player);
+    protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+        this.value = this.feature.getValue(gs, player, unitGroups);
     }
 
     @Override
