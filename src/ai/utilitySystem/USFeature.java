@@ -2,8 +2,12 @@ package ai.utilitySystem;
 
 import rts.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class USFeature extends USNode {
     private Operation operation;
+    private List<USNode> params = new ArrayList<>();
     private USNode param1; // What if we want a constant here instead?
     private USNode param2;
 
@@ -14,48 +18,103 @@ public class USFeature extends USNode {
         SUBTRACT,
         MIN,
         MAX,
-        POWER
+        POWER,
+        AVGERAGE
     }
 
-    public USFeature(String name, Operation operation, USNode param1, USNode param2) {
+    public USFeature(String name, Operation operation) {
         this.name = name;
         this.operation = operation;
-        this.param1 = param1;
-        this.param2 = param2;
+        this.params = new ArrayList<>();
     }
 
     @Override
     protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
-        float val1 = this.param1.getValue(gs, player, unitGroups);
-        float val2 = this.param2.getValue(gs, player, unitGroups);
+        float val = 0.0f;
         switch (this.operation) {
-            case DIVIDE:
-                if (val2 == 0) {
-                    this.value = 0;
-                    break;
+            case DIVIDE -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        if (nextVal == 0.0f) nextVal = 1f;
+                        val /= nextVal;
+                    }
                 }
-                this.value = val1 / val2;
-                break;
-            case MULTIPLY:
-                this.value = val1 * val2;
-                break;
-            case SUM:
-                this.value = val1 + val2;
-                break;
-            case SUBTRACT:
-                this.value = val1 - val2;
-                break;
-            case MIN:
-                this.value = Math.min(val1, val2);
-                break;
-            case MAX:
-                this.value = Math.max(val1, val2);
-                break;
-            case POWER:
-                this.value = (float)Math.pow(val1, val2);
-                break;
-            default:
-                throw new Exception("Not yet implemented operation: " + this.operation);
+                value = val;
+            }
+            case MULTIPLY -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val *= nextVal;
+                    }
+                }
+                value = val;
+            }
+            case SUM -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val += nextVal;
+                    }
+                }
+                value = val;
+            }
+            case SUBTRACT -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val -= nextVal;
+                    }
+                }
+                value = val;
+            }
+            case MIN -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val = Math.min(val, nextVal);
+                    }
+                }
+                value = val;
+            }
+            case MAX -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val = Math.max(val, nextVal);
+                    }
+                }
+                value = val;
+            }
+            case POWER -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val = (float) Math.pow(val, nextVal);
+                    }
+                }
+                value = val;
+            }
+            case AVGERAGE -> {
+                for (int i = 0; i < params.size(); i++) {
+                    if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+                    else {
+                        float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                        val += nextVal;
+                    }
+                }
+                val /= params.size();
+                value = val;
+            }
+            default -> throw new Exception("Not yet implemented operation: " + this.operation);
         }
     }
 
@@ -66,6 +125,7 @@ public class USFeature extends USNode {
 
     @Override
     public String toPlantUML() {
+        /*
         String v1 = "V1";
         String v2 = "V2";
         if (this.param1.getClass() == USConstant.class) {
@@ -76,13 +136,16 @@ public class USFeature extends USNode {
             USConstant constant = (USConstant) this.param2;
             v2 = "" + constant.getConstant();
         }
+         */
         return "map " + this.name + " {\n" +
-                "Func => " + this.operation + "(" + v1 + "," + v2 + ")\n" +
+                "Func => " + this.operation + "\n" +
                 "Value => " + this.value + "\n" +
                 "}\n";
     }
 
     public void addParam(USNode node) {
+        params.add(node);
+        /*
         if (param1 == null) {
             param1 = node;
         } else if (param2 == null) {
@@ -91,15 +154,21 @@ public class USFeature extends USNode {
             //TODO Handle this, unsure how
 
         }
+         */
     }
 
+    /*
     public USNode getParam2()
     {
         return param2;
     }
+     */
 
     public String relationsToPlantUML() {
-        return (this.param1.getClass() == USConstant.class ? "" : (this.param1.getName() + " --> " + this.name + " : V1\n")) +
-                (this.param2.getClass() == USConstant.class ? "" : (this.param2.getName() + " --> " + this.name + " : V2\n"));
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i<params.size(); i++){
+            sb.append(params.get(i).getName()).append(" --> ").append(name).append(" : V").append(i).append("\n");
+        }
+        return sb.toString();
     }
 }

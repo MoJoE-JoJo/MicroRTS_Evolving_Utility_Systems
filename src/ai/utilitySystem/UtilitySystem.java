@@ -1,21 +1,24 @@
 package ai.utilitySystem;
+
+import ai.utilitySystem.USAction.UtilAction;
+import rts.GameState;
+
 import java.util.List;
 import java.util.Random;
-import ai.utilitySystem.USAction.UtilAction;
-
-import rts.*;
 
 public class UtilitySystem {
     protected List<USVariable> variables;
     protected List<USFeature> features;
     protected List<USAction> actions;
+    protected List<USConstant> constants;
     protected Random random;
     protected int generation;
 
-    public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions) {
+    public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions, List<USConstant> constants) {
         this.variables = variables;
         this.features = features;
         this.actions = actions;
+        this.constants = constants;
         this.random = new Random();
     }
 
@@ -84,8 +87,13 @@ public class UtilitySystem {
         String features = "";
         String actions = "";
         String relations = "";
+        String constants = "";
+        //TODO: Hent konstanter ligesom variable
         for(int i = 0; i < this.variables.size(); i++) {
             variables += this.variables.get(i).toPlantUML();
+        }
+        for(int i = 0; i < this.constants.size(); i++) {
+            constants += this.constants.get(i).toPlantUML();
         }
         for(int i = 0; i < this.features.size(); i++) {
             USFeature feature = this.features.get(i);
@@ -104,6 +112,7 @@ public class UtilitySystem {
         concatString += USConstants.PlantUMLActionsStart;
         concatString += actions;
         concatString += "}\n";
+        concatString += constants;
         concatString += features;
         concatString += relations;
         concatString += USConstants.PlantUMLEnd;

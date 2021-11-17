@@ -1,10 +1,9 @@
 package ai.utilitySystem;
 
+import ai.utilitySystem.USFeature.Operation;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import ai.utilitySystem.USFeature.Operation;
-import ai.utilitySystem.USVariable.GameStateVariable;
 
 public class USTestRandom {
     public static void main(String args[]) throws InterruptedException {
@@ -12,12 +11,16 @@ public class USTestRandom {
         List<USVariable> variables = new LinkedList<USVariable>();
         List<USFeature> features = new LinkedList<USFeature>();
         List<USAction> actions = new LinkedList<USAction>();
+        List<USConstant> constants = new LinkedList<USConstant>();
+
 
         // constants
-        USConstant c1 = new USConstant(1f);
+        USConstant c1 = new USConstant("c1",1f);
+        constants.add(c1);
 
         // features
-        USFeature f1 = new USFeature("f1", Operation.DIVIDE, c1, c1);
+        USFeature f1 = new USFeature("f1", Operation.DIVIDE);
+        f1.addParam(c1);
         features.add(f1);
 
         // actions
@@ -29,7 +32,7 @@ public class USTestRandom {
         actions.add(new USAction("build_war", f1, USAction.UtilAction.BUILD_WAR_UNIT));
         actions.add(new USAction("harvest", f1, USAction.UtilAction.HARVEST_RESOURCE));
 
-        UtilitySystem us = new UtilitySystem(variables, features, actions);
+        UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         String plantUML = us.toPlantUML();
         System.out.print(plantUML);
     }
