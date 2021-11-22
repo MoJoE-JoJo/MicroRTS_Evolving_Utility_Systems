@@ -9,7 +9,6 @@ import com.anji.util.Properties;
 import com.anji.util.Randomizer;
 import org.jgap.BulkFitnessFunction;
 import org.jgap.Chromosome;
-import tests.RunExperimentTest;
 
 import java.util.Iterator;
 import java.util.List;
@@ -34,8 +33,9 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             UtilitySystem US = null;
             try {
                 var xmlString = new XmlPersistableChromosome(chrom).toXml();
-                System.out.println("Building utility system");
+//                System.out.println("Building utility system");
                 US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
+                US.setRandom(true);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -59,9 +59,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
 
             chrom.setFitnessValue( fitness );
-            System.out.println("Fitness -> " + fitness);
-
-
         }
     }
 

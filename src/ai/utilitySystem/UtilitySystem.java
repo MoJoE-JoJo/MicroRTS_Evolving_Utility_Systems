@@ -11,7 +11,8 @@ public class UtilitySystem {
     protected List<USFeature> features;
     protected List<USAction> actions;
     protected List<USConstant> constants;
-    protected Random random;
+    protected Random RNG;
+    protected boolean random = true;
     protected int generation;
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions, List<USConstant> constants) {
@@ -19,7 +20,7 @@ public class UtilitySystem {
         this.features = features;
         this.actions = actions;
         this.constants = constants;
-        this.random = new Random();
+        this.RNG = new Random();
     }
 
     private void markAllNodesUnvisited() {
@@ -34,8 +35,20 @@ public class UtilitySystem {
         });
     }
 
+    public UtilAction getAction(GameState gs, int player, UnitGroups unitGroups) throws Exception
+    {
+        if (random)
+        {
+            return getActionWeightedRandom(gs, player, unitGroups);
+        }
+        else
+        {
+            return getActionBest(gs, player, unitGroups);
+        }
+    }
+
     // gets the highest scoring action
-    public UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+    private UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
@@ -53,7 +66,7 @@ public class UtilitySystem {
     }
 
     // gets a random node, using the scores as weights
-    public UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+    private UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         // calculate values for all actions
         float[] values = new float[actions.size()];
@@ -68,7 +81,7 @@ public class UtilitySystem {
         }
         // if all weights are 0, return a random action
         if (min == max) {
-            int randomInt = this.random.nextInt(0, values.length);
+            int randomInt = this.RNG.nextInt(0, values.length);
             return actions.get(randomInt).getAction();
         }
         // normalize the values to the range 0-1
@@ -79,7 +92,7 @@ public class UtilitySystem {
             indices[i] = sum;
         }
         // chose one randomly using the values as weights
-        float r = this.random.nextFloat() * sum;
+        float r = this.RNG.nextFloat() * sum;
         for(int i = 0; i < actions.size(); i++) {
             if (r <= indices[i]) {
                 return actions.get(i).getAction();
@@ -127,5 +140,9 @@ public class UtilitySystem {
         concatString += relations;
         concatString += USConstants.PlantUMLEnd;
         return concatString;
+    }
+
+    public void setRandom(boolean b) {
+        random = b;
     }
 }

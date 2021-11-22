@@ -192,7 +192,7 @@ public int getSpeciatedFitnessValue() {
  * and should not be invoked from anything else. This is the raw fitness value, before species
  * fitness sharing.
  * 
- * @param a_newFitnessValue a positive integer representing the fitness of this Chromosome. if
+ * @param a_newFitnessValue a positive integer representing the fitness of this Chromosome. if less than
  * 0, fitness is set as 1.
  */
 public void setFitnessValue( int a_newFitnessValue ) {

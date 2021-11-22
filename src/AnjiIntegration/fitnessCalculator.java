@@ -6,8 +6,11 @@ import ai.core.AI;
 import ai.utilitySystem.UtilitySystem;
 import rts.GameState;
 import rts.PhysicalGameState;
+import rts.units.Unit;
 import rts.units.UnitTypeTable;
 import tests.RunExperimentTest;
+
+import java.util.List;
 
 public class fitnessCalculator {
 
@@ -24,21 +27,29 @@ public class fitnessCalculator {
         AI opponentAi = new PassiveAI();
 
         // == PLAY THE GAME ==
-        GameState gs = RunExperimentTest.runUntilAtResourceCount(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 10);
+        GameState gs = RunExperimentTest.runUntilAtWarriorCount(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 1);
+        //GameState gs = RunExperimentTest.runExperiment(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
 
-        // == EVAL GAMESTATE ==
-        System.out.println("Time: " + gs.getTime());
-        System.out.println("Winner: " + gs.winner());
+        // == EVAL THE GAMESTATE ==
+        //System.out.println("Time: " + gs.getTime());
+        //System.out.println("Winner: " + gs.winner());
 
+        int res = 1;
         // PUNISH THY FOOL FOR WINNING THE GAME!!
-        if (gs.winner() != -1)
-        {
-            return 0;
+        if (gs.winner() != -1) {
+            return res;
         }
-        //System.out.println(gs);
+
+//        //System.out.println(gs);
+//        List<Unit> units = gs.getUnits();
+//        for (Unit unit : units) {
+//            if (unit.getPlayer() == 0) {
+//                res += 5;
+//            }
+//        }
 
 
-
-        return MAX_GAME_CYCLES - gs.getTime();
+        //return res;
+        return MAX_GAME_CYCLES - gs.getTime() + res;
     }
 }

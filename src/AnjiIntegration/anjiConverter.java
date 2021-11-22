@@ -59,7 +59,7 @@ public class anjiConverter {
             System.out.println("------");
 
             if (doc.hasChildNodes()) {
-                printNote(doc.getChildNodes());
+                //printNote(doc.getChildNodes());
                 returnSystem = buildUtilitySystemFromNodeList(doc.getChildNodes());
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
