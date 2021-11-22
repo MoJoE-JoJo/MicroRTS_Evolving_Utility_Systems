@@ -9,8 +9,8 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        //runAnji();
-        buildUtilitySystemFromChromosome(8817);
+        runAnji();
+        //buildUtilitySystemFromChromosome(8817);
 
     }
 
