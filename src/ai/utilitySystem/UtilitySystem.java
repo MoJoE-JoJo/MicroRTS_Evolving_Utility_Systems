@@ -56,17 +56,27 @@ public class UtilitySystem {
     public UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         // calculate values for all actions
-        float sum = 0;
-        float[] indices = new float[actions.size()];
+        float[] values = new float[actions.size()];
+        float min = Float.MAX_VALUE;
+        float max = Float.MIN_VALUE;
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            sum += node.getValue(gs, player, unitGroups);
-            indices[i] = sum;
+            float value = node.getValue(gs, player, unitGroups);
+            values[i] = value;
+            if (value > max) max = value;
+            if (value < min) min = value;
         }
         // if all weights are 0, return a random action
-        if (sum == 0) {
-            int randomInt = this.random.nextInt(0, indices.length);
+        if (min == max) {
+            int randomInt = this.random.nextInt(0, values.length);
             return actions.get(randomInt).getAction();
+        }
+        // normalize the values to the range 0-1
+        float[] indices = new float[actions.size()];
+        float sum = 0;
+        for(int i = 0; i < actions.size(); i++) {
+            sum += (values[i] - min) / (max - min);
+            indices[i] = sum;
         }
         // chose one randomly using the values as weights
         float r = this.random.nextFloat() * sum;
