@@ -21,10 +21,10 @@ public class fitnessCalculator {
 
         // == SETUP THE AI ==
         AI utilitySystemAI = new UtilitySystemAI(utt, utilitySystem, false);
-        AI ai3 = new PassiveAI();
+        AI opponentAi = new PassiveAI();
 
         // == PLAY THE GAME ==
-        GameState gs = RunExperimentTest.runUntilAtResourceCount(utilitySystemAI, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 10);
+        GameState gs = RunExperimentTest.runUntilAtResourceCount(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 10);
 
         // == EVAL GAMESTATE ==
         System.out.println("Time: " + gs.getTime());

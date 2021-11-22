@@ -34,7 +34,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             UtilitySystem US = null;
             try {
                 var xmlString = new XmlPersistableChromosome(chrom).toXml();
-
+                System.out.println("Building utility system");
                 US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
 
             } catch (Exception e) {
@@ -59,6 +59,9 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
 
             chrom.setFitnessValue( fitness );
+            System.out.println("Fitness -> " + fitness);
+
+
         }
     }
 

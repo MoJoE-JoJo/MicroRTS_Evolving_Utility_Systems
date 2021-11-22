@@ -9,8 +9,8 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        //tryAndRunAnji();
-        tryAndBuildFromChromosome(605);
+        tryAndRunAnji();
+        //tryAndBuildFromChromosome(84);
 
     }
 
@@ -27,7 +27,7 @@ public class startANJI {
 
     private static void tryAndRunAnji() {
         try {
-            Properties props = new Properties("utility_system.properties");
+            Properties props = new Properties("utility_system_stage_1.properties");
             Evolver evolver = new Evolver();
             evolver.init(props);
             evolver.run();

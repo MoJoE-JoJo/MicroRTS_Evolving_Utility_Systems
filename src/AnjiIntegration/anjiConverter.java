@@ -82,10 +82,11 @@ public class anjiConverter {
         List<USAction> actionList = new LinkedList<>();
         List<USFeature> featureList = new LinkedList<>();
         List<USVariable> varibleList = new LinkedList<>();
+        List<USConstant> constantsList = new LinkedList<>();
 
 
         // first layer is a chromosome, so get its children which is all the neurons and connections
-        if (nodeList.item(0).getNodeName() == "chromosome") {
+        if (nodeList.item(0).getNodeName().equals("chromosome")) {
             nodeList = nodeList.item(0).getChildNodes();
         }
 
@@ -109,8 +110,16 @@ public class anjiConverter {
                         switch (neuronType) {
                             case "in":
                                 // inputs neurons -> utility system variable nodes
-                                // convert neuron ID to a GameStateVariable. The first Neurons in the chromosome are always the ids 0-X where X is the amount of input neurons
-                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[Integer.parseInt(neuronId)];
+                                // convert neuron ID to a GameStateVariable.
+                                // The first Neurons in the chromosome are always the ids 1-X where X is the amount of input neurons
+                                int neuronIdInt = Integer.parseInt(neuronId);
+                                // The neuron with id 0 we use for creating constants, so it is skipped here
+                                if(neuronIdInt == 0)
+                                {
+                                    break;
+                                }
+
+                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[neuronIdInt-1];
                                 var usVariable = new USVariable(neuronId, gameStateVariable);
                                 nodeMap.put(neuronId, usVariable);
                                 varibleList.add(usVariable);
@@ -151,8 +160,29 @@ public class anjiConverter {
                         break;
                     case "connection":
                         // Handle connections,
+                        String connId = tempXMLNode.getAttributes().getNamedItem("id").getNodeValue();
                         String srcId = tempXMLNode.getAttributes().getNamedItem("src-id").getNodeValue();
                         String destId = tempXMLNode.getAttributes().getNamedItem("dest-id").getNodeValue();
+
+                        // each time there is a connection that has id: 0 as src create a new constant node
+                        // The value is based on the weight of the connection
+                        if(srcId.equals("0"))
+                        {
+                            float conVal = Float.parseFloat(tempXMLNode.getAttributes().getNamedItem("weight").getNodeValue());
+                            //todo could be multiplied by a bias here? for now assume bias is always 1.
+                            USConstant constant = new USConstant(connId, conVal);
+
+                            constantsList.add(constant); // add node to list for building
+                            nodeMap.put(connId, constant); // add node to map to look up
+
+                            //put in the connection map, but under the connection id instead of neuron id.
+
+                            List newList = new LinkedList();
+                            newList.add(destId);
+                            connectionMap.put(connId, newList);
+                            break;
+                        }
+
 
                         //see if there already exist a list.
                         if (connectionMap.containsKey(srcId)) {
@@ -164,6 +194,7 @@ public class anjiConverter {
                             newList.add(destId);
                             connectionMap.put(srcId, newList);
                         }
+
                         break;
                     default:
                         break;
@@ -177,6 +208,12 @@ public class anjiConverter {
             var src = entry.getKey();
             var destList = entry.getValue();
             USNode srcNode = nodeMap.get(src); // lookup src node
+
+            if(srcNode == null)
+            {
+                System.out.println("Stop");
+            }
+
             for (var destNodeId : destList) {
                 //System.out.println("Connection: " + src + " --> " + destNodeId);
 
@@ -186,8 +223,7 @@ public class anjiConverter {
                 if (!allowedToMakeConnection(srcNode, destNode)) {
                     continue;
                 }
-
-                // switch on src node type, this is for updating all the object relations.
+                // switch on dest node type, this is for updating all the object relations.
                 // The utility system is based on a "top down" approach, it builds relations such that the destNode has a ref to srcNode
                 switch (destNode.getType()) {
                     case US_CONSTANT:
@@ -228,7 +264,7 @@ public class anjiConverter {
         }
         */
 
-        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, new ArrayList<>()); //TODO: ANJI cannot generate constants as it is
+        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, constantsList);
         return US;
     }
 
@@ -242,7 +278,7 @@ public class anjiConverter {
         }
 
         // check for circular connection.
-        if (srcNode.getName() == destNode.getName()) {
+        if (srcNode.getName().equals(destNode.getName())) {
             return false;
         }
 

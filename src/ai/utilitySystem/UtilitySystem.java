@@ -75,8 +75,9 @@ public class UtilitySystem {
                 return actions.get(i).getAction();
             }
         }
-        // An action should always be returned in the loop above,
+        // An action should always be returned to the loop above,
         // if not something is wrong with the implementation above.
+        String debugString = toPlantUML();
         throw new Exception("getActionWeightedRandom failed to choose an action.");
     }
 
