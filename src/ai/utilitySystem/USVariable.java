@@ -142,7 +142,7 @@ public class USVariable extends USNode {
         List<Unit> units = gs.getUnits();
         int count = 0;
         for(Unit unit : units) {
-            if (unit.getPlayer() == player && unit.getType().name == unitName) {
+            if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
                 count++;
             }
         }
@@ -161,7 +161,7 @@ public class USVariable extends USNode {
         List<Unit> units = gs.getUnits();
         int count = 0;
         for(Unit unit : units) {
-            if (unit.getPlayer() == player && unit.getType().name == unitName) {
+            if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
                 count+= unit.getHitPoints();
             }
         }
