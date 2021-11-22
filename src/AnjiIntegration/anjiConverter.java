@@ -120,28 +120,27 @@ public class anjiConverter {
                                 }
 
                                 USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[neuronIdInt-1];
-                                var usVariable = new USVariable(neuronId, gameStateVariable);
+                                var usVariable = new USVariable(neuronId + "_" + gameStateVariable, gameStateVariable);
                                 nodeMap.put(neuronId, usVariable);
                                 varibleList.add(usVariable);
                                 break;
                             case "out":
-                                // outputs neurons -> utility system "final features layer" nodes
-                                // creates a new feature node, and a action node.
-                                // The connection going to a "out" node will then go to this feature node that can handle multiple connections
+                                // outputs neurons -> utility Action node
+                                // creates a new action node.
 
                                 // create a "final feature layer" node.
-                                USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM);
+                                //USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM);
 
-
+                                // choose the next action in line
                                 USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
+                                // if statement to prevent problems
                                 if (nextActionIndex <= USAction.UtilAction.values().length - 2) {
                                     nextActionIndex++;
                                 }
 
-                                USAction actionNode = new USAction(actionEnum.toString(), finalFeature, actionEnum);
+                                USAction actionNode = new USAction(actionEnum.toString(), null, actionEnum);
 
-                                nodeMap.put(neuronId, finalFeature);
-                                featureList.add(finalFeature);
+                                nodeMap.put(neuronId, actionNode);
                                 actionList.add(actionNode);
                                 break;
                             case "hid":
@@ -232,7 +231,7 @@ public class anjiConverter {
                         // only allow a connection with variable as dest, if its to a action
                         if (srcNode.getType() == USNode.NodeType.US_ACTION) {
                             USAction tmpFeature = (USAction) srcNode;
-                            tmpFeature.addFeature(destNode);
+                            tmpFeature.addParam(destNode);
                             System.out.println("Made a connection from a Variable to a Action");
 
                         } else {
@@ -246,7 +245,7 @@ public class anjiConverter {
                         break;
                     case US_ACTION:
                         USAction tmpAction = (USAction) destNode;
-                        tmpAction.addFeature(srcNode);
+                        tmpAction.addParam(srcNode);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + srcNode.getType());

@@ -1,7 +1,13 @@
 package ai.utilitySystem;
 import rts.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class USAction extends USNode {
+
+    private List<USNode> params;
+
     public enum UtilAction {
         ATTACK_WITH_SINGLE_UNIT,
         DEFEND_WITH_SINGLE_UNIT,
@@ -19,11 +25,33 @@ public class USAction extends USNode {
         this.name = name;
         this.feature = feature;
         this.action = action;
+        this.params = new ArrayList<>();
+    }
+
+    public void addParam(USNode node) {
+        params.add(node);
     }
 
     @Override
     protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
-        this.value = this.feature.getValue(gs, player, unitGroups);
+
+        // find average of all params going to this action.
+        float val = 0.0f;
+        for (int i = 0; i < params.size(); i++)
+        {
+            if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
+            else {
+                float nextVal = params.get(i).getValue(gs, player, unitGroups);
+                val += nextVal;
+            }
+        }
+        if(val == 0.0f)
+        {
+            this.value = 0.0f;
+            return;
+        }
+        val /= params.size();
+        this.value = val;
     }
 
     @Override
@@ -42,11 +70,13 @@ public class USAction extends USNode {
             "}\n";
     }
 
-    public void addFeature(USNode node) {
-        feature = node;
-    }
-
     public String relationsToPlantUML() {
-        return this.feature.getName() + " --> " + this.name + "\n";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i<params.size(); i++){
+            sb.append(params.get(i).getName()).append(" ---> ").append(this.name).append("\n");
+        }
+        return sb.toString();
+
+        //return this.feature.getName() + " --> " + this.name + "\n";
     }
 }

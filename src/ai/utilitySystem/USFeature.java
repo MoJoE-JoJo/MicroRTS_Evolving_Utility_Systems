@@ -7,9 +7,7 @@ import java.util.List;
 
 public class USFeature extends USNode {
     private Operation operation;
-    private List<USNode> params = new ArrayList<>();
-    private USNode param1; // What if we want a constant here instead?
-    private USNode param2;
+    private List<USNode> params;
 
     public enum Operation {
         DIVIDE,
@@ -145,24 +143,7 @@ public class USFeature extends USNode {
 
     public void addParam(USNode node) {
         params.add(node);
-        /*
-        if (param1 == null) {
-            param1 = node;
-        } else if (param2 == null) {
-            param2 = node;
-        } else {
-            //TODO Handle this, unsure how
-
-        }
-         */
     }
-
-    /*
-    public USNode getParam2()
-    {
-        return param2;
-    }
-     */
 
     public String relationsToPlantUML() {
         StringBuilder sb = new StringBuilder();

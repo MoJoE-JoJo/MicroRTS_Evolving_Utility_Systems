@@ -29,7 +29,15 @@ public class fitnessCalculator {
         // == EVAL GAMESTATE ==
         System.out.println("Time: " + gs.getTime());
         System.out.println("Winner: " + gs.winner());
+
+        // PUNISH THY FOOL FOR WINNING THE GAME!!
+        if (gs.winner() != -1)
+        {
+            return 0;
+        }
         //System.out.println(gs);
+
+
 
         return MAX_GAME_CYCLES - gs.getTime();
     }

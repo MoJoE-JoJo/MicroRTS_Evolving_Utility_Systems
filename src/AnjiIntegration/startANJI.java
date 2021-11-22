@@ -9,12 +9,12 @@ public class startANJI {
 
     public static void main(String[] args) {
         System.out.println("Starting ANJI test");
-        tryAndRunAnji();
-        //tryAndBuildFromChromosome(84);
+        //runAnji();
+        buildUtilitySystemFromChromosome(8817);
 
     }
 
-    private static void tryAndBuildFromChromosome(int id) {
+    private static void buildUtilitySystemFromChromosome(int id) {
         try {
             UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(id);
             String uml = us.toPlantUML();
@@ -25,7 +25,9 @@ public class startANJI {
         }
     }
 
-    private static void tryAndRunAnji() {
+
+
+    private static void runAnji() {
         try {
             Properties props = new Properties("utility_system_stage_1.properties");
             Evolver evolver = new Evolver();
