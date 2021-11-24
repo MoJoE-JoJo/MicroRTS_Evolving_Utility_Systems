@@ -182,7 +182,7 @@ public final class USConstants {
         //actions.add(new USAction("defend", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
         actions.add(new USAction("build_base", fba2, USAction.UtilAction.BUILD_BASE));
         actions.add(new USAction("build_barracks", fra5, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_light", fra5, USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_light", fwa4, USAction.UtilAction.BUILD_LIGHT));
         actions.add(new USAction("build_worker", fwo5, USAction.UtilAction.BUILD_WORKER));
         actions.add(new USAction("harvest", fh2, USAction.UtilAction.HARVEST_RESOURCE));
 
