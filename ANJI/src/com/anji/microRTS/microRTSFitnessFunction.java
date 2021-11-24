@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 6000;
-
+    private int iterations;
     private Random rand;
 
     public microRTSFitnessFunction() {
@@ -51,13 +51,13 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
 
             int fitness = 0;
-            int iterations = 3;
             try {
                 for (int i = 0; i < iterations; i++) {
-                    fitness += fitnessCalculator.fitnessOfUtilitySystem(US);
+                    boolean playerOne = i % 2 == 0;
+                    fitness += fitnessCalculator.fitnessOfUtilitySystem(US, playerOne);
                 }
                 fitness /= iterations; // get the avg fitness
-                System.out.println("fitness for chromosome " + chrom.getId() + " -> " + fitness);
+                System.out.println("chromosome id -> " + chrom.getId() + ", Fitness score -> " + fitness);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,6 +74,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
     @Override
     public void init(Properties props) throws Exception {
         Randomizer r = (Randomizer) props.singletonObjectProperty(Randomizer.class);
+        iterations = props.getIntProperty("fitness.iterations", 10);
         rand = r.getRand();
     }
 }
