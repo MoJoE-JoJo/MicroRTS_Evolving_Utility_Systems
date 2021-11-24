@@ -1,5 +1,6 @@
 package ai.utilitySystem;
 import java.util.List;
+import java.util.HashSet;
 
 import rts.*;
 import rts.units.Unit;
@@ -25,7 +26,9 @@ public class USVariable extends USNode {
         PLAYER_BASE_HEALTH,         // The sum of all of the player's base units health.
         ENEMY_BASE_HEALTH,          // The sum of all of the enemy's base units health.
         UNHARVESTED_RESOURCES,      // The sum of unharvested resources in all resource units.
-        PLAYER_HARVESTING_WORKERS   // The count of the player's worker units that are actively harvesting resources.
+        PLAYER_HARVESTING_WORKERS,  // The count of the player's worker units that are actively harvesting resources.
+        PLAYER_IDLE_WARRIORS,       // The number of iddle warriors under the players' control
+        PLAYER_IDLE_WORKERS,         // The number of iddle workers under the players' control
     }
 
     public USVariable(String name, GameStateVariable gsv) {
@@ -100,6 +103,16 @@ public class USVariable extends USNode {
                 break;
             case PLAYER_HARVESTING_WORKERS:
                 this.value = unitGroups.harvestingWorkers.size();
+                break;
+            case PLAYER_IDLE_WARRIORS:
+                sum = 0;
+                sum += unitCountInGroup(unitGroups.passiveUnits, "Light");
+                sum += unitCountInGroup(unitGroups.passiveUnits, "Heavy");
+                sum += unitCountInGroup(unitGroups.passiveUnits, "Ranged");
+                this.value = sum;
+                break;
+            case PLAYER_IDLE_WORKERS:
+                this.value = unitCountInGroup(unitGroups.passiveUnits, "Worker");
                 break;
             default:
                 throw new Exception("Not yet implemented game state variable: " + this.gsv);
@@ -180,6 +193,16 @@ public class USVariable extends USNode {
         for(Unit unit : units) {
             if (unit.getType().isResource) {
                 count += unit.getResources(); // I'm not sure this is how to get the resource count
+            }
+        }
+        return count;
+    }
+
+    private float unitCountInGroup(HashSet<Unit> unitGroup, String unitName) {
+        int count = 0;
+        for(Unit unit : unitGroup) {
+            if (unit.getType().name.equals(unitName)) {
+                count+= unit.getHitPoints();
             }
         }
         return count;
