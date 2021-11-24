@@ -130,9 +130,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             //Do the translation stuff
 
             UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
-            UtilAction utilAction = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
-            List<UtilAction> utilActions = new ArrayList<UtilAction>();
-            utilActions.add(utilAction);
+            List<UtilAction> utilActions = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
+            //UtilAction utilAction= utilActions.get(0);
+            //utilActions = new ArrayList<>();
+            //utilActions.add(utilAction);
             Player p = gs.getPlayer(player);
             for (Unit u : attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
@@ -245,9 +246,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.remove(u);
             passiveUnits.remove(u);
             harvestingWorkers.remove(u);
-            return true;
+            //return true;
         }
-        return false;
+        return true;
     }
 
     void attackClosestEnemy(Unit u, Player p, GameState gs) {
@@ -318,9 +319,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.add(u);
             passiveUnits.remove(u);
             harvestingWorkers.remove(u);
-            return true;
+            //return true;
         }
-        return false;
+        return true;
     }
 
     void DefendLogic(Unit u, Player p, GameState gs) {
@@ -650,9 +651,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.remove(u);
             passiveUnits.remove(u);
             harvestingWorkers.add(u);
-            return true;
+            //return true;
         }
-        return false;
+        return true;
     }
 
     void HarvestLogic(Unit u, Player p, GameState gs) {

@@ -1,15 +1,11 @@
 package ai.utilitySystem;
 
-import ai.aiSelection.AlphaBetaSearch.Action;
 import ai.utilitySystem.USAction.UtilAction;
 import rts.GameState;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -54,7 +50,7 @@ public class UtilitySystem {
     }
 
     // gets a random node, using the scores as weights
-    public UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+    public List<UtilAction> getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         // calculate values for all actions
         float[] values = new float[actions.size()];
@@ -73,7 +69,7 @@ public class UtilitySystem {
             actions.get(i).setWeightedValue(val * this.random.nextFloat());
         }
         // order the actions by the random weighted value
-        return getSortedUtilActions().get(0);
+        return getSortedUtilActions();
     }
 
     // make sure weightedValue is set before calling this
@@ -83,6 +79,7 @@ public class UtilitySystem {
         Collections.shuffle(copiedActions);
         // Sort
         Collections.sort(copiedActions);
+        Collections.reverse(copiedActions);
 
         // Convert to UtilAction
         List<UtilAction> orderedActions = new ArrayList<>();
