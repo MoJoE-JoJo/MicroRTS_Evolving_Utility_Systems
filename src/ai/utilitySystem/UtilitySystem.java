@@ -47,8 +47,8 @@ public class UtilitySystem {
         }
     }
 
-    // gets the highest scoring action
-    private UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+    // gets the highest scoring action (if equal, by order)
+    public UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         USAction bestNode = actions.get(0);
         for(int i = 0; i < actions.size(); i++) {
