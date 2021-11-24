@@ -2,6 +2,7 @@ package com.anji.microRTS;
 
 import AnjiIntegration.anjiConverter;
 import AnjiIntegration.fitnessCalculator;
+import ai.utilitySystem.USConstants;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.integration.XmlPersistableChromosome;
 import com.anji.util.Configurable;
@@ -18,7 +19,11 @@ import java.util.Random;
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 6000;
     private int iterations;
-    private Random rand;
+    private boolean doCoEvolution;
+
+    private UtilitySystem prevChampion;
+    private int championFitness;
+
 
     public microRTSFitnessFunction() {
         super();
@@ -54,9 +59,21 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             try {
                 for (int i = 0; i < iterations; i++) {
                     boolean playerOne = i % 2 == 0;
-                    fitness += fitnessCalculator.fitnessOfUtilitySystem(US, playerOne);
+                    if (doCoEvolution) {
+                        fitness += fitnessCalculator.coEvolutionFitness(US, prevChampion, playerOne);
+                    } else {
+                        fitness += fitnessCalculator.fitnessOfUtilitySystem(US, playerOne, i);
+                    }
                 }
                 fitness /= iterations; // get the avg fitness
+
+                if (doCoEvolution) //if doing co-evolution, see if need of updating champion
+                {
+                    if (fitness > championFitness) {
+                        championFitness = fitness;
+                        prevChampion = US;
+                    }
+                }
                 System.out.println("chromosome id -> " + chrom.getId() + ", Fitness score -> " + fitness);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -73,8 +90,12 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public void init(Properties props) throws Exception {
-        Randomizer r = (Randomizer) props.singletonObjectProperty(Randomizer.class);
         iterations = props.getIntProperty("fitness.iterations", 10);
-        rand = r.getRand();
+        doCoEvolution = props.getBooleanProperty("utility.system.co.evolution", false);
+
+        if (doCoEvolution) {
+            prevChampion = USConstants.getRandomUtilitySystem();
+            championFitness = 0;
+        }
     }
 }

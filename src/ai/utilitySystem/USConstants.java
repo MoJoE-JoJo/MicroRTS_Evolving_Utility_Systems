@@ -42,6 +42,8 @@ public final class USConstants {
         actions.add(new USAction("build_barracks", f1, USAction.UtilAction.BUILD_BARRACKS));
         actions.add(new USAction("build_base", f1, USAction.UtilAction.BUILD_BASE));
         actions.add(new USAction("build_light", f1, USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_heavy", f1, USAction.UtilAction.BUILD_HEAVY));
+        actions.add(new USAction("build_ranged", f1, USAction.UtilAction.BUILD_RANGED));
         actions.add(new USAction("harvest", f1, USAction.UtilAction.HARVEST_RESOURCE));
 
         UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
