@@ -36,8 +36,10 @@ const createBoxPlotData = (json) => {
     const data = []
     json.run[0].generation.forEach(generation => {
         const y = []
-        generation.specie[0].chromosome.forEach(chromosome => {
+        generation.specie.forEach(specie => {
+          specie.chromosome.forEach(chromosome => {
             y.push(chromosome._attr.fitness._value)
+          })
         })
         let sum = 0;
         y.forEach(v => {
