@@ -131,6 +131,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
             UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
             UtilAction utilAction = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
+            List<UtilAction> utilActions = new ArrayList<UtilAction>();
+            utilActions.add(utilAction);
             Player p = gs.getPlayer(player);
             for (Unit u : attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
@@ -144,38 +146,38 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
                 HarvestLogic(u, p, gs);
             }
-            switch (utilAction) {
-                case ATTACK_WITH_SINGLE_UNIT -> {
-                    return AttackWithSingleUnit(gs, p);
-                }
-                case DEFEND_WITH_SINGLE_UNIT -> {
-                    return DefendWithSingleUnit(gs, p);
-                }
-                case BUILD_BASE -> {
-                    return BuildBase(gs, p);
-                }
-                case BUILD_BARRACKS -> {
-                    return BuildBarracks(gs, p);
-                }
-                case BUILD_WORKER -> {
-                    return BuildWorker(gs, p);
-                }
-                case BUILD_LIGHT -> {
-                    return BuildLight(gs, p);
-                }
-                case BUILD_RANGED -> {
-                    return BuildRanged(gs, p);
-                }
-                case BUILD_HEAVY -> {
-                    return BuildHeavy(gs, p);
-                }
-                case HARVEST_RESOURCE -> {
-                    return Harvest_Resources(gs, p);
-                }
-                default -> {
-                    return translateActions(p.getID(), gs);
+            for (UtilAction ua : utilActions) {
+                switch (ua) {
+                    case ATTACK_WITH_SINGLE_UNIT -> {
+                        if(AttackWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case DEFEND_WITH_SINGLE_UNIT -> {
+                        if(DefendWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_BASE -> {
+                        if(BuildBase(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_BARRACKS -> {
+                        if(BuildBarracks(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_WORKER -> {
+                        if(BuildWorker(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_LIGHT -> {
+                        if(BuildLight(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_RANGED -> {
+                        if(BuildRanged(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case BUILD_HEAVY -> {
+                        if(BuildHeavy(gs, p)) return translateActions(p.getID(), gs);
+                    }
+                    case HARVEST_RESOURCE -> {
+                        if(Harvest_Resources(gs, p)) return translateActions(p.getID(), gs);
+                    }
                 }
             }
+            return translateActions(p.getID(), gs);
         } catch (Exception e) {
             System.out.println(e);
             return translateActions(player, gs);
@@ -193,7 +195,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return parameters;
     }
 
-    protected PlayerAction AttackWithSingleUnit(GameState gs, Player p) {
+    protected boolean AttackWithSingleUnit(GameState gs, Player p) {
         if (verbose) System.out.println("Attack With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canAttack = new LinkedList<>();
@@ -243,8 +245,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.remove(u);
             passiveUnits.remove(u);
             harvestingWorkers.remove(u);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
     void attackClosestEnemy(Unit u, Player p, GameState gs) {
@@ -265,7 +268,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    protected PlayerAction DefendWithSingleUnit(GameState gs, Player p) {
+    protected boolean DefendWithSingleUnit(GameState gs, Player p) {
         if (verbose) System.out.println("Defend With Single Unit");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canDefend = new LinkedList<>();
@@ -315,8 +318,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.add(u);
             passiveUnits.remove(u);
             harvestingWorkers.remove(u);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
     void DefendLogic(Unit u, Player p, GameState gs) {
@@ -351,7 +355,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    protected PlayerAction BuildBase(GameState gs, Player p) {
+    protected boolean BuildBase(GameState gs, Player p) {
         if (verbose) System.out.println("Build Base");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -406,7 +410,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 passiveUnits.remove(u);
                 harvestingWorkers.remove(u);
                 buildingWorkers.add(u);
-                return translateActions(p.getID(), gs);
+                return true;
             }
         }
         //Expand behaviour
@@ -451,10 +455,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 passiveUnits.remove(u);
                 harvestingWorkers.remove(u);
                 buildingWorkers.add(u);
-                return translateActions(p.getID(), gs);
+                return true;
             }
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
     protected List<Unit> otherResourcePoint(Player p, PhysicalGameState pgs) {
@@ -525,7 +529,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         return bases;
     }
 
-    protected PlayerAction BuildBarracks(GameState gs, Player p) {
+    protected boolean BuildBarracks(GameState gs, Player p) {
         if (verbose) System.out.println("Build Barracks");
         //Setup of variables
         PhysicalGameState pgs = gs.getPhysicalGameState();
@@ -574,13 +578,13 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 passiveUnits.remove(u);
                 harvestingWorkers.remove(u);
                 buildingWorkers.add(u);
-                return translateActions(p.getID(), gs);
+                return true;
             }
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
-    protected PlayerAction BuildWorker(GameState gs, Player p) {
+    protected boolean BuildWorker(GameState gs, Player p) {
         if (verbose) System.out.println("Build Worker");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
@@ -595,24 +599,24 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 Random rand = new Random();
                 Unit u = canTrain.get(rand.nextInt(canTrain.size()));
                 train(u, workerType);
-                return translateActions(p.getID(), gs);
+                return true;
             }
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
-    protected PlayerAction BuildWarUnit(GameState gs, Player p) {
-        if (verbose) System.out.println("Build War Unit");
-        Random ran = new Random();
-        int val = ran.nextInt(3);
-        if (val == 0) BuildLight(gs, p);
-        else if (val == 1) BuildHeavy(gs, p);
-        else if (val == 2) BuildRanged(gs, p);
+//    protected boolean BuildWarUnit(GameState gs, Player p) {
+//        if (verbose) System.out.println("Build War Unit");
+//        Random ran = new Random();
+//        int val = ran.nextInt(3);
+//        if (val == 0) BuildLight(gs, p);
+//        else if (val == 1) BuildHeavy(gs, p);
+//        else if (val == 2) BuildRanged(gs, p);
+//
+//        return translateActions(p.getID(), gs);
+//    }
 
-        return translateActions(p.getID(), gs);
-    }
-
-    protected PlayerAction Harvest_Resources(GameState gs, Player p) {
+    protected boolean Harvest_Resources(GameState gs, Player p) {
         if (verbose) System.out.println("Harvest Resource");
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canHarvest = new LinkedList<>();
@@ -646,9 +650,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             defendingUnits.remove(u);
             passiveUnits.remove(u);
             harvestingWorkers.add(u);
-            return translateActions(p.getID(), gs);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
     void HarvestLogic(Unit u, Player p, GameState gs) {
@@ -692,7 +696,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    protected PlayerAction BuildLight(GameState gs, Player p) {
+    protected boolean BuildLight(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
@@ -707,11 +711,12 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Random rand = new Random();
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, lightType);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
-    protected PlayerAction BuildHeavy(GameState gs, Player p) {
+    protected boolean BuildHeavy(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
@@ -726,11 +731,12 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Random rand = new Random();
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, heavyType);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
-    protected PlayerAction BuildRanged(GameState gs, Player p) {
+    protected boolean BuildRanged(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
 
@@ -746,8 +752,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Random rand = new Random();
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, rangedType);
+            return true;
         }
-        return translateActions(p.getID(), gs);
+        return false;
     }
 
 }

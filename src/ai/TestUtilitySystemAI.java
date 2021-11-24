@@ -1,16 +1,7 @@
 package ai;
 
-import ai.abstraction.Build;
-import ai.utilitySystem.*;
 import rts.*;
-import rts.units.Unit;
 import rts.units.UnitTypeTable;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import ai.utilitySystem.USFeature.Operation;
-import ai.utilitySystem.USVariable.GameStateVariable;
 
 public class TestUtilitySystemAI extends UtilitySystemAI {
     boolean oneAction = true;
@@ -71,7 +62,8 @@ public class TestUtilitySystemAI extends UtilitySystemAI {
         //}
         if(oneAction){
             oneAction = false;
-            return DefendWithSingleUnit(gs, p);
+            if(DefendWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
+            return translateActions(p.getID(), gs);
         }
         else{
             //oneAction = true;
