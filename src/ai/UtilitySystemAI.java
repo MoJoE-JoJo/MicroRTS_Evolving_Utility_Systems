@@ -131,9 +131,9 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
             UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
             List<UtilAction> utilActions = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
-            UtilAction utilAction= utilActions.get(0);
-            utilActions = new ArrayList<>();
-            utilActions.add(utilAction);
+            //UtilAction utilAction= utilActions.get(0);
+            //utilActions = new ArrayList<>();
+            //utilActions.add(utilAction);
             Player p = gs.getPlayer(player);
             for (Unit u : attackingUnits) {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
