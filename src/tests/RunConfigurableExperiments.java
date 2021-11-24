@@ -2,10 +2,7 @@ package tests;
 
 import ai.RandomAI;
 import ai.RandomBiasedAI;
-import ai.abstraction.HeavyRush;
-import ai.abstraction.LightRush;
-import ai.abstraction.RangedRush;
-import ai.abstraction.WorkerRush;
+import ai.abstraction.*;
 import ai.abstraction.pathfinding.FloodFillPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import ai.ahtn.AHTNAI;
@@ -358,11 +355,19 @@ public class RunConfigurableExperiments {
         bots1.add(new LightRush(utt));
         bots1.add(new HeavyRush(utt));
         bots1.add(new RangedRush(utt));
+        bots1.add(new WorkerDefense(utt));
+        bots1.add(new LightDefense(utt));
+        bots1.add(new HeavyDefense(utt));
+        bots1.add(new RangedDefense(utt));
 
         bots2.add(new WorkerRush(utt));
         bots2.add(new LightRush(utt));
         bots2.add(new HeavyRush(utt));
         bots2.add(new RangedRush(utt));
+        bots2.add(new WorkerDefense(utt));
+        bots2.add(new LightDefense(utt));
+        bots2.add(new HeavyDefense(utt));
+        bots2.add(new RangedDefense(utt));
         loadMaps(args[2]);
         PrintStream out = new PrintStream(new File(args[3]));
         int iterations = Integer.parseInt(args[4]);
