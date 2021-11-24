@@ -16,13 +16,13 @@ import java.util.Random;
 
 
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
-    private final static int MAX_FITNESS = 1000000;
+    private final static int MAX_FITNESS = 6000;
 
     private Random rand;
 
     public microRTSFitnessFunction() {
         super();
-        System.out.println("YOLO");
+        //System.out.println("constructor called");
     }
 
     @Override
@@ -50,16 +50,14 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 continue;
             }
 
-            // TODO play microRTS and get a fitness score
             int fitness = 0;
             int iterations = 3;
             try {
-                System.out.println("Calculating fitness for chromosome -> " + chrom.getId());
                 for (int i = 0; i < iterations; i++) {
                     fitness += fitnessCalculator.fitnessOfUtilitySystem(US);
                 }
-                fitness /= iterations;
-                System.out.println("Fitness -> " + fitness);
+                fitness /= iterations; // get the avg fitness
+                System.out.println("fitness for chromosome " + chrom.getId() + " -> " + fitness);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -70,7 +68,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public int getMaxFitnessValue() {
-        return 5000;
+        return MAX_FITNESS;
     }
 
     @Override
