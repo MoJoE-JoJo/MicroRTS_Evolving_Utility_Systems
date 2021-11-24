@@ -112,35 +112,20 @@ public final class USConstants {
         fba2.addParam(c0);
         features.add(fba2);
 
-        USFeature fra1 = new USFeature("resouceSUB2", Operation.SUBTRACT);
-        fra1.addParam(vre);
-        fra1.addParam(c2);
+        USFeature fra1 = new USFeature("01POWracks", Operation.POWER);
+        fra1.addParam(c01);
+        fra1.addParam(vra);
         features.add(fra1);
 
-        USFeature fra2 = new USFeature("resouceGT2", Operation.MAX);
+        USFeature fra2 = new USFeature("valueRacksXPow", Operation.MULTIPLY);
+        fra2.addParam(c10);
         fra2.addParam(fra1);
-        fra2.addParam(c0);
         features.add(fra2);
 
-        USFeature fra3 = new USFeature("warrValue", Operation.MAX);
-        fra3.addParam(fra2);
-        fra3.addParam(c10);
-        features.add(fra3);
-
-        USFeature fra4 = new USFeature("02POWwarriors", Operation.POWER);
-        fra4.addParam(c01);
-        fra4.addParam(vra);
-        features.add(fra4);
-
-        USFeature fra5 = new USFeature("valueWarXPow", Operation.MULTIPLY);
-        fra5.addParam(fra3);
-        fra5.addParam(fra4);
-        features.add(fra5);
-
-        USFeature fwa4 = new USFeature("05POWwarriors", Operation.POWER);
-        fwa4.addParam(c05);
-        fwa4.addParam(vwa);
-        features.add(fwa4);
+        USFeature fwa = new USFeature("racksX10", Operation.MULTIPLY);
+        fwa.addParam(c10);
+        fwa.addParam(vra);
+        features.add(fwa);
 
         USFeature fwo1 = new USFeature("resouceSUB1", Operation.SUBTRACT);
         fwo1.addParam(vre);
@@ -181,8 +166,8 @@ public final class USConstants {
         actions.add(new USAction("attack", fa3, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
         //actions.add(new USAction("defend", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
         actions.add(new USAction("build_base", fba2, USAction.UtilAction.BUILD_BASE));
-        actions.add(new USAction("build_barracks", fra5, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_light", fwa4, USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_barracks", fra2, USAction.UtilAction.BUILD_BARRACKS));
+        actions.add(new USAction("build_light", fwa, USAction.UtilAction.BUILD_LIGHT));
         actions.add(new USAction("build_worker", fwo5, USAction.UtilAction.BUILD_WORKER));
         actions.add(new USAction("harvest", fh2, USAction.UtilAction.HARVEST_RESOURCE));
 
