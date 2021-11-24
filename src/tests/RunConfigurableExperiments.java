@@ -1,16 +1,5 @@
 package tests;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Stream;
-
 import ai.RandomAI;
 import ai.RandomBiasedAI;
 import ai.abstraction.HeavyRush;
@@ -20,10 +9,7 @@ import ai.abstraction.WorkerRush;
 import ai.abstraction.pathfinding.FloodFillPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
 import ai.ahtn.AHTNAI;
-import ai.core.AI;
-import ai.core.AIWithComputationBudget;
-import ai.core.ContinuingAI;
-import ai.core.PseudoContinuingAI;
+import ai.core.*;
 import ai.evaluation.EvaluationFunction;
 import ai.evaluation.SimpleEvaluationFunction;
 import ai.mcts.naivemcts.NaiveMCTS;
@@ -36,14 +22,20 @@ import ai.minimax.RTMiniMax.IDRTMinimaxRandomized;
 import ai.montecarlo.MonteCarlo;
 import ai.portfolio.PortfolioAI;
 import ai.portfolio.portfoliogreedysearch.PGSAI;
-import ai.puppet.BasicConfigurableScript;
-import ai.puppet.PuppetNoPlan;
-import ai.puppet.PuppetSearchAB;
-import ai.puppet.PuppetSearchMCTS;
-import ai.puppet.SingleChoiceConfigurableScript;
+import ai.puppet.*;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
-import ai.core.InterruptibleAI;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class RunConfigurableExperiments {
 
@@ -362,9 +354,15 @@ public class RunConfigurableExperiments {
             processBots(bots2);
         }
         */
-        bots1.add(new RandomAI(utt));
-        bots2.add(new RandomAI(utt));
-        bots2.add(new RandomBiasedAI());
+        bots1.add(new WorkerRush(utt));
+        bots1.add(new LightRush(utt));
+        bots1.add(new HeavyRush(utt));
+        bots1.add(new RangedRush(utt));
+
+        bots2.add(new WorkerRush(utt));
+        bots2.add(new LightRush(utt));
+        bots2.add(new HeavyRush(utt));
+        bots2.add(new RangedRush(utt));
         loadMaps(args[2]);
         PrintStream out = new PrintStream(new File(args[3]));
         int iterations = Integer.parseInt(args[4]);
@@ -379,9 +377,9 @@ public class RunConfigurableExperiments {
         if (true) {
             if (asymetric) {
                 ExperimenterAsymmetric.runExperiments(bots1, bots2,
-                        maps, utt, iterations, 3000, 300, false, out, saveTrace, saveZip, traceDir);
+                        maps, utt, iterations, 5000, 300, false, out, saveTrace, saveZip, traceDir);
             } else {
-                Experimenter.runExperiments(bots1, maps, utt, iterations, 3000, 300, false, out,
+                Experimenter.runExperiments(bots1, maps, utt, iterations, 5000, 300, false, out,
                         -1, true, false, saveTrace, saveZip, traceDir);
             }
         } else {// Separate the matches by map:
