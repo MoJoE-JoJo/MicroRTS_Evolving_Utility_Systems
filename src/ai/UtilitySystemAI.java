@@ -166,8 +166,14 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 case BUILD_WORKER -> {
                     return BuildWorker(gs, p);
                 }
-                case BUILD_WAR_UNIT -> {
-                    return BuildWarUnit(gs, p);
+                case BUILD_LIGHT -> {
+                    return BuildLight(gs, p);
+                }
+                case BUILD_RANGED -> {
+                    return BuildRanged(gs, p);
+                }
+                case BUILD_HEAVY -> {
+                    return BuildHeavy(gs, p);
                 }
                 case HARVEST_RESOURCE -> {
                     return Harvest_Resources(gs, p);
@@ -181,6 +187,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             return translateActions(player, gs);
         }
     }
+
 
 
     @Override
@@ -562,7 +569,12 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             if (canBuild.size() > 0) {
                 Random rand = new Random();
                 Unit u = canBuild.get(rand.nextInt(canBuild.size()));
-                buildIfNotAlreadyBuilding(u, barracksType, u.getX(), u.getY(), reservedPositions, p, pgs);
+                Random danr = new Random();
+                int posX = danr.nextInt(-1, 2);
+                int posY = danr.nextInt(-1, 2);
+
+                buildIfNotAlreadyBuilding(u, barracksType, u.getX()+posX, u.getY()+posY, reservedPositions, p, pgs);
+
                 attackingUnits.remove(u);
                 defendingUnits.remove(u);
                 passiveUnits.remove(u);
@@ -686,7 +698,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         }
     }
 
-    protected void BuildLight(GameState gs, Player p) {
+    protected PlayerAction BuildLight(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
@@ -702,9 +714,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, lightType);
         }
+        return translateActions(p.getID(), gs);
     }
 
-    protected void BuildHeavy(GameState gs, Player p) {
+    protected PlayerAction BuildHeavy(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
         // behavior of bases:
@@ -720,9 +733,10 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, heavyType);
         }
+        return translateActions(p.getID(), gs);
     }
 
-    protected void BuildRanged(GameState gs, Player p) {
+    protected PlayerAction BuildRanged(GameState gs, Player p) {
         PhysicalGameState pgs = gs.getPhysicalGameState();
         List<Unit> canTrain = new LinkedList<Unit>();
 
@@ -739,6 +753,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             Unit u = canTrain.get(rand.nextInt(canTrain.size()));
             train(u, rangedType);
         }
+        return translateActions(p.getID(), gs);
     }
 
 }

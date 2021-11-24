@@ -14,7 +14,9 @@ public class USAction extends USNode {
         BUILD_BASE,
         BUILD_BARRACKS,
         BUILD_WORKER,
-        BUILD_WAR_UNIT,
+        BUILD_LIGHT,
+        BUILD_RANGED,
+        BUILD_HEAVY,
         HARVEST_RESOURCE
     }
 
