@@ -4,6 +4,7 @@
  */
 package ai;
 
+import AnjiIntegration.anjiConverter;
 import ai.abstraction.AbstractAction;
 import ai.abstraction.AbstractionLayerAI;
 import ai.abstraction.Harvest;
@@ -64,7 +65,12 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        utilitySystem = USConstants.getSimpleUtilitySystem();
+        //        utilitySystem = USConstants.getSimpleUtilitySystem();
+        try {
+            utilitySystem = anjiConverter.toUtilitySystemFromChromosome(13837);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(utilitySystem.toPlantUML());
     }
 

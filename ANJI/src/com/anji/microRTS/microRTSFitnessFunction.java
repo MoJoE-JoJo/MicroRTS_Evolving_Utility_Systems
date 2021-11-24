@@ -15,17 +15,20 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 1000000;
 
     private Random rand;
 
+    public microRTSFitnessFunction() {
+        super();
+        System.out.println("YOLO");
+    }
 
     @Override
     public void evaluate(List genotypes) {
         Iterator it = genotypes.iterator();
-        while ( it.hasNext() ) {
+        while (it.hasNext()) {
             Chromosome chrom = (Chromosome) it.next();
 
 
@@ -41,8 +44,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 e.printStackTrace();
             }
 
-            if (US == null)
-            {
+            if (US == null) {
                 //set the fitness to 0 if it failed to build the utility system
                 chrom.setFitnessValue(0);
                 continue;
@@ -50,15 +52,19 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
             // TODO play microRTS and get a fitness score
             int fitness = 0;
+            int iterations = 3;
             try {
                 System.out.println("Calculating fitness for chromosome -> " + chrom.getId());
-                fitness = fitnessCalculator.fitnessOfUtilitySystem(US);
+                for (int i = 0; i < iterations; i++) {
+                    fitness += fitnessCalculator.fitnessOfUtilitySystem(US);
+                }
+                fitness /= iterations;
                 System.out.println("Fitness -> " + fitness);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            chrom.setFitnessValue( fitness );
+            chrom.setFitnessValue(fitness);
         }
     }
 
@@ -69,7 +75,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public void init(Properties props) throws Exception {
-        Randomizer r = (Randomizer) props.singletonObjectProperty( Randomizer.class );
+        Randomizer r = (Randomizer) props.singletonObjectProperty(Randomizer.class);
         rand = r.getRand();
     }
 }
