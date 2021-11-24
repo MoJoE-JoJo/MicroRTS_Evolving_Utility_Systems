@@ -1,7 +1,7 @@
 package ai.utilitySystem;
 import rts.*;
 
-public class USAction extends USNode {
+public class USAction extends USNode implements Comparable<USAction> {
     public enum UtilAction {
         ATTACK_WITH_SINGLE_UNIT,
         DEFEND_WITH_SINGLE_UNIT,
@@ -16,6 +16,7 @@ public class USAction extends USNode {
 
     private USNode feature;
     private UtilAction action;
+    private float weightedValue;
 
     public USAction (String name, USFeature feature, UtilAction action) {
         this.name = name;
@@ -50,5 +51,18 @@ public class USAction extends USNode {
 
     public String relationsToPlantUML() {
         return this.feature.getName() + " --> " + this.name + "\n";
+    }
+
+    public void setWeightedValue(float weightedValue) {
+        this.weightedValue = weightedValue;
+    }
+
+    public float getWeightedValue() {
+        return this.weightedValue;
+    }
+
+    @Override
+    public int compareTo(USAction a) {
+        return this.weightedValue > a.getWeightedValue() ? 1 : this.weightedValue < a.getWeightedValue() ? -1 : 0;
     }
 }
