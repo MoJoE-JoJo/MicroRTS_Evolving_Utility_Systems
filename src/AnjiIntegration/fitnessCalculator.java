@@ -8,11 +8,8 @@ import ai.utilitySystem.UtilitySystem;
 import com.anji.microRTS.microRTSFitnessFunction;
 import rts.GameState;
 import rts.PhysicalGameState;
-import rts.units.Unit;
 import rts.units.UnitTypeTable;
 import tests.RunExperimentTest;
-
-import java.util.List;
 
 public class fitnessCalculator {
 
@@ -124,7 +121,7 @@ public class fitnessCalculator {
     }
 
 
-    private static AI selectAIFromOpponenType(UnitTypeTable utt, microRTSFitnessFunction.OpponentTypes type, int iteration) {
+    private static AI selectAIFromOpponentType(UnitTypeTable utt, microRTSFitnessFunction.OpponentTypes type, int iteration) {
         switch (type) {
             case PASSIVE:
                 return new PassiveAI(utt);
@@ -136,9 +133,10 @@ public class fitnessCalculator {
         }
     }
 
-    private static AI selectOpponentAI(UnitTypeTable utt, int opponentAI) {
+    private static AI selectOpponentAI(UnitTypeTable utt, int iteration) {
 
-        switch (opponentAI) {
+        
+        switch (iteration % 8) {
             case 0:
                 return new WorkerRush(utt);
             case 1:
@@ -176,10 +174,10 @@ public class fitnessCalculator {
 
         if (isPlayerZero) {
             playerZero = new UtilitySystemAI(utt, utilitySystem, false);
-            playerOne = selectAIFromOpponenType(utt, opponentType, iteration);
+            playerOne = selectAIFromOpponentType(utt, opponentType, iteration);
             playerId = 0;
         } else {
-            playerZero = selectAIFromOpponenType(utt, opponentType, iteration);
+            playerZero = selectAIFromOpponentType(utt, opponentType, iteration);
             playerOne = new UtilitySystemAI(utt, utilitySystem, false);
             playerId = 1;
         }
