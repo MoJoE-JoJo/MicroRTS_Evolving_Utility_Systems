@@ -18,5 +18,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="module" module-name="MicroRTS_EUS" />
   </component>
 </module>

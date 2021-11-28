@@ -322,4 +322,18 @@ public class anjiConverter {
         InputStream targetStream = new FileInputStream(fileName);
         return targetStream;
     }
+
+    public static String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
+        //TODO
+
+        //<chromosome id="231">
+        // <neuron id="0" type="in" activation="sigmoid"/>
+
+
+        // create in node "0" which is is the constant node
+        // for each variable node -> <neuron id="0" type="in" activation="sigmoid"/>
+
+        //utilitySystem.
+        return "";
+    }
 }
