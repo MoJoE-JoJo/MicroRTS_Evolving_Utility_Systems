@@ -3,7 +3,7 @@ package AnjiIntegration;
 import com.anji.neat.Evolver;
 import com.anji.util.Properties;
 
-public class startANJI {
+public class startANJIEvolver {
 
 
     public static void main(String[] args) {
