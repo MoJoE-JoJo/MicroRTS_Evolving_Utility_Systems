@@ -19,7 +19,7 @@ public class EvaluateChromosome {
 
             try {
                 // build utility system
-                UtilitySystem utilitySystem = anjiConverter.toUtilitySystemFromChromosome(8514);
+                UtilitySystem utilitySystem = anjiConverter.toUtilitySystemFromChromosome(8236);
 
                 // setup AI and game
                 // == GAME SETTINGS ==
@@ -48,7 +48,9 @@ public class EvaluateChromosome {
                 e.printStackTrace();
             }
         }
+
         score = score / 100; // get average time
+        System.out.println("final average time");
         System.out.println(score);
     }
 }

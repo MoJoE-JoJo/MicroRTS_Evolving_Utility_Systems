@@ -216,7 +216,7 @@ public class fitnessCalculator {
                     return 1;
                 }
 
-                return MAX_GAME_CYCLES - gs.getTime();
+                return MAX_GAME_CYCLES - gs.getTime() + 5;
             case MILITIA_UNITS:
                 // run the game
                 gs = RunExperimentTest.runUntilAtWarriorCount(playerZero, playerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, playerId, gameGoalCount);
