@@ -135,7 +135,6 @@ public class fitnessCalculator {
 
     private static AI selectOpponentAI(UnitTypeTable utt, int iteration) {
 
-        
         switch (iteration % 8) {
             case 0:
                 return new WorkerRush(utt);

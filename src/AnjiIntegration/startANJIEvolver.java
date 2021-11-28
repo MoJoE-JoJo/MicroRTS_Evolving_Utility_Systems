@@ -8,7 +8,7 @@ public class startANJIEvolver {
 
     public static void main(String[] args) {
         try {
-            Properties props = new Properties("utility_system_properties/test_2_militia_unit.properties");
+            Properties props = new Properties("utility_system_properties/test_3_ensemble_learning.properties");
             Evolver evolver = new Evolver();
             evolver.init(props);
             evolver.run();
