@@ -67,6 +67,10 @@ public final class USConstants {
         variables.add(vha);
         USVariable vra = new USVariable("barracks", GameStateVariable.PLAYER_BARRACKS);
         variables.add(vra);
+        USVariable vid = new USVariable("iddle_warriors", GameStateVariable.PLAYER_IDLE_WARRIORS);
+        variables.add(vid);
+        USVariable vidwo = new USVariable("iddle_warriors", GameStateVariable.PLAYER_IDLE_WORKERS);
+        variables.add(vidwo);
 
         // constants
         USConstant c0 = new USConstant("c0",0f);
@@ -85,22 +89,14 @@ public final class USConstants {
         constants.add(c5);
         USConstant c10 = new USConstant("c10",10f);
         constants.add(c10);
+        USConstant c25 = new USConstant("c25",25f);
+        constants.add(c25);
 
         // features
-        USFeature fa1 = new USFeature("warriorX5", Operation.MULTIPLY);
-        fa1.addParam(vwa);
-        fa1.addParam(c5);
+        USFeature fa1 = new USFeature("iddlewarr", Operation.MULTIPLY);
+        fa1.addParam(vid);
+        fa1.addParam(c25);
         features.add(fa1);
-
-        USFeature fa2 = new USFeature("workerX1", Operation.MULTIPLY);
-        fa2.addParam(vwo);
-        fa2.addParam(c1);
-        features.add(fa2);
-
-        USFeature fa3 = new USFeature("warSUMwork", Operation.SUM);
-        fa3.addParam(fa1);
-        fa3.addParam(fa2);
-        features.add(fa3);
 
         USFeature fba1 = new USFeature("resourceSUB10", Operation.SUBTRACT);
         fba1.addParam(vre);
@@ -113,7 +109,7 @@ public final class USConstants {
         features.add(fba2);
 
         USFeature fra1 = new USFeature("01POWracks", Operation.POWER);
-        fra1.addParam(c01);
+        fra1.addParam(c05);
         fra1.addParam(vra);
         features.add(fra1);
 
@@ -127,49 +123,34 @@ public final class USConstants {
         fwa.addParam(vra);
         features.add(fwa);
 
-        USFeature fwo1 = new USFeature("resouceSUB1", Operation.SUBTRACT);
-        fwo1.addParam(vre);
-        fwo1.addParam(c1);
+        USFeature fwa2 = new USFeature("racksX10Xresources", Operation.MULTIPLY);
+        fwa2.addParam(fwa);
+        fwa2.addParam(vre);
+        features.add(fwa2);
+
+        USFeature fwo1 = new USFeature("02POWworkers", Operation.POWER);
+        fwo1.addParam(c05);
+        fwo1.addParam(vwo);
         features.add(fwo1);
 
-        USFeature fwo2 = new USFeature("resouceGT1", Operation.MAX);
+        USFeature fwo2 = new USFeature("valueWorXPow", Operation.MULTIPLY);
+        fwo2.addParam(c25);
         fwo2.addParam(fwo1);
-        fwo2.addParam(c0);
         features.add(fwo2);
 
-        USFeature fwo3 = new USFeature("workValue", Operation.MAX);
-        fwo3.addParam(fwo2);
-        fwo3.addParam(c10);
-        features.add(fwo3);
-
-        USFeature fwo4 = new USFeature("02POWworkers", Operation.POWER);
-        fwo4.addParam(c025);
-        fwo4.addParam(vwo);
-        features.add(fwo4);
-
-        USFeature fwo5 = new USFeature("valueWorXPow", Operation.MULTIPLY);
-        fwo5.addParam(fwo3);
-        fwo5.addParam(fwo4);
-        features.add(fwo5);
-
-        USFeature fh1 = new USFeature("harvestingMAX02", Operation.MAX);
-        fh1.addParam(vha);
-        fh1.addParam(c01);
+        USFeature fh1 = new USFeature("iddlework", Operation.MULTIPLY);
+        fh1.addParam(vidwo);
+        fh1.addParam(c25);
         features.add(fh1);
 
-        USFeature fh2 = new USFeature("5DIVabove", Operation.DIVIDE);
-        fh2.addParam(c5);
-        fh2.addParam(fh1);
-        features.add(fh2);
-
         // actions
-        actions.add(new USAction("attack", fa3, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
+        actions.add(new USAction("attack", fa1, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
         //actions.add(new USAction("defend", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
         actions.add(new USAction("build_base", fba2, USAction.UtilAction.BUILD_BASE));
         actions.add(new USAction("build_barracks", fra2, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_light", fwa, USAction.UtilAction.BUILD_LIGHT));
-        actions.add(new USAction("build_worker", fwo5, USAction.UtilAction.BUILD_WORKER));
-        actions.add(new USAction("harvest", fh2, USAction.UtilAction.HARVEST_RESOURCE));
+        actions.add(new USAction("build_light", fwa2, USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_worker", fwo2, USAction.UtilAction.BUILD_WORKER));
+        actions.add(new USAction("harvest", fh1, USAction.UtilAction.HARVEST_RESOURCE));
 
         UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         return us;

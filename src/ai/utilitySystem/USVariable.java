@@ -106,13 +106,14 @@ public class USVariable extends USNode {
                 break;
             case PLAYER_IDLE_WARRIORS:
                 sum = 0;
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Light");
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Heavy");
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Ranged");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Light");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Heavy");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Ranged");
                 this.value = sum;
                 break;
             case PLAYER_IDLE_WORKERS:
-                this.value = unitCountInGroup(unitGroups.passiveUnits, "Worker");
+                this.value = getPlayerUnitCount(gs, player, "Worker") -
+                    unitCountInGroup(unitGroups.harvestingWorkers, player, "Worker");
                 break;
             default:
                 throw new Exception("Not yet implemented game state variable: " + this.gsv);
@@ -198,11 +199,11 @@ public class USVariable extends USNode {
         return count;
     }
 
-    private float unitCountInGroup(HashSet<Unit> unitGroup, String unitName) {
+    private float unitCountInGroup(HashSet<Unit> unitGroup, int player, String unitName) {
         int count = 0;
         for(Unit unit : unitGroup) {
-            if (unit.getType().name.equals(unitName)) {
-                count+= unit.getHitPoints();
+            if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
+                count++;
             }
         }
         return count;
