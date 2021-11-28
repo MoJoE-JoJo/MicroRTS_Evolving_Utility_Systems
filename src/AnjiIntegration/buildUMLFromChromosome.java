@@ -6,7 +6,7 @@ public class buildUMLFromChromosome {
 
     public static void main(String[] args) {
         try {
-            UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(5868);
+            UtilitySystem us = anjiConverter.toUtilitySystemFromChromosome(8514);
 
             String uml = us.toPlantUML();
             System.out.println(uml);

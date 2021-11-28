@@ -67,7 +67,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         reset(a_utt);
         //        utilitySystem = USConstants.getSimpleUtilitySystem();
         try {
-            utilitySystem = anjiConverter.toUtilitySystemFromChromosome(8945);
+            // TODO make it possible to provide a chromosome ID in the constructor?
+            utilitySystem = anjiConverter.toUtilitySystemFromChromosome(8514);
         } catch (Exception e) {
             e.printStackTrace();
         }

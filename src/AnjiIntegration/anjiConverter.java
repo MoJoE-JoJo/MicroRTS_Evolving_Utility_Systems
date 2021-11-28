@@ -45,8 +45,6 @@ public class anjiConverter {
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-
         UtilitySystem returnSystem = null;
         try (InputStream is = readXmlFileIntoInputStream("./db/chromosome/chromosome" + chromId + ".xml")) {
 
@@ -54,9 +52,6 @@ public class anjiConverter {
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
             // read from a project's resources folder
             Document doc = docBuilder.parse(is);
-
-            System.out.println("Root Element :" + doc.getDocumentElement().getNodeName());
-            System.out.println("------");
 
             if (doc.hasChildNodes()) {
                 //printNote(doc.getChildNodes());

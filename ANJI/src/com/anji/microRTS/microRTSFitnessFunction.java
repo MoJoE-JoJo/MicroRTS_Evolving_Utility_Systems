@@ -7,20 +7,35 @@ import ai.utilitySystem.UtilitySystem;
 import com.anji.integration.XmlPersistableChromosome;
 import com.anji.util.Configurable;
 import com.anji.util.Properties;
-import com.anji.util.Randomizer;
 import org.jgap.BulkFitnessFunction;
 import org.jgap.Chromosome;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 6000;
     private int iterations;
-    private boolean doCoEvolution;
+    private boolean doCoEvolution = false;
 
+    public enum GameTypes {
+            HARVEST,
+            MILITIA_UNITS,
+            NORMAL
+    }
+
+    public enum OpponentTypes {
+        PASSIVE,
+        COEVOLUTION,
+        ROUND_ROBIN
+    }
+
+    private GameTypes gametype;
+    private int gameGoalCount;
+    private OpponentTypes opponentType;
+
+    // co evolution stuff
     private UtilitySystem prevChampion;
     private int championFitness;
 
@@ -55,16 +70,20 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 continue;
             }
 
+
+            // === CALC FITNESS ===
             int fitness = 0;
             try {
                 for (int i = 0; i < iterations; i++) {
-                    boolean playerOne = i % 2 == 0;
+
                     if (doCoEvolution) {
-                        fitness += fitnessCalculator.coEvolutionFitness(US, prevChampion, playerOne);
+                        fitness += fitnessCalculator.coEvolutionFitness(US, prevChampion, i);
                     } else {
-                        fitness += fitnessCalculator.fitnessOfUtilitySystem(US, playerOne, i);
+                        fitness += fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount);
                     }
                 }
+
+
                 fitness /= iterations; // get the avg fitness
 
                 if (doCoEvolution) //if doing co-evolution, see if need of updating champion
@@ -90,12 +109,24 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public void init(Properties props) throws Exception {
-        iterations = props.getIntProperty("fitness.iterations", 10);
-        doCoEvolution = props.getBooleanProperty("utility.system.co.evolution", false);
+        iterations = props.getIntProperty("fitness.iterations");
+        opponentType = OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
+        gametype = GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
-        if (doCoEvolution) {
+        //TODO can add more game settings here if wanted like maps, gametime and so on.
+
+        if (!gametype.equals(GameTypes.NORMAL))
+        {
+            // read the game goal property
+            gameGoalCount = props.getIntProperty("fitness.game.goal");
+        }
+
+        if (opponentType.equals(OpponentTypes.COEVOLUTION)) {
+            // if doing co-evolution, set initial champ and champ fitness
             prevChampion = USConstants.getRandomUtilitySystem();
             championFitness = 0;
+            doCoEvolution = true;
         }
+
     }
 }

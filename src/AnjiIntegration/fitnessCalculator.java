@@ -5,6 +5,7 @@ import ai.UtilitySystemAI;
 import ai.abstraction.*;
 import ai.core.AI;
 import ai.utilitySystem.UtilitySystem;
+import com.anji.microRTS.microRTSFitnessFunction;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.Unit;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class fitnessCalculator {
 
-    public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, boolean isPlayerZero, int opponentAI) throws Exception {
+    public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI) throws Exception {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
@@ -27,6 +28,8 @@ public class fitnessCalculator {
         AI playerZero;
         AI PlayerOne;
         int playerId;
+        //decide if player 1 or 2, for swapping positions on the board since it can give some advantages
+        boolean isPlayerZero = iteration % 2 == 0;
         if (isPlayerZero) {
             playerZero = new UtilitySystemAI(utt, utilitySystem, false);
             playerId = 0;
@@ -75,7 +78,7 @@ public class fitnessCalculator {
         //return MAX_GAME_CYCLES - gs.getTime() + res;
     }
 
-    public static int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, boolean isPlayerZero) throws Exception {
+    public static int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, int iteration) throws Exception {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
@@ -87,6 +90,9 @@ public class fitnessCalculator {
         AI playerZero;
         AI PlayerOne;
         int playerId;
+
+        //decide if player 1 or 2, for swapping positions on the board since it can give some advantages
+        boolean isPlayerZero = iteration % 2 == 0;
         if (isPlayerZero) {
             playerZero = new UtilitySystemAI(utt, utilitySystem, false);
             playerId = 0;
@@ -117,6 +123,19 @@ public class fitnessCalculator {
         }
     }
 
+
+    private static AI selectAIFromOpponenType(UnitTypeTable utt, microRTSFitnessFunction.OpponentTypes type, int iteration) {
+        switch (type) {
+            case PASSIVE:
+                return new PassiveAI(utt);
+            case ROUND_ROBIN:
+                return selectOpponentAI(utt, iteration);
+            case COEVOLUTION:
+            case default:
+                return null;
+        }
+    }
+
     private static AI selectOpponentAI(UnitTypeTable utt, int opponentAI) {
 
         switch (opponentAI) {
@@ -141,4 +160,76 @@ public class fitnessCalculator {
         }
     }
 
+    public static int calcFitness(UtilitySystem utilitySystem, int iteration, microRTSFitnessFunction.OpponentTypes opponentType, microRTSFitnessFunction.GameTypes gametype, int gameGoalCount) throws Exception {
+        // == SETUP GAME BASED ON PARAMETERS ==
+        String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
+        UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
+        int MAX_GAME_CYCLES = 5000; // game time
+        int MAX_INACTIVE_CYCLES = 5000;
+        PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
+
+        // == SETUP THE AIs ==
+        AI playerZero;
+        AI playerOne;
+        int playerId;
+        boolean isPlayerZero = iteration % 2 == 0;
+
+        if (isPlayerZero) {
+            playerZero = new UtilitySystemAI(utt, utilitySystem, false);
+            playerOne = selectAIFromOpponenType(utt, opponentType, iteration);
+            playerId = 0;
+        } else {
+            playerZero = selectAIFromOpponenType(utt, opponentType, iteration);
+            playerOne = new UtilitySystemAI(utt, utilitySystem, false);
+            playerId = 1;
+        }
+
+        GameState gs;
+        switch (gametype) {
+            case NORMAL:
+                // run the game
+                gs = RunExperimentTest.runNormalGame(playerZero, playerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
+
+                // eval gamestate: small rewards for time survived in lost game, bigger rewards when winning the game fast.
+
+                int res = MAX_GAME_CYCLES + 1000;
+
+                if (gs.winner() == playerId) // win
+                {
+                    return res - gs.getTime();
+                } else if (gs.winner() == -1) //tie
+                {
+                    return 1000;
+                } else //else lost the game, reward based on survival time
+                {
+                    return gs.getTime() / 10;
+                }
+
+            case HARVEST:
+                // run the game
+                gs = RunExperimentTest.runUntilAtResourceCount(playerZero, playerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, playerId, gameGoalCount);
+
+                // eval gamestate: if US_AI killed enemy AI reward 1, else it gets a higher score the quicker it gets the resource amount
+
+                if (gs.winner() == playerId) // utility system AI won
+                {
+                    return 1;
+                }
+
+                return MAX_GAME_CYCLES - gs.getTime();
+            case MILITIA_UNITS:
+                // run the game
+                gs = RunExperimentTest.runUntilAtWarriorCount(playerZero, playerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, playerId, gameGoalCount);
+
+                if (gs.winner() == playerId) // win
+                {
+                    int resourceCount = gs.getPhysicalGameState().getPlayer(playerId).getResources();
+                    return resourceCount * 5; // 5 pr resource cause why not.
+                }
+
+                return MAX_GAME_CYCLES - gs.getTime();
+            default:
+                throw new Exception("invalid gametype, in fitnessCalculator");
+        }
+    }
 }

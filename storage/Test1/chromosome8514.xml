@@ -1,0 +1,38 @@
+<chromosome id="8514" primary-parent-id="8427"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="in" activation="sigmoid"/>
+<neuron id="9" type="in" activation="sigmoid"/>
+<neuron id="10" type="in" activation="sigmoid"/>
+<neuron id="11" type="in" activation="sigmoid"/>
+<neuron id="12" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="14" type="in" activation="sigmoid"/>
+<neuron id="15" type="in" activation="sigmoid"/>
+<neuron id="16" type="in" activation="sigmoid"/>
+<neuron id="17" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="43" type="out" activation="sigmoid"/>
+<connection id="47" src-id="3" dest-id="43" weight="2.323081007102066"/>
+<neuron id="65" type="out" activation="sigmoid"/>
+<neuron id="87" type="out" activation="sigmoid"/>
+<connection id="101" src-id="13" dest-id="87" weight="4.319507776391033"/>
+<neuron id="109" type="out" activation="sigmoid"/>
+<connection id="126" src-id="16" dest-id="109" weight="-1.351436192358741"/>
+<neuron id="131" type="out" activation="sigmoid"/>
+<neuron id="153" type="out" activation="sigmoid"/>
+<neuron id="175" type="out" activation="sigmoid"/>
+<neuron id="197" type="out" activation="sigmoid"/>
+<connection id="215" src-id="17" dest-id="197" weight="-3.3843237691873544"/>
+<neuron id="791" type="hid" activation="MIN"/>
+<connection id="792" src-id="19" dest-id="791" weight="1.0974624455065332"/>
+<connection id="793" src-id="791" dest-id="175" weight="-3.2387121002547437"/>
+</chromosome>
