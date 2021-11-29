@@ -2,7 +2,7 @@ package com.anji.microRTS;
 
 import AnjiIntegration.anjiConverter;
 import AnjiIntegration.fitnessCalculator;
-import ai.utilitySystem.USConstants;
+import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.integration.XmlPersistableChromosome;
 import com.anji.util.Configurable;
@@ -58,7 +58,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 var xmlString = new XmlPersistableChromosome(chrom).toXml();
 //                System.out.println("Building utility system");
                 US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
-                US.setRandom(true);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -123,7 +122,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
         if (opponentType.equals(OpponentTypes.COEVOLUTION)) {
             // if doing co-evolution, set initial champ and champ fitness
-            prevChampion = USConstants.getRandomUtilitySystem();
+            prevChampion = StaticUtilitySystems.getRandomUtilitySystem();
             championFitness = 0;
             doCoEvolution = true;
         }

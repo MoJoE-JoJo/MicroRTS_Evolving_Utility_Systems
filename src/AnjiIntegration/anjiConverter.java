@@ -368,7 +368,7 @@ public class anjiConverter {
         // then we need to find all connections: starts with actions
         for (USAction action : utilitySystem.getActions()) {
             for (USNode param : action.getParams()) {
-                if (USNode.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                if (param instanceof USConstant) { // if a constant src is always 0 and the constant is stored in the weight
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
                 } else {
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"1\"/>\n");
@@ -379,7 +379,7 @@ public class anjiConverter {
 
         for (USFeature feature : utilitySystem.getFeatures()) {
             for (USNode param : feature.getParams()) {
-                if (USNode.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                if (param instanceof USConstant) { // if a constant src is always 0 and the constant is stored in the weight
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
                 } else {
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"1\"/>\n");

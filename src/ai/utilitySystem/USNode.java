@@ -27,9 +27,7 @@ public abstract class USNode {
      */
     protected abstract void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception;
 
-    public static NodeType getType() {
-        return null;
-    }
+    public abstract NodeType getType();
 
     /**
      * Gets the value of the node.

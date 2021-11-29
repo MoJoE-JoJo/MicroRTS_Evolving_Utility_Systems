@@ -19,8 +19,8 @@ public class USConstant extends USNode {
         this.value = this.constant;
         this.visited = true;
     }
-
-    public static NodeType getType() {
+    @Override
+    public NodeType getType() {
         return NodeType.US_CONSTANT;
     }
 

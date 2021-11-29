@@ -153,8 +153,8 @@ public void init( Properties props ) throws Exception {
 
 	//TODO if we want to run from a baseline, it would be here we added it.
 	// USE THE BELOW METHODs
-	//anjiConverter.toXMLStringFromUtilitySystem();
-	//FilePersistence.chromosomeFromXml();
+	anjiConverter.toXMLStringFromUtilitySystem();
+	FilePersistence.chromosomeFromXml();
 
 
 
