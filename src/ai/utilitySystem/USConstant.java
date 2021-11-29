@@ -1,4 +1,5 @@
 package ai.utilitySystem;
+
 import rts.*;
 
 public class USConstant extends USNode {
@@ -19,15 +20,14 @@ public class USConstant extends USNode {
         this.visited = true;
     }
 
-    @Override
-    public NodeType getType() {
+    public static NodeType getType() {
         return NodeType.US_CONSTANT;
     }
 
     @Override
     public String toPlantUML() {
         return "object " + this.name + " {\n" +
-            "Value: " + this.constant + "\n" +
-            "}\n";
+                "Value: " + this.constant + "\n" +
+                "}\n";
     }
 }

@@ -9,6 +9,10 @@ public class USFeature extends USNode {
     private Operation operation;
     private List<USNode> params;
 
+    public List<USNode> getParams() {
+        return params;
+    }
+
     public enum Operation {
         DIVIDE,
         MULTIPLY,
@@ -116,9 +120,12 @@ public class USFeature extends USNode {
         }
     }
 
-    @Override
-    public NodeType getType() {
+    public static NodeType getType() {
         return NodeType.US_FEATURE;
+    }
+
+    public String getOperation() {
+        return operation.toString();
     }
 
     @Override
@@ -147,7 +154,7 @@ public class USFeature extends USNode {
 
     public String relationsToPlantUML() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i<params.size(); i++){
+        for (int i = 0; i < params.size(); i++) {
             sb.append(params.get(i).getName()).append(" ----> ").append(name).append(" : V").append(i).append("\n");
         }
         return sb.toString();

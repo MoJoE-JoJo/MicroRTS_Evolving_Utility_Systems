@@ -34,6 +34,10 @@ public class USAction extends USNode {
         params.add(node);
     }
 
+    public List<USNode> getParams(){
+        return params;
+    }
+
     @Override
     protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
 
@@ -56,8 +60,7 @@ public class USAction extends USNode {
         this.value = val;
     }
 
-    @Override
-    public NodeType getType() {
+    public static NodeType getType() {
         return NodeType.US_ACTION;
     }
 

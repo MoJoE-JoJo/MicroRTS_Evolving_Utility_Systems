@@ -109,12 +109,11 @@ public class anjiConverter {
                                 // The first Neurons in the chromosome are always the ids 1-X where X is the amount of input neurons
                                 int neuronIdInt = Integer.parseInt(neuronId);
                                 // The neuron with id 0 we use for creating constants, so it is skipped here
-                                if(neuronIdInt == 0)
-                                {
+                                if (neuronIdInt == 0) {
                                     break;
                                 }
 
-                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[neuronIdInt-1];
+                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[neuronIdInt - 1];
                                 var usVariable = new USVariable(neuronId + "_" + gameStateVariable, gameStateVariable);
                                 nodeMap.put(neuronId, usVariable);
                                 varibleList.add(usVariable);
@@ -160,8 +159,7 @@ public class anjiConverter {
 
                         // each time there is a connection that has id: 0 as src create a new constant node
                         // The value is based on the weight of the connection
-                        if(srcId.equals("0"))
-                        {
+                        if (srcId.equals("0")) {
                             float conVal = Float.parseFloat(tempXMLNode.getAttributes().getNamedItem("weight").getNodeValue());
                             //todo could be multiplied by a bias here? for now assume bias is always 1.
                             USConstant constant = new USConstant(connId, conVal);
@@ -203,8 +201,7 @@ public class anjiConverter {
             var destList = entry.getValue();
             USNode srcNode = nodeMap.get(src); // lookup src node
 
-            if(srcNode == null)
-            {
+            if (srcNode == null) {
                 System.out.println("Stop");
             }
 
@@ -323,17 +320,75 @@ public class anjiConverter {
         return targetStream;
     }
 
-    public static String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
-        //TODO
 
-        //<chromosome id="231">
+    private class tmpConnection {
+
+
+    }
+
+    public static String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
+
+        int neuronId = 0;
+
+        Map<USNode, Integer> neuronIDMap = new HashMap<>();
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("<chromosome id=\"" + 1 + "\">\n");
+
         // <neuron id="0" type="in" activation="sigmoid"/>
 
 
-        // create in node "0" which is is the constant node
-        // for each variable node -> <neuron id="0" type="in" activation="sigmoid"/>
+        // create in node "0" which is the constant node
+        builder.append("<neuron id=\"" + neuronId + "\" type=\"in\" activation=\"sigmoid\"/>\n");
+        neuronId++;
 
-        //utilitySystem.
-        return "";
+        // then for each variable node -> <neuron id="0" type="in" activation="sigmoid"/>
+        for (USVariable variable : utilitySystem.getVariables()) {
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"in\" activation=\"sigmoid\"/>\n");
+            neuronIDMap.put(variable, neuronId);
+            neuronId++;
+        }
+
+        // then for each action node -> <neuron id="0" type="out" activation="sigmoid"/>
+        for (USAction action : utilitySystem.getActions()) {
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"out\" activation=\"sigmoid\"/>\n");
+            neuronIDMap.put(action, neuronId);
+            neuronId++;
+        }
+
+
+        // then for each feature node -> <neuron id="0" type="hid" activation="feature.operation"/>
+        for (USFeature feature : utilitySystem.getFeatures()) {
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"hid\" activation=\"" + feature.getOperation() + "\"/>\n");
+            neuronIDMap.put(feature, neuronId);
+            neuronId++;
+        }
+
+        // then we need to find all connections: starts with actions
+        for (USAction action : utilitySystem.getActions()) {
+            for (USNode param : action.getParams()) {
+                if (USNode.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
+                } else {
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"1\"/>\n");
+                }
+                neuronId++;
+            }
+        }
+
+        for (USFeature feature : utilitySystem.getFeatures()) {
+            for (USNode param : feature.getParams()) {
+                if (USNode.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
+                } else {
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"1\"/>\n");
+                }
+                neuronId++;
+            }
+        }
+
+        builder.append("</chromosome>"); // end tag
+        return builder.toString();
     }
 }

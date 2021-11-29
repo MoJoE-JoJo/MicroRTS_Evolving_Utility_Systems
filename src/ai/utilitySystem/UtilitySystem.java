@@ -145,4 +145,16 @@ public class UtilitySystem {
     public void setRandom(boolean b) {
         random = b;
     }
+
+    public List<USVariable> getVariables() {
+        return variables;
+    }
+
+    public List<USFeature> getFeatures() {
+        return features;
+    }
+
+    public List<USAction> getActions() {
+        return actions;
+    }
 }
