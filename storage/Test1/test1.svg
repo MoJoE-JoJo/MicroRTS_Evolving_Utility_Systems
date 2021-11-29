@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1099px" preserveAspectRatio="none" style="width:1432px;height:1099px;background:#FFFFFF;" version="1.1" viewBox="0 0 1432 1099" width="1432px" zoomAndPan="magnify"><defs><filter height="300%" id="fjuholrlm24ew" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="199" x="610" y="16.708">Simple Utility System</text><!--MD5=[5c6f735556c006253f07fb52d40e42a3]
+cluster Variables--><rect fill="#FFFFFF" filter="url(#fjuholrlm24ew)" height="673" style="stroke:#000000;stroke-width:1.5;" width="953" x="7" y="27.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="76" x="445.5" y="42.9482">Variables</text><!--MD5=[35029accb77031662d9bd72a87160063]
+cluster Actions--><rect fill="#FFFFFF" filter="url(#fjuholrlm24ew)" height="527" style="stroke:#000000;stroke-width:1.5;" width="365" x="1055" y="560.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="62" x="1206.5" y="575.9482">Actions</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="137" x="54" y="281.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="61" y="295.0918">1_PLAYER_RESOURCE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="55" x2="190" y1="299.9219" y2="299.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="60" y="313.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="136" x="54.5" y="354.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="122" x="61.5" y="368.0918">2_ENEMY_RESOURCE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="55.5" x2="189.5" y1="372.9219" y2="372.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="60.5" y="386.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="134" x="55.5" y="208.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="120" x="62.5" y="222.0918">3_PLAYER_WORKERS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="56.5" x2="188.5" y1="226.9219" y2="226.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="61.5" y="240.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="132" x="56.5" y="135.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="118" x="63.5" y="149.0918">4_ENEMY_WORKERS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="57.5" x2="187.5" y1="153.9219" y2="153.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="62.5" y="167.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="137" x="54" y="62.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="61" y="76.0918">5_PLAYER_WARRIORS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="55" x2="190" y1="80.9219" y2="80.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="60" y="94.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="135" x="283" y="281.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="121" x="290" y="295.0918">6_ENEMY_WARRIORS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="284" x2="417" y1="299.9219" y2="299.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="289" y="313.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="109" x="296" y="208.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="95" x="303" y="222.0918">7_PLAYER_LIGHT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="297" x2="404" y1="226.9219" y2="226.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="302" y="240.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="107" x="69" y="427.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="93" x="76" y="441.0918">8_ENEMY_LIGHT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="70" x2="175" y1="445.9219" y2="445.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="75" y="459.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="114" x="293.5" y="135.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="100" x="300.5" y="149.0918">9_PLAYER_HEAVY</text><line style="stroke:#A80036;stroke-width:1.5;" x1="294.5" x2="406.5" y1="153.9219" y2="153.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="299.5" y="167.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="119" x="291" y="62.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="105" x="298" y="76.0918">10_ENEMY_HEAVY</text><line style="stroke:#A80036;stroke-width:1.5;" x1="292" x2="409" y1="80.9219" y2="80.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="297" y="94.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="129" x="515" y="281.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="522" y="295.0918">11_PLAYER_RANGED</text><line style="stroke:#A80036;stroke-width:1.5;" x1="516" x2="643" y1="299.9219" y2="299.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="521" y="313.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="128" x="515.5" y="208.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="522.5" y="222.0918">12_ENEMY_RANGED</text><line style="stroke:#A80036;stroke-width:1.5;" x1="516.5" x2="642.5" y1="226.9219" y2="226.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="521.5" y="240.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="144" x="50.5" y="500.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="130" x="57.5" y="514.0918">13_PLAYER_BARRACKS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="51.5" x2="193.5" y1="518.9219" y2="518.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="56.5" y="532.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="142" x="508.5" y="135.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="128" x="515.5" y="149.0918">14_ENEMY_BARRACKS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="509.5" x2="649.5" y1="153.9219" y2="153.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="514.5" y="167.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="165" x="497" y="62.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="151" x="504" y="76.0918">15_PLAYER_BASE_HEALTH</text><line style="stroke:#A80036;stroke-width:1.5;" x1="498" x2="661" y1="80.9219" y2="80.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="503" y="94.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="163" x="752" y="281.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="149" x="759" y="295.0918">16_ENEMY_BASE_HEALTH</text><line style="stroke:#A80036;stroke-width:1.5;" x1="753" x2="914" y1="299.9219" y2="299.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="758" y="313.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="199" x="23" y="573.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="185" x="30" y="587.0918">17_UNHARVESTED_RESOURCES</text><line style="stroke:#A80036;stroke-width:1.5;" x1="24" x2="221" y1="591.9219" y2="591.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="29" y="605.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="221" x="723" y="208.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="207" x="730" y="222.0918">18_PLAYER_HARVESTING_WORKERS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="724" x2="943" y1="226.9219" y2="226.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="729" y="240.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="175" x="35" y="646.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="161" x="42" y="660.0918">19_PLAYER_IDLE_WARRIORS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="36" x2="209" y1="664.9219" y2="664.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="41" y="678.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="173" x="747" y="135.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="159" x="754" y="149.0918">20_PLAYER_IDLE_WORKERS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="748" x2="919" y1="153.9219" y2="153.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="753" y="167.2041">Value: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="177" x="1071.5" y="1033.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="163" x="1078.5" y="1047.0918">ATTACK_WITH_SINGLE_UNIT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1072.5" x2="1247.5" y1="1051.9219" y2="1051.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1077.5" y="1065.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="178" x="1071" y="668.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="164" x="1078" y="682.0918">DEFEND_WITH_SINGLE_UNIT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1072" x2="1248" y1="686.9219" y2="686.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1077" y="700.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="86" x="1117" y="887.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="1124" y="901.0918">BUILD_BASE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1118" x2="1202" y1="905.9219" y2="905.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1123" y="919.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="117" x="1101.5" y="595.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="103" x="1108.5" y="609.0918">BUILD_BARRACKS</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1102.5" x2="1217.5" y1="613.9219" y2="613.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1107.5" y="627.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="106" x="1107" y="741.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92" x="1114" y="755.0918">BUILD_WORKER</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1108" x2="1212" y1="759.9219" y2="759.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1113" y="773.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="89" x="1312.5" y="668.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="75" x="1319.5" y="682.0918">BUILD_LIGHT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1313.5" x2="1400.5" y1="686.9219" y2="686.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1318.5" y="700.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="103" x="1108.5" y="814.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="89" x="1115.5" y="828.0918">BUILD_RANGED</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1109.5" x2="1210.5" y1="832.9219" y2="832.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1114.5" y="846.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="94" x="1310" y="595.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="1317" y="609.0918">BUILD_HEAVY</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1311" x2="1403" y1="613.9219" y2="613.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1316" y="627.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="37.6094" style="stroke:#A80036;stroke-width:1.5;" width="137" x="1091.5" y="960.9531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="1098.5" y="974.0918">HARVEST_RESOURCE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1092.5" x2="1227.5" y1="978.9219" y2="978.9219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="54" x="1097.5" y="992.2041">Score: 0.0</text><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="49.25" style="stroke:#A80036;stroke-width:1.5;" width="74" x="796.5" y="883.4531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="821.5" y="896.5918">637</text><line style="stroke:#A80036;stroke-width:1.0;" x1="796.5" x2="870.5" y1="901.4219" y2="901.4219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="26" x="804" y="912.7041">Func</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="23" x="842.5" y="912.7041">MAX</text><line style="stroke:#A80036;stroke-width:1.0;" x1="837.5" x2="837.5" y1="901.4219" y2="917.0625"/><line style="stroke:#A80036;stroke-width:1.0;" x1="796.5" x2="870.5" y1="917.0625" y2="917.0625"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="31" x="801.5" y="928.3447">Value</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="17" x="842.5" y="928.3447">0.0</text><line style="stroke:#A80036;stroke-width:1.0;" x1="837.5" x2="837.5" y1="917.0625" y2="932.7031"/><rect fill="#FEFECE" filter="url(#fjuholrlm24ew)" height="49.25" style="stroke:#A80036;stroke-width:1.5;" width="71" x="798" y="721.4531"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="818" y="734.5918">1346</text><line style="stroke:#A80036;stroke-width:1.0;" x1="798" x2="869" y1="739.4219" y2="739.4219"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="26" x="805.5" y="750.7041">Func</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="20" x="844" y="750.7041">MIN</text><line style="stroke:#A80036;stroke-width:1.0;" x1="839" x2="839" y1="739.4219" y2="755.0625"/><line style="stroke:#A80036;stroke-width:1.0;" x1="798" x2="869" y1="755.0625" y2="755.0625"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="31" x="803" y="766.3447">Value</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="17" x="844" y="766.3447">0.0</text><line style="stroke:#A80036;stroke-width:1.0;" x1="839" x2="839" y1="755.0625" y2="770.7031"/><!--MD5=[5dfa330ac5bb8c74dbc0e9d932953edf]
+link 13_PLAYER_BARRACKS to 637--><path codeLine="107" d="M175.634,539.0071 C199.261,547.6421 222,555.9531 222,555.9531 C222,555.9531 252,851.9531 252,851.9531 C252,851.9531 642.808,888.9801 783.105,902.2731 " fill="none" id="13_PLAYER_BARRACKS-to-637" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="788.392,902.7741,779.8093,897.9433,783.4143,902.3026,779.0549,905.9076,788.392,902.7741" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="17" x="449" y="866.02">V0</text><!--MD5=[d84cd24ba3f9e5368a576bee56439500]
+link 2_ENEMY_RESOURCE to 1346--><path codeLine="108" d="M175.634,393.0071 C199.261,401.6421 222,409.9531 222,409.9531 C222,409.9531 723,700.9531 723,700.9531 C723,700.9531 755.531,714.0251 785.131,725.9191 " fill="none" id="2_ENEMY_RESOURCE-to-1346" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="789.851,727.8151,782.9911,720.7481,785.2115,725.951,780.0086,728.1714,789.851,727.8151" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="17" x="449" y="539.02">V0</text><!--MD5=[57c0ade4f519ade6fe8fafef76f245ff]
+link 19_PLAYER_IDLE_WARRIORS to ATTACK_WITH_SINGLE_UNIT--><path codeLine="109" d="M130.592,685.1591 C157.53,758.1131 252,1013.9531 252,1013.9531 C252,1013.9531 349.5,1058.9531 349.5,1058.9531 C349.5,1058.9531 349.5,1058.9531 1008,1058.9531 C1008,1058.9531 1034.98,1057.8811 1066.13,1056.6433 " fill="none" id="19_PLAYER_IDLE_WARRIORS-to-ATTACK_WITH_SINGLE_UNIT" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1071.16,1056.4433,1062.0072,1052.8065,1066.164,1056.6433,1062.3272,1060.8001,1071.16,1056.4433" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d2547eca2f39c7f8ca39dae7b402ba84]
+link 637 to BUILD_BASE--><path codeLine="110" d="M878.601,906.9531 C939.533,906.9531 1049.02,906.9531 1111.63,906.9531 " fill="none" id="637-to-BUILD_BASE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1116.8,906.9531,1107.8,902.9531,1111.8,906.9531,1107.8,910.9531,1116.8,906.9531" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[37354a5f70ac80f3aca0368b8667de5c]
+link 1346 to BUILD_WORKER--><path codeLine="111" d="M877.256,747.0611 C934.757,749.8961 1037.19,754.9471 1101.42,758.1141 " fill="none" id="1346-to-BUILD_WORKER" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1106.75,758.3771,1097.9549,753.9447,1101.7559,758.1343,1097.5663,761.9353,1106.75,758.3771" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9b5b6763be99147e0138e9ce6ec679a6]
+link 8_ENEMY_LIGHT to BUILD_RANGED--><path codeLine="112" d="M175.634,466.0071 C199.261,474.6421 222,482.9531 222,482.9531 C222,482.9531 349.5,825.9531 349.5,825.9531 C349.5,825.9531 349.5,825.9531 1008,825.9531 C1008,825.9531 1060.11,828.7141 1103.11,830.9921 " fill="none" id="8_ENEMY_LIGHT-to-BUILD_RANGED" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1108.3,831.2671,1099.5304,826.7845,1103.3074,830.9957,1099.0961,834.7727,1108.3,831.2671" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2012e842cc79f8c4fdd0edf50af3502e]
+link 17_UNHARVESTED_RESOURCES to HARVEST_RESOURCE--><path codeLine="113" d="M175.634,612.0071 C199.261,620.6421 222,628.9531 222,628.9531 C222,628.9531 252,859.9531 252,859.9531 C252,859.9531 349.5,987.9531 349.5,987.9531 C349.5,987.9531 349.5,987.9531 1008,987.9531 C1008,987.9531 1047.61,985.8551 1086.25,983.8071 " fill="none" id="17_UNHARVESTED_RESOURCES-to-HARVEST_RESOURCE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1091.45,983.5321,1082.2461,980.0266,1086.4574,983.8035,1082.6804,988.0148,1091.45,983.5321" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[789f73b5caac8202b857abd15e5df27e]
+link 1_PLAYER_RESOURCE to 3_PLAYER_WORKERS--><!--MD5=[ad9f175703bd6934c5696c5984657762]
+link 3_PLAYER_WORKERS to 4_ENEMY_WORKERS--><!--MD5=[240e1307fffbb8a06d419c02d2e27661]
+link 4_ENEMY_WORKERS to 5_PLAYER_WARRIORS--><!--MD5=[1ecbd760bd7632896789fdf2531ba382]
+link 1_PLAYER_RESOURCE to 6_ENEMY_WARRIORS--><!--MD5=[c2a6babf66f4b1d166a3c19b600e053a]
+link 6_ENEMY_WARRIORS to 7_PLAYER_LIGHT--><!--MD5=[4c4758c563bb999d75a2ba35c9fa0bbb]
+link 7_PLAYER_LIGHT to 9_PLAYER_HEAVY--><!--MD5=[5576da7d86373e8e4b64e9420ddec0a7]
+link 9_PLAYER_HEAVY to 10_ENEMY_HEAVY--><!--MD5=[d2f3cbefb9deeb0bd8a9d4b3bee39291]
+link 6_ENEMY_WARRIORS to 11_PLAYER_RANGED--><!--MD5=[fff1ef9029c4cb76a4f0d542b6e8ee94]
+link 11_PLAYER_RANGED to 12_ENEMY_RANGED--><!--MD5=[3525f205083d49f6bb06eb4370074e7d]
+link 12_ENEMY_RANGED to 14_ENEMY_BARRACKS--><!--MD5=[815cf0a29fa577a835a2bbbb39ad4957]
+link 14_ENEMY_BARRACKS to 15_PLAYER_BASE_HEALTH--><!--MD5=[b56bf52d01e18b32479bedf3627f9cf2]
+link 11_PLAYER_RANGED to 16_ENEMY_BASE_HEALTH--><!--MD5=[016fcad1dd94c76d142d8ebb0c32ed1c]
+link 16_ENEMY_BASE_HEALTH to 18_PLAYER_HARVESTING_WORKERS--><!--MD5=[66e0666710dfebbc18c7509ea0f21456]
+link 18_PLAYER_HARVESTING_WORKERS to 20_PLAYER_IDLE_WORKERS--><!--MD5=[4ee8d0cd0a17c5ac4563b6b2cb437f02]
+link DEFEND_WITH_SINGLE_UNIT to BUILD_BARRACKS--><!--MD5=[c5bca4dc6f72304f95fcf185a149c1a4]
+link DEFEND_WITH_SINGLE_UNIT to BUILD_LIGHT--><!--MD5=[ae80e0521f6a722bdd05db03843fabab]
+link BUILD_LIGHT to BUILD_HEAVY--><!--MD5=[c5ef65e2abe13b0f3e779458ece1b443]
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+' Horizontal lines: - ->, <- -, <- ->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 2_ENEMY_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 4_ENEMY_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 6_ENEMY_WARRIORS {
+Value: 0.0
+}
+object 7_PLAYER_LIGHT {
+Value: 0.0
+}
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+object HARVEST_RESOURCE {
+Score: 0.0
+}
+}
+map 637 {
+Func => MAX
+Value => 0.0
+}
+map 1346 {
+Func => MIN
+Value => 0.0
+}
+13_PLAYER_BARRACKS - - - -> 637 : V0
+2_ENEMY_RESOURCE - - - -> 1346 : V0
+19_PLAYER_IDLE_WARRIORS - - -> ATTACK_WITH_SINGLE_UNIT
+637 - - -> BUILD_BASE
+1346 - - -> BUILD_WORKER
+8_ENEMY_LIGHT - - -> BUILD_RANGED
+17_UNHARVESTED_RESOURCES - - -> HARVEST_RESOURCE
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 2_ENEMY_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 4_ENEMY_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 6_ENEMY_WARRIORS {
+Value: 0.0
+}
+object 7_PLAYER_LIGHT {
+Value: 0.0
+}
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+object HARVEST_RESOURCE {
+Score: 0.0
+}
+}
+map 637 {
+Func => MAX
+Value => 0.0
+}
+map 1346 {
+Func => MIN
+Value => 0.0
+}
+13_PLAYER_BARRACKS - - - -> 637 : V0
+2_ENEMY_RESOURCE - - - -> 1346 : V0
+19_PLAYER_IDLE_WARRIORS - - -> ATTACK_WITH_SINGLE_UNIT
+637 - - -> BUILD_BASE
+1346 - - -> BUILD_WORKER
+8_ENEMY_LIGHT - - -> BUILD_RANGED
+17_UNHARVESTED_RESOURCES - - -> HARVEST_RESOURCE
+@enduml
+
+PlantUML version 1.2021.15beta8(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

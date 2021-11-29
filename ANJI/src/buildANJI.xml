@@ -2,7 +2,7 @@
   <property name="src" value="."/>
   <property name="dest" value="../out"/>
 
-  <target name="compile">
+  <target name="compile" description="run javac">
     <javac srcdir="${src}" destdir="${dest}">
       <classpath>
         <pathelement path="../../lib/clibwrapper_jiio.jar"/>
@@ -20,13 +20,13 @@
     </javac>
   </target>
 
-  <target name="jar-lib" depends="compile" description="builds a new ANJI jar file and place it in the lib folder">
+  <target name="build-jar-in-lib" depends="compile" description="builds a new ANJI jar file and place it in the lib folder">
     <jar destfile="../../lib/anji.jar" basedir="${dest}" update="yes">
        <include name="**/**.class"/>
     </jar>
   </target>
 
-  <target name="jar-here" depends="compile" description="builds a jar file beside the build xml file">
+  <target name="build-jar-here" depends="compile" description="builds a jar file beside the build xml file">
     <jar jarfile="anji.jar" basedir="${dest}">
       <include name="**/**.class"/>
     </jar>

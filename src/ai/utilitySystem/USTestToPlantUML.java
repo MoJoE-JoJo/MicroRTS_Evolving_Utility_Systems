@@ -49,11 +49,11 @@ public class USTestToPlantUML {
         features.add(f4);
 
         // actions
-        USAction a1 = new USAction("a1", f1, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT);
+        USAction a1 = new USAction("a1", new LinkedList<>(List.of(f1)), USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT);
         actions.add(a1);
-        USAction a2 = new USAction("a2", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT);
+        USAction a2 = new USAction("a2", new LinkedList<>(List.of(f2)), USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT);
         actions.add(a2);
-        USAction a3 = new USAction("a3", f4, USAction.UtilAction.BUILD_WORKER);
+        USAction a3 = new USAction("a3", new LinkedList<>(List.of(f4)), USAction.UtilAction.BUILD_WORKER);
         actions.add(a3);
 
         UtilitySystem us = new UtilitySystem(variables, features, actions, constants);

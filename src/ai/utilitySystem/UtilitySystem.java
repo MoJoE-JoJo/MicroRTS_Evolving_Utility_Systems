@@ -113,17 +113,29 @@ public class UtilitySystem {
             actions += action.toPlantUML();
             relations += action.relationsToPlantUML();
         }
-        concatString += USConstants.PlantUMLStart;
-        concatString += USConstants.PlantUMLVariablesStart;
+        concatString += StaticUtilitySystems.PlantUMLStart;
+        concatString += StaticUtilitySystems.PlantUMLVariablesStart;
         concatString += variables;
         concatString += "}\n";
-        concatString += USConstants.PlantUMLActionsStart;
+        concatString += StaticUtilitySystems.PlantUMLActionsStart;
         concatString += actions;
         concatString += "}\n";
         concatString += constants;
         concatString += features;
         concatString += relations;
-        concatString += USConstants.PlantUMLEnd;
+        concatString += StaticUtilitySystems.PlantUMLEnd;
         return concatString;
+    }
+
+    public List<USVariable> getVariables() {
+        return variables;
+    }
+
+    public List<USAction> getActions() {
+        return actions;
+    }
+
+    public List<USFeature> getFeatures() {
+        return features;
     }
 }

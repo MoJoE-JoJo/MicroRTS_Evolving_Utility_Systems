@@ -19,17 +19,6 @@
  */
 package com.anji.neat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.apache.log4j.Logger;
-import org.jgap.BulkFitnessFunction;
-import org.jgap.Chromosome;
-import org.jgap.Genotype;
-import org.jgap.event.GeneticEvent;
-
 import com.anji.Copyright;
 import com.anji.integration.LogEventListener;
 import com.anji.integration.PersistenceEventListener;
@@ -39,6 +28,16 @@ import com.anji.run.Run;
 import com.anji.util.Configurable;
 import com.anji.util.Properties;
 import com.anji.util.Reset;
+import org.apache.log4j.Logger;
+import org.jgap.BulkFitnessFunction;
+import org.jgap.Chromosome;
+import org.jgap.Genotype;
+import org.jgap.event.GeneticEvent;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Configures and performs an ANJI evolutionary run.
@@ -152,11 +151,20 @@ public void init( Properties props ) throws Exception {
 	config.setBulkFitnessFunction( fitnessFunc );
 	maxFitness = fitnessFunc.getMaxFitnessValue();
 
+	//TODO if we want to run from a baseline, it would be here we added it.
+	// USE THE BELOW METHODs
+	anjiConverter.toXMLStringFromUtilitySystem();
+	FilePersistence.chromosomeFromXml();
+
+
+
+
 	// load population, either from previous run or random
 	genotype = db.loadGenotype( config );
 	if ( genotype != null )
 		logger.info( "genotype from previous run" );
 	else {
+		//config.setSampleChromosomeMaterial(Chromosome);
 		genotype = Genotype.randomInitialGenotype( config );
 		logger.info( "random genotype" );
 	}
