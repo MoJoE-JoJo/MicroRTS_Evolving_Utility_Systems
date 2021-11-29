@@ -121,7 +121,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             for (Unit u : gs.getUnits()) {
                 if ((gs.getActionAssignment(u) == null || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE) &&
                         !attackingUnits.contains(u) &&
-                        !defendingUnits.contains(u)) {
+                        !defendingUnits.contains(u) &&
+                        !harvestingWorkers.contains(u)){
                     passiveUnits.add(u);
                     harvestingWorkers.remove(u);
                     buildingWorkers.remove(u);

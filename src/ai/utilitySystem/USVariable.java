@@ -113,7 +113,8 @@ public class USVariable extends USNode {
                 break;
             case PLAYER_IDLE_WORKERS:
                 this.value = getPlayerUnitCount(gs, player, "Worker") -
-                    unitCountInGroup(unitGroups.harvestingWorkers, player, "Worker");
+                    unitCountInGroup(unitGroups.harvestingWorkers, player, "Worker") -
+                    unitCountInGroup(unitGroups.buildingWorkers, player, "Worker");
                 break;
             default:
                 throw new Exception("Not yet implemented game state variable: " + this.gsv);
