@@ -82,7 +82,7 @@ public final static ActivationFunctionType SUM = new ActivationFunctionType("SUM
 public final static ActivationFunctionType SUBTRACT = new ActivationFunctionType("SUBTRACT");
 public final static ActivationFunctionType MIN = new ActivationFunctionType("MIN");
 public final static ActivationFunctionType MAX = new ActivationFunctionType("MAX");
-public final static ActivationFunctionType POWER = new ActivationFunctionType("MAX");
+public final static ActivationFunctionType POWER = new ActivationFunctionType("POWER");
 
 
 /**

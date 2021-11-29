@@ -23,6 +23,7 @@ import com.anji.Copyright;
 import com.anji.integration.LogEventListener;
 import com.anji.integration.PersistenceEventListener;
 import com.anji.integration.PresentationEventListener;
+import com.anji.persistence.FilePersistence;
 import com.anji.persistence.Persistence;
 import com.anji.run.Run;
 import com.anji.util.Configurable;
@@ -34,6 +35,9 @@ import org.jgap.Chromosome;
 import org.jgap.Genotype;
 import org.jgap.event.GeneticEvent;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -153,8 +157,8 @@ public void init( Properties props ) throws Exception {
 
 	//TODO if we want to run from a baseline, it would be here we added it.
 	// USE THE BELOW METHODs
-	anjiConverter.toXMLStringFromUtilitySystem();
-	FilePersistence.chromosomeFromXml();
+	//anjiConverter.toXMLStringFromUtilitySystem();
+	//FilePersistence.chromosomeFromXml();
 
 
 
@@ -164,7 +168,22 @@ public void init( Properties props ) throws Exception {
 	if ( genotype != null )
 		logger.info( "genotype from previous run" );
 	else {
-		//config.setSampleChromosomeMaterial(Chromosome);
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
+		//load our baseline file
+		InputStream targetStream = new FileInputStream("baselineChromosome.xml");
+
+		StringBuilder textBuilder = new StringBuilder();
+		try (Reader reader = new BufferedReader(new InputStreamReader
+				(targetStream, Charset.forName(StandardCharsets.UTF_8.name())))) {
+			int c = 0;
+			while ((c = reader.read()) != -1) {
+				textBuilder.append((char) c);
+			}
+		}
+
+
+		Chromosome baseLineChromosome = FilePersistence.chromosomeFromXml(config, textBuilder.toString());
+		config.setSampleChromosomeMaterial(baseLineChromosome.cloneMaterial());
 		genotype = Genotype.randomInitialGenotype( config );
 		logger.info( "random genotype" );
 	}

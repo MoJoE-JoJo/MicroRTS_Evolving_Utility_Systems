@@ -119,8 +119,8 @@ public class USFeature extends USNode {
             default -> throw new Exception("Not yet implemented operation: " + this.operation);
         }
     }
-
-    public static NodeType getType() {
+    @Override
+    public NodeType getType() {
         return NodeType.US_FEATURE;
     }
 
