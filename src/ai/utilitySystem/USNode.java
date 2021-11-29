@@ -9,13 +9,14 @@ public abstract class USNode {
     protected String name;
     protected float value;
     protected boolean visited;
-
     public enum NodeType {
         US_VARIABLE,
         US_FEATURE,
         US_ACTION,
         US_CONSTANT
     }
+
+    public abstract NodeType getType();
 
     /**
      * Calculate the value of the node. Should only be called by getValue().
@@ -26,8 +27,6 @@ public abstract class USNode {
      * @throws Exception
      */
     protected abstract void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception;
-
-    public abstract NodeType getType();
 
     /**
      * Gets the value of the node.

@@ -19,7 +19,8 @@ public class EvaluateChromosome {
 
             try {
                 // build utility system
-                UtilitySystem utilitySystem = anjiConverter.toUtilitySystemFromChromosome(8409);
+                anjiConverter anjioCon = new anjiConverter();
+                UtilitySystem utilitySystem = anjioCon.toUtilitySystemFromChromosome(8409);
 
                 // setup AI and game
                 // == GAME SETTINGS ==

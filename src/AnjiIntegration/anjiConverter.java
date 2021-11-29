@@ -18,7 +18,12 @@ import java.util.*;
 
 public class anjiConverter {
 
-    public static UtilitySystem toUtilitySystemFromXMLString(String rawXML) {
+    public anjiConverter()
+    {
+
+    }
+
+    public UtilitySystem toUtilitySystemFromXMLString(String rawXML) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         UtilitySystem returnSystem = null;
@@ -37,7 +42,7 @@ public class anjiConverter {
     }
 
 
-    public static UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
+    public UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
         ChromosomeToNetworkXml converter = new ChromosomeToNetworkXml();
 
         // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
@@ -63,7 +68,7 @@ public class anjiConverter {
         return returnSystem;
     }
 
-    private static UtilitySystem buildUtilitySystemFromNodeList(NodeList nodeList) {
+    private UtilitySystem buildUtilitySystemFromNodeList(NodeList nodeList) {
         // Structures and values used
         Map<String, USNode> nodeMap = new HashMap<>();
         // Map where the key is the src and the value the destination
@@ -259,7 +264,7 @@ public class anjiConverter {
         return US;
     }
 
-    private static boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
+    private boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
         if (srcNode.getType() == USNode.NodeType.US_ACTION && destNode.getType() == USNode.NodeType.US_ACTION) {
             return false;
         }
@@ -279,7 +284,7 @@ public class anjiConverter {
         return true;
     }
 
-    private static void printNote(NodeList nodeList) {
+    private void printNote(NodeList nodeList) {
 
         for (int count = 0; count < nodeList.getLength(); count++) {
 
@@ -315,18 +320,12 @@ public class anjiConverter {
         }
     }
 
-    private static InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
+    private InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
         InputStream targetStream = new FileInputStream(fileName);
         return targetStream;
     }
 
-
-    private class tmpConnection {
-
-
-    }
-
-    public static String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
+    public String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
 
         int neuronId = 0;
 
@@ -368,7 +367,7 @@ public class anjiConverter {
         // then we need to find all connections: starts with actions
         for (USAction action : utilitySystem.getActions()) {
             for (USNode param : action.getParams()) {
-                if (param instanceof USConstant) { // if a constant src is always 0 and the constant is stored in the weight
+                if (param.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
                 } else {
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"1\"/>\n");
@@ -379,7 +378,7 @@ public class anjiConverter {
 
         for (USFeature feature : utilitySystem.getFeatures()) {
             for (USNode param : feature.getParams()) {
-                if (param instanceof USConstant) { // if a constant src is always 0 and the constant is stored in the weight
+                if (param.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
                 } else {
                     builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"1\"/>\n");

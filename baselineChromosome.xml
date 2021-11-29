@@ -1,0 +1,52 @@
+<chromosome id="1">
+<neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="out" activation="sigmoid"/>
+<neuron id="9" type="out" activation="sigmoid"/>
+<neuron id="10" type="out" activation="sigmoid"/>
+<neuron id="11" type="out" activation="sigmoid"/>
+<neuron id="12" type="out" activation="sigmoid"/>
+<neuron id="13" type="out" activation="sigmoid"/>
+<neuron id="14" type="hid" activation="MULTIPLY"/>
+<neuron id="15" type="hid" activation="SUBTRACT"/>
+<neuron id="16" type="hid" activation="MAX"/>
+<neuron id="17" type="hid" activation="POWER"/>
+<neuron id="18" type="hid" activation="MULTIPLY"/>
+<neuron id="19" type="hid" activation="MULTIPLY"/>
+<neuron id="20" type="hid" activation="MULTIPLY"/>
+<neuron id="21" type="hid" activation="POWER"/>
+<neuron id="22" type="hid" activation="MULTIPLY"/>
+<neuron id="23" type="hid" activation="MULTIPLY"/>
+<connection id="24" src-id="14" dest-id="8" weight="1"/>
+<connection id="25" src-id="16" dest-id="9" weight="1"/>
+<connection id="26" src-id="18" dest-id="10" weight="1"/>
+<connection id="27" src-id="20" dest-id="11" weight="1"/>
+<connection id="28" src-id="22" dest-id="12" weight="1"/>
+<connection id="29" src-id="23" dest-id="13" weight="1"/>
+<connection id="30" src-id="6" dest-id="14" weight="1"/>
+<connection id="31" src-id="0" dest-id="14" weight="25.0"/>
+<connection id="32" src-id="1" dest-id="15" weight="1"/>
+<connection id="33" src-id="0" dest-id="15" weight="10.0"/>
+<connection id="34" src-id="15" dest-id="16" weight="1"/>
+<connection id="35" src-id="0" dest-id="16" weight="0.0"/>
+<connection id="36" src-id="0" dest-id="17" weight="0.5"/>
+<connection id="37" src-id="5" dest-id="17" weight="1"/>
+<connection id="38" src-id="0" dest-id="18" weight="10.0"/>
+<connection id="39" src-id="17" dest-id="18" weight="1"/>
+<connection id="40" src-id="0" dest-id="19" weight="10.0"/>
+<connection id="41" src-id="5" dest-id="19" weight="1"/>
+<connection id="42" src-id="19" dest-id="20" weight="1"/>
+<connection id="43" src-id="1" dest-id="20" weight="1"/>
+<connection id="44" src-id="0" dest-id="21" weight="0.5"/>
+<connection id="45" src-id="2" dest-id="21" weight="1"/>
+<connection id="46" src-id="0" dest-id="22" weight="25.0"/>
+<connection id="47" src-id="21" dest-id="22" weight="1"/>
+<connection id="48" src-id="7" dest-id="23" weight="1"/>
+<connection id="49" src-id="0" dest-id="23" weight="25.0"/>
+</chromosome>

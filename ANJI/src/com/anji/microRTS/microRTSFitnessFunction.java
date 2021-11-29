@@ -57,7 +57,8 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             try {
                 var xmlString = new XmlPersistableChromosome(chrom).toXml();
 //                System.out.println("Building utility system");
-                US = anjiConverter.toUtilitySystemFromXMLString(xmlString);
+                anjiConverter anjioCon = new anjiConverter();
+                US = anjioCon.toUtilitySystemFromXMLString(xmlString);
 
             } catch (Exception e) {
                 e.printStackTrace();
