@@ -13,6 +13,18 @@ import tests.RunExperimentTest;
 
 public class fitnessCalculator {
 
+    public enum GameTypes {
+        HARVEST,
+        MILITIA_UNITS,
+        NORMAL
+    }
+
+    public enum OpponentTypes {
+        PASSIVE,
+        COEVOLUTION,
+        ROUND_ROBIN
+    }
+
     public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI) throws Exception {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
@@ -121,7 +133,7 @@ public class fitnessCalculator {
     }
 
 
-    private static AI selectAIFromOpponentType(UnitTypeTable utt, microRTSFitnessFunction.OpponentTypes type, int iteration) {
+    private static AI selectAIFromOpponentType(UnitTypeTable utt, OpponentTypes type, int iteration) {
         switch (type) {
             case PASSIVE:
                 return new PassiveAI(utt);
@@ -157,7 +169,7 @@ public class fitnessCalculator {
         }
     }
 
-    public static int calcFitness(UtilitySystem utilitySystem, int iteration, microRTSFitnessFunction.OpponentTypes opponentType, microRTSFitnessFunction.GameTypes gametype, int gameGoalCount) throws Exception {
+    public static int calcFitness(UtilitySystem utilitySystem, int iteration, OpponentTypes opponentType, GameTypes gametype, int gameGoalCount) throws Exception {
         // == SETUP GAME BASED ON PARAMETERS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)

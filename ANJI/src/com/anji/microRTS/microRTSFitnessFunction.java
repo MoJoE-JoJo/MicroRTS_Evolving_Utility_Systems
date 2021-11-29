@@ -2,6 +2,8 @@ package com.anji.microRTS;
 
 import AnjiIntegration.anjiConverter;
 import AnjiIntegration.fitnessCalculator;
+import AnjiIntegration.fitnessCalculator.GameTypes;
+import AnjiIntegration.fitnessCalculator.OpponentTypes;
 import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.integration.XmlPersistableChromosome;
@@ -13,23 +15,10 @@ import org.jgap.Chromosome;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class microRTSFitnessFunction implements BulkFitnessFunction, Configurable {
     private final static int MAX_FITNESS = 6000;
     private int iterations;
     private boolean doCoEvolution = false;
-
-    public enum GameTypes {
-            HARVEST,
-            MILITIA_UNITS,
-            NORMAL
-    }
-
-    public enum OpponentTypes {
-        PASSIVE,
-        COEVOLUTION,
-        ROUND_ROBIN
-    }
 
     private GameTypes gametype;
     private int gameGoalCount;
@@ -110,23 +99,22 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
     @Override
     public void init(Properties props) throws Exception {
         iterations = props.getIntProperty("fitness.iterations");
-        opponentType = OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
-        gametype = GameTypes.valueOf(props.getProperty("fitness.game.type"));
+        opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
+        gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
         //TODO can add more game settings here if wanted like maps, gametime and so on.
 
-        if (!gametype.equals(GameTypes.NORMAL))
+        if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL))
         {
             // read the game goal property
             gameGoalCount = props.getIntProperty("fitness.game.goal");
         }
 
-        if (opponentType.equals(OpponentTypes.COEVOLUTION)) {
+        if (opponentType.equals(fitnessCalculator.OpponentTypes.COEVOLUTION)) {
             // if doing co-evolution, set initial champ and champ fitness
             prevChampion = StaticUtilitySystems.getRandomUtilitySystem();
             championFitness = 0;
             doCoEvolution = true;
         }
-
     }
 }
