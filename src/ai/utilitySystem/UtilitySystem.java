@@ -3,16 +3,18 @@ package ai.utilitySystem;
 import ai.utilitySystem.USAction.UtilAction;
 import rts.GameState;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 
 public class UtilitySystem {
     protected List<USVariable> variables;
     protected List<USFeature> features;
     protected List<USAction> actions;
     protected List<USConstant> constants;
-    protected Random RNG;
-    protected boolean random = true;
+    protected Random random;
     protected int generation;
 
     public UtilitySystem(List<USVariable> variables, List<USFeature> features, List<USAction>actions, List<USConstant> constants) {
@@ -20,7 +22,7 @@ public class UtilitySystem {
         this.features = features;
         this.actions = actions;
         this.constants = constants;
-        this.RNG = new Random();
+        this.random = new Random();
     }
 
     private void markAllNodesUnvisited() {
@@ -35,38 +37,20 @@ public class UtilitySystem {
         });
     }
 
-    public UtilAction getAction(GameState gs, int player, UnitGroups unitGroups) throws Exception
-    {
-        if (random)
-        {
-            return getActionWeightedRandom(gs, player, unitGroups);
-        }
-        else
-        {
-            return getActionBest(gs, player, unitGroups);
-        }
-    }
-
-    // gets the highest scoring action (if equal, by order)
+    // gets the highest scoring action
     public UtilAction getActionBest(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
-        USAction bestNode = actions.get(0);
+        // calculate values for all actions
         for(int i = 0; i < actions.size(); i++) {
             USAction node = actions.get(i);
-            try{
-                if (node.getValue(gs, player, unitGroups) > bestNode.getValue(gs, player, unitGroups)) {
-                    bestNode = node;
-                }
-            }catch (Exception e){
-                System.out.println(e);
-            }
-
+            actions.get(i).setWeightedValue(node.getValue(gs, player, unitGroups));
         }
-        return bestNode.getAction();
+        // order the actions
+        return getSortedUtilActions().get(0);
     }
 
     // gets a random node, using the scores as weights
-    private UtilAction getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
+    public List<UtilAction> getActionWeightedRandom(GameState gs, int player, UnitGroups unitGroups) throws Exception {
         this.markAllNodesUnvisited();
         // calculate values for all actions
         float[] values = new float[actions.size()];
@@ -79,29 +63,30 @@ public class UtilitySystem {
             if (value > max) max = value;
             if (value < min) min = value;
         }
-        // if all weights are 0, return a random action
-        if (min == max) {
-            int randomInt = this.RNG.nextInt(0, values.length);
-            return actions.get(randomInt).getAction();
-        }
-        // normalize the values to the range 0-1
-        float[] indices = new float[actions.size()];
-        float sum = 0;
+        // normalize the values to the range 0-1 and multiply by a random number
         for(int i = 0; i < actions.size(); i++) {
-            sum += (values[i] - min) / (max - min);
-            indices[i] = sum;
+            float val = (values[i] - min) / (max - min);
+            actions.get(i).setWeightedValue(val * this.random.nextFloat());
         }
-        // chose one randomly using the values as weights
-        float r = this.RNG.nextFloat() * sum;
+        // order the actions by the random weighted value
+        return getSortedUtilActions();
+    }
+
+    // make sure weightedValue is set before calling this
+    private List<UtilAction> getSortedUtilActions() {
+        List<USAction> copiedActions = new ArrayList<>(actions);
+        // Shuffle first so that any actions with the same value are in random order
+        Collections.shuffle(copiedActions);
+        // Sort
+        Collections.sort(copiedActions);
+        Collections.reverse(copiedActions);
+
+        // Convert to UtilAction
+        List<UtilAction> orderedActions = new ArrayList<>();
         for(int i = 0; i < actions.size(); i++) {
-            if (r <= indices[i]) {
-                return actions.get(i).getAction();
-            }
+            orderedActions.add(copiedActions.get(i).getAction());
         }
-        // An action should always be returned to the loop above,
-        // if not something is wrong with the implementation above.
-        String debugString = toPlantUML();
-        throw new Exception("getActionWeightedRandom failed to choose an action.");
+        return orderedActions;
     }
 
     // outputs the utility system as a string that can be parsed by PlantUML
@@ -140,21 +125,5 @@ public class UtilitySystem {
         concatString += relations;
         concatString += USConstants.PlantUMLEnd;
         return concatString;
-    }
-
-    public void setRandom(boolean b) {
-        random = b;
-    }
-
-    public List<USVariable> getVariables() {
-        return variables;
-    }
-
-    public List<USFeature> getFeatures() {
-        return features;
-    }
-
-    public List<USAction> getActions() {
-        return actions;
     }
 }

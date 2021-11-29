@@ -1,13 +1,7 @@
 package ai.utilitySystem;
 import rts.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class USAction extends USNode {
-
-    private List<USNode> params;
-
+public class USAction extends USNode implements Comparable<USAction> {
     public enum UtilAction {
         ATTACK_WITH_SINGLE_UNIT,
         DEFEND_WITH_SINGLE_UNIT,
@@ -22,45 +16,21 @@ public class USAction extends USNode {
 
     private USNode feature;
     private UtilAction action;
+    private float weightedValue;
 
     public USAction (String name, USFeature feature, UtilAction action) {
         this.name = name;
         this.feature = feature;
         this.action = action;
-        this.params = new ArrayList<>();
-    }
-
-    public void addParam(USNode node) {
-        params.add(node);
-    }
-
-    public List<USNode> getParams(){
-        return params;
     }
 
     @Override
     protected void calculateValue(GameState gs, int player, UnitGroups unitGroups) throws Exception {
-
-        // find average of all params going to this action.
-        float val = 0.0f;
-        for (int i = 0; i < params.size(); i++)
-        {
-            if (i == 0) val = params.get(i).getValue(gs, player, unitGroups);
-            else {
-                float nextVal = params.get(i).getValue(gs, player, unitGroups);
-                val += nextVal;
-            }
-        }
-        if(val == 0.0f)
-        {
-            this.value = 0.0f;
-            return;
-        }
-        val /= params.size();
-        this.value = val;
+        this.value = this.feature.getValue(gs, player, unitGroups);
     }
 
-    public static NodeType getType() {
+    @Override
+    public NodeType getType() {
         return NodeType.US_ACTION;
     }
 
@@ -75,13 +45,24 @@ public class USAction extends USNode {
             "}\n";
     }
 
-    public String relationsToPlantUML() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i<params.size(); i++){
-            sb.append(params.get(i).getName()).append(" ---> ").append(this.name).append("\n");
-        }
-        return sb.toString();
+    public void addFeature(USNode node) {
+        feature = node;
+    }
 
-        //return this.feature.getName() + " --> " + this.name + "\n";
+    public String relationsToPlantUML() {
+        return this.feature.getName() + " --> " + this.name + "\n";
+    }
+
+    public void setWeightedValue(float weightedValue) {
+        this.weightedValue = weightedValue;
+    }
+
+    public float getWeightedValue() {
+        return this.weightedValue;
+    }
+
+    @Override
+    public int compareTo(USAction a) {
+        return this.weightedValue > a.getWeightedValue() ? 1 : this.weightedValue < a.getWeightedValue() ? -1 : 0;
     }
 }
