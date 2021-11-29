@@ -6,7 +6,7 @@ import ai.utilitySystem.USVariable.GameStateVariable;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class USConstants {
+public final class StaticUtilitySystems {
     public static final String PlantUMLStart = "@startuml\n" +
                                             "skinparam packageStyle rectangle\n"+
                                             "skinparam linetype polyline\n"+
@@ -36,13 +36,13 @@ public final class USConstants {
         features.add(f1);
 
         // actions
-        actions.add(new USAction("attack", f1, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
-        actions.add(new USAction("defend", f1, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
-        actions.add(new USAction("build_worker", f1, USAction.UtilAction.BUILD_WORKER));
-        actions.add(new USAction("build_barracks", f1, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_base", f1, USAction.UtilAction.BUILD_BASE));
-        actions.add(new USAction("build_light", f1, USAction.UtilAction.BUILD_LIGHT));
-        actions.add(new USAction("harvest", f1, USAction.UtilAction.HARVEST_RESOURCE));
+        actions.add(new USAction("attack", new LinkedList<>(List.of(f1)), USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
+        actions.add(new USAction("defend", new LinkedList<>(List.of(f1)), USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
+        actions.add(new USAction("build_worker", new LinkedList<>(List.of(f1)), USAction.UtilAction.BUILD_WORKER));
+        actions.add(new USAction("build_barracks", new LinkedList<>(List.of(f1)), USAction.UtilAction.BUILD_BARRACKS));
+        actions.add(new USAction("build_base", new LinkedList<>(List.of(f1)), USAction.UtilAction.BUILD_BASE));
+        actions.add(new USAction("build_light", new LinkedList<>(List.of(f1)), USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("harvest", new LinkedList<>(List.of(f1)), USAction.UtilAction.HARVEST_RESOURCE));
 
         UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         return us;
@@ -144,13 +144,13 @@ public final class USConstants {
         features.add(fh1);
 
         // actions
-        actions.add(new USAction("attack", fa1, USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
+        actions.add(new USAction("attack", new LinkedList<>(List.of(fa1)), USAction.UtilAction.ATTACK_WITH_SINGLE_UNIT));
         //actions.add(new USAction("defend", f2, USAction.UtilAction.DEFEND_WITH_SINGLE_UNIT));
-        actions.add(new USAction("build_base", fba2, USAction.UtilAction.BUILD_BASE));
-        actions.add(new USAction("build_barracks", fra2, USAction.UtilAction.BUILD_BARRACKS));
-        actions.add(new USAction("build_light", fwa2, USAction.UtilAction.BUILD_LIGHT));
-        actions.add(new USAction("build_worker", fwo2, USAction.UtilAction.BUILD_WORKER));
-        actions.add(new USAction("harvest", fh1, USAction.UtilAction.HARVEST_RESOURCE));
+        actions.add(new USAction("build_base", new LinkedList<>(List.of(fba2)), USAction.UtilAction.BUILD_BASE));
+        actions.add(new USAction("build_barracks", new LinkedList<>(List.of(fra2)), USAction.UtilAction.BUILD_BARRACKS));
+        actions.add(new USAction("build_light", new LinkedList<>(List.of(fwa2)), USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_worker", new LinkedList<>(List.of(fwo2)), USAction.UtilAction.BUILD_WORKER));
+        actions.add(new USAction("harvest", new LinkedList<>(List.of(fh1)), USAction.UtilAction.HARVEST_RESOURCE));
 
         UtilitySystem us = new UtilitySystem(variables, features, actions, constants);
         return us;
