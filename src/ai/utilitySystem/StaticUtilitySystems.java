@@ -69,7 +69,7 @@ public final class StaticUtilitySystems {
         variables.add(vra);
         USVariable vid = new USVariable("iddle_warriors", GameStateVariable.PLAYER_IDLE_WARRIORS);
         variables.add(vid);
-        USVariable vidwo = new USVariable("iddle_warriors", GameStateVariable.PLAYER_IDLE_WORKERS);
+        USVariable vidwo = new USVariable("iddle_workers", GameStateVariable.PLAYER_IDLE_WORKERS);
         variables.add(vidwo);
 
         // constants
@@ -149,6 +149,8 @@ public final class StaticUtilitySystems {
         actions.add(new USAction("build_base", new LinkedList<>(List.of(fba2)), USAction.UtilAction.BUILD_BASE));
         actions.add(new USAction("build_barracks", new LinkedList<>(List.of(fra2)), USAction.UtilAction.BUILD_BARRACKS));
         actions.add(new USAction("build_light", new LinkedList<>(List.of(fwa2)), USAction.UtilAction.BUILD_LIGHT));
+        actions.add(new USAction("build_heavy", new LinkedList<>(List.of(fwa2)), USAction.UtilAction.BUILD_HEAVY));
+        actions.add(new USAction("build_ranged", new LinkedList<>(List.of(fwa2)), USAction.UtilAction.BUILD_RANGED));
         actions.add(new USAction("build_worker", new LinkedList<>(List.of(fwo2)), USAction.UtilAction.BUILD_WORKER));
         actions.add(new USAction("harvest", new LinkedList<>(List.of(fh1)), USAction.UtilAction.HARVEST_RESOURCE));
 
