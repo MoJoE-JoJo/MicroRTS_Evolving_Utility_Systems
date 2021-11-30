@@ -7,7 +7,7 @@ import rts.*;
 import rts.units.Unit;
 
 public class USVariable extends USNode {
-    GameStateVariable gsv;
+    private GameStateVariable gsv;
 
     public enum GameStateVariable {
         PLAYER_RESOURCE,            // The player's total resource count.
@@ -35,6 +35,10 @@ public class USVariable extends USNode {
     public USVariable(String name, GameStateVariable gsv) {
         this.name = name;
         this.gsv = gsv;
+    }
+
+    public GameStateVariable getGameStateVariable() {
+        return this.gsv;
     }
 
     @Override

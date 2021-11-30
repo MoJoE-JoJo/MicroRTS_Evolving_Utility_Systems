@@ -327,7 +327,15 @@ public class anjiConverter {
 
     public String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
 
+        // constant id  = 0
+        // variable id  = 1 + variable enum index
+        // action id    = 1 + variable enum.length + action enum index
+        // feature id   = 1 + variable enum.length + action enum.length + featurelist index
+        // connection id= continue from last feature id.
         int neuronId = 0;
+        int constantLength = 1;
+        int variableLength = USVariable.GameStateVariable.values().length;
+        int actionLength = USAction.UtilAction.values().length;
 
         Map<USNode, Integer> neuronIDMap = new HashMap<>();
 
@@ -344,20 +352,20 @@ public class anjiConverter {
 
         // then for each variable node -> <neuron id="0" type="in" activation="sigmoid"/>
         for (USVariable variable : utilitySystem.getVariables()) {
+            neuronId = constantLength + variable.getGameStateVariable().ordinal();
             builder.append("<neuron id=\"" + neuronId + "\" type=\"in\" activation=\"sigmoid\"/>\n");
             neuronIDMap.put(variable, neuronId);
-            neuronId++;
         }
 
         // then for each action node -> <neuron id="0" type="out" activation="sigmoid"/>
         for (USAction action : utilitySystem.getActions()) {
+            neuronId = constantLength + variableLength + action.getAction().ordinal();
             builder.append("<neuron id=\"" + neuronId + "\" type=\"out\" activation=\"sigmoid\"/>\n");
             neuronIDMap.put(action, neuronId);
-            neuronId++;
         }
 
-
         // then for each feature node -> <neuron id="0" type="hid" activation="feature.operation"/>
+        neuronId = constantLength + variableLength + actionLength;
         for (USFeature feature : utilitySystem.getFeatures()) {
             builder.append("<neuron id=\"" + neuronId + "\" type=\"hid\" activation=\"" + feature.getOperation() + "\"/>\n");
             neuronIDMap.put(feature, neuronId);
