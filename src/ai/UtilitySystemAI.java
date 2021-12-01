@@ -65,12 +65,6 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        try {
-            //utilitySystem = new anjiConverter().toUtilitySystemFromChromosome(2790);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(utilitySystem.toPlantUML());
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt, UtilitySystem us, boolean verbose) {
