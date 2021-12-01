@@ -58,13 +58,20 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
-        utilitySystem = USConstants.getSimpleUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        utilitySystem = USConstants.getSimpleUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
+        System.out.println(utilitySystem.toPlantUML());
+    }
+
+    public UtilitySystemAI(UnitTypeTable a_utt, int chromosome) {
+        this(a_utt, new AStarPathFinding());
+        reset(a_utt);
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
         System.out.println(utilitySystem.toPlantUML());
     }
 
@@ -121,7 +128,8 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             for (Unit u : gs.getUnits()) {
                 if ((gs.getActionAssignment(u) == null || gs.getActionAssignment(u).action.getType() == UnitAction.TYPE_NONE) &&
                         !attackingUnits.contains(u) &&
-                        !defendingUnits.contains(u)) {
+                        !defendingUnits.contains(u) &&
+                        !harvestingWorkers.contains(u)){
                     passiveUnits.add(u);
                     harvestingWorkers.remove(u);
                     buildingWorkers.remove(u);

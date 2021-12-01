@@ -1,4 +1,5 @@
 package ai.utilitySystem;
+
 import java.util.List;
 import java.util.HashSet;
 
@@ -6,7 +7,7 @@ import rts.*;
 import rts.units.Unit;
 
 public class USVariable extends USNode {
-    GameStateVariable gsv;
+    private GameStateVariable gsv;
 
     public enum GameStateVariable {
         PLAYER_RESOURCE,            // The player's total resource count.
@@ -34,6 +35,10 @@ public class USVariable extends USNode {
     public USVariable(String name, GameStateVariable gsv) {
         this.name = name;
         this.gsv = gsv;
+    }
+
+    public GameStateVariable getGameStateVariable() {
+        return this.gsv;
     }
 
     @Override
@@ -106,13 +111,15 @@ public class USVariable extends USNode {
                 break;
             case PLAYER_IDLE_WARRIORS:
                 sum = 0;
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Light");
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Heavy");
-                sum += unitCountInGroup(unitGroups.passiveUnits, "Ranged");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Light");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Heavy");
+                sum += unitCountInGroup(unitGroups.passiveUnits, player, "Ranged");
                 this.value = sum;
                 break;
             case PLAYER_IDLE_WORKERS:
-                this.value = unitCountInGroup(unitGroups.passiveUnits, "Worker");
+                this.value = getPlayerUnitCount(gs, player, "Worker") -
+                    unitCountInGroup(unitGroups.harvestingWorkers, player, "Worker") -
+                    unitCountInGroup(unitGroups.buildingWorkers, player, "Worker");
                 break;
             default:
                 throw new Exception("Not yet implemented game state variable: " + this.gsv);
@@ -127,13 +134,13 @@ public class USVariable extends USNode {
     @Override
     public String toPlantUML() {
         return "object " + this.name + " {\n" +
-            "Value: " + this.value + "\n" +
-            "}\n";
+                "Value: " + this.value + "\n" +
+                "}\n";
     }
 
     /**
      * The given players total resource count in the current game state.
-     * 
+     *
      * @param gs
      * @param player
      * @return
@@ -145,7 +152,7 @@ public class USVariable extends USNode {
 
     /**
      * The current count of a specific unit type owned by the given player.
-     * 
+     *
      * @param gs
      * @param player
      * @param unitName
@@ -154,7 +161,7 @@ public class USVariable extends USNode {
     private float getPlayerUnitCount(GameState gs, int player, String unitName) {
         List<Unit> units = gs.getUnits();
         int count = 0;
-        for(Unit unit : units) {
+        for (Unit unit : units) {
             if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
                 count++;
             }
@@ -164,7 +171,7 @@ public class USVariable extends USNode {
 
     /**
      * The health sum of hit points of all units of a specific type owned by the given player.
-     * 
+     *
      * @param gs
      * @param player
      * @param unitName
@@ -173,9 +180,9 @@ public class USVariable extends USNode {
     private float getPlayerUnitHealthSum(GameState gs, int player, String unitName) {
         List<Unit> units = gs.getUnits();
         int count = 0;
-        for(Unit unit : units) {
+        for (Unit unit : units) {
             if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
-                count+= unit.getHitPoints();
+                count += unit.getHitPoints();
             }
         }
         return count;
@@ -183,14 +190,14 @@ public class USVariable extends USNode {
 
     /**
      * The unharvested resources in all resource units in the game.
-     * 
+     *
      * @param gs
      * @return
      */
     private float getUnharvestedResources(GameState gs) {
         List<Unit> units = gs.getUnits();
         int count = 0;
-        for(Unit unit : units) {
+        for (Unit unit : units) {
             if (unit.getType().isResource) {
                 count += unit.getResources(); // I'm not sure this is how to get the resource count
             }
@@ -198,11 +205,11 @@ public class USVariable extends USNode {
         return count;
     }
 
-    private float unitCountInGroup(HashSet<Unit> unitGroup, String unitName) {
+    private float unitCountInGroup(HashSet<Unit> unitGroup, int player, String unitName) {
         int count = 0;
-        for(Unit unit : unitGroup) {
-            if (unit.getType().name.equals(unitName)) {
-                count+= unit.getHitPoints();
+        for (Unit unit : unitGroup) {
+            if (unit.getPlayer() == player && unit.getType().name.equals(unitName)) {
+                count++;
             }
         }
         return count;

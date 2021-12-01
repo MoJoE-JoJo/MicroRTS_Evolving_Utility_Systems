@@ -18,7 +18,12 @@ import java.util.*;
 
 public class anjiConverter {
 
-    public static UtilitySystem toUtilitySystemFromXMLString(String rawXML) {
+    public anjiConverter()
+    {
+
+    }
+
+    public UtilitySystem toUtilitySystemFromXMLString(String rawXML) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         UtilitySystem returnSystem = null;
@@ -37,15 +42,13 @@ public class anjiConverter {
     }
 
 
-    public static UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
+    public UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
         ChromosomeToNetworkXml converter = new ChromosomeToNetworkXml();
 
         // https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
 
         // Instantiate the Factory
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         UtilitySystem returnSystem = null;
         try (InputStream is = readXmlFileIntoInputStream("./db/chromosome/chromosome" + chromId + ".xml")) {
@@ -55,11 +58,8 @@ public class anjiConverter {
             // read from a project's resources folder
             Document doc = docBuilder.parse(is);
 
-            System.out.println("Root Element :" + doc.getDocumentElement().getNodeName());
-            System.out.println("------");
-
             if (doc.hasChildNodes()) {
-                printNote(doc.getChildNodes());
+                //printNote(doc.getChildNodes());
                 returnSystem = buildUtilitySystemFromNodeList(doc.getChildNodes());
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
@@ -68,7 +68,7 @@ public class anjiConverter {
         return returnSystem;
     }
 
-    private static UtilitySystem buildUtilitySystemFromNodeList(NodeList nodeList) {
+    private UtilitySystem buildUtilitySystemFromNodeList(NodeList nodeList) {
         // Structures and values used
         Map<String, USNode> nodeMap = new HashMap<>();
         // Map where the key is the src and the value the destination
@@ -82,10 +82,11 @@ public class anjiConverter {
         List<USAction> actionList = new LinkedList<>();
         List<USFeature> featureList = new LinkedList<>();
         List<USVariable> varibleList = new LinkedList<>();
+        List<USConstant> constantsList = new LinkedList<>();
 
 
         // first layer is a chromosome, so get its children which is all the neurons and connections
-        if (nodeList.item(0).getNodeName() == "chromosome") {
+        if (nodeList.item(0).getNodeName().equals("chromosome")) {
             nodeList = nodeList.item(0).getChildNodes();
         }
 
@@ -109,30 +110,36 @@ public class anjiConverter {
                         switch (neuronType) {
                             case "in":
                                 // inputs neurons -> utility system variable nodes
-                                // convert neuron ID to a GameStateVariable. The first Neurons in the chromosome are always the ids 0-X where X is the amount of input neurons
-                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[Integer.parseInt(neuronId)];
-                                var usVariable = new USVariable(neuronId, gameStateVariable);
+                                // convert neuron ID to a GameStateVariable.
+                                // The first Neurons in the chromosome are always the ids 1-X where X is the amount of input neurons
+                                int neuronIdInt = Integer.parseInt(neuronId);
+                                // The neuron with id 0 we use for creating constants, so it is skipped here
+                                if (neuronIdInt == 0) {
+                                    break;
+                                }
+
+                                USVariable.GameStateVariable gameStateVariable = USVariable.GameStateVariable.values()[neuronIdInt - 1];
+                                var usVariable = new USVariable(neuronId + "_" + gameStateVariable, gameStateVariable);
                                 nodeMap.put(neuronId, usVariable);
                                 varibleList.add(usVariable);
                                 break;
                             case "out":
-                                // outputs neurons -> utility system "final features layer" nodes
-                                // creates a new feature node, and a action node.
-                                // The connection going to a "out" node will then go to this feature node that can handle multiple connections
+                                // outputs neurons -> utility Action node
+                                // creates a new action node.
 
                                 // create a "final feature layer" node.
-                                USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM);
+                                //USFeature finalFeature = new USFeature(neuronId, USFeature.Operation.SUM);
 
-
+                                // choose the next action in line
                                 USAction.UtilAction actionEnum = USAction.UtilAction.values()[nextActionIndex];
+                                // if statement to prevent problems
                                 if (nextActionIndex <= USAction.UtilAction.values().length - 2) {
                                     nextActionIndex++;
                                 }
 
-                                USAction actionNode = new USAction(actionEnum.toString(), finalFeature, actionEnum);
+                                USAction actionNode = new USAction(actionEnum.toString(), null, actionEnum);
 
-                                nodeMap.put(neuronId, finalFeature);
-                                featureList.add(finalFeature);
+                                nodeMap.put(neuronId, actionNode);
                                 actionList.add(actionNode);
                                 break;
                             case "hid":
@@ -151,8 +158,28 @@ public class anjiConverter {
                         break;
                     case "connection":
                         // Handle connections,
+                        String connId = tempXMLNode.getAttributes().getNamedItem("id").getNodeValue();
                         String srcId = tempXMLNode.getAttributes().getNamedItem("src-id").getNodeValue();
                         String destId = tempXMLNode.getAttributes().getNamedItem("dest-id").getNodeValue();
+
+                        // each time there is a connection that has id: 0 as src create a new constant node
+                        // The value is based on the weight of the connection
+                        if (srcId.equals("0")) {
+                            float conVal = Float.parseFloat(tempXMLNode.getAttributes().getNamedItem("weight").getNodeValue());
+                            //todo could be multiplied by a bias here? for now assume bias is always 1.
+                            USConstant constant = new USConstant(connId, conVal);
+
+                            constantsList.add(constant); // add node to list for building
+                            nodeMap.put(connId, constant); // add node to map to look up
+
+                            //put in the connection map, but under the connection id instead of neuron id.
+
+                            List newList = new LinkedList();
+                            newList.add(destId);
+                            connectionMap.put(connId, newList);
+                            break;
+                        }
+
 
                         //see if there already exist a list.
                         if (connectionMap.containsKey(srcId)) {
@@ -164,6 +191,7 @@ public class anjiConverter {
                             newList.add(destId);
                             connectionMap.put(srcId, newList);
                         }
+
                         break;
                     default:
                         break;
@@ -177,6 +205,11 @@ public class anjiConverter {
             var src = entry.getKey();
             var destList = entry.getValue();
             USNode srcNode = nodeMap.get(src); // lookup src node
+
+            if (srcNode == null) {
+                System.out.println("Stop");
+            }
+
             for (var destNodeId : destList) {
                 //System.out.println("Connection: " + src + " --> " + destNodeId);
 
@@ -186,8 +219,7 @@ public class anjiConverter {
                 if (!allowedToMakeConnection(srcNode, destNode)) {
                     continue;
                 }
-
-                // switch on src node type, this is for updating all the object relations.
+                // switch on dest node type, this is for updating all the object relations.
                 // The utility system is based on a "top down" approach, it builds relations such that the destNode has a ref to srcNode
                 switch (destNode.getType()) {
                     case US_CONSTANT:
@@ -196,7 +228,7 @@ public class anjiConverter {
                         // only allow a connection with variable as dest, if its to a action
                         if (srcNode.getType() == USNode.NodeType.US_ACTION) {
                             USAction tmpFeature = (USAction) srcNode;
-                            tmpFeature.addFeature(destNode);
+                            tmpFeature.addParam(destNode);
                             System.out.println("Made a connection from a Variable to a Action");
 
                         } else {
@@ -210,7 +242,7 @@ public class anjiConverter {
                         break;
                     case US_ACTION:
                         USAction tmpAction = (USAction) destNode;
-                        tmpAction.addFeature(srcNode);
+                        tmpAction.addParam(srcNode);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + srcNode.getType());
@@ -228,11 +260,11 @@ public class anjiConverter {
         }
         */
 
-        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, new ArrayList<>()); //TODO: ANJI cannot generate constants as it is
+        UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, constantsList);
         return US;
     }
 
-    private static boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
+    private boolean allowedToMakeConnection(USNode srcNode, USNode destNode) {
         if (srcNode.getType() == USNode.NodeType.US_ACTION && destNode.getType() == USNode.NodeType.US_ACTION) {
             return false;
         }
@@ -242,7 +274,7 @@ public class anjiConverter {
         }
 
         // check for circular connection.
-        if (srcNode.getName() == destNode.getName()) {
+        if (srcNode.getName().equals(destNode.getName())) {
             return false;
         }
 
@@ -252,7 +284,7 @@ public class anjiConverter {
         return true;
     }
 
-    private static void printNote(NodeList nodeList) {
+    private void printNote(NodeList nodeList) {
 
         for (int count = 0; count < nodeList.getLength(); count++) {
 
@@ -288,8 +320,82 @@ public class anjiConverter {
         }
     }
 
-    private static InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
+    private InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
         InputStream targetStream = new FileInputStream(fileName);
         return targetStream;
+    }
+
+    public String toXMLStringFromUtilitySystem(UtilitySystem utilitySystem) {
+
+        // constant id  = 0
+        // variable id  = 1 + variable enum index
+        // action id    = 1 + variable enum.length + action enum index
+        // feature id   = 1 + variable enum.length + action enum.length + featurelist index
+        // connection id= continue from last feature id.
+        int neuronId = 0;
+        int constantLength = 1;
+        int variableLength = USVariable.GameStateVariable.values().length;
+        int actionLength = USAction.UtilAction.values().length;
+
+        Map<USNode, Integer> neuronIDMap = new HashMap<>();
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("<chromosome id=\"" + 1 + "\">\n");
+
+        // <neuron id="0" type="in" activation="sigmoid"/>
+
+
+        // create in node "0" which is the constant node
+        builder.append("<neuron id=\"" + neuronId + "\" type=\"in\" activation=\"sigmoid\"/>\n");
+        neuronId++;
+
+        // then for each variable node -> <neuron id="0" type="in" activation="sigmoid"/>
+        for (USVariable variable : utilitySystem.getVariables()) {
+            neuronId = constantLength + variable.getGameStateVariable().ordinal();
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"in\" activation=\"sigmoid\"/>\n");
+            neuronIDMap.put(variable, neuronId);
+        }
+
+        // then for each action node -> <neuron id="0" type="out" activation="sigmoid"/>
+        for (USAction action : utilitySystem.getActions()) {
+            neuronId = constantLength + variableLength + action.getAction().ordinal();
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"out\" activation=\"sigmoid\"/>\n");
+            neuronIDMap.put(action, neuronId);
+        }
+
+        // then for each feature node -> <neuron id="0" type="hid" activation="feature.operation"/>
+        neuronId = constantLength + variableLength + actionLength;
+        for (USFeature feature : utilitySystem.getFeatures()) {
+            builder.append("<neuron id=\"" + neuronId + "\" type=\"hid\" activation=\"" + feature.getOperation() + "\"/>\n");
+            neuronIDMap.put(feature, neuronId);
+            neuronId++;
+        }
+
+        // then we need to find all connections: starts with actions
+        for (USAction action : utilitySystem.getActions()) {
+            for (USNode param : action.getParams()) {
+                if (param.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
+                } else {
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(action) + "\" weight=\"1\"/>\n");
+                }
+                neuronId++;
+            }
+        }
+
+        for (USFeature feature : utilitySystem.getFeatures()) {
+            for (USNode param : feature.getParams()) {
+                if (param.getType() == USNode.NodeType.US_CONSTANT) { // if a constant src is always 0 and the constant is stored in the weight
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + 0 + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"" + ((USConstant) param).getConstant() + "\"/>\n");
+                } else {
+                    builder.append("<connection id=\"" + neuronId + "\" src-id=\"" + neuronIDMap.get(param) + "\" dest-id=\"" + neuronIDMap.get(feature) + "\" weight=\"1\"/>\n");
+                }
+                neuronId++;
+            }
+        }
+
+        builder.append("</chromosome>"); // end tag
+        return builder.toString();
     }
 }

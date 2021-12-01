@@ -7,9 +7,11 @@ import java.util.List;
 
 public class USFeature extends USNode {
     private Operation operation;
-    private List<USNode> params = new ArrayList<>();
-    private USNode param1; // What if we want a constant here instead?
-    private USNode param2;
+    private List<USNode> params;
+
+    public List<USNode> getParams() {
+        return params;
+    }
 
     public enum Operation {
         DIVIDE,
@@ -117,10 +119,13 @@ public class USFeature extends USNode {
             default -> throw new Exception("Not yet implemented operation: " + this.operation);
         }
     }
-
     @Override
     public NodeType getType() {
         return NodeType.US_FEATURE;
+    }
+
+    public String getOperation() {
+        return operation.toString();
     }
 
     @Override
@@ -145,28 +150,11 @@ public class USFeature extends USNode {
 
     public void addParam(USNode node) {
         params.add(node);
-        /*
-        if (param1 == null) {
-            param1 = node;
-        } else if (param2 == null) {
-            param2 = node;
-        } else {
-            //TODO Handle this, unsure how
-
-        }
-         */
     }
-
-    /*
-    public USNode getParam2()
-    {
-        return param2;
-    }
-     */
 
     public String relationsToPlantUML() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i<params.size(); i++){
+        for (int i = 0; i < params.size(); i++) {
             sb.append(params.get(i).getName()).append(" ----> ").append(name).append(" : V").append(i).append("\n");
         }
         return sb.toString();

@@ -18,12 +18,12 @@ public class UtilitySystemAIRandom extends UtilitySystemAI {
     public UtilitySystemAIRandom(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
-        utilitySystem = USConstants.getRandomUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getRandomUtilitySystem();
     }
 
     public UtilitySystemAIRandom(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        utilitySystem = USConstants.getRandomUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getRandomUtilitySystem();
     }
 }

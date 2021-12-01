@@ -30,7 +30,7 @@ import rts.units.UnitTypeTable;
         PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
         // GameState gs = runExperiment(ai1, ai2, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
         // GameState gs2 = runUntilAtResourceCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 10);
-        GameState gs3 = runUntilAtWarriorCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 1);
+        GameState gs3 = runUntilAtWarriorCount(ai1, ai3, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 0, 1);
         // with the current US it often wins before reaching 10 resources.
         /*
         System.out.println("GAMEOVER");
@@ -84,7 +84,32 @@ import rts.units.UnitTypeTable;
         return gs;
     }
 
-    public static GameState runUntilAtResourceCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int resourceGoal) throws Exception {
+     // Run a single iteration of the game
+     public static GameState runNormalGame(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles) throws Exception {
+         boolean GC_EACH_FRAME = false;
+         long lastTimeActionIssued = 0;
+         ai1.reset();
+         ai2.reset();
+         GameState gs = new GameState(map.clone(),utt);
+         boolean gameover = false;
+
+         do {
+             if (GC_EACH_FRAME) System.gc();
+             PlayerAction pa1 = null, pa2 = null;
+             pa1 = ai1.getAction(0, gs);
+             pa2 = ai2.getAction(1, gs);
+             if (gs.issueSafe(pa1)) lastTimeActionIssued = gs.getTime();
+             if (gs.issueSafe(pa2)) lastTimeActionIssued = gs.getTime();
+             gameover = gs.cycle();
+         } while (!gameover &&
+                 (gs.getTime() < max_cycles) &&
+                 (gs.getTime() - lastTimeActionIssued < max_inactive_cycles));
+         ai1.gameOver(gs.winner());
+         ai2.gameOver(gs.winner());
+         return gs;
+     }
+
+    public static GameState runUntilAtResourceCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int playerID, int resourceGoal) throws Exception {
         boolean GC_EACH_FRAME = false;
         long lastTimeActionIssued = 0;
         ai1.reset();
@@ -101,7 +126,7 @@ import rts.units.UnitTypeTable;
             if (gs.issueSafe(pa1)) lastTimeActionIssued = gs.getTime();
             if (gs.issueSafe(pa2)) lastTimeActionIssued = gs.getTime();
             gameover = gs.cycle();
-            resourceCount = gs.getPhysicalGameState().getPlayer(0).getResources();
+            resourceCount = gs.getPhysicalGameState().getPlayer(playerID).getResources();
         } while (!gameover && 
                     (gs.getTime() < max_cycles) && 
                     (gs.getTime() - lastTimeActionIssued < max_inactive_cycles) &&
@@ -111,7 +136,7 @@ import rts.units.UnitTypeTable;
         return gs;
     }
 
-    public static GameState runUntilAtWarriorCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int warriorGoal) throws Exception {
+    public static GameState runUntilAtWarriorCount(AI ai1, AI ai2, PhysicalGameState map, UnitTypeTable utt, int max_cycles, int max_inactive_cycles, int playerID, int warriorGoal) throws Exception {
         boolean GC_EACH_FRAME = false;
         long lastTimeActionIssued = 0;
         ai1.reset();
@@ -131,7 +156,7 @@ import rts.units.UnitTypeTable;
             warriorCount = 0;
             List<Unit> units = gs.getUnits();
             for(Unit unit : units) {
-                if (unit.getPlayer() == 0) {
+                if (unit.getPlayer() == playerID) {
                     if (unit.getType().name.equals("Light") ||
                         unit.getType().name.equals("Heavy") ||
                         unit.getType().name.equals("Ranged")) {
