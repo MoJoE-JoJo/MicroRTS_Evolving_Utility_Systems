@@ -14,6 +14,15 @@ import tests.RunExperimentTest;
 
 public class fitnessCalculator {
 
+
+    private int MAX_GAME_CYCLES;
+    private int MAX_INACTIVE_CYCLES;
+    private UnitTypeTable utt;
+    private String map;
+    private OpponentTypes opponentType;
+    private GameTypes gameType;
+    private boolean takeWeigthedActions;
+
     public enum GameTypes {
         HARVEST,
         MILITIA_UNITS,
@@ -27,7 +36,17 @@ public class fitnessCalculator {
         BASELINE
     }
 
-    public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI, String map) throws Exception {
+    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, boolean takeWeigthedActions) {
+        MAX_GAME_CYCLES = maxGameCycles;
+        MAX_INACTIVE_CYCLES = maxInactiveCycles;
+        this.map = map;
+        this.opponentType = opponentType;
+        this.gameType = gameType;
+        utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
+    }
+
+    @Deprecated
+    public int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI, String map) throws Exception {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
@@ -89,11 +108,8 @@ public class fitnessCalculator {
         //return MAX_GAME_CYCLES - gs.getTime() + res;
     }
 
-    public static int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, int iteration, String map) throws Exception {
-        // == GAME SETTINGS ==
-        UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
-        int MAX_GAME_CYCLES = 5000; // game time
-        int MAX_INACTIVE_CYCLES = 5000;
+    public int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, int iteration) throws Exception {
+        // == init game ==
         PhysicalGameState pgs = PhysicalGameState.load(map, utt);
 
         // == SETUP THE AIs ==
@@ -125,17 +141,14 @@ public class fitnessCalculator {
         } else if (gs.winner() == -1) //tie
         {
             return 1000;
-        } else //else lost the game, reward based on survival time
+        } else //else lost the game, reward based on survival time, divided by 10 to never out weight a win or tie
         {
             return gs.getTime() / 10;
         }
     }
 
-    public static int calcFitness(UtilitySystem utilitySystem, int iteration, OpponentTypes opponentType, GameTypes gametype, int gameGoalCount, String map) throws Exception {
-        // == SETUP GAME BASED ON PARAMETERS ==
-        UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
-        int MAX_GAME_CYCLES = 3000; // game time
-        int MAX_INACTIVE_CYCLES = 3000;
+    public int calcFitness(UtilitySystem utilitySystem, int iteration, int gameGoalCount) throws Exception {
+        // init game
         PhysicalGameState pgs = PhysicalGameState.load(map, utt);
 
         // == SETUP THE AIs ==
@@ -155,7 +168,7 @@ public class fitnessCalculator {
         }
 
         GameState gs;
-        switch (gametype) {
+        switch (gameType) {
             case NORMAL:
                 // run the game
                 gs = RunExperimentTest.runNormalGame(playerZero, playerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);

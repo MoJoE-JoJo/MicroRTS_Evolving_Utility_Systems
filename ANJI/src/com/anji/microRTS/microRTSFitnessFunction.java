@@ -24,7 +24,10 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
     private GameTypes gametype;
     private int gameGoalCount;
     private OpponentTypes opponentType;
+    private int maxGameCycles;
+    private int maxInactiveCycles;
     String map = "";
+    private boolean takeWeigthedActions;
 
     // co evolution stuff
     private UtilitySystem prevChampion;
@@ -62,14 +65,15 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             int fitness = 0;
             int wins = 0;
             try {
+                fitnessCalculator fitnessCalc = new fitnessCalculator(maxGameCycles, maxInactiveCycles, map, opponentType, gametype, takeWeigthedActions);
                 for (int i = 0; i < iterations; i++) {
                     int tmpFitness = 0;
                     if (doCoEvolution) {
-                        tmpFitness = fitnessCalculator.coEvolutionFitness(US, prevChampion, i, map);
+                        tmpFitness = fitnessCalc.coEvolutionFitness(US, prevChampion, i);
                     } else {
-                        tmpFitness = fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount, map);
+                        tmpFitness = fitnessCalc.calcFitness(US, i, gameGoalCount);
                     }
-                    // at the moment a fitness higher than 1000 means a win.
+                    // if the fitness is higher than 1000, it means a win.
                     if (tmpFitness > 1000) {
                         wins++;
                     }
@@ -88,7 +92,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             chrom.setFitnessValue(fitness);
         }
     }
@@ -104,7 +107,10 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
         gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
-        map = props.getProperty("fitness.game.map", "maps/16x16/basesWorkers16x16.xml");
+        map = props.getProperty("fitness.game.map");
+        maxGameCycles = props.getIntProperty("fitness.game.max.gamecycles");
+        maxInactiveCycles = props.getIntProperty("fitness.game.max.inactivecycles");
+        takeWeigthedActions = props.getBooleanProperty("fitness.game.utility.system.weighted.actions");
         //TODO can always add more game settings here if wanted like maps, gametime and so on.
 
         if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL)) {
