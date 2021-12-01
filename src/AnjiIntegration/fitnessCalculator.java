@@ -4,6 +4,7 @@ import ai.PassiveAI;
 import ai.UtilitySystemAI;
 import ai.abstraction.*;
 import ai.core.AI;
+import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.microRTS.microRTSFitnessFunction;
 import rts.GameState;
@@ -22,7 +23,8 @@ public class fitnessCalculator {
     public enum OpponentTypes {
         PASSIVE,
         COEVOLUTION,
-        ROUND_ROBIN
+        ROUND_ROBIN,
+        BASELINE
     }
 
     public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI) throws Exception {
@@ -139,6 +141,8 @@ public class fitnessCalculator {
                 return new PassiveAI(utt);
             case ROUND_ROBIN:
                 return selectOpponentAI(utt, iteration);
+            case BASELINE:
+                return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
             case COEVOLUTION:
             case default:
                 return null;

@@ -58,20 +58,20 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
-        utilitySystem = StaticUtilitySystems.getSimpleUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        utilitySystem = StaticUtilitySystems.getSimpleUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
         System.out.println(utilitySystem.toPlantUML());
     }
 
     public UtilitySystemAI(UnitTypeTable a_utt, int chromosome) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        utilitySystem = StaticUtilitySystems.getSimpleUtilitySystem();
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
         System.out.println(utilitySystem.toPlantUML());
     }
 
