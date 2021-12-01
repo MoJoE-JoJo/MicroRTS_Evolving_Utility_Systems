@@ -1,4 +1,4 @@
-.box-plot {
+.box-plot, .line-graph {
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(50% - 20px);
 }

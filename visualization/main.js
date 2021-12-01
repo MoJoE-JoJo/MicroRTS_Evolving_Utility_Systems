@@ -1,6 +1,28 @@
 // var path = "C:\Users\Johan\Documents\GitHub\MicroRTS_EUS\nevt\fitness\fitness.xml"
 
-var layout = {
+var xAxis = {
+  title: {
+    text: 'Generation',
+    font: {
+      family: 'Courier New, monospace',
+      size: 18,
+      color: '#7f7f7f'
+    }
+  }
+}
+
+var yAxis = {
+  title: {
+    text: 'Fitness',
+    font: {
+      family: 'Courier New, monospace',
+      size: 18,
+      color: '#7f7f7f'
+    }
+  }
+}
+
+var boxPlotLayout = {
     title: {
       text:'Box plot',
       font: {
@@ -10,27 +32,23 @@ var layout = {
       xref: 'paper',
       x: 0.05,
     },
-    xaxis: {
-      title: {
-        text: 'Generation',
-        font: {
-          family: 'Courier New, monospace',
-          size: 18,
-          color: '#7f7f7f'
-        }
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Fitness',
-        font: {
-          family: 'Courier New, monospace',
-          size: 18,
-          color: '#7f7f7f'
-        }
-      }
-    }
+    xaxis: xAxis,
+    yaxis: yAxis
 }
+
+const lineGraphLayout = {
+  title: {
+    text:'Line graph',
+    font: {
+      family: 'Courier New, monospace',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.05,
+  },
+  xaxis: xAxis,
+  yaxis: yAxis
+};
 
 const createBoxPlotData = (json) => {
     const data = []
@@ -48,10 +66,45 @@ const createBoxPlotData = (json) => {
         data.push({
             y: y,
             type: 'box',
-            name: 'generation ' + generation._attr.id._value,
+            name: generation._attr.id._value,
             average: sum / y.length
         })
-        console.log(sum / y.length)
+    })
+    return data
+}
+
+const createLineGraphData = (json) => {
+    const data = []
+    const yMax = []
+    const xMax = []
+    const yAvg = []
+    const xAvg = []
+    for (let i = 0; i < json.run[0].generation.length; i++) {
+      const fitness = json.run[0].generation[i].fitness[0]
+      yMax.push(fitness.max[0]._text)
+      xMax.push(i)
+      yAvg.push(fitness.avg[0]._text)
+      xAvg.push(i)
+    }
+    data.push({
+      x: xMax,
+      y: yMax,
+      mode: 'lines',
+      name: 'Max',
+      line: {
+        dash: 'solid',
+        width: 2
+      }
+    })
+    data.push({
+      x: xAvg,
+      y: yAvg,
+      mode: 'lines',
+      name: 'Average',
+      line: {
+        dash: 'solid',
+        width: 2
+      }
     })
     return data
 }
@@ -64,9 +117,11 @@ document.getElementById('inputfile')
         result = fr.result
         const json = xmlToJSON.parseString(result)
         // console.log(json)
-        const data = createBoxPlotData(json)
-        // console.log(data)
-        Plotly.newPlot('box-plot', data, layout)
+        const boxPlotData = createBoxPlotData(json)
+        const lineGraphData = createLineGraphData(json)
+        // console.log(lineGraphData)
+        Plotly.newPlot('box-plot', boxPlotData, boxPlotLayout)
+        Plotly.newPlot('line-graph', lineGraphData, lineGraphLayout)
     }
         
     fr.readAsText(this.files[0])
