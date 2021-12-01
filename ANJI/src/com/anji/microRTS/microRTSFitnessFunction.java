@@ -31,7 +31,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     public microRTSFitnessFunction() {
         super();
-        //System.out.println("constructor called");
     }
 
     @Override
@@ -40,12 +39,10 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         while (it.hasNext()) {
             Chromosome chrom = (Chromosome) it.next();
 
-
             // build utility system
             UtilitySystem US = null;
             try {
                 var xmlString = new XmlPersistableChromosome(chrom).toXml();
-//                System.out.println("Building utility system");
                 anjiConverter anjioCon = new anjiConverter();
                 US = anjioCon.toUtilitySystemFromXMLString(xmlString);
 
@@ -59,20 +56,23 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 continue;
             }
 
-
             // === CALC FITNESS ===
             int fitness = 0;
+            int wins = 0;
             try {
                 for (int i = 0; i < iterations; i++) {
-
+                    int tmpFitness = 0;
                     if (doCoEvolution) {
-                        fitness += fitnessCalculator.coEvolutionFitness(US, prevChampion, i);
+                        tmpFitness = fitnessCalculator.coEvolutionFitness(US, prevChampion, i);
                     } else {
-                        fitness += fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount);
+                        tmpFitness = fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount);
                     }
+                    // at the moment a fitness higher than 1000 means a win.
+                    if (tmpFitness >= 1000) {
+                        wins++;
+                    }
+                    fitness += tmpFitness;
                 }
-
-
                 fitness /= iterations; // get the avg fitness
 
                 if (doCoEvolution) //if doing co-evolution, see if need of updating champion
@@ -82,7 +82,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                         prevChampion = US;
                     }
                 }
-                System.out.println("chromosome id -> " + chrom.getId() + ", Fitness score -> " + fitness);
+                System.out.println("chromosome id -> " + chrom.getId() + ", Fitness score -> " + fitness + " (wins: " + wins + "/" + iterations + ")");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,10 +102,9 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
         gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
-        //TODO can add more game settings here if wanted like maps, gametime and so on.
+        //TODO can always add more game settings here if wanted like maps, gametime and so on.
 
-        if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL))
-        {
+        if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL)) {
             // read the game goal property
             gameGoalCount = props.getIntProperty("fitness.game.goal");
         }

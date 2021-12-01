@@ -8,7 +8,6 @@ public class buildUMLFromChromosome {
         try {
             anjiConverter anjioCon = new anjiConverter();
             UtilitySystem us = anjioCon.toUtilitySystemFromChromosome(454);
-
             String uml = us.toPlantUML();
             System.out.println(uml);
         } catch (Exception e) {

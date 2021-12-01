@@ -49,7 +49,7 @@ public final class StaticUtilitySystems {
     }
 
     // create a simple utility system
-    public static final UtilitySystem getSimpleUtilitySystem() {
+    public static final UtilitySystem getBaselineUtilitySystem() {
         // create a US
         List<USVariable> variables = new LinkedList<USVariable>();
         List<USFeature> features = new LinkedList<USFeature>();
