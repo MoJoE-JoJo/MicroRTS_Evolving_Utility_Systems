@@ -248,6 +248,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             harvestingWorkers.remove(u);
             //return true;
         }
+        //return false;
         return true;
     }
 
@@ -321,6 +322,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             harvestingWorkers.remove(u);
             //return true;
         }
+        //return false;
         return true;
     }
 
@@ -653,6 +655,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             harvestingWorkers.add(u);
             //return true;
         }
+        //return false;
         return true;
     }
 

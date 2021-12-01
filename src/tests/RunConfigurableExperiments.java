@@ -51,7 +51,7 @@ public class RunConfigurableExperiments {
     private static List<AI> bots2 = new LinkedList<>();
     private static List<PhysicalGameState> maps = new LinkedList<>();
     static UnitTypeTable utt = new UnitTypeTable(
-            UnitTypeTable.VERSION_ORIGINAL_FINETUNED,
+            UnitTypeTable.VERSION_ORIGINAL,
             UnitTypeTable.MOVE_CONFLICT_RESOLUTION_CANCEL_BOTH);
 
     public static PathFinding getPathFinding() {
