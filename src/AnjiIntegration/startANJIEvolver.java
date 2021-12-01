@@ -13,7 +13,7 @@ public class startANJIEvolver {
 //            String s = poop.toXMLStringFromUtilitySystem(StaticUtilitySystems.getSimpleUtilitySystem());
 //            String uml = StaticUtilitySystems.getSimpleUtilitySystem().toPlantUML();
 //            System.out.println(s);
-          Properties props = new Properties("utility_system_properties/test_3_ensemble_learning.properties");
+          Properties props = new Properties("utility_system_properties/test_4_evolve_baseline.properties");
           Evolver evolver = new Evolver();
           evolver.init(props);
           evolver.run();
