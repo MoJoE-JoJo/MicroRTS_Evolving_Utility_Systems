@@ -27,7 +27,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
     private int maxGameCycles;
     private int maxInactiveCycles;
     String map = "";
-    private boolean takeWeigthedActions;
+    private boolean takeMaxAction;
 
     // co evolution stuff
     private UtilitySystem prevChampion;
@@ -65,7 +65,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             int fitness = 0;
             int wins = 0;
             try {
-                fitnessCalculator fitnessCalc = new fitnessCalculator(maxGameCycles, maxInactiveCycles, map, opponentType, gametype, takeWeigthedActions);
+                fitnessCalculator fitnessCalc = new fitnessCalculator(maxGameCycles, maxInactiveCycles, map, opponentType, gametype, takeMaxAction);
                 for (int i = 0; i < iterations; i++) {
                     int tmpFitness = 0;
                     if (doCoEvolution) {
@@ -108,10 +108,9 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
         map = props.getProperty("fitness.game.map");
-        maxGameCycles = props.getIntProperty("fitness.game.max.gamecycles");
-        maxInactiveCycles = props.getIntProperty("fitness.game.max.inactivecycles");
-        takeWeigthedActions = props.getBooleanProperty("fitness.game.utility.system.weighted.actions");
-        //TODO can always add more game settings here if wanted like maps, gametime and so on.
+        maxGameCycles = props.getIntProperty("fitness.game.cycles.max");
+        maxInactiveCycles = props.getIntProperty("fitness.game.cycles.inactive.max");
+        takeMaxAction = props.getBooleanProperty("utility.system.take.max.action");
 
         if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL)) {
             // read the game goal property

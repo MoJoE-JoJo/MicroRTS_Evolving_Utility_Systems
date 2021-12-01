@@ -6,7 +6,6 @@ import ai.abstraction.*;
 import ai.core.AI;
 import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
-import com.anji.microRTS.microRTSFitnessFunction;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
@@ -21,7 +20,7 @@ public class fitnessCalculator {
     private String map;
     private OpponentTypes opponentType;
     private GameTypes gameType;
-    private boolean takeWeigthedActions;
+    private boolean takeMaxAction;
 
     public enum GameTypes {
         HARVEST,
@@ -36,12 +35,13 @@ public class fitnessCalculator {
         BASELINE
     }
 
-    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, boolean takeWeigthedActions) {
+    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, boolean takeMaxAction) {
         MAX_GAME_CYCLES = maxGameCycles;
         MAX_INACTIVE_CYCLES = maxInactiveCycles;
         this.map = map;
         this.opponentType = opponentType;
         this.gameType = gameType;
+        this.takeMaxAction = takeMaxAction;
         utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
     }
 
@@ -120,12 +120,12 @@ public class fitnessCalculator {
         //decide if player 0 or 1, for swapping positions on the board since it can give some advantages
         boolean isPlayerZero = iteration % 2 == 0;
         if (isPlayerZero) {
-            playerZero = new UtilitySystemAI(utt, utilitySystem, false);
+            playerZero = new UtilitySystemAI(utt, utilitySystem, false, takeMaxAction);
             playerId = 0;
-            PlayerOne = new UtilitySystemAI(utt, prevChampion, false);
+            PlayerOne = new UtilitySystemAI(utt, prevChampion, false, takeMaxAction);
         } else {
-            playerZero = new UtilitySystemAI(utt, prevChampion, false);
-            PlayerOne = new UtilitySystemAI(utt, utilitySystem, false);
+            playerZero = new UtilitySystemAI(utt, prevChampion, false, takeMaxAction);
+            PlayerOne = new UtilitySystemAI(utt, utilitySystem, false, takeMaxAction);
             playerId = 1;
         }
 
@@ -158,12 +158,12 @@ public class fitnessCalculator {
         boolean isPlayerZero = iteration % 2 == 0;
 
         if (isPlayerZero) {
-            playerZero = new UtilitySystemAI(utt, utilitySystem, false);
+            playerZero = new UtilitySystemAI(utt, utilitySystem, false, takeMaxAction);
             playerOne = selectAIFromOpponentType(utt, opponentType, iteration);
             playerId = 0;
         } else {
             playerZero = selectAIFromOpponentType(utt, opponentType, iteration);
-            playerOne = new UtilitySystemAI(utt, utilitySystem, false);
+            playerOne = new UtilitySystemAI(utt, utilitySystem, false, takeMaxAction);
             playerId = 1;
         }
 
