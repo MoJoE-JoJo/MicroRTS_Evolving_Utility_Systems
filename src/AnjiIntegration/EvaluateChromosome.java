@@ -4,16 +4,39 @@ import ai.PassiveAI;
 import ai.UtilitySystemAI;
 import ai.core.AI;
 import ai.utilitySystem.UtilitySystem;
+import com.anji.util.Properties;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
 import tests.RunExperimentTest;
 
+import java.io.IOException;
+
 public class EvaluateChromosome {
 
     public static void main(String[] args) {
+        // two arguments:
+        //[0] the properties files for the training/evolving
+        //[1] the champion chromosome XML file example -> chromosome1234.xml
+
+        try {
+            //Properties props = new Properties("utility_system_properties/test_9_evolve_baseline_VS_baseline.properties");
+            Properties props = new Properties(args[0]);
 
 
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+    public static void evaluateResourceGathering()
+    {
         int score = 0;
         for (int i = 0; i < 100; i++) {
 
@@ -54,4 +77,5 @@ public class EvaluateChromosome {
         System.out.println("final average time");
         System.out.println(score);
     }
+
 }

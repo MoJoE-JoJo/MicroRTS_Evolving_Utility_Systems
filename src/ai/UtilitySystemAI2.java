@@ -4,7 +4,6 @@
  */
 package ai;
 
-import AnjiIntegration.anjiConverter;
 import ai.abstraction.AbstractAction;
 import ai.abstraction.AbstractionLayerAI;
 import ai.abstraction.Harvest;
@@ -24,7 +23,7 @@ import java.util.*;
 /**
  *
  */
-public class UtilitySystemAI extends AbstractionLayerAI {
+public class UtilitySystemAI2 extends AbstractionLayerAI {
     protected UtilitySystem utilitySystem; // can we just pass it as param in constructor?
     protected UnitTypeTable utt;
     protected UnitType workerType;
@@ -41,7 +40,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     protected HashSet<Unit> defendingUnits;
     protected boolean verbose = true;
 
-    public UtilitySystemAI(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
+    public UtilitySystemAI2(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
         super(pathfinding, computationLimit, iterationsLimit);
         List<USVariable> variables = new ArrayList<USVariable>();
         List<USFeature> features = new ArrayList<USFeature>();
@@ -56,24 +55,27 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         utilitySystem = new UtilitySystem(variables, features, actions, constants);
     }
 
-    public UtilitySystemAI(UnitTypeTable a_utt, PathFinding a_pf) {
+    public UtilitySystemAI2(UnitTypeTable a_utt, PathFinding a_pf) {
         this(a_utt, a_pf, -1, -1);
         reset(a_utt);
         utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
     }
 
-    public UtilitySystemAI(UnitTypeTable a_utt) {
+    public UtilitySystemAI2(UnitTypeTable a_utt) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
-        try {
-            utilitySystem = new anjiConverter().toUtilitySystemFromChromosome(2790);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
         System.out.println(utilitySystem.toPlantUML());
     }
 
-    public UtilitySystemAI(UnitTypeTable a_utt, UtilitySystem us, boolean verbose) {
+    public UtilitySystemAI2(UnitTypeTable a_utt, int chromosome) {
+        this(a_utt, new AStarPathFinding());
+        reset(a_utt);
+        utilitySystem = StaticUtilitySystems.getBaselineUtilitySystem();
+        System.out.println(utilitySystem.toPlantUML());
+    }
+
+    public UtilitySystemAI2(UnitTypeTable a_utt, UtilitySystem us, boolean verbose) {
         this(a_utt, new AStarPathFinding());
         reset(a_utt);
         utilitySystem = us;
@@ -107,7 +109,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
     @Override
     public AI clone() {
-        return new UtilitySystemAI(utt, pf); // copy utility system aswell
+        return new UtilitySystemAI2(utt, pf); // copy utility system aswell
     }
 
 

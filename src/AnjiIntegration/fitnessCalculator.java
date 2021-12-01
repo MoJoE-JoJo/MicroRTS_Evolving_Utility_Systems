@@ -27,7 +27,7 @@ public class fitnessCalculator {
         BASELINE
     }
 
-    public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI) throws Exception {
+    public static int fitnessOfUtilitySystem(UtilitySystem utilitySystem, int iteration, int opponentAI, String map) throws Exception {
         // == GAME SETTINGS ==
         String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
@@ -89,20 +89,19 @@ public class fitnessCalculator {
         //return MAX_GAME_CYCLES - gs.getTime() + res;
     }
 
-    public static int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, int iteration) throws Exception {
+    public static int coEvolutionFitness(UtilitySystem utilitySystem, UtilitySystem prevChampion, int iteration, String map) throws Exception {
         // == GAME SETTINGS ==
-        String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
         int MAX_GAME_CYCLES = 5000; // game time
         int MAX_INACTIVE_CYCLES = 5000;
-        PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
+        PhysicalGameState pgs = PhysicalGameState.load(map, utt);
 
         // == SETUP THE AIs ==
         AI playerZero;
         AI PlayerOne;
         int playerId;
 
-        //decide if player 1 or 2, for swapping positions on the board since it can give some advantages
+        //decide if player 0 or 1, for swapping positions on the board since it can give some advantages
         boolean isPlayerZero = iteration % 2 == 0;
         if (isPlayerZero) {
             playerZero = new UtilitySystemAI(utt, utilitySystem, false);
@@ -115,9 +114,7 @@ public class fitnessCalculator {
         }
 
         // == PLAY THE GAME ==
-
         GameState gs = RunExperimentTest.runExperiment(playerZero, PlayerOne, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES);
-
 
         // == EVAL THE FINAL GAMESTATE ==
         int res = MAX_GAME_CYCLES + 1000;
@@ -134,52 +131,12 @@ public class fitnessCalculator {
         }
     }
 
-
-    private static AI selectAIFromOpponentType(UnitTypeTable utt, OpponentTypes type, int iteration) {
-        switch (type) {
-            case PASSIVE:
-                return new PassiveAI(utt);
-            case ROUND_ROBIN:
-                return selectOpponentAI(utt, iteration);
-            case BASELINE:
-                return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
-            case COEVOLUTION:
-            case default:
-                return null;
-        }
-    }
-
-    private static AI selectOpponentAI(UnitTypeTable utt, int iteration) {
-
-        switch (iteration % 8) {
-            case 0:
-                return new WorkerRush(utt);
-            case 1:
-                return new WorkerDefense(utt);
-            case 2:
-                return new LightRush(utt);
-            case 3:
-                return new LightDefense(utt);
-            case 4:
-                return new RangedRush(utt);
-            case 5:
-                return new RangedDefense(utt);
-            case 6:
-                return new HeavyRush(utt);
-            case 7:
-                return new HeavyDefense(utt);
-            default:
-                return new PassiveAI(utt);
-        }
-    }
-
-    public static int calcFitness(UtilitySystem utilitySystem, int iteration, OpponentTypes opponentType, GameTypes gametype, int gameGoalCount) throws Exception {
+    public static int calcFitness(UtilitySystem utilitySystem, int iteration, OpponentTypes opponentType, GameTypes gametype, int gameGoalCount, String map) throws Exception {
         // == SETUP GAME BASED ON PARAMETERS ==
-        String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
         UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED); // original game (NOOP length = move length)
-        int MAX_GAME_CYCLES = 5000; // game time
-        int MAX_INACTIVE_CYCLES = 5000;
-        PhysicalGameState pgs = PhysicalGameState.load(scenarioFileName, utt);
+        int MAX_GAME_CYCLES = 3000; // game time
+        int MAX_INACTIVE_CYCLES = 3000;
+        PhysicalGameState pgs = PhysicalGameState.load(map, utt);
 
         // == SETUP THE AIs ==
         AI playerZero;
@@ -245,4 +202,44 @@ public class fitnessCalculator {
                 throw new Exception("invalid gametype, in fitnessCalculator");
         }
     }
+
+    private static AI selectAIFromOpponentType(UnitTypeTable utt, OpponentTypes type, int iteration) {
+        switch (type) {
+            case PASSIVE:
+                return new PassiveAI(utt);
+            case ROUND_ROBIN:
+                return selectOpponentAI(utt, iteration);
+            case BASELINE:
+                return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
+            case COEVOLUTION:
+            case default:
+                return null;
+        }
+    }
+
+    private static AI selectOpponentAI(UnitTypeTable utt, int iteration) {
+
+        switch (iteration % 8) {
+            case 0:
+                return new WorkerRush(utt);
+            case 1:
+                return new WorkerDefense(utt);
+            case 2:
+                return new LightRush(utt);
+            case 3:
+                return new LightDefense(utt);
+            case 4:
+                return new RangedRush(utt);
+            case 5:
+                return new RangedDefense(utt);
+            case 6:
+                return new HeavyRush(utt);
+            case 7:
+                return new HeavyDefense(utt);
+            default:
+                return new PassiveAI(utt);
+        }
+    }
+
+
 }
