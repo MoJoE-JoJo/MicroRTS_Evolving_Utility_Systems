@@ -20,9 +20,11 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
     private int iterations;
     private boolean doCoEvolution = false;
 
+    // game settings
     private GameTypes gametype;
     private int gameGoalCount;
     private OpponentTypes opponentType;
+    String map = "";
 
     // co evolution stuff
     private UtilitySystem prevChampion;
@@ -63,12 +65,12 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 for (int i = 0; i < iterations; i++) {
                     int tmpFitness = 0;
                     if (doCoEvolution) {
-                        tmpFitness = fitnessCalculator.coEvolutionFitness(US, prevChampion, i);
+                        tmpFitness = fitnessCalculator.coEvolutionFitness(US, prevChampion, i, map);
                     } else {
-                        tmpFitness = fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount);
+                        tmpFitness = fitnessCalculator.calcFitness(US, i, opponentType, gametype, gameGoalCount, map);
                     }
                     // at the moment a fitness higher than 1000 means a win.
-                    if (tmpFitness >= 1000) {
+                    if (tmpFitness > 1000) {
                         wins++;
                     }
                     fitness += tmpFitness;
@@ -102,6 +104,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
         opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
         gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 
+        map = props.getProperty("fitness.game.map", "maps/16x16/basesWorkers16x16.xml");
         //TODO can always add more game settings here if wanted like maps, gametime and so on.
 
         if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL)) {
