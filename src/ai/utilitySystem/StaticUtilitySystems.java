@@ -91,11 +91,13 @@ public final class StaticUtilitySystems {
         constants.add(c10);
         USConstant c25 = new USConstant("c25",25f);
         constants.add(c25);
+        USConstant c100 = new USConstant("c100",100f);
+        constants.add(c100);
 
         // features
         USFeature fa1 = new USFeature("iddlewarr", Operation.MULTIPLY);
         fa1.addParam(vid);
-        fa1.addParam(c25);
+        fa1.addParam(c100);
         features.add(fa1);
 
         USFeature fba1 = new USFeature("resourceSUB10", Operation.SUBTRACT);
