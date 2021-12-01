@@ -39,6 +39,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
     protected HashSet<Unit> buildingWorkers;
     protected HashSet<Unit> attackingUnits;
     protected HashSet<Unit> defendingUnits;
+    protected boolean useMaxUtil = false;
     protected boolean verbose = true;
 
     public UtilitySystemAI(UnitTypeTable a_utt, PathFinding pathfinding, int computationLimit, int iterationsLimit) {
@@ -78,6 +79,14 @@ public class UtilitySystemAI extends AbstractionLayerAI {
         reset(a_utt);
         utilitySystem = us;
         this.verbose = verbose;
+    }
+
+    public UtilitySystemAI(UnitTypeTable a_utt, UtilitySystem us, boolean verbose, boolean useMaxUtil) {
+        this(a_utt, new AStarPathFinding());
+        reset(a_utt);
+        utilitySystem = us;
+        this.verbose = verbose;
+        this.useMaxUtil = useMaxUtil;
     }
 
 
@@ -136,8 +145,15 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             //Do the translation stuff
 
             UnitGroups unitGroups = new UnitGroups(passiveUnits, harvestingWorkers, buildingWorkers, attackingUnits, defendingUnits);
-            List<UtilAction> utilActions = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
-            //UtilAction utilAction= utilActions.get(0);
+            List<UtilAction> utilActions;
+            UtilAction utilAction;
+            if(!useMaxUtil){
+                utilActions = utilitySystem.getActionWeightedRandom(gs, player, unitGroups);
+                utilAction = utilActions.get(0);
+            }
+            else{
+                utilAction = utilitySystem.getActionBest(gs, player, unitGroups);
+            }
             //utilActions = new ArrayList<>();
             //utilActions.add(utilAction);
             Player p = gs.getPlayer(player);
@@ -153,35 +169,33 @@ public class UtilitySystemAI extends AbstractionLayerAI {
                 //gs.getUnitActions().remove(u); //Just to be sure that it stops it current action, and that it doesn't try to give a new action if it already has one
                 HarvestLogic(u, p, gs);
             }
-            for (UtilAction ua : utilActions) {
-                switch (ua) {
-                    case ATTACK_WITH_SINGLE_UNIT -> {
-                        if(AttackWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case DEFEND_WITH_SINGLE_UNIT -> {
-                        if(DefendWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_BASE -> {
-                        if(BuildBase(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_BARRACKS -> {
-                        if(BuildBarracks(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_WORKER -> {
-                        if(BuildWorker(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_LIGHT -> {
-                        if(BuildLight(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_RANGED -> {
-                        if(BuildRanged(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case BUILD_HEAVY -> {
-                        if(BuildHeavy(gs, p)) return translateActions(p.getID(), gs);
-                    }
-                    case HARVEST_RESOURCE -> {
-                        if(Harvest_Resources(gs, p)) return translateActions(p.getID(), gs);
-                    }
+            switch (utilAction) {
+                case ATTACK_WITH_SINGLE_UNIT -> {
+                    if(AttackWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case DEFEND_WITH_SINGLE_UNIT -> {
+                    if(DefendWithSingleUnit(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_BASE -> {
+                    if(BuildBase(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_BARRACKS -> {
+                    if(BuildBarracks(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_WORKER -> {
+                    if(BuildWorker(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_LIGHT -> {
+                    if(BuildLight(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_RANGED -> {
+                    if(BuildRanged(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case BUILD_HEAVY -> {
+                    if(BuildHeavy(gs, p)) return translateActions(p.getID(), gs);
+                }
+                case HARVEST_RESOURCE -> {
+                    if(Harvest_Resources(gs, p)) return translateActions(p.getID(), gs);
                 }
             }
             return translateActions(p.getID(), gs);
