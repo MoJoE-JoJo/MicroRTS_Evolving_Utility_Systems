@@ -109,7 +109,7 @@ public class UtilitySystemAI extends AbstractionLayerAI {
 
     @Override
     public AI clone() {
-        return new UtilitySystemAI(utt, pf); // copy utility system aswell
+        return new UtilitySystemAI(utt, utilitySystem, verbose, useMaxUtil); // copy utility system aswell
     }
 
 
@@ -197,8 +197,6 @@ public class UtilitySystemAI extends AbstractionLayerAI {
             return translateActions(player, gs);
         }
     }
-
-
 
     @Override
     public List<ParameterSpecification> getParameters() {
