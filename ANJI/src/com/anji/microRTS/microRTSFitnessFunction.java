@@ -103,7 +103,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
 
     @Override
     public void init(Properties props) throws Exception {
-        iterations = props.getIntProperty("fitness.iterations");
+        iterations = props.getIntProperty("fitness.game.iterations");
         opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
         gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
 

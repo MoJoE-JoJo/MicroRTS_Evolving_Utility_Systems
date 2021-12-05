@@ -149,6 +149,7 @@ public class fitnessCalculator {
 
     public int calcFitness(UtilitySystem utilitySystem, int iteration, int gameGoalCount) throws Exception {
         // init game
+
         PhysicalGameState pgs = PhysicalGameState.load(map, utt);
 
         // == SETUP THE AIs ==

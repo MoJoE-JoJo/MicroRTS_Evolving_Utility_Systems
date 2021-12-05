@@ -2,69 +2,183 @@ package AnjiIntegration;
 
 import ai.PassiveAI;
 import ai.UtilitySystemAI;
+import ai.abstraction.*;
 import ai.core.AI;
+import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.util.Properties;
+import org.jgap.Chromosome;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
 import tests.RunExperimentTest;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 public class EvaluateChromosome {
 
+    private static List<AI> opponentBots = new LinkedList<>();
+    private static String map;
+    private static fitnessCalculator.OpponentTypes opponentType;
+    private static fitnessCalculator.GameTypes gametype;
+    private static int maxGameCycles;
+    private static int maxInactiveCycles;
+    private static boolean takeMaxAction;
+    private static int gameGoalCount;
+    private static UtilitySystem utilSystem;
+    private static UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
+
     public static void main(String[] args) {
         // two arguments:
-        //[0] the properties files for the training/evolving
-        //[1] the champion chromosome XML file example -> chromosome1234.xml
+        // [0] the properties files for the training/evolving
+        // [1] the champion chromosome XML file example -> chromosome1234.xml
 
         try {
-            //Properties props = new Properties("utility_system_properties/test_9_evolve_baseline_VS_baseline.properties");
+
+            // read the first argument as the properties file
             Properties props = new Properties(args[0]);
+            //Properties props = new Properties("utility_system_properties/test_1.properties");
+
+            // read second argument as the champion chromosome file.
+            anjiConverter conv = new anjiConverter();
+            InputStream inputStream = conv.readXmlFileIntoInputStream(args[1]);
+            //InputStream inputStream = conv.readXmlFileIntoInputStream("./db/chromosome/chromosome" + 8659 + ".xml");
+            utilSystem = conv.toUtilitySystemFromInputStream(inputStream);
 
 
+            // === SETUP GAME BASED ON PROPERTY FILE ===
+
+            map = props.getProperty("fitness.game.map");
+            opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
+            gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
+            maxGameCycles = props.getIntProperty("fitness.game.cycles.max");
+            maxInactiveCycles = props.getIntProperty("fitness.game.cycles.inactive.max");
+            takeMaxAction = props.getBooleanProperty("utility.system.take.max.action");
+
+            if (!gametype.equals(fitnessCalculator.GameTypes.NORMAL)) {
+                // read the game goal property
+                gameGoalCount = props.getIntProperty("fitness.game.goal");
+            }
+
+
+
+            // == SETUP THE OPPONENT BOTS ==
+            opponentBots = new LinkedList<>();
+            switch (opponentType) {
+
+                case PASSIVE:
+                    opponentBots.add( new PassiveAI());
+                    break;
+                case COEVOLUTION:
+
+                    //TODO what to play against here!?
+                    break;
+                case ROUND_ROBIN:
+                    opponentBots.add(new WorkerRush(utt));
+                    opponentBots.add(new LightRush(utt));
+                    opponentBots.add(new HeavyRush(utt));
+                    opponentBots.add(new RangedRush(utt));
+                    opponentBots.add(new WorkerDefense(utt));
+                    opponentBots.add(new LightDefense(utt));
+                    opponentBots.add(new HeavyDefense(utt));
+                    opponentBots.add(new RangedDefense(utt));
+                    break;
+                case BASELINE:
+                    opponentBots.add(new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false));
+                    break;
+            }
+
+            // == EVAL DIFFERENTLY BASED ON GAMETYPE ==
+
+            switch (gametype) {
+                case NORMAL:
+                    evaluateNormalGames();
+                    break;
+                case HARVEST:
+                    evaluateResourceGathering();
+                    break;
+                case MILITIA_UNITS:
+                    evaluateMilitiaUnits();
+                    break;
+                default:
+                    throw new Exception("invalid gametype, in EvaluateChromosome");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
     }
 
+    private static void evaluateNormalGames() {
+
+        // for each opponent type,
+        for (int o = 0; o < opponentBots.size(); o++) {
+
+            AI opponent = opponentBots.get(o);
+
+            int score = 0;
+            int falseWins = 0;
+            for (int i = 0; i < 100; i++) {
+                try {
+
+                    // setup AI and game
+                    PhysicalGameState pgs = null;
+                    pgs = PhysicalGameState.load(map, utt);
+
+                    // == SETUP THE AI ==
+                    AI utilitySystemAI = new UtilitySystemAI(utt, utilSystem, false);
+
+                    // == PLAY THE GAME ==
+                    GameState gs = RunExperimentTest.runNormalGame(utilitySystemAI, opponent, pgs, utt, maxGameCycles, maxInactiveCycles);
+
+                    // == EVAL THE GAMESTATE ==
+
+                    if (gs.winner() == 0)
+                    {
+                        score++;
+                    }
+
+                    System.out.print("\r" + "against bot " + o + " game " + i + " out of 100");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            //TODO Save result in CSV?
 
 
+        }
+    }
 
-    public static void evaluateResourceGathering()
-    {
+    private static void evaluateMilitiaUnits() {
         int score = 0;
+        int falseWins = 0;
         for (int i = 0; i < 100; i++) {
-
             try {
-                // build utility system
-                anjiConverter anjioCon = new anjiConverter();
-                UtilitySystem utilitySystem = anjioCon.toUtilitySystemFromChromosome(8409);
 
                 // setup AI and game
-                // == GAME SETTINGS ==
-                String scenarioFileName = "maps/16x16/basesWorkers16x16.xml";
-                UnitTypeTable utt = new UnitTypeTable(); // original game (NOOP length = move length)
-                int MAX_GAME_CYCLES = 5000; // game time
-                int MAX_INACTIVE_CYCLES = 5000;
                 PhysicalGameState pgs = null;
-                pgs = PhysicalGameState.load(scenarioFileName, utt);
+                pgs = PhysicalGameState.load(map, utt);
 
                 // == SETUP THE AI ==
-                AI utilitySystemAI = new UtilitySystemAI(utt, utilitySystem, false);
-                AI opponentAi = new PassiveAI();
+                AI utilitySystemAI = new UtilitySystemAI(utt, utilSystem, false);
+                AI opponentAi = opponentBots.get(0);
 
                 // == PLAY THE GAME ==
-                //GameState gs = RunExperimentTest.runUntilAtWarriorCount(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 0, 1);
-                //
-
-                GameState gs = RunExperimentTest.runUntilAtResourceCount(utilitySystemAI, opponentAi, pgs, utt, MAX_GAME_CYCLES, MAX_INACTIVE_CYCLES, 0, 15);
+                GameState gs = RunExperimentTest.runUntilAtWarriorCount(utilitySystemAI, opponentAi, pgs, utt, maxGameCycles, maxInactiveCycles, 0, gameGoalCount);
 
                 // == EVAL THE GAMESTATE ==
+                // here print out the time it takes to reach the end.
+
+                if (gs.winner() == 0)
+                {
+                    falseWins++;
+                }
+
                 int time = gs.getTime();
                 System.out.println(time);
                 score += time;
@@ -76,6 +190,51 @@ public class EvaluateChromosome {
         score = score / 100; // get average time
         System.out.println("final average time");
         System.out.println(score);
+        System.out.println("Amount of 'false wins', where the utility system won by killing the enemy");
+        System.out.println(falseWins);
+
+
     }
 
+    public static void evaluateResourceGathering()
+    {
+        int score = 0;
+        int falseWins = 0;
+        for (int i = 0; i < 100; i++) {
+            try {
+
+                // setup AI and game
+                PhysicalGameState pgs = null;
+                pgs = PhysicalGameState.load(map, utt);
+
+                // == SETUP THE AI ==
+                AI utilitySystemAI = new UtilitySystemAI(utt, utilSystem, false);
+                AI opponentAi = opponentBots.get(0);
+
+                // == PLAY THE GAME ==
+                GameState gs = RunExperimentTest.runUntilAtResourceCount(utilitySystemAI, opponentAi, pgs, utt, maxGameCycles, maxInactiveCycles, 0, gameGoalCount);
+
+                // == EVAL THE GAMESTATE ==
+                // here print out the time it takes to reach the end.
+
+                if (gs.winner() == 0)
+                {
+                    falseWins++;
+                }
+
+                int time = gs.getTime();
+                System.out.println(time);
+                score += time;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        score = score / 100; // get average time
+        System.out.println("final average time");
+        System.out.println(score);
+        System.out.println("Amount of 'false wins', where the utility system won by killing the enemy");
+        System.out.println(falseWins);
+
+    }
 }

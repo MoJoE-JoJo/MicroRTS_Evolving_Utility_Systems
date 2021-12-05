@@ -41,6 +41,27 @@ public class anjiConverter {
         return returnSystem;
     }
 
+    public UtilitySystem toUtilitySystemFromInputStream(InputStream stream) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        UtilitySystem returnSystem = null;
+        try {
+
+            // parse XML file
+            DocumentBuilder docBuilder = dbf.newDocumentBuilder();
+            // read from a project's resources folder
+            Document doc = docBuilder.parse(stream);
+
+            if (doc.hasChildNodes()) {
+                //printNote(doc.getChildNodes());
+                returnSystem = buildUtilitySystemFromNodeList(doc.getChildNodes());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnSystem;
+    }
+
 
     public UtilitySystem toUtilitySystemFromChromosome(long chromId) throws Exception {
         ChromosomeToNetworkXml converter = new ChromosomeToNetworkXml();
@@ -250,16 +271,6 @@ public class anjiConverter {
             }
         }
 
-        // == Handle empty values in feature nodes ==
-        /*
-        for (USFeature node : featureList) {
-            if (node.getParam2() == null) {
-                //todo not sure this is good enough
-                node.addParam(new USConstant(1.0f));
-            }
-        }
-        */
-
         UtilitySystem US = new UtilitySystem(varibleList, featureList, actionList, constantsList);
         return US;
     }
@@ -320,7 +331,7 @@ public class anjiConverter {
         }
     }
 
-    private InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
+    public InputStream readXmlFileIntoInputStream(final String fileName) throws FileNotFoundException {
         InputStream targetStream = new FileInputStream(fileName);
         return targetStream;
     }
