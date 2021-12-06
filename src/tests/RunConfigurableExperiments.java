@@ -2,6 +2,7 @@ package tests;
 
 import ai.RandomAI;
 import ai.RandomBiasedAI;
+import ai.UtilitySystemAI;
 import ai.abstraction.*;
 import ai.abstraction.pathfinding.FloodFillPathFinding;
 import ai.abstraction.pathfinding.PathFinding;
@@ -20,6 +21,7 @@ import ai.montecarlo.MonteCarlo;
 import ai.portfolio.PortfolioAI;
 import ai.portfolio.portfoliogreedysearch.PGSAI;
 import ai.puppet.*;
+import ai.utilitySystem.StaticUtilitySystems;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
 
@@ -51,7 +53,7 @@ public class RunConfigurableExperiments {
     private static List<AI> bots2 = new LinkedList<>();
     private static List<PhysicalGameState> maps = new LinkedList<>();
     static UnitTypeTable utt = new UnitTypeTable(
-            UnitTypeTable.VERSION_ORIGINAL,
+            UnitTypeTable.VERSION_ORIGINAL_FINETUNED,
             UnitTypeTable.MOVE_CONFLICT_RESOLUTION_CANCEL_BOTH);
 
     public static PathFinding getPathFinding() {
@@ -351,14 +353,7 @@ public class RunConfigurableExperiments {
             processBots(bots2);
         }
         */
-        bots1.add(new WorkerRush(utt));
-        bots1.add(new LightRush(utt));
-        bots1.add(new HeavyRush(utt));
-        bots1.add(new RangedRush(utt));
-        bots1.add(new WorkerDefense(utt));
-        bots1.add(new LightDefense(utt));
-        bots1.add(new HeavyDefense(utt));
-        bots1.add(new RangedDefense(utt));
+        bots1.add(new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false, false));
 
         bots2.add(new WorkerRush(utt));
         bots2.add(new LightRush(utt));
