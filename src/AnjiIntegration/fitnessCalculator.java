@@ -32,7 +32,9 @@ public class fitnessCalculator {
         PASSIVE,
         COEVOLUTION,
         ROUND_ROBIN,
-        BASELINE
+        BASELINE,
+        ROUND_ROBIN_AND_BASELINE,
+        COEVOLUTION_AND_ROUND_ROBIN,
     }
 
     public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, boolean takeMaxAction) {
@@ -63,9 +65,9 @@ public class fitnessCalculator {
         if (isPlayerZero) {
             playerZero = new UtilitySystemAI(utt, utilitySystem, false);
             playerId = 0;
-            PlayerOne = selectOpponentAI(utt, opponentAI);
+            PlayerOne = selectRoundRobinOpponentAI(utt, opponentAI);
         } else {
-            playerZero = selectOpponentAI(utt, opponentAI);
+            playerZero = selectRoundRobinOpponentAI(utt, opponentAI);
             PlayerOne = new UtilitySystemAI(utt, utilitySystem, false);
             playerId = 1;
         }
@@ -222,16 +224,23 @@ public class fitnessCalculator {
             case PASSIVE:
                 return new PassiveAI(utt);
             case ROUND_ROBIN:
-                return selectOpponentAI(utt, iteration);
+            case COEVOLUTION_AND_ROUND_ROBIN:
+                return selectRoundRobinOpponentAI(utt, iteration);
             case BASELINE:
                 return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
+            case ROUND_ROBIN_AND_BASELINE:
+                if (iteration == 9) {
+                    return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
+                } else {
+                    return selectRoundRobinOpponentAI(utt, iteration);
+                }
             case COEVOLUTION:
             case default:
                 return null;
         }
     }
 
-    private static AI selectOpponentAI(UnitTypeTable utt, int iteration) {
+    private static AI selectRoundRobinOpponentAI(UnitTypeTable utt, int iteration) {
 
         switch (iteration % 8) {
             case 0:
@@ -254,6 +263,4 @@ public class fitnessCalculator {
                 return new PassiveAI(utt);
         }
     }
-
-
 }

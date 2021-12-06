@@ -69,7 +69,11 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
                 for (int i = 0; i < iterations; i++) {
                     int tmpFitness = 0;
                     if (doCoEvolution) {
-                        tmpFitness = fitnessCalc.coEvolutionFitness(US, prevChampion, i);
+                        if (opponentType.equals(OpponentTypes.COEVOLUTION_AND_ROUND_ROBIN) && iterations % 9 != 0) {
+                            tmpFitness = fitnessCalc.calcFitness(US, i, gameGoalCount);
+                        } else {
+                            tmpFitness = fitnessCalc.coEvolutionFitness(US, prevChampion, i);
+                        }
                     } else {
                         tmpFitness = fitnessCalc.calcFitness(US, i, gameGoalCount);
                     }
@@ -94,6 +98,7 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
             chrom.setFitnessValue(fitness);
         }
+
     }
 
     @Override

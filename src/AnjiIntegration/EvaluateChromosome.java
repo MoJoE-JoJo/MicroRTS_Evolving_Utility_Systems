@@ -11,10 +11,10 @@ import org.jgap.Chromosome;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
+import tests.ExperimenterAsymmetric;
 import tests.RunExperimentTest;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,8 +30,9 @@ public class EvaluateChromosome {
     private static int gameGoalCount;
     private static UtilitySystem utilSystem;
     private static UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
+    private static PrintStream csvResult;
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // two arguments:
         // [0] the properties files for the training/evolving
         // [1] the champion chromosome XML file example -> chromosome1234.xml
@@ -39,20 +40,34 @@ public class EvaluateChromosome {
         try {
 
             // read the first argument as the properties file
-            Properties props = new Properties(args[0]);
+            Properties prop = new Properties(args[0]);
             //Properties props = new Properties("utility_system_properties/test_1.properties");
 
             // read second argument as the champion chromosome file.
             anjiConverter conv = new anjiConverter();
             InputStream inputStream = conv.readXmlFileIntoInputStream(args[1]);
             //InputStream inputStream = conv.readXmlFileIntoInputStream("./db/chromosome/chromosome" + 8659 + ".xml");
-            utilSystem = conv.toUtilitySystemFromInputStream(inputStream);
+            UtilitySystem util = conv.toUtilitySystemFromInputStream(inputStream);
 
+            eval(prop, util);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void eval(Properties props, UtilitySystem championSystem) {
+        try {
+            // build CSV result path
+            String runName = props.getProperty("run.name");
+            String filepath = "./storage/" + runName;
+            csvResult = new PrintStream(new File(filepath + "/" + "evalResults.csv"));
+            // set the util system
+            utilSystem = championSystem;
 
             // === SETUP GAME BASED ON PROPERTY FILE ===
 
             map = props.getProperty("fitness.game.map");
-            opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent"));
+            opponentType = fitnessCalculator.OpponentTypes.valueOf(props.getProperty("fitness.game.opponent.evaluate"));
             gametype = fitnessCalculator.GameTypes.valueOf(props.getProperty("fitness.game.type"));
             maxGameCycles = props.getIntProperty("fitness.game.cycles.max");
             maxInactiveCycles = props.getIntProperty("fitness.game.cycles.inactive.max");
@@ -63,18 +78,11 @@ public class EvaluateChromosome {
                 gameGoalCount = props.getIntProperty("fitness.game.goal");
             }
 
-
-
             // == SETUP THE OPPONENT BOTS ==
             opponentBots = new LinkedList<>();
             switch (opponentType) {
-
                 case PASSIVE:
-                    opponentBots.add( new PassiveAI());
-                    break;
-                case COEVOLUTION:
-
-                    //TODO what to play against here!?
+                    opponentBots.add(new PassiveAI());
                     break;
                 case ROUND_ROBIN:
                     opponentBots.add(new WorkerRush(utt));
@@ -89,6 +97,19 @@ public class EvaluateChromosome {
                 case BASELINE:
                     opponentBots.add(new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false));
                     break;
+                case ROUND_ROBIN_AND_BASELINE:
+                    opponentBots.add(new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false));
+                    opponentBots.add(new WorkerRush(utt));
+                    opponentBots.add(new LightRush(utt));
+                    opponentBots.add(new HeavyRush(utt));
+                    opponentBots.add(new RangedRush(utt));
+                    opponentBots.add(new WorkerDefense(utt));
+                    opponentBots.add(new LightDefense(utt));
+                    opponentBots.add(new HeavyDefense(utt));
+                    opponentBots.add(new RangedDefense(utt));
+                    break;
+                case default:
+                    throw new Exception("unknown evaluate opponent types");
             }
 
             // == EVAL DIFFERENTLY BASED ON GAMETYPE ==
@@ -112,45 +133,27 @@ public class EvaluateChromosome {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 
     private static void evaluateNormalGames() {
 
-        // for each opponent type,
-        for (int o = 0; o < opponentBots.size(); o++) {
+        try {
 
-            AI opponent = opponentBots.get(o);
+            List<PhysicalGameState> pgs = new LinkedList<>();
+            pgs.add(PhysicalGameState.load(map, utt));
 
-            int score = 0;
-            int falseWins = 0;
-            for (int i = 0; i < 100; i++) {
-                try {
+            // == SETUP THE AI ==
+            List<AI> bots1 = new LinkedList<>();
+            bots1.add(new UtilitySystemAI(utt, utilSystem, false));
 
-                    // setup AI and game
-                    PhysicalGameState pgs = null;
-                    pgs = PhysicalGameState.load(map, utt);
+            // == PLAY THE GAME ==
+            ExperimenterAsymmetric.runExperiments(bots1, opponentBots,
+                    pgs, utt, 100, 5000, 300, false, csvResult, false, false, "");
 
-                    // == SETUP THE AI ==
-                    AI utilitySystemAI = new UtilitySystemAI(utt, utilSystem, false);
-
-                    // == PLAY THE GAME ==
-                    GameState gs = RunExperimentTest.runNormalGame(utilitySystemAI, opponent, pgs, utt, maxGameCycles, maxInactiveCycles);
-
-                    // == EVAL THE GAMESTATE ==
-
-                    if (gs.winner() == 0)
-                    {
-                        score++;
-                    }
-
-                    System.out.print("\r" + "against bot " + o + " game " + i + " out of 100");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            //TODO Save result in CSV?
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -174,8 +177,7 @@ public class EvaluateChromosome {
                 // == EVAL THE GAMESTATE ==
                 // here print out the time it takes to reach the end.
 
-                if (gs.winner() == 0)
-                {
+                if (gs.winner() == 0) {
                     falseWins++;
                 }
 
@@ -196,8 +198,7 @@ public class EvaluateChromosome {
 
     }
 
-    public static void evaluateResourceGathering()
-    {
+    public static void evaluateResourceGathering() {
         int score = 0;
         int falseWins = 0;
         for (int i = 0; i < 100; i++) {
@@ -217,8 +218,7 @@ public class EvaluateChromosome {
                 // == EVAL THE GAMESTATE ==
                 // here print out the time it takes to reach the end.
 
-                if (gs.winner() == 0)
-                {
+                if (gs.winner() == 0) {
                     falseWins++;
                 }
 
