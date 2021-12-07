@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class startANJIEvolver {
+public class ANJIEvolveAndEvaluate {
 
     public static void main(String[] args) {
         try {
