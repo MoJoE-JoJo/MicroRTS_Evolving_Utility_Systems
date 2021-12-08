@@ -18,7 +18,7 @@ public class ANJIEvolveAndEvaluate {
         try {
 
             // === RUN EVOLUTION ===
-            Properties props = new Properties("utility_system_properties/test_test.properties");
+            Properties props = new Properties("utility_system_properties/test5.properties");
             //Properties props = new Properties(args[0]);
             Evolver evolver = new Evolver();
             evolver.init(props);
