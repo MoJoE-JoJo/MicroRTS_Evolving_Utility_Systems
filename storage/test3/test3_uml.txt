@@ -28,6 +28,45 @@ Value: 0.0
 object 7_PLAYER_LIGHT {
 Value: 0.0
 }
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
 }
 package Actions {
 object ATTACK_WITH_SINGLE_UNIT {
@@ -48,58 +87,20 @@ Score: 0.0
 object BUILD_LIGHT {
 Score: 0.0
 }
+object BUILD_RANGED {
+Score: 0.0
 }
-object 31 {
-Value: 1.4265786
+object BUILD_HEAVY {
+Score: 0.0
 }
-object 33 {
-Value: -0.23857898
+object HARVEST_RESOURCE {
+Score: 0.0
 }
-object 38 {
-Value: -0.5855751
 }
-object 40 {
-Value: -0.0839319
-}
-map 14 {
-Func => MULTIPLY
-Value => 0.0
-}
-map 15 {
-Func => SUBTRACT
-Value => 0.0
-}
-map 16 {
-Func => MAX
-Value => 0.0
-}
-map 18 {
-Func => MULTIPLY
-Value => 0.0
-}
-map 19 {
-Func => MULTIPLY
-Value => 0.0
-}
-map 20 {
-Func => MULTIPLY
-Value => 0.0
-}
-map 377 {
+map 312 {
 Func => POWER
 Value => 0.0
 }
-6_ENEMY_WARRIORS ----> 14 : V0
-31 ----> 14 : V1
-33 ----> 15 : V0
-2_ENEMY_RESOURCE ----> 15 : V1
-15 ----> 16 : V0
-38 ----> 18 : V0
-40 ----> 19 : V0
-19 ----> 20 : V0
-16 ----> 377 : V0
-14 ---> ATTACK_WITH_SINGLE_UNIT
-377 ---> DEFEND_WITH_SINGLE_UNIT
-18 ---> BUILD_BASE
-20 ---> BUILD_BARRACKS
+18_PLAYER_HARVESTING_WORKERS ----> 312 : V0
+312 ---> BUILD_LIGHT
 @enduml

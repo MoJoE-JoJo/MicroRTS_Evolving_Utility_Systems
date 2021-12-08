@@ -65,17 +65,21 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             int fitness = 0;
             int wins = 0;
             try {
-                fitnessCalculator fitnessCalc = new fitnessCalculator(maxGameCycles, maxInactiveCycles, map, opponentType, gametype, takeMaxAction);
+                fitnessCalculator fitnessCalc = new fitnessCalculator(maxGameCycles, maxInactiveCycles, map, opponentType, gametype, gameGoalCount, takeMaxAction);
                 for (int i = 0; i < iterations; i++) {
                     int tmpFitness = 0;
                     if (doCoEvolution) {
-                        if (opponentType.equals(OpponentTypes.COEVOLUTION_AND_ROUND_ROBIN) && iterations % 9 != 0) {
-                            tmpFitness = fitnessCalc.calcFitness(US, i, gameGoalCount);
+                        if (opponentType.equals(OpponentTypes.COEVOLUTION_AND_ROUND_ROBIN) && i % 9 != 0) {
+                            // if the opponent is COEVOLUTION_AND_ROUND_ROBIN then play against ROUND_ROBIN, unless iteration is 9.
+                            tmpFitness = fitnessCalc.calcFitness(US, i);
+                        } else if (opponentType.equals(OpponentTypes.COEVOLUTION_AND_BASELINE) && i % 2 == 0) {
+                            // if the opponent is COEVOLUTION_AND_BASELINE then every other iteration play against baseline
+                            tmpFitness = fitnessCalc.calcFitness(US, i);
                         } else {
                             tmpFitness = fitnessCalc.coEvolutionFitness(US, prevChampion, i);
                         }
                     } else {
-                        tmpFitness = fitnessCalc.calcFitness(US, i, gameGoalCount);
+                        tmpFitness = fitnessCalc.calcFitness(US, i);
                     }
                     // if the fitness is higher than 1000, it means a win.
                     if (tmpFitness > 1000) {
@@ -98,7 +102,6 @@ public class microRTSFitnessFunction implements BulkFitnessFunction, Configurabl
             }
             chrom.setFitnessValue(fitness);
         }
-
     }
 
     @Override

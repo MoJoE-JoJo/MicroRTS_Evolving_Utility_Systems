@@ -21,6 +21,7 @@ public class fitnessCalculator {
     private OpponentTypes opponentType;
     private GameTypes gameType;
     private boolean takeMaxAction;
+    private int gameGoalCount;
 
     public enum GameTypes {
         HARVEST,
@@ -35,14 +36,16 @@ public class fitnessCalculator {
         BASELINE,
         ROUND_ROBIN_AND_BASELINE,
         COEVOLUTION_AND_ROUND_ROBIN,
+        COEVOLUTION_AND_BASELINE,
     }
 
-    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, boolean takeMaxAction) {
+    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType,int goalCount, boolean takeMaxAction) {
         MAX_GAME_CYCLES = maxGameCycles;
         MAX_INACTIVE_CYCLES = maxInactiveCycles;
         this.map = map;
         this.opponentType = opponentType;
         this.gameType = gameType;
+        this.gameGoalCount = goalCount;
         this.takeMaxAction = takeMaxAction;
         utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
     }
@@ -149,7 +152,7 @@ public class fitnessCalculator {
         }
     }
 
-    public int calcFitness(UtilitySystem utilitySystem, int iteration, int gameGoalCount) throws Exception {
+    public int calcFitness(UtilitySystem utilitySystem, int iteration) throws Exception {
         // init game
 
         PhysicalGameState pgs = PhysicalGameState.load(map, utt);
@@ -180,13 +183,13 @@ public class fitnessCalculator {
 
                 int res = MAX_GAME_CYCLES + 1000;
 
-                if (gs.winner() == playerId) // win
+                if (gs.winner() == playerId) // win: can be between [1000,6000]
                 {
                     return res - gs.getTime();
-                } else if (gs.winner() == -1) //tie
+                } else if (gs.winner() == -1) //tie: always returns [1000]
                 {
                     return 1000;
-                } else //else lost the game, reward based on survival time
+                } else //else lost the game, reward based on survival time are in the range [0, 500]
                 {
                     return gs.getTime() / 10;
                 }
@@ -226,7 +229,8 @@ public class fitnessCalculator {
             case ROUND_ROBIN:
             case COEVOLUTION_AND_ROUND_ROBIN:
                 return selectRoundRobinOpponentAI(utt, iteration);
-            case BASELINE:
+            case COEVOLUTION_AND_BASELINE:
+                case BASELINE:
                 return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
             case ROUND_ROBIN_AND_BASELINE:
                 if (iteration == 9) {

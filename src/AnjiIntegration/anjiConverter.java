@@ -187,7 +187,6 @@ public class anjiConverter {
                         // The value is based on the weight of the connection
                         if (srcId.equals("0")) {
                             float conVal = Float.parseFloat(tempXMLNode.getAttributes().getNamedItem("weight").getNodeValue());
-                            //todo could be multiplied by a bias here? for now assume bias is always 1.
                             USConstant constant = new USConstant(connId, conVal);
 
                             constantsList.add(constant); // add node to list for building
@@ -288,10 +287,6 @@ public class anjiConverter {
         if (srcNode.getName().equals(destNode.getName())) {
             return false;
         }
-
-        //TODO Maybe more cases
-
-
         return true;
     }
 

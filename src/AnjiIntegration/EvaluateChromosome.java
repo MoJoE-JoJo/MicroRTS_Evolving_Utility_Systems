@@ -32,7 +32,7 @@ public class EvaluateChromosome {
     private static UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
     private static PrintStream csvResult;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         // two arguments:
         // [0] the properties files for the training/evolving
         // [1] the champion chromosome XML file example -> chromosome1234.xml
@@ -136,11 +136,8 @@ public class EvaluateChromosome {
 
     }
 
-
     private static void evaluateNormalGames() {
-
         try {
-
             List<PhysicalGameState> pgs = new LinkedList<>();
             pgs.add(PhysicalGameState.load(map, utt));
 
@@ -194,7 +191,6 @@ public class EvaluateChromosome {
         System.out.println(score);
         System.out.println("Amount of 'false wins', where the utility system won by killing the enemy");
         System.out.println(falseWins);
-
 
     }
 
