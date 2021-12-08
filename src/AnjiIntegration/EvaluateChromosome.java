@@ -31,6 +31,7 @@ public class EvaluateChromosome {
     private static UtilitySystem utilSystem;
     private static UnitTypeTable utt = new UnitTypeTable(UnitTypeTable.VERSION_ORIGINAL_FINETUNED);
     private static PrintStream csvResult;
+    private static PrintStream csvResult2;
 
     public static void main(String[] args) {
         // two arguments:
@@ -60,7 +61,8 @@ public class EvaluateChromosome {
             // build CSV result path
             String runName = props.getProperty("run.name");
             String filepath = "./storage/" + runName;
-            csvResult = new PrintStream(new File(filepath + "/" + "evalResults.csv"));
+            csvResult = new PrintStream(new File(filepath + "/" + "evalResultsP1.csv"));
+            csvResult2 = new PrintStream(new File(filepath + "/" + "evalResultsP2.csv"));
             // set the util system
             utilSystem = championSystem;
 
@@ -148,6 +150,8 @@ public class EvaluateChromosome {
             // == PLAY THE GAME ==
             ExperimenterAsymmetric.runExperiments(bots1, opponentBots,
                     pgs, utt, 100, 5000, 300, false, csvResult, false, false, "");
+            ExperimenterAsymmetric.runExperiments(opponentBots, bots1,
+                    pgs, utt, 100, 5000, 300, false, csvResult2, false, false, "");
 
         } catch (Exception e) {
             e.printStackTrace();
