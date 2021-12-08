@@ -97,28 +97,48 @@ object HARVEST_RESOURCE {
 Score: 0.0
 }
 }
-map 548 {
-Func => MAX
-Value => 0.0
-}
-map 753 {
+map 363 {
 Func => MULTIPLY
 Value => 0.0
 }
-map 1896 {
-Func => MAX
+map 507 {
+Func => POWER
 Value => 0.0
 }
-map 3094 {
+map 520 {
+Func => SUM
+Value => 0.0
+}
+map 698 {
 Func => MIN
 Value => 0.0
 }
-2_ENEMY_RESOURCE ----> 548 : V0
-548 ----> 753 : V0
-1_PLAYER_RESOURCE ----> 1896 : V0
-19_PLAYER_IDLE_WARRIORS ----> 3094 : V0
-753 ---> ATTACK_WITH_SINGLE_UNIT
-3094 ---> ATTACK_WITH_SINGLE_UNIT
-1896 ---> BUILD_WORKER
-5_PLAYER_WARRIORS ---> BUILD_LIGHT
+map 900 {
+Func => POWER
+Value => 0.0
+}
+map 1419 {
+Func => MIN
+Value => 0.0
+}
+map 1588 {
+Func => MIN
+Value => 0.0
+}
+map 5201 {
+Func => DIVIDE
+Value => 0.0
+}
+1419 ----> 363 : V0
+20_PLAYER_IDLE_WORKERS ----> 363 : V1
+363 ----> 507 : V0
+17_UNHARVESTED_RESOURCES ----> 520 : V0
+507 ----> 698 : V0
+520 ----> 900 : V0
+1588 ----> 1419 : V0
+900 ----> 1588 : V0
+2_ENEMY_RESOURCE ----> 5201 : V0
+698 ---> ATTACK_WITH_SINGLE_UNIT
+5201 ---> DEFEND_WITH_SINGLE_UNIT
+520 ---> BUILD_WORKER
 @enduml

@@ -10,52 +10,13 @@ package Variables {
 object 1_PLAYER_RESOURCE {
 Value: 0.0
 }
-object 2_ENEMY_RESOURCE {
-Value: 0.0
-}
 object 3_PLAYER_WORKERS {
-Value: 0.0
-}
-object 4_ENEMY_WORKERS {
 Value: 0.0
 }
 object 5_PLAYER_WARRIORS {
 Value: 0.0
 }
-object 6_ENEMY_WARRIORS {
-Value: 0.0
-}
-object 7_PLAYER_LIGHT {
-Value: 0.0
-}
-object 8_ENEMY_LIGHT {
-Value: 0.0
-}
-object 9_PLAYER_HEAVY {
-Value: 0.0
-}
-object 10_ENEMY_HEAVY {
-Value: 0.0
-}
-object 11_PLAYER_RANGED {
-Value: 0.0
-}
-object 12_ENEMY_RANGED {
-Value: 0.0
-}
 object 13_PLAYER_BARRACKS {
-Value: 0.0
-}
-object 14_ENEMY_BARRACKS {
-Value: 0.0
-}
-object 15_PLAYER_BASE_HEALTH {
-Value: 0.0
-}
-object 16_ENEMY_BASE_HEALTH {
-Value: 0.0
-}
-object 17_UNHARVESTED_RESOURCES {
 Value: 0.0
 }
 object 18_PLAYER_HARVESTING_WORKERS {
@@ -93,32 +54,37 @@ Score: 0.0
 object BUILD_HEAVY {
 Score: 0.0
 }
-object HARVEST_RESOURCE {
-Score: 0.0
 }
+object 49 {
+Value: 4.7406893
 }
-map 548 {
-Func => MAX
-Value => 0.0
-}
-map 753 {
+map 30 {
 Func => MULTIPLY
 Value => 0.0
 }
-map 1896 {
-Func => MAX
+map 36 {
+Func => MULTIPLY
 Value => 0.0
 }
-map 3094 {
+map 389 {
+Func => MULTIPLY
+Value => 0.0
+}
+map 681 {
 Func => MIN
 Value => 0.0
 }
-2_ENEMY_RESOURCE ----> 548 : V0
-548 ----> 753 : V0
-1_PLAYER_RESOURCE ----> 1896 : V0
-19_PLAYER_IDLE_WARRIORS ----> 3094 : V0
-753 ---> ATTACK_WITH_SINGLE_UNIT
-3094 ---> ATTACK_WITH_SINGLE_UNIT
-1896 ---> BUILD_WORKER
-5_PLAYER_WARRIORS ---> BUILD_LIGHT
+map 1128 {
+Func => MIN
+Value => 0.0
+}
+49 ----> 30 : V0
+681 ----> 36 : V0
+30 ----> 389 : V0
+1128 ----> 681 : V0
+1_PLAYER_RESOURCE ----> 1128 : V0
+389 ---> ATTACK_WITH_SINGLE_UNIT
+20_PLAYER_IDLE_WORKERS ---> ATTACK_WITH_SINGLE_UNIT
+36 ---> BUILD_WORKER
+18_PLAYER_HARVESTING_WORKERS ---> BUILD_LIGHT
 @enduml
