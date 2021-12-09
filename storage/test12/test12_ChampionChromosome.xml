@@ -1,0 +1,26 @@
+<chromosome id="5306" primary-parent-id="5193"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="379" type="hid" activation="MULTIPLY"/>
+<connection id="798" src-id="0" dest-id="26" weight="1.9755406690207504"/>
+<connection id="4300" src-id="379" dest-id="21" weight="-3.2381719943125855"/>
+<neuron id="4401" type="hid" activation="MIN"/>
+<connection id="4402" src-id="20" dest-id="4401" weight="1.0"/>
+<connection id="4403" src-id="4401" dest-id="379" weight="1.0"/>
+<neuron id="4675" type="hid" activation="POWER"/>
+<connection id="4676" src-id="18" dest-id="4675" weight="2.080047897336738"/>
+<connection id="4677" src-id="4675" dest-id="24" weight="2.8029137821333245"/>
+</chromosome>
