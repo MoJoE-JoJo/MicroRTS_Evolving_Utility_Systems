@@ -1,0 +1,1 @@
+java -jar MicroRTS_EUS.jar

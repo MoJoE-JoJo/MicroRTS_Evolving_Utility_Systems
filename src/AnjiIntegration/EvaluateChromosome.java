@@ -7,14 +7,16 @@ import ai.core.AI;
 import ai.utilitySystem.StaticUtilitySystems;
 import ai.utilitySystem.UtilitySystem;
 import com.anji.util.Properties;
-import org.jgap.Chromosome;
 import rts.GameState;
 import rts.PhysicalGameState;
 import rts.units.UnitTypeTable;
 import tests.ExperimenterAsymmetric;
 import tests.RunExperimentTest;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -110,7 +112,10 @@ public class EvaluateChromosome {
                     opponentBots.add(new HeavyDefense(utt));
                     opponentBots.add(new RangedDefense(utt));
                     break;
-                case default:
+                //all cases with co-evolution can't be the evaluation targets
+                case COEVOLUTION_AND_ROUND_ROBIN:
+                case COEVOLUTION_AND_BASELINE:
+                case COEVOLUTION:
                     throw new Exception("unknown evaluate opponent types");
             }
 

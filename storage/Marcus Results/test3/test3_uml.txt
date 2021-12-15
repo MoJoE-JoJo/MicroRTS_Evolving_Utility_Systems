@@ -1,0 +1,125 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 2_ENEMY_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 4_ENEMY_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 6_ENEMY_WARRIORS {
+Value: 0.0
+}
+object 7_PLAYER_LIGHT {
+Value: 0.0
+}
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+object HARVEST_RESOURCE {
+Score: 0.0
+}
+}
+map 330 {
+Func => SUM
+Value => 0.0
+}
+map 503 {
+Func => MULTIPLY
+Value => 0.0
+}
+map 1007 {
+Func => MIN
+Value => 0.0
+}
+map 1948 {
+Func => MULTIPLY
+Value => 0.0
+}
+503 ----> 330 : V0
+9_PLAYER_HEAVY ----> 330 : V1
+1948 ----> 503 : V0
+3_PLAYER_WORKERS ----> 1007 : V0
+1007 ----> 1948 : V0
+330 ---> ATTACK_WITH_SINGLE_UNIT
+19_PLAYER_IDLE_WARRIORS ---> DEFEND_WITH_SINGLE_UNIT
+20_PLAYER_IDLE_WORKERS ---> BUILD_WORKER
+14_ENEMY_BARRACKS ---> BUILD_RANGED
+@enduml

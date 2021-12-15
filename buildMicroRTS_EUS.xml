@@ -1,0 +1,103 @@
+<project name="MicroRTS_EUS" basedir=".">
+  <property name="src" value="."/>
+  <property name="ANJIsrc" value="./ANJI/src"/>
+  <property name="dest" value="./out/CombinedBuild"/>
+  <property name="propertiesSrc" value="./ANJI/properties"/>
+
+
+  <target name="compile" description="run javac">
+<!--    make output folder if it don't exists-->
+    <mkdir dir="${dest}"/>
+<!--    Compile all the source files with libs included-->
+    <javac destdir="${dest}" >
+      <src path="${src}"/>
+      <src path="${ANJIsrc}"/>
+      <compilerarg value="-Xlint:unchecked"/>
+      <classpath>
+        <pathelement path="./lib/clibwrapper_jiio.jar"/>
+        <pathelement path="./lib/hb16.jar"/>
+        <pathelement path="./lib/jai_imageio.jar"/>
+        <pathelement path="./lib/jakarta-regexp-1.3.jar"/>
+        <pathelement path="./lib/jcommon.jar"/>
+        <pathelement path="./lib/jdom.jar"/>
+        <pathelement path="./lib/jfreechart.jar"/>
+        <pathelement path="./lib/jgap.jar"/>
+        <pathelement path="./lib/jmagick.jar"/>
+        <pathelement path="./lib/junit.jar"/>
+        <pathelement path="./lib/log4j.jar"/>
+        <pathelement path="./lib/minimal-json-0.9.4.jar"/>
+        <pathelement path="./lib/mlibwrapper_jai.jar"/>
+        <pathelement path="./lib/weka.jar"/>
+      </classpath>
+    </javac>
+
+<!--  copy properties files  -->
+    <copy todir="${dest}/properties">
+      <fileset dir="${propertiesSrc}/">
+      </fileset>
+    </copy>
+
+<!--  copy baselineChromosome file  -->
+    <copy todir="${dest}" file="./ANJI/properties/utility_system_properties/baselineChromosome.xml"/>
+
+<!--  copy lib files  -->
+    <mkdir dir="${dest}/lib"/>
+    <copy todir="${dest}/lib">
+      <fileset dir="./lib">
+      </fileset>
+    </copy>
+  </target>
+
+
+  <target name="build-jar" depends="compile" description="builds a jar file">
+    <jar destfile="${dest}/MicroRTS_EUS.jar" basedir="${dest}" update="yes">
+      <include name="**/**.class"/>
+
+      <fileset dir=".">
+        <include name="**/maps/**"/>
+        <include name="**/utts/**"/>
+      </fileset>
+
+      <fileset dir="${dest}/properties">
+      </fileset>
+
+      <manifest>
+        <attribute name="Main-Class" value="AnjiIntegration.ANJIEvolveAndEvaluate"/>
+      </manifest>
+      <zipgroupfileset dir="./lib" includes="**/*.jar"/>
+
+    </jar>
+
+    <!--   cleanup the out folder   -->
+    <delete includeemptydirs="yes">
+      <fileset dir="${dest}">
+        <exclude name="properties/utility_system_properties/*"/>
+        <exclude name="MicroRTS_EUS.jar"/>
+        <exclude name="baselineChromosome.xml"/>
+      </fileset>
+    </delete>
+
+    <!--  copy the runscripts  -->
+    <copy todir="${dest}">
+      <fileset dir="./runScripts">
+      </fileset>
+    </copy>
+
+  </target>
+
+
+
+
+  <target name="clean" description="Clean out the out folder of all class files">
+    <delete>
+      <fileset dir="${dest}">
+        <include name="**/**.class"/>
+      </fileset>
+    </delete>
+    <delete dir="${dest}/com"/>
+    <delete dir="${dest}/org"/>
+    <delete dir="${dest}/examples"/>
+  </target>
+
+</project>
+

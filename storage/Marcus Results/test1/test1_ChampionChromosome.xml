@@ -1,0 +1,46 @@
+<chromosome id="6183" primary-parent-id="5954"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="in" activation="sigmoid"/>
+<neuron id="9" type="in" activation="sigmoid"/>
+<neuron id="10" type="in" activation="sigmoid"/>
+<neuron id="11" type="in" activation="sigmoid"/>
+<neuron id="12" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="14" type="in" activation="sigmoid"/>
+<neuron id="15" type="in" activation="sigmoid"/>
+<neuron id="16" type="in" activation="sigmoid"/>
+<neuron id="17" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="43" type="out" activation="sigmoid"/>
+<neuron id="65" type="out" activation="sigmoid"/>
+<connection id="68" src-id="2" dest-id="65" weight="-1.526963659113688"/>
+<connection id="77" src-id="11" dest-id="65" weight="-5.778631102154995"/>
+<neuron id="87" type="out" activation="sigmoid"/>
+<neuron id="109" type="out" activation="sigmoid"/>
+<connection id="122" src-id="12" dest-id="109" weight="6.2221767948769475"/>
+<connection id="127" src-id="17" dest-id="109" weight="3.6721783330424795"/>
+<neuron id="131" type="out" activation="sigmoid"/>
+<connection id="149" src-id="17" dest-id="131" weight="1.2611852548751592"/>
+<neuron id="153" type="out" activation="sigmoid"/>
+<connection id="169" src-id="15" dest-id="153" weight="1.975663595555889"/>
+<neuron id="175" type="out" activation="sigmoid"/>
+<connection id="196" src-id="20" dest-id="175" weight="4.618059961792987"/>
+<neuron id="197" type="out" activation="sigmoid"/>
+<neuron id="1553" type="hid" activation="SUM"/>
+<connection id="1554" src-id="17" dest-id="1553" weight="6.38794204976671"/>
+<neuron id="3332" type="hid" activation="DIVIDE"/>
+<connection id="3333" src-id="1553" dest-id="3332" weight="0.4347460288147674"/>
+<connection id="3334" src-id="3332" dest-id="197" weight="1.0494517730167567"/>
+<neuron id="4051" type="hid" activation="SUM"/>
+<connection id="4052" src-id="9" dest-id="4051" weight="1.0"/>
+<connection id="4053" src-id="4051" dest-id="65" weight="-8.408935460586374"/>
+</chromosome>
