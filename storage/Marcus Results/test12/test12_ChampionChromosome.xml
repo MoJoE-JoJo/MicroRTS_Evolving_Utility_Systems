@@ -1,0 +1,27 @@
+<chromosome id="5256" primary-parent-id="5212" secondary-parent-id="4726"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="30" type="hid" activation="MULTIPLY"/>
+<neuron id="396" type="hid" activation="DIVIDE"/>
+<connection id="397" src-id="30" dest-id="396" weight="0.9914344486596122"/>
+<connection id="398" src-id="396" dest-id="21" weight="5.588271568702699"/>
+<connection id="650" src-id="30" dest-id="26" weight="2.42965694215311"/>
+<neuron id="4306" type="hid" activation="DIVIDE"/>
+<connection id="4307" src-id="3" dest-id="4306" weight="3.8039873408705773"/>
+<neuron id="4961" type="hid" activation="MIN"/>
+<connection id="4962" src-id="4306" dest-id="4961" weight="1.0"/>
+<connection id="4963" src-id="4961" dest-id="30" weight="1.6884951145108804"/>
+</chromosome>

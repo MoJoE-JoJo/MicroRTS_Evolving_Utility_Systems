@@ -1,0 +1,1 @@
+java -cp MicroRTS_EUS.jar gui.frontend.FrontEnd

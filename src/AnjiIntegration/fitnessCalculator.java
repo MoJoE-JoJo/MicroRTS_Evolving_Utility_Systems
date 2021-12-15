@@ -39,7 +39,7 @@ public class fitnessCalculator {
         COEVOLUTION_AND_BASELINE,
     }
 
-    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType,int goalCount, boolean takeMaxAction) {
+    public fitnessCalculator(int maxGameCycles, int maxInactiveCycles, String map, OpponentTypes opponentType, GameTypes gameType, int goalCount, boolean takeMaxAction) {
         MAX_GAME_CYCLES = maxGameCycles;
         MAX_INACTIVE_CYCLES = maxInactiveCycles;
         this.map = map;
@@ -230,7 +230,7 @@ public class fitnessCalculator {
             case COEVOLUTION_AND_ROUND_ROBIN:
                 return selectRoundRobinOpponentAI(utt, iteration);
             case COEVOLUTION_AND_BASELINE:
-                case BASELINE:
+            case BASELINE:
                 return new UtilitySystemAI(utt, StaticUtilitySystems.getBaselineUtilitySystem(), false);
             case ROUND_ROBIN_AND_BASELINE:
                 if (iteration == 9) {
@@ -238,10 +238,10 @@ public class fitnessCalculator {
                 } else {
                     return selectRoundRobinOpponentAI(utt, iteration);
                 }
-            case COEVOLUTION:
-            case default:
+            case COEVOLUTION: // co-evolution is handled in an outer layer
                 return null;
         }
+        return null;
     }
 
     private static AI selectRoundRobinOpponentAI(UnitTypeTable utt, int iteration) {

@@ -21,10 +21,10 @@
  */
 package com.anji.fingerprint.test;
 
-import junit.framework.TestCase;
-
 import com.anji.fingerprint.Classification;
 import com.anji.fingerprint.ClassifierResult;
+import junit.framework.TestCase;
+
 
 /**
  * ClassifierResultTest
@@ -47,8 +47,8 @@ public class ClassifierResultTest extends TestCase {
 		super( arg0 );
 	}
 
-	private static void assertConfidences( ClassifierResult uut, float arch, float whorl,
-			float left, float right, float none ) {
+	private static void assertConfidences(ClassifierResult uut, float arch, float whorl,
+										  float left, float right, float none ) {
 		assertEquals( "wrong arch confidence", arch, uut.getConfidence( Classification.ARCH ), 0f );
 		assertEquals( "wrong whorl confidence", whorl, uut.getConfidence( Classification.WHORL ),
 				0f );

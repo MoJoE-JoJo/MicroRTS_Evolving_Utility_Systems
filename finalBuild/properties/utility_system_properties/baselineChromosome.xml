@@ -1,0 +1,56 @@
+<chromosome id="1">
+    <neuron id="0" type="in" activation="sigmoid"/>
+    <neuron id="1" type="in" activation="sigmoid"/>
+    <neuron id="3" type="in" activation="sigmoid"/>
+    <neuron id="5" type="in" activation="sigmoid"/>
+    <neuron id="18" type="in" activation="sigmoid"/>
+    <neuron id="13" type="in" activation="sigmoid"/>
+    <neuron id="19" type="in" activation="sigmoid"/>
+    <neuron id="20" type="in" activation="sigmoid"/>
+    <neuron id="21" type="out" activation="sigmoid"/>
+    <neuron id="23" type="out" activation="sigmoid"/>
+    <neuron id="24" type="out" activation="sigmoid"/>
+    <neuron id="26" type="out" activation="sigmoid"/>
+    <neuron id="28" type="out" activation="sigmoid"/>
+    <neuron id="27" type="out" activation="sigmoid"/>
+    <neuron id="25" type="out" activation="sigmoid"/>
+    <neuron id="29" type="out" activation="sigmoid"/>
+    <neuron id="30" type="hid" activation="MULTIPLY"/>
+    <neuron id="31" type="hid" activation="SUBTRACT"/>
+    <neuron id="32" type="hid" activation="MAX"/>
+    <neuron id="33" type="hid" activation="POWER"/>
+    <neuron id="34" type="hid" activation="MULTIPLY"/>
+    <neuron id="35" type="hid" activation="MULTIPLY"/>
+    <neuron id="36" type="hid" activation="MULTIPLY"/>
+    <neuron id="37" type="hid" activation="POWER"/>
+    <neuron id="38" type="hid" activation="MULTIPLY"/>
+    <neuron id="39" type="hid" activation="MULTIPLY"/>
+    <connection id="40" src-id="30" dest-id="21" weight="1"/>
+    <connection id="41" src-id="32" dest-id="23" weight="1"/>
+    <connection id="42" src-id="34" dest-id="24" weight="1"/>
+    <connection id="43" src-id="36" dest-id="26" weight="1"/>
+    <connection id="44" src-id="36" dest-id="28" weight="1"/>
+    <connection id="45" src-id="36" dest-id="27" weight="1"/>
+    <connection id="46" src-id="38" dest-id="25" weight="1"/>
+    <connection id="47" src-id="39" dest-id="29" weight="1"/>
+    <connection id="48" src-id="19" dest-id="30" weight="1"/>
+    <connection id="49" src-id="0" dest-id="30" weight="100.0"/>
+    <connection id="50" src-id="1" dest-id="31" weight="1"/>
+    <connection id="51" src-id="0" dest-id="31" weight="10.0"/>
+    <connection id="52" src-id="31" dest-id="32" weight="1"/>
+    <connection id="53" src-id="0" dest-id="32" weight="0.0"/>
+    <connection id="54" src-id="0" dest-id="33" weight="0.5"/>
+    <connection id="55" src-id="13" dest-id="33" weight="1"/>
+    <connection id="56" src-id="0" dest-id="34" weight="10.0"/>
+    <connection id="57" src-id="33" dest-id="34" weight="1"/>
+    <connection id="58" src-id="0" dest-id="35" weight="10.0"/>
+    <connection id="59" src-id="13" dest-id="35" weight="1"/>
+    <connection id="60" src-id="35" dest-id="36" weight="1"/>
+    <connection id="61" src-id="1" dest-id="36" weight="1"/>
+    <connection id="62" src-id="0" dest-id="37" weight="0.5"/>
+    <connection id="63" src-id="3" dest-id="37" weight="1"/>
+    <connection id="64" src-id="0" dest-id="38" weight="25.0"/>
+    <connection id="65" src-id="37" dest-id="38" weight="1"/>
+    <connection id="66" src-id="20" dest-id="39" weight="1"/>
+    <connection id="67" src-id="0" dest-id="39" weight="25.0"/>
+</chromosome>
