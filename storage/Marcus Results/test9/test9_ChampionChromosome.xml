@@ -1,0 +1,32 @@
+<chromosome id="5276" primary-parent-id="5011"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="32" type="hid" activation="MAX"/>
+<neuron id="38" type="hid" activation="MULTIPLY"/>
+<connection id="64" src-id="0" dest-id="38" weight="-4.5692601047823755"/>
+<connection id="134" src-id="0" dest-id="23" weight="-1.8103349442257004"/>
+<neuron id="164" type="hid" activation="MULTIPLY"/>
+<connection id="165" src-id="0" dest-id="164" weight="-2.1170991709663447"/>
+<connection id="166" src-id="164" dest-id="32" weight="-2.2075570469671453"/>
+<neuron id="167" type="hid" activation="DIVIDE"/>
+<connection id="168" src-id="32" dest-id="167" weight="5.616974925584708"/>
+<connection id="169" src-id="167" dest-id="23" weight="0.5213866198361929"/>
+<neuron id="340" type="hid" activation="POWER"/>
+<connection id="342" src-id="340" dest-id="25" weight="5.0596167186133965"/>
+<neuron id="1258" type="hid" activation="DIVIDE"/>
+<connection id="1259" src-id="38" dest-id="1258" weight="-0.5025837617210549"/>
+<connection id="1260" src-id="1258" dest-id="340" weight="0.8266892215489516"/>
+</chromosome>

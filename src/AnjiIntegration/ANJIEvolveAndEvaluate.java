@@ -16,7 +16,7 @@ public class ANJIEvolveAndEvaluate {
 
     public static void main(String[] args) {
 
-        String array[] = {/*"1", "2", "3", "4", "5", "9"*/ "11", "12"};
+        String array[] = {/*"1", "2", "3", "4", "5", "11",*/ "9"};
 
         for (String s : array) {
             try {

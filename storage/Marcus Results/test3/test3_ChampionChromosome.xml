@@ -1,0 +1,44 @@
+<chromosome id="5542" primary-parent-id="5442"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="in" activation="sigmoid"/>
+<neuron id="9" type="in" activation="sigmoid"/>
+<neuron id="10" type="in" activation="sigmoid"/>
+<neuron id="11" type="in" activation="sigmoid"/>
+<neuron id="12" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="14" type="in" activation="sigmoid"/>
+<neuron id="15" type="in" activation="sigmoid"/>
+<neuron id="16" type="in" activation="sigmoid"/>
+<neuron id="17" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="22" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="330" type="hid" activation="SUM"/>
+<connection id="332" src-id="330" dest-id="21" weight="-2.6406724711940646"/>
+<connection id="376" src-id="19" dest-id="22" weight="0.044688536667948114"/>
+<neuron id="503" type="hid" activation="MULTIPLY"/>
+<connection id="505" src-id="503" dest-id="330" weight="-4.026808219323104"/>
+<connection id="839" src-id="20" dest-id="25" weight="-0.42348566672856025"/>
+<connection id="871" src-id="14" dest-id="27" weight="0.13247191905975342"/>
+<neuron id="1007" type="hid" activation="MIN"/>
+<connection id="1008" src-id="3" dest-id="1007" weight="1.8410285905566228"/>
+<connection id="1313" src-id="9" dest-id="330" weight="3.7601191688480373"/>
+<neuron id="1948" type="hid" activation="MULTIPLY"/>
+<connection id="1949" src-id="1007" dest-id="1948" weight="1.5443094714737216"/>
+<connection id="1950" src-id="1948" dest-id="503" weight="5.5198467033255"/>
+</chromosome>
