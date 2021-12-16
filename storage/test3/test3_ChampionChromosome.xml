@@ -1,0 +1,40 @@
+<chromosome id="5696" primary-parent-id="5429"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="in" activation="sigmoid"/>
+<neuron id="9" type="in" activation="sigmoid"/>
+<neuron id="10" type="in" activation="sigmoid"/>
+<neuron id="11" type="in" activation="sigmoid"/>
+<neuron id="12" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="14" type="in" activation="sigmoid"/>
+<neuron id="15" type="in" activation="sigmoid"/>
+<neuron id="16" type="in" activation="sigmoid"/>
+<neuron id="17" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="22" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<connection id="370" src-id="19" dest-id="27" weight="-3.6588937379209128"/>
+<neuron id="1672" type="hid" activation="DIVIDE"/>
+<connection id="1825" src-id="2" dest-id="21" weight="2.6175135332780113"/>
+<neuron id="3012" type="hid" activation="MULTIPLY"/>
+<connection id="3013" src-id="1672" dest-id="3012" weight="4.215698932203059"/>
+<neuron id="3830" type="hid" activation="MAX"/>
+<connection id="3831" src-id="3012" dest-id="3830" weight="-1.2666549881103384"/>
+<connection id="3832" src-id="3830" dest-id="25" weight="2.973393208098781"/>
+<connection id="4964" src-id="16" dest-id="1672" weight="0.7584371488548016"/>
+</chromosome>

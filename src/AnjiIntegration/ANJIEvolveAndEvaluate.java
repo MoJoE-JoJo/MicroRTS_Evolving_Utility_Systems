@@ -17,7 +17,7 @@ public class ANJIEvolveAndEvaluate {
 
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
-            String array[] = {"1", "2", "3", "4", "5", "9", "11",};
+            String array[] = {"13", "3", "4", "5", "9", "14"};
             for (String s : array) {
                 run(new Properties("utility_system_properties/test" + s + ".properties"));
             }

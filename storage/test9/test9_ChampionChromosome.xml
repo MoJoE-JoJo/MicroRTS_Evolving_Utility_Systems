@@ -1,0 +1,35 @@
+<chromosome id="4936" primary-parent-id="4673" secondary-parent-id="4725"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="36" type="hid" activation="MULTIPLY"/>
+<neuron id="205" type="hid" activation="MULTIPLY"/>
+<connection id="206" src-id="36" dest-id="205" weight="1.0"/>
+<connection id="207" src-id="205" dest-id="26" weight="-0.39529901890354124"/>
+<neuron id="233" type="hid" activation="MIN"/>
+<neuron id="1143" type="hid" activation="POWER"/>
+<connection id="1144" src-id="1" dest-id="1143" weight="4.806911803024809"/>
+<neuron id="1239" type="hid" activation="DIVIDE"/>
+<connection id="1241" src-id="1239" dest-id="36" weight="-9.358782315829583"/>
+<neuron id="1488" type="hid" activation="SUM"/>
+<connection id="1489" src-id="233" dest-id="1488" weight="2.2579470364201186"/>
+<connection id="1490" src-id="1488" dest-id="1239" weight="-1.9324478933019913"/>
+<neuron id="3656" type="hid" activation="MIN"/>
+<connection id="3657" src-id="36" dest-id="3656" weight="-0.08541470594865952"/>
+<connection id="3658" src-id="3656" dest-id="21" weight="-0.7367841148583885"/>
+<neuron id="4150" type="hid" activation="MAX"/>
+<connection id="4151" src-id="1143" dest-id="4150" weight="0.5147171839193625"/>
+<connection id="4152" src-id="4150" dest-id="233" weight="3.0834419878996915"/>
+</chromosome>

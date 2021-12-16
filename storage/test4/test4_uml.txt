@@ -1,0 +1,137 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 2_ENEMY_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 4_ENEMY_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 6_ENEMY_WARRIORS {
+Value: 0.0
+}
+object 7_PLAYER_LIGHT {
+Value: 0.0
+}
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+object HARVEST_RESOURCE {
+Score: 0.0
+}
+}
+object 88 {
+Value: 2.4797437
+}
+object 176 {
+Value: -1.7880657
+}
+map 1412 {
+Func => POWER
+Value => 0.0
+}
+13_PLAYER_BARRACKS ----> 1412 : V0
+16_ENEMY_BASE_HEALTH ---> ATTACK_WITH_SINGLE_UNIT
+17_UNHARVESTED_RESOURCES ---> ATTACK_WITH_SINGLE_UNIT
+3_PLAYER_WORKERS ---> ATTACK_WITH_SINGLE_UNIT
+4_ENEMY_WORKERS ---> ATTACK_WITH_SINGLE_UNIT
+1412 ---> DEFEND_WITH_SINGLE_UNIT
+5_PLAYER_WARRIORS ---> DEFEND_WITH_SINGLE_UNIT
+7_PLAYER_LIGHT ---> DEFEND_WITH_SINGLE_UNIT
+10_ENEMY_HEAVY ---> DEFEND_WITH_SINGLE_UNIT
+2_ENEMY_RESOURCE ---> BUILD_BASE
+3_PLAYER_WORKERS ---> BUILD_BASE
+20_PLAYER_IDLE_WORKERS ---> BUILD_BASE
+88 ---> BUILD_BARRACKS
+15_PLAYER_BASE_HEALTH ---> BUILD_BARRACKS
+16_ENEMY_BASE_HEALTH ---> BUILD_BARRACKS
+2_ENEMY_RESOURCE ---> BUILD_BARRACKS
+6_ENEMY_WARRIORS ---> BUILD_BARRACKS
+17_UNHARVESTED_RESOURCES ---> BUILD_WORKER
+12_ENEMY_RANGED ---> BUILD_LIGHT
+17_UNHARVESTED_RESOURCES ---> BUILD_LIGHT
+7_PLAYER_LIGHT ---> BUILD_LIGHT
+9_PLAYER_HEAVY ---> BUILD_LIGHT
+20_PLAYER_IDLE_WORKERS ---> BUILD_LIGHT
+11_PLAYER_RANGED ---> BUILD_HEAVY
+176 ---> BUILD_HEAVY
+6_ENEMY_WARRIORS ---> BUILD_HEAVY
+9_PLAYER_HEAVY ---> BUILD_HEAVY
+@enduml

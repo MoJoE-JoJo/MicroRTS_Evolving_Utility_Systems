@@ -1,0 +1,147 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 2_ENEMY_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 4_ENEMY_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 6_ENEMY_WARRIORS {
+Value: 0.0
+}
+object 7_PLAYER_LIGHT {
+Value: 0.0
+}
+object 8_ENEMY_LIGHT {
+Value: 0.0
+}
+object 9_PLAYER_HEAVY {
+Value: 0.0
+}
+object 10_ENEMY_HEAVY {
+Value: 0.0
+}
+object 11_PLAYER_RANGED {
+Value: 0.0
+}
+object 12_ENEMY_RANGED {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 14_ENEMY_BARRACKS {
+Value: 0.0
+}
+object 15_PLAYER_BASE_HEALTH {
+Value: 0.0
+}
+object 16_ENEMY_BASE_HEALTH {
+Value: 0.0
+}
+object 17_UNHARVESTED_RESOURCES {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+object HARVEST_RESOURCE {
+Score: 0.0
+}
+}
+map 358 {
+Func => DIVIDE
+Value => 0.0
+}
+map 1502 {
+Func => MULTIPLY
+Value => 0.0
+}
+map 1653 {
+Func => MAX
+Value => 0.0
+}
+map 2017 {
+Func => MAX
+Value => 0.0
+}
+map 2264 {
+Func => MIN
+Value => 0.0
+}
+map 3547 {
+Func => MAX
+Value => 0.0
+}
+map 3973 {
+Func => DIVIDE
+Value => 0.0
+}
+map 3976 {
+Func => MULTIPLY
+Value => 0.0
+}
+map 4179 {
+Func => MULTIPLY
+Value => 0.0
+}
+17_UNHARVESTED_RESOURCES ----> 358 : V0
+17_UNHARVESTED_RESOURCES ----> 1502 : V0
+2017 ----> 1653 : V0
+3973 ----> 2017 : V0
+1502 ----> 2264 : V0
+3976 ----> 3547 : V0
+3547 ----> 3973 : V0
+4179 ----> 3976 : V0
+2264 ----> 4179 : V0
+358 ---> ATTACK_WITH_SINGLE_UNIT
+1653 ---> BUILD_WORKER
+@enduml

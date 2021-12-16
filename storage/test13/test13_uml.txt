@@ -1,0 +1,87 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam linetype polyline
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title Simple Utility System
+
+package Variables {
+object 1_PLAYER_RESOURCE {
+Value: 0.0
+}
+object 3_PLAYER_WORKERS {
+Value: 0.0
+}
+object 5_PLAYER_WARRIORS {
+Value: 0.0
+}
+object 13_PLAYER_BARRACKS {
+Value: 0.0
+}
+object 18_PLAYER_HARVESTING_WORKERS {
+Value: 0.0
+}
+object 19_PLAYER_IDLE_WARRIORS {
+Value: 0.0
+}
+object 20_PLAYER_IDLE_WORKERS {
+Value: 0.0
+}
+}
+package Actions {
+object ATTACK_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object DEFEND_WITH_SINGLE_UNIT {
+Score: 0.0
+}
+object BUILD_BASE {
+Score: 0.0
+}
+object BUILD_BARRACKS {
+Score: 0.0
+}
+object BUILD_WORKER {
+Score: 0.0
+}
+object BUILD_LIGHT {
+Score: 0.0
+}
+object BUILD_RANGED {
+Score: 0.0
+}
+object BUILD_HEAVY {
+Score: 0.0
+}
+}
+map 36 {
+Func => MULTIPLY
+Value => 0.0
+}
+map 392 {
+Func => MAX
+Value => 0.0
+}
+map 1453 {
+Func => SUM
+Value => 0.0
+}
+map 2889 {
+Func => MIN
+Value => 0.0
+}
+map 3173 {
+Func => DIVIDE
+Value => 0.0
+}
+20_PLAYER_IDLE_WORKERS ----> 36 : V0
+1453 ----> 392 : V0
+36 ----> 1453 : V0
+18_PLAYER_HARVESTING_WORKERS ----> 2889 : V0
+3173 ----> 2889 : V1
+19_PLAYER_IDLE_WARRIORS ----> 3173 : V0
+36 ---> ATTACK_WITH_SINGLE_UNIT
+2889 ---> BUILD_BARRACKS
+392 ---> BUILD_WORKER
+@enduml

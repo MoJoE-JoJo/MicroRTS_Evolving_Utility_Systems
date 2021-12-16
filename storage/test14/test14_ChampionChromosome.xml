@@ -1,0 +1,51 @@
+<chromosome id="5323" primary-parent-id="4920" secondary-parent-id="4906"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="2" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="4" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="6" type="in" activation="sigmoid"/>
+<neuron id="7" type="in" activation="sigmoid"/>
+<neuron id="8" type="in" activation="sigmoid"/>
+<neuron id="9" type="in" activation="sigmoid"/>
+<neuron id="10" type="in" activation="sigmoid"/>
+<neuron id="11" type="in" activation="sigmoid"/>
+<neuron id="12" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="14" type="in" activation="sigmoid"/>
+<neuron id="15" type="in" activation="sigmoid"/>
+<neuron id="16" type="in" activation="sigmoid"/>
+<neuron id="17" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="22" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="358" type="hid" activation="DIVIDE"/>
+<connection id="359" src-id="17" dest-id="358" weight="7.631975361675398"/>
+<connection id="360" src-id="358" dest-id="21" weight="0.5358814706779813"/>
+<neuron id="1502" type="hid" activation="MULTIPLY"/>
+<connection id="1503" src-id="17" dest-id="1502" weight="-0.13389043500737596"/>
+<neuron id="1653" type="hid" activation="MAX"/>
+<connection id="1655" src-id="1653" dest-id="25" weight="1.071203261715199"/>
+<neuron id="2017" type="hid" activation="MAX"/>
+<connection id="2019" src-id="2017" dest-id="1653" weight="-2.5417528942805117"/>
+<neuron id="2264" type="hid" activation="MIN"/>
+<connection id="2265" src-id="1502" dest-id="2264" weight="-0.7959737486850005"/>
+<neuron id="3547" type="hid" activation="MAX"/>
+<neuron id="3973" type="hid" activation="DIVIDE"/>
+<connection id="3974" src-id="3547" dest-id="3973" weight="2.185470457041617"/>
+<connection id="3975" src-id="3973" dest-id="2017" weight="-0.35155274368843425"/>
+<neuron id="3976" type="hid" activation="MULTIPLY"/>
+<connection id="3978" src-id="3976" dest-id="3547" weight="1.4627816288834525"/>
+<neuron id="4179" type="hid" activation="MULTIPLY"/>
+<connection id="4180" src-id="2264" dest-id="4179" weight="1.0"/>
+<connection id="4181" src-id="4179" dest-id="3976" weight="1.203129011805006"/>
+</chromosome>

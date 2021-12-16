@@ -1,0 +1,40 @@
+<chromosome id="5304" primary-parent-id="4992" secondary-parent-id="5113"><neuron id="0" type="in" activation="sigmoid"/>
+<neuron id="1" type="in" activation="sigmoid"/>
+<neuron id="3" type="in" activation="sigmoid"/>
+<neuron id="5" type="in" activation="sigmoid"/>
+<neuron id="13" type="in" activation="sigmoid"/>
+<neuron id="18" type="in" activation="sigmoid"/>
+<neuron id="19" type="in" activation="sigmoid"/>
+<neuron id="20" type="in" activation="sigmoid"/>
+<neuron id="21" type="out" activation="sigmoid"/>
+<neuron id="23" type="out" activation="sigmoid"/>
+<neuron id="24" type="out" activation="sigmoid"/>
+<neuron id="25" type="out" activation="sigmoid"/>
+<neuron id="26" type="out" activation="sigmoid"/>
+<neuron id="27" type="out" activation="sigmoid"/>
+<neuron id="28" type="out" activation="sigmoid"/>
+<neuron id="29" type="out" activation="sigmoid"/>
+<neuron id="30" type="hid" activation="MULTIPLY"/>
+<neuron id="357" type="hid" activation="MIN"/>
+<connection id="358" src-id="30" dest-id="357" weight="2.176761162503854"/>
+<connection id="359" src-id="357" dest-id="21" weight="-2.5593200552806037"/>
+<neuron id="378" type="hid" activation="MIN"/>
+<connection id="423" src-id="30" dest-id="21" weight="1.7212167494084372"/>
+<neuron id="1565" type="hid" activation="MAX"/>
+<neuron id="2208" type="hid" activation="POWER"/>
+<connection id="2210" src-id="2208" dest-id="26" weight="-3.0793866011514583"/>
+<neuron id="2321" type="hid" activation="POWER"/>
+<connection id="2322" src-id="0" dest-id="2321" weight="0.9628768774380564"/>
+<connection id="2323" src-id="2321" dest-id="378" weight="2.048722828151262"/>
+<neuron id="2642" type="hid" activation="POWER"/>
+<connection id="2643" src-id="378" dest-id="2642" weight="4.658627452739554"/>
+<connection id="2644" src-id="2642" dest-id="1565" weight="-9.97118720382688"/>
+<neuron id="2738" type="hid" activation="POWER"/>
+<connection id="2739" src-id="1565" dest-id="2738" weight="5.32521187277404"/>
+<connection id="2740" src-id="2738" dest-id="30" weight="8.5532917434157"/>
+<neuron id="2945" type="hid" activation="POWER"/>
+<neuron id="3053" type="hid" activation="POWER"/>
+<connection id="3054" src-id="2945" dest-id="3053" weight="2.292807163986536"/>
+<connection id="3055" src-id="3053" dest-id="2208" weight="3.6493788193111216"/>
+<connection id="3331" src-id="1565" dest-id="2945" weight="2.1776376553967043"/>
+</chromosome>
