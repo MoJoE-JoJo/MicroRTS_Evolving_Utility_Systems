@@ -84,20 +84,5 @@
     </copy>
 
   </target>
-
-
-
-
-  <target name="clean" description="Clean out the out folder of all class files">
-    <delete>
-      <fileset dir="${dest}">
-        <include name="**/**.class"/>
-      </fileset>
-    </delete>
-    <delete dir="${dest}/com"/>
-    <delete dir="${dest}/org"/>
-    <delete dir="${dest}/examples"/>
-  </target>
-
 </project>
 

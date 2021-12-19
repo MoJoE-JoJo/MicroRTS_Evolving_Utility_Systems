@@ -33,4 +33,6 @@ and select the fitness.xml file you want to view.
 It also contains the results from the evaluation 'evalResultsP1.csv' & 'evalResultsP2.csv' 
 where the utility system has respectively been evaluated as player 1 and player 2.
 
-
+## compiling a new jar file
+If you want to modify the code and generate a new runnable jar file, there is an ANT build located in the base layer called 'buildMicroRTS_EUS.xml' which can compile a new jar and copies all the necessary files to 'out/CombinedBuild' directory.
+We found the easiest to use the intellij IDE which has build-in ANT build support.

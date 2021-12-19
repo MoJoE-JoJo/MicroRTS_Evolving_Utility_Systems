@@ -11,3 +11,6 @@
 /tournament_*/
 /nevt/*
 /out/
+/finalBuild/storage
+/finalBuild/db
+/finalBuild/nevt
