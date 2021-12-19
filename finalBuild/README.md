@@ -13,16 +13,12 @@ if you want to run an evolution with your own config, it can be done with the fo
 
 Where the quickTest.properties is then replaced with the properties file you want to run.
 You can take inspiration in the properties files under finalBuild\properties\utility_system_properties and modify or copy/paste them as you see fit.
-Our custom properties are located in the top of the properties file, the others are from the ANJI project. 
-o learn more about them look in the docs under ANJI/docs/index.html
+Our custom properties are located in the top of the properties file, the others are from the ANJI project.
+to learn more about them look in the docs under ANJI/docs/index.html
 
-After a run is done the results can be found in a directory called storage where the ANJI chromosome that lead to the best utility system can be located, 
-together with a txt file that can visually show the utility system if its concent is copied to this site -> http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000. 
-Furthermore it also creates a file that gives an overview over the fitness scores doing the evolution generations (fitness.XML), to view a graph it open the 'visualization/index.html'
-and select the fitness.xml file you want to view. 
-It also contains the results from the evaluation 'evalResultsP1.csv' & 'evalResultsP2.csv' 
+After a run is done the results can be found in a directory called storage where the ANJI chromosome that lead to the best utility system can be located,
+together with a txt file that can visually show the utility system if its content is copied to this site -> http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000.
+Furthermore, it also creates a file that gives an overview over the fitness scores doing the evolution generations 'fitness.XML'. To view a graph open the 'visualization/index.html'
+and select the fitness.xml file you want to view.
+It also contains the results from the evaluation 'evalResultsP1.csv' & 'evalResultsP2.csv'
 where the utility system has respectively been evaluated as player 1 and player 2.
-
-
-
-
