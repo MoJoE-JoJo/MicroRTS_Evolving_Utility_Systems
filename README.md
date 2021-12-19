@@ -31,7 +31,7 @@ together with a txt file that can visually show the utility system if its conten
 Furthermore, it also creates a file that gives an overview over the fitness scores doing the evolution generations 'fitness.XML'. To view a graph open the 'visualization/index.html'
 and select the fitness.xml file you want to view. 
 It also contains the results from the evaluation 'evalResultsP1.csv' & 'evalResultsP2.csv' 
-where the utility system has respectively been evaluated as player 1 and player 2.
+where the utility system has respectively been evaluated as player 1 and player 2 based on the evolution method chosen in the properties file.
 
 ## Compiling a new jar file
 If you want to modify the code and generate a new runnable jar file, there is an ANT build located in the base layer called 'buildMicroRTS_EUS.xml' which can compile a new jar and copies all the necessary files to 'out/CombinedBuild' directory.
