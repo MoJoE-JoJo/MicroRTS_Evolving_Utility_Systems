@@ -4,9 +4,11 @@ The project takes root in the MicroRTS (https://github.com/santiontanon/microrts
 
 The purpose of this project was to experiment with evolving utility system based AI through a NeuroEvolution of Augmenting Topologies (NEAT) method. 
 
+The Utility System implementation is located under 'src/ai/utilitySystem' and the AI-agent using Utility Systems is located in the 'src/ai'.
 
-All the ANJI related code is located in the ANJI directory and all MicroRTS is in the src directory. 
-Under src is the AnjiIntegration directory where most of the code to integrate microRTS and ANJI is located, together with the main methods for starting evolutions and evaluations
+All the ANJI related code is located in the ANJI directory and all MicroRTS is in the src directory.
+
+Under src is the AnjiIntegration directory where most of the code to integrate microRTS and ANJI is located, together with the main methods for starting evolutions and evaluations.
 
 ## Instructions for running the compiled jar files in finalBuild:
 For some ease of use, the most prominent tests have been prepared to be run from the finalBuild in the form of a java jar file.
